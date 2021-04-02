@@ -1,3 +1,24 @@
+# all data files
+data/elevation/*
+data/shapefiles/*
+data/chelsa/*
+
+*.tif*
+*.shp
+*.dbf
+*.shx
+
+# any zip or shapefile
+*.zip
+*.shp
+*.prj
+*.cpg
+*ini
+
+# pdf files
+*.pdf
+
+
 # History files
 .Rhistory
 .Rapp.history
@@ -19,6 +40,7 @@
 
 # RStudio files
 .Rproj.user/
+.Rproj
 
 # produced vignettes
 vignettes/*.html
