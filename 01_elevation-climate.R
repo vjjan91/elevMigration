@@ -1,7 +1,9 @@
-## Ecography: Plot of temperature and precipitation by Himalayan region (eastern, central and Western)
+## Climate as a function of elevation
+
+### Author: Code written by Pratik Gupte and Vijay Ramesh for a manuscript in review
 
 ## Prepare libraries
-# load libs
+
 library(raster)
 library(stringi)
 library(glue)
@@ -15,8 +17,8 @@ library(ggthemes)
 library(sf)
 
 # Load shapefiles
-west <- st_read("C:\\Users\\vr235\\Desktop\\SahasMaps\\westHimalayas.shp")
-east <- st_read("C:\\Users\\vr235\\Desktop\\SahasMaps\\eastHimalayas.shp")
+west <- st_read("data/shapefiles/westHimalayas.shp")
+east <- st_read("data/shapefiles/eastHimalayas.shp")
 
 # get ci func
 ci <- function(x){qnorm(0.975)*sd(x, na.rm = T)/sqrt(length(x))}
@@ -33,8 +35,8 @@ assertthat::assert_that(funcMode(c(2,2,2,2,3,3,3,4)) == as.character(2),
 
 ### Prepare terrain rasters
 # load elevation and crop to hills size, then mask by hills
-alt <- raster("data/spatial/elevation/alt")
-alt.hills <- crop(alt, as(Him, "Spatial"))
+alt <- raster("data/elevation/alt")
+alt.hills <- crop(alt, as(west, "Spatial"))
 rm(alt); gc()
 
 # get slope and aspect
@@ -52,11 +54,14 @@ chelsaFiles <- list.files("data/chelsa/",
 chelsaData <- purrr::map(chelsaFiles, function(chr){
   a <- raster(chr)
   crs(a) <- crs(elevData)
-  a <- crop(a, as(Him, "Spatial"))
+  a <- crop(a, as(west, "Spatial"))
   return(a)
 })
 
+# Divide temperature values by 10
 chelsaData[[1]] <- chelsaData[[1]]/10
+chelsaData[[2]] <- chelsaData[[2]]/10
+chelsaData[[3]] <- chelsaData[[3]]/10
 
 # stack chelsa data
 chelsaData <- raster::stack(chelsaData)
@@ -67,7 +72,7 @@ env_data <- stack(elevData, chelsaData)
 
 # get proper names
 elev_names <- c("elev", "slope", "aspect")
-chelsa_names <- c("chelsa_temp", "chelsa_prec")
+chelsa_names <- c("maxTemp_warmMonth", "minTemp_coldMonth","TempRange")
 
 names(env_data) <- as.character(glue('{c(elev_names, chelsa_names)}'))
 
@@ -81,17 +86,21 @@ env <- as.list(env)
 env <- purrr::map(env, getValues)
 names(env) <- c("elev", chelsa_names)
 
-# conver to dataframe and round to 100m
+# convert to dataframe and round to 100m
 env <- bind_cols(env)
 env <- drop_na(env) %>% 
-  mutate(elev_round  = plyr::round_any(elev, 200)) %>% 
+  mutate(elev_round  = plyr::round_any(elev, 100)) %>% 
   dplyr::select(-elev) %>% 
-  pivot_longer(cols = contains("chelsa"),
+  pivot_longer(cols = contains("Temp"),
                names_to = "clim_var") %>% 
   group_by(elev_round, clim_var) %>% 
   summarise_all(.funs = list(~mean(.), ~ci(.)))
 
+# Set elevation higher limit
 env <- env %>% filter(elev_round<=5000)
+
+# Write results to a .csv
+westHim <- write.csv(env,"output/westHim_500.csv", row.names = F)
 
 # plot in facets
 fig_climate_elev <- ggplot(env)+
@@ -103,7 +112,7 @@ fig_climate_elev <- ggplot(env)+
   scale_y_continuous(labels = scales::comma)+
   facet_wrap(~clim_var, scales = "free_y")+
   theme_few()+
-  labs(x = "elevation (m)", y = "CHELSA variable value")+
+  labs(x = "elevation (m) at 100m intervals", y = "CHELSA variable value")+
   theme(axis.title = element_text(size = 16, face = "bold"), 
         axis.ticks.length.x = unit(.5, "cm"),
         axis.text = element_text(size = 14),
@@ -111,6 +120,6 @@ fig_climate_elev <- ggplot(env)+
         legend.key.size = unit(1,"cm"),
         legend.text = element_text(size = 12))
 
-ggsave(fig_climate_elev, filename = "C:\\Users\\vr235\\Desktop\\SahasMaps\\fig_centralHim_elev.svg", 
-       height = 10, width = 11, device = svg(), dpi = 300); dev.off()
+ggsave(fig_climate_elev, filename = "figs/fig_westHim_elev100.png", 
+       height = 10, width = 14, device = png(), dpi = 300, units="in"); dev.off()
 
