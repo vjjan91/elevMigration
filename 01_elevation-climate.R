@@ -36,7 +36,7 @@ assertthat::assert_that(funcMode(c(2,2,2,2,3,3,3,4)) == as.character(2),
 ### Prepare terrain rasters
 # load elevation and crop to hills size, then mask by hills
 alt <- raster("data/elevation/alt")
-alt.hills <- crop(alt, as(west, "Spatial"))
+alt.hills <- crop(alt, as(east, "Spatial"))
 rm(alt); gc()
 
 # get slope and aspect
@@ -54,7 +54,7 @@ chelsaFiles <- list.files("data/chelsa/",
 chelsaData <- purrr::map(chelsaFiles, function(chr){
   a <- raster(chr)
   crs(a) <- crs(elevData)
-  a <- crop(a, as(west, "Spatial"))
+  a <- crop(a, as(east, "Spatial"))
   return(a)
 })
 
@@ -89,7 +89,7 @@ names(env) <- c("elev", chelsa_names)
 # convert to dataframe and round to 100m
 env <- bind_cols(env)
 env <- drop_na(env) %>% 
-  mutate(elev_round  = plyr::round_any(elev, 100)) %>% 
+  mutate(elev_round  = plyr::round_any(elev, 500)) %>% 
   dplyr::select(-elev) %>% 
   pivot_longer(cols = contains("Temp"),
                names_to = "clim_var") %>% 
@@ -100,7 +100,7 @@ env <- drop_na(env) %>%
 env <- env %>% filter(elev_round<=5000)
 
 # Write results to a .csv
-westHim <- write.csv(env,"output/westHim_500.csv", row.names = F)
+eastHim <- write.csv(env,"output/eastHim_500.csv", row.names = F)
 
 # plot in facets
 fig_climate_elev <- ggplot(env)+
@@ -112,7 +112,7 @@ fig_climate_elev <- ggplot(env)+
   scale_y_continuous(labels = scales::comma)+
   facet_wrap(~clim_var, scales = "free_y")+
   theme_few()+
-  labs(x = "elevation (m) at 100m intervals", y = "CHELSA variable value")+
+  labs(x = "elevation (m) at 500m intervals", y = "CHELSA variable value")+
   theme(axis.title = element_text(size = 16, face = "bold"), 
         axis.ticks.length.x = unit(.5, "cm"),
         axis.text = element_text(size = 14),
@@ -120,6 +120,6 @@ fig_climate_elev <- ggplot(env)+
         legend.key.size = unit(1,"cm"),
         legend.text = element_text(size = 12))
 
-ggsave(fig_climate_elev, filename = "figs/fig_westHim_elev100.png", 
+ggsave(fig_climate_elev, filename = "figs/fig_eastHim_elev500.png", 
        height = 10, width = 14, device = png(), dpi = 300, units="in"); dev.off()
 
