@@ -62,6 +62,7 @@ chelsaData <- purrr::map(chelsaFiles, function(chr){
 chelsaData[[1]] <- chelsaData[[1]]/10
 chelsaData[[2]] <- chelsaData[[2]]/10
 chelsaData[[3]] <- chelsaData[[3]]/10
+chelsaData[[4]] <- chelsaData[[4]]/10
 
 # stack chelsa data
 chelsaData <- raster::stack(chelsaData)
@@ -72,7 +73,7 @@ env_data <- stack(elevData, chelsaData)
 
 # get proper names
 elev_names <- c("elev", "slope", "aspect")
-chelsa_names <- c("maxTemp_warmMonth", "minTemp_coldMonth","TempRange")
+chelsa_names <- c("maxTemp_Jan", "maxTemp_June","minTemp_Jan","minTemp_June")
 
 names(env_data) <- as.character(glue('{c(elev_names, chelsa_names)}'))
 
@@ -86,22 +87,22 @@ env <- as.list(env)
 env <- purrr::map(env, getValues)
 names(env) <- c("elev", chelsa_names)
 
-# convert to dataframe and round to 100m
+# convert to dataframe and round to a particular elevational band you need
 env <- bind_cols(env)
 env <- drop_na(env) %>% 
   mutate(elev_round  = plyr::round_any(elev, 500)) %>% 
   dplyr::select(-elev) %>% 
-  pivot_longer(cols = contains("Temp"),
-               names_to = "clim_var") %>% 
-  group_by(elev_round, clim_var) %>% 
-  summarise_all(.funs = list(~mean(.), ~ci(.)))
-
-# Set elevation higher limit
-env <- env %>% filter(elev_round<=5000)
+  group_by(elev_round) %>% 
+  summarise_all(.funs = list(~mean(.), ~ci(.))) %>%
+  mutate(tempRange_Jan = (maxTemp_Jan_mean - minTemp_Jan_mean),
+         tempRange_June = (maxTemp_June_mean - minTemp_June_mean))
 
 # Write results to a .csv
+westHim <- write.csv(env,"output/westHim_100.csv", row.names = F)
 eastHim <- write.csv(env,"output/eastHim_500.csv", row.names = F)
 
+
+# Edit plot code later # 
 # plot in facets
 fig_climate_elev <- ggplot(env)+
   geom_line(aes(x = elev_round, y = mean),
