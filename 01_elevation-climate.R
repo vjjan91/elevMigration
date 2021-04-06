@@ -15,6 +15,7 @@ library(scales)
 library(ggplot2)
 library(ggthemes)
 library(sf)
+library(mapview)
 
 # Load shapefiles
 west <- st_read("data/shapefiles/westHimalayas.shp")
@@ -98,7 +99,7 @@ env <- drop_na(env) %>%
          tempRange_June = (maxTemp_June_mean - minTemp_June_mean))
 
 # Write results to a .csv
-westHim <- write.csv(env,"output/westHim_100.csv", row.names = F)
+westHim <- write.csv(env,"output/westHim_500.csv", row.names = F)
 eastHim <- write.csv(env,"output/eastHim_500.csv", row.names = F)
 
 
