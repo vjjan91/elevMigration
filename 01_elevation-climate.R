@@ -16,10 +16,23 @@ library(ggplot2)
 library(ggthemes)
 library(sf)
 library(mapview)
+library(rgeos)
 
 # Load shapefiles
-west <- st_read("data/shapefiles/westHimalayas.shp")
-east <- st_read("data/shapefiles/eastHimalayas.shp")
+himalayas <- st_read("data/shapefiles/shapefile_himalaya.shp")
+mapview(himalayas)
+
+# Need to merge a few polygons to essentially split himalayas into the west and the east
+# This will have to be done at 83E for Nepal
+
+# Merge polygons for western himalayas
+west_toMerge <- himalayas[c(3,4,7,8,9,10),]
+westHim <- st_crop(west_toMerge,xmin=68.03321,ymin=23.69771,xmax=83,ymax=37.07761)
+
+# Merge polygons for eastern himalayas
+east_toMerge <- himalayas[c(1,2,5,6,10),]
+east_toMerge <- st_buffer(east_toMerge, dist=0)
+eastHim <- st_crop(east_toMerge,xmin=83,ymin=25.96462,xmax=97.4115,ymax=30.44728)
 
 # get ci func
 ci <- function(x){qnorm(0.975)*sd(x, na.rm = T)/sqrt(length(x))}
@@ -37,7 +50,7 @@ assertthat::assert_that(funcMode(c(2,2,2,2,3,3,3,4)) == as.character(2),
 ### Prepare terrain rasters
 # load elevation and crop to hills size, then mask by hills
 alt <- raster("data/elevation/alt")
-alt.hills <- crop(alt, as(east, "Spatial"))
+alt.hills <- crop(alt, as(eastHim, "Spatial"))
 rm(alt); gc()
 
 # get slope and aspect
@@ -55,7 +68,7 @@ chelsaFiles <- list.files("data/chelsa/",
 chelsaData <- purrr::map(chelsaFiles, function(chr){
   a <- raster(chr)
   crs(a) <- crs(elevData)
-  a <- crop(a, as(east, "Spatial"))
+  a <- crop(a, as(eastHim, "Spatial"))
   return(a)
 })
 
@@ -99,8 +112,8 @@ env <- drop_na(env) %>%
          tempRange_June = (maxTemp_June_mean - minTemp_June_mean))
 
 # Write results to a .csv
-westHim <- write.csv(env,"output/westHim_500.csv", row.names = F)
-eastHim <- write.csv(env,"output/eastHim_500.csv", row.names = F)
+west_data <- write.csv(env,"output/westHim_500.csv", row.names = F)
+east_data <- write.csv(env,"output/eastHim_500.csv", row.names = F)
 
 
 # Edit plot code later # 
