@@ -1,4 +1,4 @@
-# Source code for _High elevation Himalayan birds migrate downslope, tracking thermal regimes across seasons._
+## Source code for _High elevation Himalayan birds migrate downslope, tracking thermal regimes across seasons._
 
 <!-- badges: start -->
   [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
@@ -6,7 +6,7 @@
 
 This repository contains code and analysis for a manuscript that uses citizen science data to study elevational migration in Himalayan birds.
 
-## Attribution
+### Attribution
 
 Please contact the following in case of issues:
 
