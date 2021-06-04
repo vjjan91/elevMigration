@@ -1,4 +1,8 @@
+
+# Change the working directory as you please
 setwd("D:/IISC/Sahas_elevation")
+
+# Please note that the .RData file to reproduce the analysis is now uploaded on github
 
 ## Clean up Raw ebird data
 ## Input path of ebird raw data and the country it is from
