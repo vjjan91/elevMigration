@@ -1,6 +1,5 @@
 ## Climate as a function of elevation
 
-### Author: Code written by Pratik Gupte and Vijay Ramesh for a manuscript in review
 
 ## Prepare libraries
 
@@ -104,7 +103,7 @@ names(env) <- c("elev", chelsa_names)
 # convert to dataframe and round to a particular elevational band you need
 env <- bind_cols(env)
 env <- drop_na(env) %>% 
-  mutate(elev_round  = plyr::round_any(elev, 500)) %>% 
+  mutate(elev_round  = plyr::round_any(elev, 100)) %>% # changed to 100 m intervals 
   dplyr::select(-elev) %>% 
   group_by(elev_round) %>% 
   summarise_all(.funs = list(~mean(.), ~ci(.))) %>%
@@ -112,8 +111,8 @@ env <- drop_na(env) %>%
          tempRange_June = (maxTemp_June_mean - minTemp_June_mean))
 
 # Write results to a .csv
-west_data <- write.csv(env,"output/westHim_500.csv", row.names = F)
-east_data <- write.csv(env,"output/eastHim_500.csv", row.names = F)
+west_data <- write.csv(env,"output/westHim_100.csv", row.names = F)
+east_data <- write.csv(env,"output/eastHim_100.csv", row.names = F)
 
 
 # Edit plot code later # 
@@ -127,7 +126,7 @@ fig_climate_elev <- ggplot(env)+
   scale_y_continuous(labels = scales::comma)+
   facet_wrap(~clim_var, scales = "free_y")+
   theme_few()+
-  labs(x = "elevation (m) at 500m intervals", y = "CHELSA variable value")+
+  labs(x = "elevation (m) at 100m intervals", y = "CHELSA variable value")+
   theme(axis.title = element_text(size = 16, face = "bold"), 
         axis.ticks.length.x = unit(.5, "cm"),
         axis.text = element_text(size = 14),
@@ -135,6 +134,7 @@ fig_climate_elev <- ggplot(env)+
         legend.key.size = unit(1,"cm"),
         legend.text = element_text(size = 12))
 
-ggsave(fig_climate_elev, filename = "figs/fig_eastHim_elev500.png", 
+# save ggplots accordingly
+ggsave(fig_climate_elev, filename = "figs/fig_eastHim_elev100.png", 
        height = 10, width = 14, device = png(), dpi = 300, units="in"); dev.off()
 
