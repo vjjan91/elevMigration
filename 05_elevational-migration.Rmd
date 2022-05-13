@@ -162,4 +162,4 @@ for (minSample in c(30, 60)) {
 ```
 
 ![**Elevational shift in the eastern and western Himalayas**
-Elevational shift in the eastern Himalayas (A) and western Himalayas (B). Figures show species estimates (at high sampling effort) of median summer elevations (orange circles) in descending order and their respective median winter elevations (teal triangles). Errors bars indicate 95% confidence intervals estimated from the resampling protocol.](figs/fig02.png)
+Elevational shift in the eastern Himalayas (A) and western Himalayas (B). Figures show species estimates (at high sampling effort) of median summer elevations (orange circles) in descending order and their respective median winter elevations (teal triangles). Errors bars indicate 95% confidence intervals estimated from the resampling protocol.](figs/fig02.jpg)
