@@ -3,7 +3,7 @@
 <!-- badges: start -->
 
   [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-  [![DOI](https://zenodo.org/badge/353883213.svg)](https://zenodo.org/badge/latestdoi/353883213)
+  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6545050.svg)](https://doi.org/10.5281/zenodo.6545050)
 
 <!-- badges: end -->
 
