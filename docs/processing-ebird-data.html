@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 4 Processing eBird data | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons</title>
+  <meta name="description" content="Section 4 Processing eBird data | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 4 Processing eBird data | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="vjjan91/elevMigration" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 4 Processing eBird data | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  
+  
+  
+
+<meta name="author" content="Sahas Barve" />
+<meta name="author" content="Tarun Menon" />
+<meta name="author" content="Vijay Ramesh" />
+
+
+<meta name="date" content="2022-05-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="temperature-elevation-associations.html"/>
+<link rel="next" href="resampling-analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.2</b> Attribution</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.3</b> Data access</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#the-data-used-in-this-work-is-archived-on-zenodo."><i class="fa fa-check"></i><b>1.4</b> The data used in this work is archived on Zenodo.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a><ul>
+<li class="chapter" data-level="2.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="2.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a><ul>
+<li class="chapter" data-level="3.1" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-necessary-libraries-1"><i class="fa fa-check"></i><b>3.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="3.2" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-shapefiles"><i class="fa fa-check"></i><b>3.2</b> Load shapefiles</a></li>
+<li class="chapter" data-level="3.3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#prepare-elevation-rasters"><i class="fa fa-check"></i><b>3.3</b> Prepare elevation rasters</a></li>
+<li class="chapter" data-level="3.4" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#prepare-climate-rasters"><i class="fa fa-check"></i><b>3.4</b> Prepare climate rasters</a></li>
+<li class="chapter" data-level="3.5" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#extracting-data-across-elevational-bands"><i class="fa fa-check"></i><b>3.5</b> Extracting data across elevational bands</a></li>
+<li class="chapter" data-level="3.6" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#plot-temperature-as-a-function-of-elevation"><i class="fa fa-check"></i><b>3.6</b> Plot temperature as a function of elevation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html"><i class="fa fa-check"></i><b>4</b> Processing eBird data</a><ul>
+<li class="chapter" data-level="4.1" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#load-necessary-libraries-2"><i class="fa fa-check"></i><b>4.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="4.2" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#loading-custom-functions-to-process-ebird-data"><i class="fa fa-check"></i><b>4.2</b> Loading custom functions to process eBird data</a></li>
+<li class="chapter" data-level="4.3" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#use-the-function-written-above-to-extract-ebird-data"><i class="fa fa-check"></i><b>4.3</b> Use the function written above to extract eBird data</a></li>
+<li class="chapter" data-level="4.4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#extract-elevation-at-unique-locations"><i class="fa fa-check"></i><b>4.4</b> Extract elevation at unique locations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="resampling-analysis.html"><a href="resampling-analysis.html"><i class="fa fa-check"></i><b>5</b> Resampling analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="resampling-analysis.html"><a href="resampling-analysis.html#load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations"><i class="fa fa-check"></i><b>5.1</b> Load .Rdata file containing elevation data across eBird sampling locations</a></li>
+<li class="chapter" data-level="5.2" data-path="resampling-analysis.html"><a href="resampling-analysis.html#create-resampled-datasets"><i class="fa fa-check"></i><b>5.2</b> Create resampled datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html"><i class="fa fa-check"></i><b>6</b> Extent of elevational migration</a><ul>
+<li class="chapter" data-level="6.1" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#load-necessary-libraries-3"><i class="fa fa-check"></i><b>6.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="6.2" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#eastern-himalayas"><i class="fa fa-check"></i><b>6.2</b> Eastern Himalayas</a></li>
+<li class="chapter" data-level="6.3" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#western-himalayas"><i class="fa fa-check"></i><b>6.3</b> Western Himalayas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geometric-constaints-pgls.html"><a href="geometric-constaints-pgls.html"><i class="fa fa-check"></i><b>7</b> Geometric constaints PGLS</a></li>
+<li class="chapter" data-level="8" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic generalized least squares regressions</a><ul>
+<li class="chapter" data-level="8.1" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#remove-non-himalayan-species"><i class="fa fa-check"></i><b>8.1</b> Remove non-Himalayan species</a></li>
+<li class="chapter" data-level="8.2" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-eastern-himalayas"><i class="fa fa-check"></i><b>8.2</b> PGLS models for the Eastern Himalayas</a></li>
+<li class="chapter" data-level="8.3" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-western-himalayas"><i class="fa fa-check"></i><b>8.3</b> PGLS models for the Western Himalayas</a></li>
+<li class="chapter" data-level="8.4" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#phylogenetic-paired-t-test"><i class="fa fa-check"></i><b>8.4</b> Phylogenetic paired t-test</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>High elevation Himalayan birds shift elevations to track thermal regimes across seasons</em></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="processing-ebird-data" class="section level1">
+<h1><span class="header-section-number">Section 4</span> Processing eBird data</h1>
+<p>In this script, we will process the community science data across the Eastern and Western Himalayas.</p>
+<div id="load-necessary-libraries-2" class="section level2">
+<h2><span class="header-section-number">4.1</span> Load necessary libraries</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb9-1"><a href="processing-ebird-data.html#cb9-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb9-2"><a href="processing-ebird-data.html#cb9-2"></a><span class="kw">library</span>(sf)</span>
+<span id="cb9-3"><a href="processing-ebird-data.html#cb9-3"></a><span class="kw">library</span>(raster)</span>
+<span id="cb9-4"><a href="processing-ebird-data.html#cb9-4"></a><span class="kw">library</span>(parallel)</span></code></pre></div>
+</div>
+<div id="loading-custom-functions-to-process-ebird-data" class="section level2">
+<h2><span class="header-section-number">4.2</span> Loading custom functions to process eBird data</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb10-1"><a href="processing-ebird-data.html#cb10-1"></a><span class="co"># This function processes the ebird data as long as the path where the data is stored and list of countries are mentioned </span></span>
+<span id="cb10-2"><a href="processing-ebird-data.html#cb10-2"></a></span>
+<span id="cb10-3"><a href="processing-ebird-data.html#cb10-3"></a>readcleanrawdata =<span class="st"> </span><span class="cf">function</span>(rawpath, Country)</span>
+<span id="cb10-4"><a href="processing-ebird-data.html#cb10-4"></a>{</span>
+<span id="cb10-5"><a href="processing-ebird-data.html#cb10-5"></a>  <span class="kw">require</span>(lubridate)</span>
+<span id="cb10-6"><a href="processing-ebird-data.html#cb10-6"></a>  <span class="kw">require</span>(tidyverse)</span>
+<span id="cb10-7"><a href="processing-ebird-data.html#cb10-7"></a>  <span class="kw">require</span>(cowplot)</span>
+<span id="cb10-8"><a href="processing-ebird-data.html#cb10-8"></a>  </span>
+<span id="cb10-9"><a href="processing-ebird-data.html#cb10-9"></a>  preimp =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;COMMON.NAME&quot;</span>,<span class="st">&quot;OBSERVATION.COUNT&quot;</span>,</span>
+<span id="cb10-10"><a href="processing-ebird-data.html#cb10-10"></a>             <span class="st">&quot;LOCALITY.ID&quot;</span>,<span class="st">&quot;LOCALITY.TYPE&quot;</span>, <span class="st">&quot;STATE&quot;</span>, <span class="st">&quot;COUNTRY&quot;</span>,</span>
+<span id="cb10-11"><a href="processing-ebird-data.html#cb10-11"></a>             <span class="st">&quot;LATITUDE&quot;</span>,<span class="st">&quot;LONGITUDE&quot;</span>,<span class="st">&quot;OBSERVATION.DATE&quot;</span>,<span class="st">&quot;TIME.OBSERVATIONS.STARTED&quot;</span>,<span class="st">&quot;OBSERVER.ID&quot;</span>,</span>
+<span id="cb10-12"><a href="processing-ebird-data.html#cb10-12"></a>             <span class="st">&quot;PROTOCOL.TYPE&quot;</span>,<span class="st">&quot;DURATION.MINUTES&quot;</span>,<span class="st">&quot;EFFORT.DISTANCE.KM&quot;</span>, <span class="st">&quot;REVIEWED&quot;</span>,</span>
+<span id="cb10-13"><a href="processing-ebird-data.html#cb10-13"></a>             <span class="st">&quot;NUMBER.OBSERVERS&quot;</span>,<span class="st">&quot;ALL.SPECIES.REPORTED&quot;</span>,<span class="st">&quot;GROUP.IDENTIFIER&quot;</span>,<span class="st">&quot;SAMPLING.EVENT.IDENTIFIER&quot;</span>,<span class="st">&quot;APPROVED&quot;</span>,<span class="st">&quot;CATEGORY&quot;</span>)</span>
+<span id="cb10-14"><a href="processing-ebird-data.html#cb10-14"></a>  </span>
+<span id="cb10-15"><a href="processing-ebird-data.html#cb10-15"></a>  nms =<span class="st"> </span><span class="kw">read.delim</span>(rawpath, <span class="dt">nrows =</span> <span class="dv">1</span>, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> T, <span class="dt">quote =</span> <span class="st">&quot;&quot;</span>, <span class="dt">stringsAsFactors =</span> F, <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot; &quot;</span>,<span class="ot">NA</span>))</span>
+<span id="cb10-16"><a href="processing-ebird-data.html#cb10-16"></a>  nms =<span class="st"> </span><span class="kw">names</span>(nms)</span>
+<span id="cb10-17"><a href="processing-ebird-data.html#cb10-17"></a>  nms[<span class="op">!</span>(nms <span class="op">%in%</span><span class="st"> </span>preimp)] =<span class="st"> &quot;NULL&quot;</span></span>
+<span id="cb10-18"><a href="processing-ebird-data.html#cb10-18"></a>  nms[nms <span class="op">%in%</span><span class="st"> </span>preimp] =<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb10-19"><a href="processing-ebird-data.html#cb10-19"></a>  </span>
+<span id="cb10-20"><a href="processing-ebird-data.html#cb10-20"></a>  data =<span class="st"> </span><span class="kw">read.delim</span>(rawpath, <span class="dt">colClasses =</span> nms, <span class="dt">sep =</span> <span class="st">&quot;</span><span class="ch">\t</span><span class="st">&quot;</span>, <span class="dt">header =</span> T, <span class="dt">quote =</span> <span class="st">&quot;&quot;</span>, <span class="dt">stringsAsFactors =</span> F, <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>,<span class="st">&quot; &quot;</span>,<span class="ot">NA</span>))</span>
+<span id="cb10-21"><a href="processing-ebird-data.html#cb10-21"></a>  </span>
+<span id="cb10-22"><a href="processing-ebird-data.html#cb10-22"></a>  <span class="co">## choosing important variables</span></span>
+<span id="cb10-23"><a href="processing-ebird-data.html#cb10-23"></a>  </span>
+<span id="cb10-24"><a href="processing-ebird-data.html#cb10-24"></a>  imp =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;COMMON.NAME&quot;</span>,<span class="st">&quot;OBSERVATION.COUNT&quot;</span>,</span>
+<span id="cb10-25"><a href="processing-ebird-data.html#cb10-25"></a>          <span class="st">&quot;LOCALITY.ID&quot;</span>,<span class="st">&quot;LOCALITY.TYPE&quot;</span>, <span class="st">&quot;STATE&quot;</span>, <span class="st">&quot;COUNTRY&quot;</span>,</span>
+<span id="cb10-26"><a href="processing-ebird-data.html#cb10-26"></a>          <span class="st">&quot;LATITUDE&quot;</span>,<span class="st">&quot;LONGITUDE&quot;</span>,<span class="st">&quot;OBSERVATION.DATE&quot;</span>,<span class="st">&quot;TIME.OBSERVATIONS.STARTED&quot;</span>,<span class="st">&quot;OBSERVER.ID&quot;</span>,</span>
+<span id="cb10-27"><a href="processing-ebird-data.html#cb10-27"></a>          <span class="st">&quot;PROTOCOL.TYPE&quot;</span>,<span class="st">&quot;DURATION.MINUTES&quot;</span>,<span class="st">&quot;EFFORT.DISTANCE.KM&quot;</span>, <span class="st">&quot;SAMPLING.EVENT.IDENTIFIER&quot;</span>,</span>
+<span id="cb10-28"><a href="processing-ebird-data.html#cb10-28"></a>          <span class="st">&quot;NUMBER.OBSERVERS&quot;</span>,<span class="st">&quot;ALL.SPECIES.REPORTED&quot;</span>,<span class="st">&quot;group.id&quot;</span>, <span class="st">&quot;CATEGORY&quot;</span>,<span class="st">&quot;no.sp&quot;</span>)</span>
+<span id="cb10-29"><a href="processing-ebird-data.html#cb10-29"></a>  </span>
+<span id="cb10-30"><a href="processing-ebird-data.html#cb10-30"></a>  days =<span class="st"> </span><span class="kw">c</span>(<span class="dv">31</span>,<span class="dv">28</span>,<span class="dv">31</span>,<span class="dv">30</span>,<span class="dv">31</span>,<span class="dv">30</span>,<span class="dv">31</span>,<span class="dv">31</span>,<span class="dv">30</span>,<span class="dv">31</span>,<span class="dv">30</span>,<span class="dv">31</span>)</span>
+<span id="cb10-31"><a href="processing-ebird-data.html#cb10-31"></a>  cdays =<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">31</span>,<span class="dv">59</span>,<span class="dv">90</span>,<span class="dv">120</span>,<span class="dv">151</span>,<span class="dv">181</span>,<span class="dv">212</span>,<span class="dv">243</span>,<span class="dv">273</span>,<span class="dv">304</span>,<span class="dv">334</span>)</span>
+<span id="cb10-32"><a href="processing-ebird-data.html#cb10-32"></a>  </span>
+<span id="cb10-33"><a href="processing-ebird-data.html#cb10-33"></a>  <span class="co">## setup eBird data ##</span></span>
+<span id="cb10-34"><a href="processing-ebird-data.html#cb10-34"></a>  </span>
+<span id="cb10-35"><a href="processing-ebird-data.html#cb10-35"></a>  <span class="co">## filter approved observations, species, slice by single group ID, remove repetitions</span></span>
+<span id="cb10-36"><a href="processing-ebird-data.html#cb10-36"></a>  <span class="co">## remove repeats</span></span>
+<span id="cb10-37"><a href="processing-ebird-data.html#cb10-37"></a>  <span class="co">## set date, add month, year and day columns using package LUBRIDATE</span></span>
+<span id="cb10-38"><a href="processing-ebird-data.html#cb10-38"></a>  <span class="co">## filter distance travelled, duration birded and number of observers</span></span>
+<span id="cb10-39"><a href="processing-ebird-data.html#cb10-39"></a>  <span class="co">## add number of species column (no.sp)</span></span>
+<span id="cb10-40"><a href="processing-ebird-data.html#cb10-40"></a>  </span>
+<span id="cb10-41"><a href="processing-ebird-data.html#cb10-41"></a>  <span class="cf">if</span> (Country <span class="op">!=</span><span class="st"> &quot;India&quot;</span>)</span>
+<span id="cb10-42"><a href="processing-ebird-data.html#cb10-42"></a>  {</span>
+<span id="cb10-43"><a href="processing-ebird-data.html#cb10-43"></a>    data =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb10-44"><a href="processing-ebird-data.html#cb10-44"></a><span class="st">      </span><span class="kw">filter</span>(REVIEWED <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span>APPROVED <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb10-45"><a href="processing-ebird-data.html#cb10-45"></a><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">group.id =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(GROUP.IDENTIFIER), SAMPLING.EVENT.IDENTIFIER, GROUP.IDENTIFIER)) <span class="op">%&gt;%</span></span>
+<span id="cb10-46"><a href="processing-ebird-data.html#cb10-46"></a><span class="st">      </span><span class="kw">filter</span>(ALL.SPECIES.REPORTED <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">filter</span>(EFFORT.DISTANCE.KM<span class="op">&lt;=</span><span class="fl">2.5</span><span class="op">|</span><span class="kw">is.na</span>(EFFORT.DISTANCE.KM))<span class="op">%&gt;%</span></span>
+<span id="cb10-47"><a href="processing-ebird-data.html#cb10-47"></a><span class="st">      </span><span class="kw">filter</span>(DURATION.MINUTES <span class="op">&lt;=</span><span class="st"> </span><span class="dv">120</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(NUMBER.OBSERVERS <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>)<span class="op">%&gt;%</span></span>
+<span id="cb10-48"><a href="processing-ebird-data.html#cb10-48"></a><span class="st">      </span><span class="kw">group_by</span>(group.id,COMMON.NAME) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>ungroup <span class="op">%&gt;%</span></span>
+<span id="cb10-49"><a href="processing-ebird-data.html#cb10-49"></a><span class="st">      </span><span class="kw">group_by</span>(group.id) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">no.sp =</span> <span class="kw">n_distinct</span>(COMMON.NAME))<span class="op">%&gt;%</span></span>
+<span id="cb10-50"><a href="processing-ebird-data.html#cb10-50"></a><span class="st">      </span>dplyr<span class="op">::</span><span class="kw">select</span>(imp) <span class="op">%&gt;%</span></span>
+<span id="cb10-51"><a href="processing-ebird-data.html#cb10-51"></a><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">OBSERVATION.DATE =</span> <span class="kw">as.Date</span>(OBSERVATION.DATE), </span>
+<span id="cb10-52"><a href="processing-ebird-data.html#cb10-52"></a>             <span class="dt">month =</span> <span class="kw">month</span>(OBSERVATION.DATE), <span class="dt">year =</span> <span class="kw">year</span>(OBSERVATION.DATE),</span>
+<span id="cb10-53"><a href="processing-ebird-data.html#cb10-53"></a>             <span class="dt">day =</span> <span class="kw">day</span>(OBSERVATION.DATE) <span class="op">+</span><span class="st"> </span>cdays[month], <span class="dt">week =</span> <span class="kw">week</span>(OBSERVATION.DATE),</span>
+<span id="cb10-54"><a href="processing-ebird-data.html#cb10-54"></a>             <span class="dt">fort =</span> <span class="kw">ceiling</span>(day<span class="op">/</span><span class="dv">14</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb10-55"><a href="processing-ebird-data.html#cb10-55"></a><span class="st">      </span>ungroup</span>
+<span id="cb10-56"><a href="processing-ebird-data.html#cb10-56"></a>    </span>
+<span id="cb10-57"><a href="processing-ebird-data.html#cb10-57"></a>    <span class="kw">return</span>(data)</span>
+<span id="cb10-58"><a href="processing-ebird-data.html#cb10-58"></a>  }</span>
+<span id="cb10-59"><a href="processing-ebird-data.html#cb10-59"></a>  </span>
+<span id="cb10-60"><a href="processing-ebird-data.html#cb10-60"></a>  <span class="cf">if</span> (Country <span class="op">==</span><span class="st"> &quot;India&quot;</span>)</span>
+<span id="cb10-61"><a href="processing-ebird-data.html#cb10-61"></a>  {</span>
+<span id="cb10-62"><a href="processing-ebird-data.html#cb10-62"></a>    data =<span class="st"> </span>data <span class="op">%&gt;%</span></span>
+<span id="cb10-63"><a href="processing-ebird-data.html#cb10-63"></a><span class="st">      </span><span class="kw">filter</span>(REVIEWED <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span>APPROVED <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span></span>
+<span id="cb10-64"><a href="processing-ebird-data.html#cb10-64"></a><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">group.id =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(GROUP.IDENTIFIER), SAMPLING.EVENT.IDENTIFIER, GROUP.IDENTIFIER)) <span class="op">%&gt;%</span></span>
+<span id="cb10-65"><a href="processing-ebird-data.html#cb10-65"></a><span class="st">      </span><span class="kw">filter</span>(ALL.SPECIES.REPORTED <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="kw">filter</span>(EFFORT.DISTANCE.KM<span class="op">&lt;=</span><span class="fl">2.5</span><span class="op">|</span><span class="kw">is.na</span>(EFFORT.DISTANCE.KM))<span class="op">%&gt;%</span></span>
+<span id="cb10-66"><a href="processing-ebird-data.html#cb10-66"></a><span class="st">      </span><span class="kw">filter</span>(DURATION.MINUTES <span class="op">&lt;=</span><span class="st"> </span><span class="dv">120</span>)<span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(NUMBER.OBSERVERS <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>)<span class="op">%&gt;%</span></span>
+<span id="cb10-67"><a href="processing-ebird-data.html#cb10-67"></a><span class="st">      </span><span class="kw">filter</span>(STATE <span class="op">==</span><span class="st"> &quot;Uttarakhand&quot;</span> <span class="op">|</span><span class="st"> </span>STATE <span class="op">==</span><span class="st"> &quot;Himachal Pradesh&quot;</span><span class="op">|</span><span class="st"> </span>STATE <span class="op">==</span><span class="st"> &quot;Jammu and Kashmir&quot;</span><span class="op">|</span><span class="st"> </span>STATE <span class="op">==</span><span class="st"> &quot;Sikkim&quot;</span> <span class="op">|</span><span class="st"> </span>STATE <span class="op">==</span><span class="st"> &quot;Arunachal Pradesh&quot;</span> <span class="op">|</span>STATE <span class="op">==</span><span class="st"> &quot;West Bengal&quot;</span>)<span class="op">%&gt;%</span></span>
+<span id="cb10-68"><a href="processing-ebird-data.html#cb10-68"></a><span class="st">      </span><span class="kw">group_by</span>(group.id,COMMON.NAME) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">slice</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>ungroup <span class="op">%&gt;%</span></span>
+<span id="cb10-69"><a href="processing-ebird-data.html#cb10-69"></a><span class="st">      </span><span class="kw">group_by</span>(group.id) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">no.sp =</span> <span class="kw">n_distinct</span>(COMMON.NAME))<span class="op">%&gt;%</span></span>
+<span id="cb10-70"><a href="processing-ebird-data.html#cb10-70"></a><span class="st">      </span>dplyr<span class="op">::</span><span class="kw">select</span>(imp) <span class="op">%&gt;%</span></span>
+<span id="cb10-71"><a href="processing-ebird-data.html#cb10-71"></a><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">OBSERVATION.DATE =</span> <span class="kw">as.Date</span>(OBSERVATION.DATE), </span>
+<span id="cb10-72"><a href="processing-ebird-data.html#cb10-72"></a>             <span class="dt">month =</span> <span class="kw">month</span>(OBSERVATION.DATE), <span class="dt">year =</span> <span class="kw">year</span>(OBSERVATION.DATE),</span>
+<span id="cb10-73"><a href="processing-ebird-data.html#cb10-73"></a>             <span class="dt">day =</span> <span class="kw">day</span>(OBSERVATION.DATE) <span class="op">+</span><span class="st"> </span>cdays[month], <span class="dt">week =</span> <span class="kw">week</span>(OBSERVATION.DATE),</span>
+<span id="cb10-74"><a href="processing-ebird-data.html#cb10-74"></a>             <span class="dt">fort =</span> <span class="kw">ceiling</span>(day<span class="op">/</span><span class="dv">14</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb10-75"><a href="processing-ebird-data.html#cb10-75"></a><span class="st">      </span>ungroup</span>
+<span id="cb10-76"><a href="processing-ebird-data.html#cb10-76"></a>    </span>
+<span id="cb10-77"><a href="processing-ebird-data.html#cb10-77"></a>    <span class="kw">return</span>(data)</span>
+<span id="cb10-78"><a href="processing-ebird-data.html#cb10-78"></a>  }</span>
+<span id="cb10-79"><a href="processing-ebird-data.html#cb10-79"></a>}</span></code></pre></div>
+</div>
+<div id="use-the-function-written-above-to-extract-ebird-data" class="section level2">
+<h2><span class="header-section-number">4.3</span> Use the function written above to extract eBird data</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb11-1"><a href="processing-ebird-data.html#cb11-1"></a><span class="co"># please download the latest versions of eBird data from https://ebird.org/data/download and set the file path accordingly. Since these two datasets are extremely large, we have not uploaded the same to github.</span></span>
+<span id="cb11-2"><a href="processing-ebird-data.html#cb11-2"></a></span>
+<span id="cb11-3"><a href="processing-ebird-data.html#cb11-3"></a><span class="co"># In this study, the latest version of the data corresponds to July 31st 2021</span></span>
+<span id="cb11-4"><a href="processing-ebird-data.html#cb11-4"></a></span>
+<span id="cb11-5"><a href="processing-ebird-data.html#cb11-5"></a><span class="co"># extract data for the following list of countries</span></span>
+<span id="cb11-6"><a href="processing-ebird-data.html#cb11-6"></a>Bhutan &lt;-<span class="kw">readcleanrawdata</span>(<span class="st">&quot;ebd_BT_relJul-2021.txt&quot;</span>, <span class="dt">Country =</span> <span class="st">&quot;Bhutan&quot;</span>)</span>
+<span id="cb11-7"><a href="processing-ebird-data.html#cb11-7"></a>Nepal &lt;-<span class="kw">readcleanrawdata</span>(<span class="st">&quot;ebd_NP_relJul-2021.txt&quot;</span>, <span class="dt">Country =</span> <span class="st">&quot;Nepal&quot;</span>)</span>
+<span id="cb11-8"><a href="processing-ebird-data.html#cb11-8"></a>POK &lt;-<span class="kw">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-JK-KM_relJul-2021.txt&quot;</span>, <span class="dt">Country =</span> <span class="st">&quot;POK&quot;</span>)</span>
+<span id="cb11-9"><a href="processing-ebird-data.html#cb11-9"></a>India &lt;-<span class="kw">readcleanrawdata</span>(<span class="st">&quot;ebd_IN_relJul-2021.txt&quot;</span>, <span class="dt">Country =</span> <span class="st">&quot;India&quot;</span>)</span>
+<span id="cb11-10"><a href="processing-ebird-data.html#cb11-10"></a>Pakistan &lt;-<span class="kw">readcleanrawdata</span>(<span class="st">&quot;ebd_PK_relJul-2021.txt&quot;</span>, <span class="dt">Country =</span> <span class="st">&quot;Pakistan&quot;</span>)</span>
+<span id="cb11-11"><a href="processing-ebird-data.html#cb11-11"></a></span>
+<span id="cb11-12"><a href="processing-ebird-data.html#cb11-12"></a><span class="co">## Removing non himalayan regions</span></span>
+<span id="cb11-13"><a href="processing-ebird-data.html#cb11-13"></a>India &lt;-India <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(LATITUDE<span class="op">&gt;</span><span class="dv">26</span>,LONGITUDE<span class="op">&lt;</span><span class="dv">100</span>)</span>
+<span id="cb11-14"><a href="processing-ebird-data.html#cb11-14"></a>Pakistan &lt;-Pakistan <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span> (LATITUDE<span class="op">&gt;</span><span class="dv">33</span>)</span>
+<span id="cb11-15"><a href="processing-ebird-data.html#cb11-15"></a></span>
+<span id="cb11-16"><a href="processing-ebird-data.html#cb11-16"></a>dat &lt;-<span class="kw">rbind</span>(Nepal,POK,India,Pakistan,Bhutan)</span>
+<span id="cb11-17"><a href="processing-ebird-data.html#cb11-17"></a></span>
+<span id="cb11-18"><a href="processing-ebird-data.html#cb11-18"></a><span class="co"># Keep only unique locations used</span></span>
+<span id="cb11-19"><a href="processing-ebird-data.html#cb11-19"></a></span>
+<span id="cb11-20"><a href="processing-ebird-data.html#cb11-20"></a>dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb11-21"><a href="processing-ebird-data.html#cb11-21"></a><span class="st">  </span><span class="kw">distinct</span>(LATITUDE,LONGITUDE, <span class="dt">.keep_all =</span> T) <span class="op">%&gt;%</span><span class="st">    </span><span class="kw">select</span>(LOCALITY.ID,LATITUDE,LONGITUDE)</span>
+<span id="cb11-22"><a href="processing-ebird-data.html#cb11-22"></a></span>
+<span id="cb11-23"><a href="processing-ebird-data.html#cb11-23"></a><span class="kw">write.csv</span>(dat, <span class="st">&quot;results/unique-loc.csv&quot;</span>, <span class="dt">row.names =</span> F)</span></code></pre></div>
+</div>
+<div id="extract-elevation-at-unique-locations" class="section level2">
+<h2><span class="header-section-number">4.4</span> Extract elevation at unique locations</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb12-1"><a href="processing-ebird-data.html#cb12-1"></a>dat &lt;-<span class="st"> </span><span class="kw">st_as_sf</span>(dat, <span class="dt">coords =</span> <span class="kw">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>,<span class="st">&quot;LATITUDE&quot;</span>), <span class="dt">crs=</span><span class="dv">4326</span>, <span class="dt">remove =</span> <span class="st">&quot;F&quot;</span>)</span>
+<span id="cb12-2"><a href="processing-ebird-data.html#cb12-2"></a></span>
+<span id="cb12-3"><a href="processing-ebird-data.html#cb12-3"></a><span class="co"># Loading the elevation data</span></span>
+<span id="cb12-4"><a href="processing-ebird-data.html#cb12-4"></a>elev &lt;-<span class="st"> </span><span class="kw">raster</span>(<span class="st">&quot;data/elevation/alt&quot;</span>)</span>
+<span id="cb12-5"><a href="processing-ebird-data.html#cb12-5"></a></span>
+<span id="cb12-6"><a href="processing-ebird-data.html#cb12-6"></a><span class="co"># extract elevation</span></span>
+<span id="cb12-7"><a href="processing-ebird-data.html#cb12-7"></a>elevDat &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">extract</span>(elev,dat)</span>
+<span id="cb12-8"><a href="processing-ebird-data.html#cb12-8"></a></span>
+<span id="cb12-9"><a href="processing-ebird-data.html#cb12-9"></a><span class="co"># cbind elevation back to dataframe</span></span>
+<span id="cb12-10"><a href="processing-ebird-data.html#cb12-10"></a>dat &lt;-<span class="st"> </span><span class="kw">cbind</span>(dat,elevDat)</span>
+<span id="cb12-11"><a href="processing-ebird-data.html#cb12-11"></a></span>
+<span id="cb12-12"><a href="processing-ebird-data.html#cb12-12"></a><span class="co"># save Rdata file (uploaded to GitHub)</span></span>
+<span id="cb12-13"><a href="processing-ebird-data.html#cb12-13"></a><span class="kw">save</span>(dat, <span class="dt">file =</span> <span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="temperature-elevation-associations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="resampling-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/vjjan91/elevMigration/edit/master/03_eBird-data-processing.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

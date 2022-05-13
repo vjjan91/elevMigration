@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 6 Extent of elevational migration | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons</title>
+  <meta name="description" content="Section 6 Extent of elevational migration | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 6 Extent of elevational migration | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="vjjan91/elevMigration" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 6 Extent of elevational migration | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  
+  
+  
+
+<meta name="author" content="Sahas Barve" />
+<meta name="author" content="Tarun Menon" />
+<meta name="author" content="Vijay Ramesh" />
+
+
+<meta name="date" content="2022-05-13" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="resampling-analysis.html"/>
+<link rel="next" href="geometric-constaints-pgls.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.2</b> Attribution</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.3</b> Data access</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#the-data-used-in-this-work-is-archived-on-zenodo."><i class="fa fa-check"></i><b>1.4</b> The data used in this work is archived on Zenodo.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a><ul>
+<li class="chapter" data-level="2.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="2.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a><ul>
+<li class="chapter" data-level="3.1" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-necessary-libraries-1"><i class="fa fa-check"></i><b>3.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="3.2" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-shapefiles"><i class="fa fa-check"></i><b>3.2</b> Load shapefiles</a></li>
+<li class="chapter" data-level="3.3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#prepare-elevation-rasters"><i class="fa fa-check"></i><b>3.3</b> Prepare elevation rasters</a></li>
+<li class="chapter" data-level="3.4" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#prepare-climate-rasters"><i class="fa fa-check"></i><b>3.4</b> Prepare climate rasters</a></li>
+<li class="chapter" data-level="3.5" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#extracting-data-across-elevational-bands"><i class="fa fa-check"></i><b>3.5</b> Extracting data across elevational bands</a></li>
+<li class="chapter" data-level="3.6" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#plot-temperature-as-a-function-of-elevation"><i class="fa fa-check"></i><b>3.6</b> Plot temperature as a function of elevation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html"><i class="fa fa-check"></i><b>4</b> Processing eBird data</a><ul>
+<li class="chapter" data-level="4.1" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#load-necessary-libraries-2"><i class="fa fa-check"></i><b>4.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="4.2" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#loading-custom-functions-to-process-ebird-data"><i class="fa fa-check"></i><b>4.2</b> Loading custom functions to process eBird data</a></li>
+<li class="chapter" data-level="4.3" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#use-the-function-written-above-to-extract-ebird-data"><i class="fa fa-check"></i><b>4.3</b> Use the function written above to extract eBird data</a></li>
+<li class="chapter" data-level="4.4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#extract-elevation-at-unique-locations"><i class="fa fa-check"></i><b>4.4</b> Extract elevation at unique locations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="resampling-analysis.html"><a href="resampling-analysis.html"><i class="fa fa-check"></i><b>5</b> Resampling analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="resampling-analysis.html"><a href="resampling-analysis.html#load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations"><i class="fa fa-check"></i><b>5.1</b> Load .Rdata file containing elevation data across eBird sampling locations</a></li>
+<li class="chapter" data-level="5.2" data-path="resampling-analysis.html"><a href="resampling-analysis.html#create-resampled-datasets"><i class="fa fa-check"></i><b>5.2</b> Create resampled datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html"><i class="fa fa-check"></i><b>6</b> Extent of elevational migration</a><ul>
+<li class="chapter" data-level="6.1" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#load-necessary-libraries-3"><i class="fa fa-check"></i><b>6.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="6.2" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#eastern-himalayas"><i class="fa fa-check"></i><b>6.2</b> Eastern Himalayas</a></li>
+<li class="chapter" data-level="6.3" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#western-himalayas"><i class="fa fa-check"></i><b>6.3</b> Western Himalayas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geometric-constaints-pgls.html"><a href="geometric-constaints-pgls.html"><i class="fa fa-check"></i><b>7</b> Geometric constaints PGLS</a></li>
+<li class="chapter" data-level="8" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic generalized least squares regressions</a><ul>
+<li class="chapter" data-level="8.1" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#remove-non-himalayan-species"><i class="fa fa-check"></i><b>8.1</b> Remove non-Himalayan species</a></li>
+<li class="chapter" data-level="8.2" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-eastern-himalayas"><i class="fa fa-check"></i><b>8.2</b> PGLS models for the Eastern Himalayas</a></li>
+<li class="chapter" data-level="8.3" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-western-himalayas"><i class="fa fa-check"></i><b>8.3</b> PGLS models for the Western Himalayas</a></li>
+<li class="chapter" data-level="8.4" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#phylogenetic-paired-t-test"><i class="fa fa-check"></i><b>8.4</b> Phylogenetic paired t-test</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>High elevation Himalayan birds shift elevations to track thermal regimes across seasons</em></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="extent-of-elevational-migration" class="section level1">
+<h1><span class="header-section-number">Section 6</span> Extent of elevational migration</h1>
+<p>In this script, we calculate the median migration extent, breeding and wintering elevation for all combinations of elevayional limit and sampling effort-seperately for the eastern and western Himalayas</p>
+<div id="load-necessary-libraries-3" class="section level2">
+<h2><span class="header-section-number">6.1</span> Load necessary libraries</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb15-1"><a href="extent-of-elevational-migration.html#cb15-1"></a><span class="kw">library</span>(ape)</span>
+<span id="cb15-2"><a href="extent-of-elevational-migration.html#cb15-2"></a><span class="kw">library</span>(geiger)</span>
+<span id="cb15-3"><a href="extent-of-elevational-migration.html#cb15-3"></a><span class="kw">library</span>(phytools)</span>
+<span id="cb15-4"><a href="extent-of-elevational-migration.html#cb15-4"></a><span class="kw">library</span>(coxme)</span>
+<span id="cb15-5"><a href="extent-of-elevational-migration.html#cb15-5"></a><span class="kw">library</span>(evobiR)</span>
+<span id="cb15-6"><a href="extent-of-elevational-migration.html#cb15-6"></a><span class="kw">library</span>(nlme)</span>
+<span id="cb15-7"><a href="extent-of-elevational-migration.html#cb15-7"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb15-8"><a href="extent-of-elevational-migration.html#cb15-8"></a><span class="kw">library</span>(phangorn)</span></code></pre></div>
+</div>
+<div id="eastern-himalayas" class="section level2">
+<h2><span class="header-section-number">6.2</span> Eastern Himalayas</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="extent-of-elevational-migration.html#cb16-1"></a><span class="co"># load previously generated .Rdata files for analyses</span></span>
+<span id="cb16-2"><a href="extent-of-elevational-migration.html#cb16-2"></a></span>
+<span id="cb16-3"><a href="extent-of-elevational-migration.html#cb16-3"></a><span class="cf">for</span> (minSample <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">60</span>)) {</span>
+<span id="cb16-4"><a href="extent-of-elevational-migration.html#cb16-4"></a>  <span class="cf">for</span> (ds <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;05.q1&quot;</span>, <span class="st">&quot;05.q2&quot;</span>, <span class="st">&quot;05.q3&quot;</span>, <span class="st">&quot;95.q1&quot;</span>, <span class="st">&quot;95.q2&quot;</span>, <span class="st">&quot;95.q3&quot;</span>, <span class="st">&quot;50.q1&quot;</span>, <span class="st">&quot;50.q2&quot;</span>, <span class="st">&quot;50.q3&quot;</span>)) {</span>
+<span id="cb16-5"><a href="extent-of-elevational-migration.html#cb16-5"></a>    <span class="kw">load</span>(<span class="kw">paste</span>(<span class="st">&quot;eBird_resampled_east_&quot;</span>, ds, <span class="st">&quot;.Rdata&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb16-6"><a href="extent-of-elevational-migration.html#cb16-6"></a>    B.elev &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(x) rs[[x]][, <span class="dv">1</span>])</span>
+<span id="cb16-7"><a href="extent-of-elevational-migration.html#cb16-7"></a>    B.n &lt;-<span class="st">    </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(x) rs[[x]][, <span class="dv">2</span>])</span>
+<span id="cb16-8"><a href="extent-of-elevational-migration.html#cb16-8"></a>    W.elev &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(x) rs[[x]][, <span class="dv">3</span>])</span>
+<span id="cb16-9"><a href="extent-of-elevational-migration.html#cb16-9"></a>    W.n &lt;-<span class="st">    </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(x) rs[[x]][, <span class="dv">4</span>])</span>
+<span id="cb16-10"><a href="extent-of-elevational-migration.html#cb16-10"></a>    </span>
+<span id="cb16-11"><a href="extent-of-elevational-migration.html#cb16-11"></a>    diff &lt;-<span class="st"> </span>B.elev <span class="op">-</span><span class="st"> </span>W.elev</span>
+<span id="cb16-12"><a href="extent-of-elevational-migration.html#cb16-12"></a>    <span class="kw">dimnames</span>(diff)&lt;-<span class="kw">list</span>(uniSpe[,<span class="dv">1</span>],<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>)</span>
+<span id="cb16-13"><a href="extent-of-elevational-migration.html#cb16-13"></a>    </span>
+<span id="cb16-14"><a href="extent-of-elevational-migration.html#cb16-14"></a>    <span class="co"># For each species exclude trials where it has been detected less than 30/60 times in winter or summer</span></span>
+<span id="cb16-15"><a href="extent-of-elevational-migration.html#cb16-15"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">30</span>) diff[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb16-16"><a href="extent-of-elevational-migration.html#cb16-16"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">60</span>) diff[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> </span>
+<span id="cb16-17"><a href="extent-of-elevational-migration.html#cb16-17"></a>    diff.sel &lt;-<span class="st"> </span>diff[<span class="kw">apply</span>(diff, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x))) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1000</span>, ]</span>
+<span id="cb16-18"><a href="extent-of-elevational-migration.html#cb16-18"></a>    </span>
+<span id="cb16-19"><a href="extent-of-elevational-migration.html#cb16-19"></a>    <span class="co"># Calculate medians of the percentiles over 1000 sets of resampled sampling events. Along with confidence intervals    </span></span>
+<span id="cb16-20"><a href="extent-of-elevational-migration.html#cb16-20"></a>    med.CI &lt;-<span class="st"> </span><span class="kw">apply</span>(diff.sel, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">quantile</span>((x), <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb16-21"><a href="extent-of-elevational-migration.html#cb16-21"></a>    med.CI &lt;-<span class="st"> </span><span class="kw">t</span>(med.CI)</span>
+<span id="cb16-22"><a href="extent-of-elevational-migration.html#cb16-22"></a>    med.CI  &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(med.CI)</span>
+<span id="cb16-23"><a href="extent-of-elevational-migration.html#cb16-23"></a>    med.CI<span class="op">$</span>Group &lt;-<span class="st"> </span><span class="kw">with</span>(med.CI, <span class="kw">ifelse</span>(<span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> `</span><span class="dt">97.5%</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">2</span>, <span class="kw">ifelse</span>(<span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> `</span><span class="dt">97.5%</span><span class="st">`</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)))</span>
+<span id="cb16-24"><a href="extent-of-elevational-migration.html#cb16-24"></a>    med.CI<span class="op">$</span>LCI_diff &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.CI<span class="op">$</span><span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span>)</span>
+<span id="cb16-25"><a href="extent-of-elevational-migration.html#cb16-25"></a>    med.CI<span class="op">$</span>Median_diff &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.CI<span class="op">$</span><span class="st">`</span><span class="dt">50%</span><span class="st">`</span>)</span>
+<span id="cb16-26"><a href="extent-of-elevational-migration.html#cb16-26"></a>    med.CI<span class="op">$</span>UCI_diff &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.CI<span class="op">$</span><span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span>)</span>
+<span id="cb16-27"><a href="extent-of-elevational-migration.html#cb16-27"></a>    med.CI<span class="op">$</span>Species &lt;-<span class="st"> </span><span class="kw">rownames</span>(med.CI)</span>
+<span id="cb16-28"><a href="extent-of-elevational-migration.html#cb16-28"></a>    med.CI&lt;-med.CI[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)]</span>
+<span id="cb16-29"><a href="extent-of-elevational-migration.html#cb16-29"></a>    </span>
+<span id="cb16-30"><a href="extent-of-elevational-migration.html#cb16-30"></a>    <span class="co">## adding breeding elevations to the same table</span></span>
+<span id="cb16-31"><a href="extent-of-elevational-migration.html#cb16-31"></a>    </span>
+<span id="cb16-32"><a href="extent-of-elevational-migration.html#cb16-32"></a>    <span class="kw">dimnames</span>(B.elev)&lt;-<span class="kw">list</span>(uniSpe[,<span class="dv">1</span>],<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>)</span>
+<span id="cb16-33"><a href="extent-of-elevational-migration.html#cb16-33"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">30</span>) B.elev[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb16-34"><a href="extent-of-elevational-migration.html#cb16-34"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">60</span>) B.elev[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> </span>
+<span id="cb16-35"><a href="extent-of-elevational-migration.html#cb16-35"></a>    B.sel &lt;-<span class="st"> </span>B.elev[<span class="kw">apply</span>(B.elev, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x))) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1000</span>, ]</span>
+<span id="cb16-36"><a href="extent-of-elevational-migration.html#cb16-36"></a>    </span>
+<span id="cb16-37"><a href="extent-of-elevational-migration.html#cb16-37"></a>    med.S.CI &lt;-<span class="st"> </span><span class="kw">apply</span>(B.sel, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">quantile</span>((x), <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb16-38"><a href="extent-of-elevational-migration.html#cb16-38"></a>    med.S.CI &lt;-<span class="st"> </span><span class="kw">t</span>(med.S.CI)</span>
+<span id="cb16-39"><a href="extent-of-elevational-migration.html#cb16-39"></a>    med.S.CI  &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(med.S.CI)</span>
+<span id="cb16-40"><a href="extent-of-elevational-migration.html#cb16-40"></a>    med.S.CI<span class="op">$</span>LCI_S &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.S.CI<span class="op">$</span><span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span>)</span>
+<span id="cb16-41"><a href="extent-of-elevational-migration.html#cb16-41"></a>    med.S.CI<span class="op">$</span>Median_S &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.S.CI<span class="op">$</span><span class="st">`</span><span class="dt">50%</span><span class="st">`</span>)</span>
+<span id="cb16-42"><a href="extent-of-elevational-migration.html#cb16-42"></a>    med.S.CI<span class="op">$</span>UCI_S &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.S.CI<span class="op">$</span><span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span>)</span>
+<span id="cb16-43"><a href="extent-of-elevational-migration.html#cb16-43"></a>    med.S.CI<span class="op">$</span>Species &lt;-<span class="st"> </span><span class="kw">rownames</span>(med.S.CI)</span>
+<span id="cb16-44"><a href="extent-of-elevational-migration.html#cb16-44"></a>    med.S.CI&lt;-med.S.CI[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)]</span>
+<span id="cb16-45"><a href="extent-of-elevational-migration.html#cb16-45"></a>    </span>
+<span id="cb16-46"><a href="extent-of-elevational-migration.html#cb16-46"></a>    <span class="co">## adding winter elevations to the same table</span></span>
+<span id="cb16-47"><a href="extent-of-elevational-migration.html#cb16-47"></a>    </span>
+<span id="cb16-48"><a href="extent-of-elevational-migration.html#cb16-48"></a>    <span class="kw">dimnames</span>(W.elev)&lt;-<span class="kw">list</span>(uniSpe[,<span class="dv">1</span>],<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>)</span>
+<span id="cb16-49"><a href="extent-of-elevational-migration.html#cb16-49"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">30</span>) W.elev[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb16-50"><a href="extent-of-elevational-migration.html#cb16-50"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">60</span>) W.elev[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> </span>
+<span id="cb16-51"><a href="extent-of-elevational-migration.html#cb16-51"></a>    W.sel &lt;-<span class="st"> </span>W.elev[<span class="kw">apply</span>(W.elev, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x))) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1000</span>, ]</span>
+<span id="cb16-52"><a href="extent-of-elevational-migration.html#cb16-52"></a>    </span>
+<span id="cb16-53"><a href="extent-of-elevational-migration.html#cb16-53"></a>    med.W.CI &lt;-<span class="st"> </span><span class="kw">apply</span>(W.sel, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">quantile</span>((x), <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb16-54"><a href="extent-of-elevational-migration.html#cb16-54"></a>    med.W.CI &lt;-<span class="st"> </span><span class="kw">t</span>(med.W.CI)</span>
+<span id="cb16-55"><a href="extent-of-elevational-migration.html#cb16-55"></a>    med.W.CI  &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(med.W.CI)</span>
+<span id="cb16-56"><a href="extent-of-elevational-migration.html#cb16-56"></a>    med.W.CI<span class="op">$</span>LCI_W &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.W.CI<span class="op">$</span><span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span>)</span>
+<span id="cb16-57"><a href="extent-of-elevational-migration.html#cb16-57"></a>    med.W.CI<span class="op">$</span>Median_W &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.W.CI<span class="op">$</span><span class="st">`</span><span class="dt">50%</span><span class="st">`</span>)</span>
+<span id="cb16-58"><a href="extent-of-elevational-migration.html#cb16-58"></a>    med.W.CI<span class="op">$</span>UCI_W &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.W.CI<span class="op">$</span><span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span>)</span>
+<span id="cb16-59"><a href="extent-of-elevational-migration.html#cb16-59"></a>    med.W.CI<span class="op">$</span>Species &lt;-<span class="st"> </span><span class="kw">rownames</span>(med.W.CI)</span>
+<span id="cb16-60"><a href="extent-of-elevational-migration.html#cb16-60"></a>    med.W.CI&lt;-med.W.CI[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)]</span>
+<span id="cb16-61"><a href="extent-of-elevational-migration.html#cb16-61"></a>    </span>
+<span id="cb16-62"><a href="extent-of-elevational-migration.html#cb16-62"></a>    ts&lt;-<span class="kw">left_join</span>(med.CI,med.S.CI, <span class="dt">by =</span> <span class="st">&quot;Species&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(., med.W.CI, <span class="dt">by =</span> <span class="st">&quot;Species&quot;</span>, )</span>
+<span id="cb16-63"><a href="extent-of-elevational-migration.html#cb16-63"></a>    </span>
+<span id="cb16-64"><a href="extent-of-elevational-migration.html#cb16-64"></a>    ts &lt;-<span class="st"> </span>ts[<span class="kw">c</span>(<span class="st">&quot;Species&quot;</span>, <span class="st">&quot;Group&quot;</span>, <span class="st">&quot;Median_S&quot;</span>, <span class="st">&quot;LCI_S&quot;</span>, <span class="st">&quot;UCI_S&quot;</span>,<span class="st">&quot;Median_W&quot;</span>,<span class="st">&quot;LCI_W&quot;</span>,<span class="st">&quot;UCI_W&quot;</span>,<span class="st">&quot;Median_diff&quot;</span>,<span class="st">&quot;LCI_diff&quot;</span>, <span class="st">&quot;UCI_diff&quot;</span>)]</span>
+<span id="cb16-65"><a href="extent-of-elevational-migration.html#cb16-65"></a>    </span>
+<span id="cb16-66"><a href="extent-of-elevational-migration.html#cb16-66"></a>    <span class="kw">write.csv</span>(ts, <span class="dt">file =</span> <span class="kw">paste</span>(<span class="st">&quot;birdlist_east_&quot;</span>,ds,<span class="st">&quot;.sam&quot;</span>,minSample, <span class="st">&quot;.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), <span class="dt">row.names =</span> F)</span>
+<span id="cb16-67"><a href="extent-of-elevational-migration.html#cb16-67"></a>  }</span>
+<span id="cb16-68"><a href="extent-of-elevational-migration.html#cb16-68"></a>}</span></code></pre></div>
+</div>
+<div id="western-himalayas" class="section level2">
+<h2><span class="header-section-number">6.3</span> Western Himalayas</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb17-1"><a href="extent-of-elevational-migration.html#cb17-1"></a><span class="cf">for</span> (minSample <span class="cf">in</span> <span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">60</span>)) {</span>
+<span id="cb17-2"><a href="extent-of-elevational-migration.html#cb17-2"></a>  <span class="cf">for</span> (ds <span class="cf">in</span> <span class="kw">c</span>(<span class="st">&quot;05.q1&quot;</span>, <span class="st">&quot;05.q2&quot;</span>, <span class="st">&quot;05.q3&quot;</span>, <span class="st">&quot;95.q1&quot;</span>, <span class="st">&quot;95.q2&quot;</span>, <span class="st">&quot;95.q3&quot;</span>, <span class="st">&quot;50.q1&quot;</span>, <span class="st">&quot;50.q2&quot;</span>, <span class="st">&quot;50.q3&quot;</span>)) {</span>
+<span id="cb17-3"><a href="extent-of-elevational-migration.html#cb17-3"></a>    <span class="kw">load</span>(<span class="kw">paste</span>(<span class="st">&quot;eBird_resampled_west_&quot;</span>, ds, <span class="st">&quot;.Rdata&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb17-4"><a href="extent-of-elevational-migration.html#cb17-4"></a>    B.elev &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(x) rs[[x]][, <span class="dv">1</span>])</span>
+<span id="cb17-5"><a href="extent-of-elevational-migration.html#cb17-5"></a>    B.n &lt;-<span class="st">    </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(x) rs[[x]][, <span class="dv">2</span>])</span>
+<span id="cb17-6"><a href="extent-of-elevational-migration.html#cb17-6"></a>    W.elev &lt;-<span class="st"> </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(x) rs[[x]][, <span class="dv">3</span>])</span>
+<span id="cb17-7"><a href="extent-of-elevational-migration.html#cb17-7"></a>    W.n &lt;-<span class="st">    </span><span class="kw">sapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(x) rs[[x]][, <span class="dv">4</span>])</span>
+<span id="cb17-8"><a href="extent-of-elevational-migration.html#cb17-8"></a>    </span>
+<span id="cb17-9"><a href="extent-of-elevational-migration.html#cb17-9"></a>    diff &lt;-<span class="st"> </span>B.elev <span class="op">-</span><span class="st"> </span>W.elev</span>
+<span id="cb17-10"><a href="extent-of-elevational-migration.html#cb17-10"></a>    <span class="kw">dimnames</span>(diff)&lt;-<span class="kw">list</span>(uniSpe[,<span class="dv">1</span>],<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>)</span>
+<span id="cb17-11"><a href="extent-of-elevational-migration.html#cb17-11"></a>    </span>
+<span id="cb17-12"><a href="extent-of-elevational-migration.html#cb17-12"></a>    <span class="co"># For each species exclude trials where it has been detected less than 30/60 times in winter or summer</span></span>
+<span id="cb17-13"><a href="extent-of-elevational-migration.html#cb17-13"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">30</span>) diff[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb17-14"><a href="extent-of-elevational-migration.html#cb17-14"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">60</span>) diff[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> </span>
+<span id="cb17-15"><a href="extent-of-elevational-migration.html#cb17-15"></a>    diff.sel &lt;-<span class="st"> </span>diff[<span class="kw">apply</span>(diff, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x))) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1000</span>, ]</span>
+<span id="cb17-16"><a href="extent-of-elevational-migration.html#cb17-16"></a>    </span>
+<span id="cb17-17"><a href="extent-of-elevational-migration.html#cb17-17"></a>    <span class="co"># Calculate medians of the percentiles over 1000 sets of resampled sampling events. Along with confidence intervals    </span></span>
+<span id="cb17-18"><a href="extent-of-elevational-migration.html#cb17-18"></a>    med.CI &lt;-<span class="st"> </span><span class="kw">apply</span>(diff.sel, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">quantile</span>((x), <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb17-19"><a href="extent-of-elevational-migration.html#cb17-19"></a>    med.CI &lt;-<span class="st"> </span><span class="kw">t</span>(med.CI)</span>
+<span id="cb17-20"><a href="extent-of-elevational-migration.html#cb17-20"></a>    med.CI  &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(med.CI)</span>
+<span id="cb17-21"><a href="extent-of-elevational-migration.html#cb17-21"></a>    med.CI<span class="op">$</span>Group &lt;-<span class="st"> </span><span class="kw">with</span>(med.CI, <span class="kw">ifelse</span>(<span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> `</span><span class="dt">97.5%</span><span class="st">`</span> <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">2</span>, <span class="kw">ifelse</span>(<span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> `</span><span class="dt">97.5%</span><span class="st">`</span> <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)))</span>
+<span id="cb17-22"><a href="extent-of-elevational-migration.html#cb17-22"></a>    med.CI<span class="op">$</span>LCI_diff &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.CI<span class="op">$</span><span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span>)</span>
+<span id="cb17-23"><a href="extent-of-elevational-migration.html#cb17-23"></a>    med.CI<span class="op">$</span>Median_diff &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.CI<span class="op">$</span><span class="st">`</span><span class="dt">50%</span><span class="st">`</span>)</span>
+<span id="cb17-24"><a href="extent-of-elevational-migration.html#cb17-24"></a>    med.CI<span class="op">$</span>UCI_diff &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.CI<span class="op">$</span><span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span>)</span>
+<span id="cb17-25"><a href="extent-of-elevational-migration.html#cb17-25"></a>    med.CI<span class="op">$</span>Species &lt;-<span class="st"> </span><span class="kw">rownames</span>(med.CI)</span>
+<span id="cb17-26"><a href="extent-of-elevational-migration.html#cb17-26"></a>    med.CI&lt;-med.CI[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)]</span>
+<span id="cb17-27"><a href="extent-of-elevational-migration.html#cb17-27"></a>    </span>
+<span id="cb17-28"><a href="extent-of-elevational-migration.html#cb17-28"></a>    <span class="co">## adding breeding elevations to the same table</span></span>
+<span id="cb17-29"><a href="extent-of-elevational-migration.html#cb17-29"></a>    </span>
+<span id="cb17-30"><a href="extent-of-elevational-migration.html#cb17-30"></a>    <span class="kw">dimnames</span>(B.elev)&lt;-<span class="kw">list</span>(uniSpe[,<span class="dv">1</span>],<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>)</span>
+<span id="cb17-31"><a href="extent-of-elevational-migration.html#cb17-31"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">30</span>) B.elev[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb17-32"><a href="extent-of-elevational-migration.html#cb17-32"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">60</span>) B.elev[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> </span>
+<span id="cb17-33"><a href="extent-of-elevational-migration.html#cb17-33"></a>    B.sel &lt;-<span class="st"> </span>B.elev[<span class="kw">apply</span>(B.elev, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x))) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1000</span>, ]</span>
+<span id="cb17-34"><a href="extent-of-elevational-migration.html#cb17-34"></a>    </span>
+<span id="cb17-35"><a href="extent-of-elevational-migration.html#cb17-35"></a>    med.S.CI &lt;-<span class="st"> </span><span class="kw">apply</span>(B.sel, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">quantile</span>((x), <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb17-36"><a href="extent-of-elevational-migration.html#cb17-36"></a>    med.S.CI &lt;-<span class="st"> </span><span class="kw">t</span>(med.S.CI)</span>
+<span id="cb17-37"><a href="extent-of-elevational-migration.html#cb17-37"></a>    med.S.CI  &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(med.S.CI)</span>
+<span id="cb17-38"><a href="extent-of-elevational-migration.html#cb17-38"></a>    med.S.CI<span class="op">$</span>LCI_S &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.S.CI<span class="op">$</span><span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span>)</span>
+<span id="cb17-39"><a href="extent-of-elevational-migration.html#cb17-39"></a>    med.S.CI<span class="op">$</span>Median_S &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.S.CI<span class="op">$</span><span class="st">`</span><span class="dt">50%</span><span class="st">`</span>)</span>
+<span id="cb17-40"><a href="extent-of-elevational-migration.html#cb17-40"></a>    med.S.CI<span class="op">$</span>UCI_S &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.S.CI<span class="op">$</span><span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span>)</span>
+<span id="cb17-41"><a href="extent-of-elevational-migration.html#cb17-41"></a>    med.S.CI<span class="op">$</span>Species &lt;-<span class="st"> </span><span class="kw">rownames</span>(med.S.CI)</span>
+<span id="cb17-42"><a href="extent-of-elevational-migration.html#cb17-42"></a>    med.S.CI&lt;-med.S.CI[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)]</span>
+<span id="cb17-43"><a href="extent-of-elevational-migration.html#cb17-43"></a>    </span>
+<span id="cb17-44"><a href="extent-of-elevational-migration.html#cb17-44"></a>    <span class="co">## adding winter elevations to the same table</span></span>
+<span id="cb17-45"><a href="extent-of-elevational-migration.html#cb17-45"></a>    </span>
+<span id="cb17-46"><a href="extent-of-elevational-migration.html#cb17-46"></a>    <span class="kw">dimnames</span>(W.elev)&lt;-<span class="kw">list</span>(uniSpe[,<span class="dv">1</span>],<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>)</span>
+<span id="cb17-47"><a href="extent-of-elevational-migration.html#cb17-47"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">30</span>) W.elev[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>] &lt;-<span class="st"> </span><span class="ot">NA</span></span>
+<span id="cb17-48"><a href="extent-of-elevational-migration.html#cb17-48"></a>    <span class="cf">if</span> (minSample <span class="op">==</span><span class="st"> </span><span class="dv">60</span>) W.elev[W.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span> <span class="op">|</span><span class="st"> </span>B.n <span class="op">&lt;</span><span class="st"> </span><span class="dv">60</span>] &lt;-<span class="st"> </span><span class="ot">NA</span> </span>
+<span id="cb17-49"><a href="extent-of-elevational-migration.html#cb17-49"></a>    W.sel &lt;-<span class="st"> </span>W.elev[<span class="kw">apply</span>(W.elev, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x))) <span class="op">&lt;</span><span class="st"> </span><span class="dv">1000</span>, ]</span>
+<span id="cb17-50"><a href="extent-of-elevational-migration.html#cb17-50"></a>    </span>
+<span id="cb17-51"><a href="extent-of-elevational-migration.html#cb17-51"></a>    med.W.CI &lt;-<span class="st"> </span><span class="kw">apply</span>(W.sel, <span class="dv">1</span>, <span class="dt">FUN =</span> <span class="cf">function</span>(x) <span class="kw">quantile</span>((x), <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">.5</span>, <span class="fl">.975</span>), <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb17-52"><a href="extent-of-elevational-migration.html#cb17-52"></a>    med.W.CI &lt;-<span class="st"> </span><span class="kw">t</span>(med.W.CI)</span>
+<span id="cb17-53"><a href="extent-of-elevational-migration.html#cb17-53"></a>    med.W.CI  &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(med.W.CI)</span>
+<span id="cb17-54"><a href="extent-of-elevational-migration.html#cb17-54"></a>    med.W.CI<span class="op">$</span>LCI_W &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.W.CI<span class="op">$</span><span class="st">`</span><span class="dt">2.5%</span><span class="st">`</span>)</span>
+<span id="cb17-55"><a href="extent-of-elevational-migration.html#cb17-55"></a>    med.W.CI<span class="op">$</span>Median_W &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.W.CI<span class="op">$</span><span class="st">`</span><span class="dt">50%</span><span class="st">`</span>)</span>
+<span id="cb17-56"><a href="extent-of-elevational-migration.html#cb17-56"></a>    med.W.CI<span class="op">$</span>UCI_W &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(med.W.CI<span class="op">$</span><span class="st">`</span><span class="dt">97.5%</span><span class="st">`</span>)</span>
+<span id="cb17-57"><a href="extent-of-elevational-migration.html#cb17-57"></a>    med.W.CI<span class="op">$</span>Species &lt;-<span class="st"> </span><span class="kw">rownames</span>(med.W.CI)</span>
+<span id="cb17-58"><a href="extent-of-elevational-migration.html#cb17-58"></a>    med.W.CI&lt;-med.W.CI[,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>)]</span>
+<span id="cb17-59"><a href="extent-of-elevational-migration.html#cb17-59"></a>    </span>
+<span id="cb17-60"><a href="extent-of-elevational-migration.html#cb17-60"></a>    ts&lt;-<span class="kw">left_join</span>(med.CI,med.S.CI, <span class="dt">by =</span> <span class="st">&quot;Species&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(., med.W.CI, <span class="dt">by =</span> <span class="st">&quot;Species&quot;</span>, )</span>
+<span id="cb17-61"><a href="extent-of-elevational-migration.html#cb17-61"></a>    </span>
+<span id="cb17-62"><a href="extent-of-elevational-migration.html#cb17-62"></a>    ts &lt;-<span class="st"> </span>ts[<span class="kw">c</span>(<span class="st">&quot;Species&quot;</span>, <span class="st">&quot;Group&quot;</span>, <span class="st">&quot;Median_S&quot;</span>, <span class="st">&quot;LCI_S&quot;</span>, <span class="st">&quot;UCI_S&quot;</span>,<span class="st">&quot;Median_W&quot;</span>,<span class="st">&quot;LCI_W&quot;</span>,<span class="st">&quot;UCI_W&quot;</span>,<span class="st">&quot;Median_diff&quot;</span>,<span class="st">&quot;LCI_diff&quot;</span>, <span class="st">&quot;UCI_diff&quot;</span>)]</span>
+<span id="cb17-63"><a href="extent-of-elevational-migration.html#cb17-63"></a>    </span>
+<span id="cb17-64"><a href="extent-of-elevational-migration.html#cb17-64"></a>    <span class="kw">write.csv</span>(ts, <span class="dt">file =</span> <span class="kw">paste</span>(<span class="st">&quot;birdlist_west&quot;</span>,ds,<span class="st">&quot;.sam&quot;</span>,minSample, <span class="st">&quot;.csv&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>), <span class="dt">row.names =</span> F)</span>
+<span id="cb17-65"><a href="extent-of-elevational-migration.html#cb17-65"></a>  }</span>
+<span id="cb17-66"><a href="extent-of-elevational-migration.html#cb17-66"></a>}</span></code></pre></div>
+<div class="figure">
+<img src="figs/fig02.jpg" alt="" />
+<p class="caption"><strong>Elevational shift in the eastern and western Himalayas</strong>
+Elevational shift in the eastern Himalayas (A) and western Himalayas (B). Figures show species estimates (at high sampling effort) of median summer elevations (orange circles) in descending order and their respective median winter elevations (teal triangles). Errors bars indicate 95% confidence intervals estimated from the resampling protocol.</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="resampling-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="geometric-constaints-pgls.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/vjjan91/elevMigration/edit/master/05_elevational-migration.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
