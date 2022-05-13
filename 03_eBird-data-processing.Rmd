@@ -1,0 +1,145 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
+# Processing eBird data
+
+In this script, we will process the community science data across the Eastern and Western Himalayas. 
+
+## Load necessary libraries
+```{r}
+library(tidyverse)
+library(sf)
+library(raster)
+library(parallel)
+
+```
+
+## Loading custom functions to process eBird data
+```{r}
+# This function processes the ebird data as long as the path where the data is stored and list of countries are mentioned 
+
+readcleanrawdata = function(rawpath, Country)
+{
+  require(lubridate)
+  require(tidyverse)
+  require(cowplot)
+  
+  preimp = c("COMMON.NAME","OBSERVATION.COUNT",
+             "LOCALITY.ID","LOCALITY.TYPE", "STATE", "COUNTRY",
+             "LATITUDE","LONGITUDE","OBSERVATION.DATE","TIME.OBSERVATIONS.STARTED","OBSERVER.ID",
+             "PROTOCOL.TYPE","DURATION.MINUTES","EFFORT.DISTANCE.KM", "REVIEWED",
+             "NUMBER.OBSERVERS","ALL.SPECIES.REPORTED","GROUP.IDENTIFIER","SAMPLING.EVENT.IDENTIFIER","APPROVED","CATEGORY")
+  
+  nms = read.delim(rawpath, nrows = 1, sep = "\t", header = T, quote = "", stringsAsFactors = F, na.strings = c(""," ",NA))
+  nms = names(nms)
+  nms[!(nms %in% preimp)] = "NULL"
+  nms[nms %in% preimp] = NA
+  
+  data = read.delim(rawpath, colClasses = nms, sep = "\t", header = T, quote = "", stringsAsFactors = F, na.strings = c(""," ",NA))
+  
+  ## choosing important variables
+  
+  imp = c("COMMON.NAME","OBSERVATION.COUNT",
+          "LOCALITY.ID","LOCALITY.TYPE", "STATE", "COUNTRY",
+          "LATITUDE","LONGITUDE","OBSERVATION.DATE","TIME.OBSERVATIONS.STARTED","OBSERVER.ID",
+          "PROTOCOL.TYPE","DURATION.MINUTES","EFFORT.DISTANCE.KM", "SAMPLING.EVENT.IDENTIFIER",
+          "NUMBER.OBSERVERS","ALL.SPECIES.REPORTED","group.id", "CATEGORY","no.sp")
+  
+  days = c(31,28,31,30,31,30,31,31,30,31,30,31)
+  cdays = c(0,31,59,90,120,151,181,212,243,273,304,334)
+  
+  ## setup eBird data ##
+  
+  ## filter approved observations, species, slice by single group ID, remove repetitions
+  ## remove repeats
+  ## set date, add month, year and day columns using package LUBRIDATE
+  ## filter distance travelled, duration birded and number of observers
+  ## add number of species column (no.sp)
+  
+  if (Country != "India")
+  {
+    data = data %>%
+      filter(REVIEWED == 0 | APPROVED == 1) %>%
+      mutate(group.id = ifelse(is.na(GROUP.IDENTIFIER), SAMPLING.EVENT.IDENTIFIER, GROUP.IDENTIFIER)) %>%
+      filter(ALL.SPECIES.REPORTED == 1) %>%  filter(EFFORT.DISTANCE.KM<=2.5|is.na(EFFORT.DISTANCE.KM))%>%
+      filter(DURATION.MINUTES <= 120)%>% filter(NUMBER.OBSERVERS <= 10)%>%
+      group_by(group.id,COMMON.NAME) %>% slice(1) %>% ungroup %>%
+      group_by(group.id) %>% mutate(no.sp = n_distinct(COMMON.NAME))%>%
+      dplyr::select(imp) %>%
+      mutate(OBSERVATION.DATE = as.Date(OBSERVATION.DATE), 
+             month = month(OBSERVATION.DATE), year = year(OBSERVATION.DATE),
+             day = day(OBSERVATION.DATE) + cdays[month], week = week(OBSERVATION.DATE),
+             fort = ceiling(day/14)) %>%
+      ungroup
+    
+    return(data)
+  }
+  
+  if (Country == "India")
+  {
+    data = data %>%
+      filter(REVIEWED == 0 | APPROVED == 1) %>%
+      mutate(group.id = ifelse(is.na(GROUP.IDENTIFIER), SAMPLING.EVENT.IDENTIFIER, GROUP.IDENTIFIER)) %>%
+      filter(ALL.SPECIES.REPORTED == 1) %>%  filter(EFFORT.DISTANCE.KM<=2.5|is.na(EFFORT.DISTANCE.KM))%>%
+      filter(DURATION.MINUTES <= 120)%>% filter(NUMBER.OBSERVERS <= 10)%>%
+      filter(STATE == "Uttarakhand" | STATE == "Himachal Pradesh"| STATE == "Jammu and Kashmir"| STATE == "Sikkim" | STATE == "Arunachal Pradesh" |STATE == "West Bengal")%>%
+      group_by(group.id,COMMON.NAME) %>% slice(1) %>% ungroup %>%
+      group_by(group.id) %>% mutate(no.sp = n_distinct(COMMON.NAME))%>%
+      dplyr::select(imp) %>%
+      mutate(OBSERVATION.DATE = as.Date(OBSERVATION.DATE), 
+             month = month(OBSERVATION.DATE), year = year(OBSERVATION.DATE),
+             day = day(OBSERVATION.DATE) + cdays[month], week = week(OBSERVATION.DATE),
+             fort = ceiling(day/14)) %>%
+      ungroup
+    
+    return(data)
+  }
+}
+```
+
+## Use the function written above to extract eBird data
+```{r}
+# please download the latest versions of eBird data from https://ebird.org/data/download and set the file path accordingly. Since these two datasets are extremely large, we have not uploaded the same to github.
+
+# In this study, the latest version of the data corresponds to July 31st 2021
+
+# extract data for the following list of countries
+Bhutan <-readcleanrawdata("ebd_BT_relJul-2021.txt", Country = "Bhutan")
+Nepal <-readcleanrawdata("ebd_NP_relJul-2021.txt", Country = "Nepal")
+POK <-readcleanrawdata("ebd_IN-JK-KM_relJul-2021.txt", Country = "POK")
+India <-readcleanrawdata("ebd_IN_relJul-2021.txt", Country = "India")
+Pakistan <-readcleanrawdata("ebd_PK_relJul-2021.txt", Country = "Pakistan")
+
+## Removing non himalayan regions
+India <-India %>% filter(LATITUDE>26,LONGITUDE<100)
+Pakistan <-Pakistan %>% filter (LATITUDE>33)
+
+dat <-rbind(Nepal,POK,India,Pakistan,Bhutan)
+
+# Keep only unique locations used
+
+dat <- dat %>% 
+  distinct(LATITUDE,LONGITUDE, .keep_all = T) %>%    select(LOCALITY.ID,LATITUDE,LONGITUDE)
+
+write.csv(dat, "results/unique-loc.csv", row.names = F)
+```
+
+## Extract elevation at unique locations
+```{r}
+dat <- st_as_sf(dat, coords = c("LONGITUDE","LATITUDE"), crs=4326, remove = "F")
+
+# Loading the elevation data
+elev <- raster("data/elevation/alt")
+
+# extract elevation
+elevDat <- raster::extract(elev,dat)
+
+# cbind elevation back to dataframe
+dat <- cbind(dat,elevDat)
+
+# save Rdata file (uploaded to GitHub)
+save(dat, file = "results/eBird_elev.RData")
+```
+

@@ -1,0 +1,225 @@
+---
+editor_options:
+  chunk_output_type: console
+output:
+  html_document:
+    df_print: paged
+---
+
+# Temperature-elevation associations  
+
+In this script, we calculate temperatures across elevational bands in the Eastern and Western Himalayas.  
+
+## Load necessary libraries
+```{r}
+library(raster)
+library(stringi)
+library(glue)
+library(gdalUtils)
+library(purrr)
+library(dplyr)
+library(tidyr)
+library(scales)
+library(ggplot2)
+library(ggthemes)
+library(sf)
+library(mapview)
+library(rgeos)
+
+# get ci func
+ci <- function(x){qnorm(0.975)*sd(x, na.rm = T)/sqrt(length(x))}
+
+# prep mode function to aggregate
+funcMode <- function(x, na.rm = T) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+
+# a basic test
+assertthat::assert_that(funcMode(c(2,2,2,2,3,3,3,4)) == as.character(2), 
+                        msg = "problem in the mode function") # works
+```
+
+## Load shapefiles
+```{r}
+# Load shapefiles
+# Please note the below shapefile consists of multiple polygons that combines the east and west
+himalayas <- st_read("data/shapefiles/shapefile_himalaya.shp")
+mapview(himalayas)
+
+# Need to merge a few polygons to essentially split himalayas into the west and the east
+# This will have to be done at 83E for Nepal
+
+# Merge polygons for western himalayas
+west_toMerge <- himalayas[c(3,4,7,8,9,10),]
+westHim <- st_crop(west_toMerge,xmin=68.03321,ymin=23.69771,xmax=83,ymax=37.07761)
+
+# Merge polygons for eastern himalayas
+east_toMerge <- himalayas[c(1,2,5,6,10),]
+east_toMerge <- st_buffer(east_toMerge, dist=0)
+eastHim <- st_crop(east_toMerge,xmin=83,ymin=25.96462,xmax=97.4115,ymax=30.44728)
+```
+
+## Prepare elevation rasters
+```{r}
+# load elevation and crop to hills size, then mask by hills
+# Please note that this file is large and is not uploaded to GitHub and can be downloaded from SRTM (Farr et al. 2007)
+alt <- raster("data/elevation/alt")
+alt.east <- crop(alt, as(eastHim, "Spatial"))
+alt.west <- crop(alt, as(westHim, "Spatial"))
+rm(alt); gc()
+
+# get slope and aspect
+slopeEast <- terrain(x = alt.east, opt = c("slope", "aspect"))
+slopeWest <- terrain(x = alt.west, opt = c("slope", "aspect"))
+
+# stack rasters
+elevEast <- raster::stack(alt.east, slopeEast)
+elevWest <- raster::stack(alt.west, slopeWest)
+rm(alt.east,alt.west); gc()
+```
+
+## Prepare climate rasters
+```{r}
+# list chelsa files
+# CHELSA files are not uploaded to GitHub as they are extremely large and can be downloaded from https://chelsa-climate.org/
+# Please note that we downloaded four rasters corresponding to minimum and maximum temperatures for the months of January and June
+
+chelsaFiles <- list.files("data/chelsa/", 
+                          full.names = TRUE, 
+                          pattern = "*.tif")
+
+# gather chelsa data over the east
+chelsaEast <- purrr::map(chelsaFiles, function(chr){
+  a <- raster(chr)
+  crs(a) <- crs(elevEast)
+  a <- crop(a, as(eastHim, "Spatial"))
+  return(a)
+})
+
+# gather chelsa data over the west
+chelsaWest <- purrr::map(chelsaFiles, function(chr){
+  a <- raster(chr)
+  crs(a) <- crs(elevWest)
+  a <- crop(a, as(westHim, "Spatial"))
+  return(a)
+})
+
+
+# Divide temperature values by 10 for east
+chelsaEast[[1]] <- chelsaEast[[1]]/10
+chelsaEast[[2]] <- chelsaEast[[2]]/10
+chelsaEast[[3]] <- chelsaEast[[3]]/10
+chelsaEast[[4]] <- chelsaEast[[4]]/10
+
+# Divide temperature values by 10 for the west
+chelsaWest[[1]] <- chelsaWest[[1]]/10
+chelsaWest[[2]] <- chelsaWest[[2]]/10
+chelsaWest[[3]] <- chelsaWest[[3]]/10
+chelsaWest[[4]] <- chelsaWest[[4]]/10
+
+# stack chelsa data for the east and west
+chelsaEast <- raster::stack(chelsaEast)
+chelsaWest <- raster::stack(chelsaWest)
+
+### Stack prepared rasters
+# stack rasters for efficient reprojection later
+env_east <- stack(elevEast, chelsaEast)
+env_west <- stack(elevWest, chelsaWest)
+
+# get proper names
+elev_names <- c("elev", "slope", "aspect")
+chelsa_names <- c("maxTemp_Jan", "maxTemp_June","minTemp_Jan","minTemp_June")
+
+names(env_east) <- as.character(glue('{c(elev_names, chelsa_names)}'))
+names(env_west) <- as.character(glue('{c(elev_names, chelsa_names)}'))
+```
+
+## Extracting data across elevational bands
+```{r}
+# make duplicate stack
+envEast <- env_east[[c("elev", chelsa_names)]]
+envWest <- env_West[[c("elev", chelsa_names)]]
+
+# convert to list
+envEast <- as.list(envEast)
+envWest <- as.list(envWest)
+
+# map get values over the stack
+envEast <- purrr::map(envEast, getValues)
+envWest <- purrr::map(envWest, getValues)
+names(envEast) <- c("elev", chelsa_names)
+names(envWest) <- c("elev", chelsa_names)
+
+# convert to dataframe and round to a particular elevational band you need
+envEast <- bind_cols(envEast)
+envWest <- bind_cols(envWest)
+
+envEast <- drop_na(envEast) %>% 
+  mutate(elev_round  = plyr::round_any(elev, 100)) %>% # changed to 100 m intervals 
+  dplyr::select(-elev) %>% 
+  group_by(elev_round) %>% 
+  summarise_all(.funs = list(~mean(.), ~ci(.))) %>%
+  mutate(tempRange_Jan = (maxTemp_Jan_mean - minTemp_Jan_mean),
+         tempRange_June = (maxTemp_June_mean - minTemp_June_mean))
+
+envWest <- drop_na(envWest) %>% 
+  mutate(elev_round  = plyr::round_any(elev, 100)) %>% # changed to 100 m intervals 
+  dplyr::select(-elev) %>% 
+  group_by(elev_round) %>% 
+  summarise_all(.funs = list(~mean(.), ~ci(.))) %>%
+  mutate(tempRange_Jan = (maxTemp_Jan_mean - minTemp_Jan_mean),
+         tempRange_June = (maxTemp_June_mean - minTemp_June_mean))
+
+# Write results to a .csv
+west_data <- write.csv(env,"results/westHim_100.csv", row.names = F) 
+east_data <- write.csv(env,"results/eastHim_100.csv", row.names = F)
+```
+
+## Plot temperature as a function of elevation
+```{r}
+# eastern Himalayas
+fig_climate_elevEast <- ggplot(envEast)+
+  geom_line(aes(x = elev_round, y = mean),
+            size = 0.2, col = "grey")+
+  geom_pointrange(aes(x = elev_round, y = mean, ymin=mean-ci, ymax=mean+ci),
+                  size = 0.3)+
+  scale_x_continuous(labels = scales::comma)+
+  scale_y_continuous(labels = scales::comma)+
+  facet_wrap(~clim_var, scales = "free_y")+
+  theme_few()+
+  labs(x = "elevation (m) at 100m intervals", y = "CHELSA variable value")+
+  theme(axis.title = element_text(size = 16, face = "bold"), 
+        axis.ticks.length.x = unit(.5, "cm"),
+        axis.text = element_text(size = 14),
+        legend.title = element_blank(),
+        legend.key.size = unit(1,"cm"),
+        legend.text = element_text(size = 12))
+
+# save ggplots accordingly
+ggsave(fig_climate_elevEast, filename = "figs/fig_eastHim_elev100.png", 
+       height = 10, width = 14, device = png(), dpi = 300, units="in"); dev.off()
+
+# western Himalayas
+fig_climate_elevWest <- ggplot(envWest)+
+  geom_line(aes(x = elev_round, y = mean),
+            size = 0.2, col = "grey")+
+  geom_pointrange(aes(x = elev_round, y = mean, ymin=mean-ci, ymax=mean+ci),
+                  size = 0.3)+
+  scale_x_continuous(labels = scales::comma)+
+  scale_y_continuous(labels = scales::comma)+
+  facet_wrap(~clim_var, scales = "free_y")+
+  theme_few()+
+  labs(x = "elevation (m) at 100m intervals", y = "CHELSA variable value")+
+  theme(axis.title = element_text(size = 16, face = "bold"), 
+        axis.ticks.length.x = unit(.5, "cm"),
+        axis.text = element_text(size = 14),
+        legend.title = element_blank(),
+        legend.key.size = unit(1,"cm"),
+        legend.text = element_text(size = 12))
+
+# save ggplots accordingly
+ggsave(fig_climate_elevWest, filename = "figs/fig_westHim_elev100.png", 
+       height = 10, width = 14, device = png(), dpi = 300, units="in"); dev.off()
+```
+

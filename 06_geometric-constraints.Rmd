@@ -1,0 +1,84 @@
+---
+editor_options: 
+  chunk_output_type: console
+---
+
+# Geometric constaints PGLS
+
+In this script, we tested for an association between absolute elevational shift (to retain both upslope and downslope shifts) and the breadth of elevational distribution (elevational range) of the species, in which we calculated elevational range by subtracting the summer lower elevation limit from the summer upper elevational limit. To test whether elevational shifts are greater for high or low elevation birds simply because they have more elevation to potentially shift (upslope or downslope), we calculated absolute relative elevational shift as the elevational shift at each elevational limit (upper, median, lower) divided by the predicted elevation for the respective limit (i.e.i.e., elevational shift at upper limit / elevational upper limit). 
+
+```{r}
+tree <- read.nexus("data/birdtree.nex")
+tree <- mcc(tree) ## maximum clade credibility tree
+x <- East_ele_range_higheffort 
+### repeat for East_ele_range_mediumeffort, East_ele_range_loweffort, West_ele_range_mediumeffort, West_ele_range_higheffort,West_ele_range_loweffort
+
+x$absrelshift_upper<-abs(x$Diff_ratio_upper)
+x$absrelshift_median<-abs(x$Diff_ratio_median)
+x$absrelshift_lower<-abs(x$Diff_ratio_lower)
+
+pruned.tree <-drop.tip(tree,tree$tip.label[-match(x$Tree.name, tree$tip.label)])
+pruned.tree
+glsdata<-x[match(pruned.tree$tip.label, x$Tree.name),]
+pgls1<-gls(absrelshift_upper~Summer_range,correlation=corPagel(1,pruned.tree),data=glsdata)
+j<-summary(pgls1)
+j
+pgls3<-gls(absrelshift_median~Summer_range,correlation=corPagel(1,pruned.tree),data=glsdata)
+k<-summary(pgls3)
+k
+pgls4<-gls(absrelshift_lower~Summer_range,correlation=corPagel(1,pruned.tree),data=glsdata)
+l<-summary(pgls4)
+l
+outputj<-as.data.frame(j$tTable)
+outputj$Lambda<-j$modelStruct
+outputj<-as.matrix(outputj)
+
+outputk<-as.data.frame(k$tTable)
+outputk$Lambda<-k$modelStruct
+outputk<-as.matrix(outputk)
+outputl<-as.data.frame(l$tTable)
+outputl$Lambda<-l$modelStruct
+outputl<-as.matrix(outputl)
+write.csv(outputj,file="East_absrelshift_upper~Summer_range_higheffort.csv",row.names=FALSE)
+write.csv(outputk,file="East_absrelshift_median~Summer_range_higheffort.csv",row.names=FALSE)
+write.csv(outputl,file="East_absrelshift_lower~Summer_range_higheffort.csv.csv",row.names=FALSE)
+
+## Absolute shift ~ Summer Elevational
+
+x<-East_ele_range_higheffort
+
+### repeat for East_ele_range_mediumeffort, East_ele_range_loweffort, West_ele_range_mediumeffort, West_ele_range_higheffort,West_ele_range_loweffort
+
+x$absrelshift_upper<-abs(x$Diff_ratio_upper)
+x$absrelshift_median<-abs(x$Diff_ratio_median)
+x$absrelshift_lower<-abs(x$Diff_ratio_lower)
+
+pruned.tree<-drop.tip(tree1,tree1$tip.label[-match(x$Tree.name, tree1$tip.label)])
+pruned.tree
+glsdata<-x[match(pruned.tree$tip.label, x$Tree.name),]
+pgls1<-gls(absrelshift_upper~Median_S_upper,correlation=corPagel(1,pruned.tree),data=glsdata)
+j<-summary(pgls1)
+j
+pgls3<-gls(absrelshift_median~Median_S_median,correlation=corPagel(1,pruned.tree),data=glsdata)
+k<-summary(pgls3)
+k
+pgls4<-gls(absrelshift_lower~Median_S_lower,correlation=corPagel(1,pruned.tree),data=glsdata)
+l<-summary(pgls4)
+l
+outputj<-as.data.frame(j$tTable)
+outputj$Lambda<-j$modelStruct
+outputj<-as.matrix(outputj)
+
+outputk<-as.data.frame(k$tTable)
+outputk$Lambda<-k$modelStruct
+outputk<-as.matrix(outputk)
+outputl<-as.data.frame(l$tTable)
+outputl$Lambda<-l$modelStruct
+outputl<-as.matrix(outputl)
+write.csv(outputj,file="East_absrelshift_upper~Median_S_upper_higheffort.csv",row.names=FALSE)
+write.csv(outputk,file="East_absrelshift_median~Median_S_median_higheffort.csv",row.names=FALSE)
+write.csv(outputl,file="East_absrelshift_lower~Median_S_lower_higheffort.csv.csv",row.names=FALSE)
+```
+
+![**Geometric constraints do not drive elevational shifts.** 
+Dashed lines represent predicted relationship based on linear regression model. Error bands denote standard errors. Blue lines and dots represent downslope shifts while red lines and dots are birds that shift upslope. Top Panel: Relationship between median shift upslope or downslope and summer elevational range in eastern (3A) and western Himalayas (3B), both statistically significant (Supplementary Table 2). Bottom Panel: Relationship between relative elevational shift and summer elevation (median distribution). The relationship was not significant in the east (3C) but significant in the west (3D).](figs/fig03.png)
