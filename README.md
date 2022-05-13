@@ -3,6 +3,7 @@
 <!-- badges: start -->
 
   [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+  [![DOI](https://zenodo.org/badge/353883213.svg)](https://zenodo.org/badge/latestdoi/353883213)
 
 <!-- badges: end -->
 
@@ -48,7 +49,7 @@ Please download the eBird sampling and EBD dataset from https://ebird.org/home p
 
 ### Climate and elevation data
 
-All climate is housed in the `chelsa/` and `elevation` folder within `data/`. Please note that none of this data is uploaded to GitHub as a result of the size of the datasets.  
+All climate and elevation data are housed in the `chelsa/` and `elevation` folder within `data/` respectively. Please note that none of this data is uploaded to GitHub as a result of the size of the datasets.  
 
 ### Spatial data
 
@@ -62,11 +63,15 @@ This folder contains outputs that were obtained by running the above scripts.
 
 The `figs\` folder contains figures accompanying the main text. The main text figures are suffixed with numbers (example:`fig01`).   
 
+## Attribution
+
+To cite this repository:     
+
+Vijay Ramesh, Tarun Menon, Sahas Barve (2022). _Source code and Supplementary material for "High elevation Himalayan birds shift elevations to track thermal regimes across seasons"_ (v1.1). Zenodo. https://doi.org/10.5281/zenodo.6545050. 
+
 ## Contact information
 
 Please contact the following in case of interest.  
 
 [Vijay Ramesh (repo maintainer)](https://evolecol.weebly.com/)  
 PhD student, Columbia University  
-
-
