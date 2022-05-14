@@ -27,7 +27,7 @@ We describe what each script (`.Rmd`) of this repository is intended to achieve 
 
 - _05_elevational-migration.Rmd_: To quantify the extent of elevational shift, we measured the difference between the breeding and non-breeding elevation (upper, median, and lower limit) of a species.  
 
-- _06_geometric-constraints.Rmd_: Here, we tested for an association between absolute elevational shift (to retain both upslope and downslope shifts) and the breadth of elevational distribution (elevational range) of the species, in which we calculated elevational range by subtracting the summer lower elevation limit from the summer upper elevational limit.  
+- _06_geometric-constraints.Rmd_: First (PGLS1), we tested for an association between elevational shift and the breadth of elevational distribution (elevational range) of the species, in which we calculated elevational range by subtracting the summer lower elevation limit from the summer upper elevational limit. Then (PGLS2) we tested for an association between absolute elevational shift ( to account for both upslope and downslope shifts) and the estimated summer elevation at the upper, median and lower elevational limits.   
 
 - _07_PGLS-models.Rmd_: In this script, we used a phylogenetic generalized least squares regression to test if thermal regime, dispersal ability, and diet significantly drive Himalayan bird elevational shift.   
 
