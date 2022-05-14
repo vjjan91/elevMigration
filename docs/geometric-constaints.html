@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Section 7 Geometric constaints | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons</title>
+  <meta name="description" content="Section 7 Geometric constaints | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Section 7 Geometric constaints | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="vjjan91/elevMigration" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Section 7 Geometric constaints | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  
+  
+  
+
+<meta name="author" content="Sahas Barve" />
+<meta name="author" content="Tarun Menon" />
+<meta name="author" content="Vijay Ramesh" />
+
+
+<meta name="date" content="2022-05-14" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="extent-of-elevational-migration.html"/>
+<link rel="next" href="phylogenetic-generalized-least-squares-regressions.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.2</b> Attribution</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.3</b> Data access</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#the-data-used-in-this-work-is-archived-on-zenodo."><i class="fa fa-check"></i><b>1.4</b> The data used in this work is archived on Zenodo.</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a><ul>
+<li class="chapter" data-level="2.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="2.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a><ul>
+<li class="chapter" data-level="3.1" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-necessary-libraries-1"><i class="fa fa-check"></i><b>3.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="3.2" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-shapefiles"><i class="fa fa-check"></i><b>3.2</b> Load shapefiles</a></li>
+<li class="chapter" data-level="3.3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#prepare-elevation-rasters"><i class="fa fa-check"></i><b>3.3</b> Prepare elevation rasters</a></li>
+<li class="chapter" data-level="3.4" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#prepare-climate-rasters"><i class="fa fa-check"></i><b>3.4</b> Prepare climate rasters</a></li>
+<li class="chapter" data-level="3.5" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#extracting-data-across-elevational-bands"><i class="fa fa-check"></i><b>3.5</b> Extracting data across elevational bands</a></li>
+<li class="chapter" data-level="3.6" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#plot-temperature-as-a-function-of-elevation"><i class="fa fa-check"></i><b>3.6</b> Plot temperature as a function of elevation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html"><i class="fa fa-check"></i><b>4</b> Processing eBird data</a><ul>
+<li class="chapter" data-level="4.1" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#load-necessary-libraries-2"><i class="fa fa-check"></i><b>4.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="4.2" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#loading-custom-functions-to-process-ebird-data"><i class="fa fa-check"></i><b>4.2</b> Loading custom functions to process eBird data</a></li>
+<li class="chapter" data-level="4.3" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#use-the-function-written-above-to-extract-ebird-data"><i class="fa fa-check"></i><b>4.3</b> Use the function written above to extract eBird data</a></li>
+<li class="chapter" data-level="4.4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#extract-elevation-at-unique-locations"><i class="fa fa-check"></i><b>4.4</b> Extract elevation at unique locations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="resampling-analysis.html"><a href="resampling-analysis.html"><i class="fa fa-check"></i><b>5</b> Resampling analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="resampling-analysis.html"><a href="resampling-analysis.html#load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations"><i class="fa fa-check"></i><b>5.1</b> Load .Rdata file containing elevation data across eBird sampling locations</a></li>
+<li class="chapter" data-level="5.2" data-path="resampling-analysis.html"><a href="resampling-analysis.html#create-resampled-datasets"><i class="fa fa-check"></i><b>5.2</b> Create resampled datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html"><i class="fa fa-check"></i><b>6</b> Extent of elevational migration</a><ul>
+<li class="chapter" data-level="6.1" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#load-necessary-libraries-3"><i class="fa fa-check"></i><b>6.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="6.2" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#eastern-himalayas"><i class="fa fa-check"></i><b>6.2</b> Eastern Himalayas</a></li>
+<li class="chapter" data-level="6.3" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#western-himalayas"><i class="fa fa-check"></i><b>6.3</b> Western Himalayas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="geometric-constaints.html"><a href="geometric-constaints.html"><i class="fa fa-check"></i><b>7</b> Geometric constaints</a><ul>
+<li class="chapter" data-level="7.1" data-path="geometric-constaints.html"><a href="geometric-constaints.html#calculations-across-multiple-levels-of-sampling-effort"><i class="fa fa-check"></i><b>7.1</b> Calculations across multiple levels of sampling effort</a></li>
+<li class="chapter" data-level="7.2" data-path="geometric-constaints.html"><a href="geometric-constaints.html#absolute-shift-summer-elevational-distribution"><i class="fa fa-check"></i><b>7.2</b> Absolute shift ~ Summer Elevational Distribution</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic generalized least squares regressions</a><ul>
+<li class="chapter" data-level="8.1" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#remove-non-himalayan-species"><i class="fa fa-check"></i><b>8.1</b> Remove non-Himalayan species</a></li>
+<li class="chapter" data-level="8.2" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-eastern-himalayas"><i class="fa fa-check"></i><b>8.2</b> PGLS models for the Eastern Himalayas</a></li>
+<li class="chapter" data-level="8.3" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-western-himalayas"><i class="fa fa-check"></i><b>8.3</b> PGLS models for the Western Himalayas</a></li>
+<li class="chapter" data-level="8.4" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#phylogenetic-paired-t-test"><i class="fa fa-check"></i><b>8.4</b> Phylogenetic paired t-test</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>High elevation Himalayan birds shift elevations to track thermal regimes across seasons</em></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="geometric-constaints" class="section level1">
+<h1><span class="header-section-number">Section 7</span> Geometric constaints</h1>
+<p>First, we tested for an association between raw elevational shift and the breadth of elevational distribution (elevational range) of the species, in which we calculated elevational range by subtracting the summer lower elevation limit from the summer upper elevational limit. To test whether elevational shifts are smaller for species with a broad elevational distribution.</p>
+<div id="calculations-across-multiple-levels-of-sampling-effort" class="section level2">
+<h2><span class="header-section-number">7.1</span> Calculations across multiple levels of sampling effort</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb18-1"><a href="geometric-constaints.html#cb18-1"></a><span class="co">## Eastern Himalayas</span></span>
+<span id="cb18-2"><a href="geometric-constaints.html#cb18-2"></a></span>
+<span id="cb18-3"><a href="geometric-constaints.html#cb18-3"></a><span class="co">## An example with high effort is shown here (this can be repeated for medium and low effort as well for both Eastern and Western Himalayas)</span></span>
+<span id="cb18-4"><a href="geometric-constaints.html#cb18-4"></a></span>
+<span id="cb18-5"><a href="geometric-constaints.html#cb18-5"></a><span class="co">## (files available for replication in the results/ folder)</span></span>
+<span id="cb18-6"><a href="geometric-constaints.html#cb18-6"></a></span>
+<span id="cb18-7"><a href="geometric-constaints.html#cb18-7"></a><span class="co">## read in phylogenetic tree</span></span>
+<span id="cb18-8"><a href="geometric-constaints.html#cb18-8"></a></span>
+<span id="cb18-9"><a href="geometric-constaints.html#cb18-9"></a>tree &lt;-<span class="st"> </span><span class="kw">read.nexus</span>(<span class="st">&quot;data/birdtree.nex&quot;</span>)</span>
+<span id="cb18-10"><a href="geometric-constaints.html#cb18-10"></a>tree &lt;-<span class="st"> </span><span class="kw">mcc</span>(tree) <span class="co">## maximum clade credibility tree</span></span>
+<span id="cb18-11"><a href="geometric-constaints.html#cb18-11"></a>x &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;results/East_ele_range_higheffort.csv&quot;</span>) <span class="co"># read in high effort data</span></span>
+<span id="cb18-12"><a href="geometric-constaints.html#cb18-12"></a></span>
+<span id="cb18-13"><a href="geometric-constaints.html#cb18-13"></a><span class="co">##  subset tree to match species</span></span>
+<span id="cb18-14"><a href="geometric-constaints.html#cb18-14"></a>pruned.tree &lt;-<span class="st"> </span><span class="kw">drop.tip</span>(tree,tree<span class="op">$</span>tip.label[<span class="op">-</span><span class="kw">match</span>(x<span class="op">$</span>Tree.name, tree<span class="op">$</span>tip.label)])</span>
+<span id="cb18-15"><a href="geometric-constaints.html#cb18-15"></a>pruned.tree</span>
+<span id="cb18-16"><a href="geometric-constaints.html#cb18-16"></a></span>
+<span id="cb18-17"><a href="geometric-constaints.html#cb18-17"></a><span class="co">## Match tree tips to species name</span></span>
+<span id="cb18-18"><a href="geometric-constaints.html#cb18-18"></a>glsdata &lt;-<span class="st"> </span>x[<span class="kw">match</span>(pruned.tree<span class="op">$</span>tip.label, x<span class="op">$</span>Tree.name),]</span>
+<span id="cb18-19"><a href="geometric-constaints.html#cb18-19"></a></span>
+<span id="cb18-20"><a href="geometric-constaints.html#cb18-20"></a><span class="co"># PGLS analysis </span></span>
+<span id="cb18-21"><a href="geometric-constaints.html#cb18-21"></a>pgls1 &lt;-<span class="st"> </span><span class="kw">gls</span>(Median_diff_upper<span class="op">~</span>Summer_range,<span class="dt">correlation=</span><span class="kw">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="dt">data=</span>glsdata)</span>
+<span id="cb18-22"><a href="geometric-constaints.html#cb18-22"></a>j&lt;-<span class="kw">summary</span>(pgls1)</span>
+<span id="cb18-23"><a href="geometric-constaints.html#cb18-23"></a>j</span>
+<span id="cb18-24"><a href="geometric-constaints.html#cb18-24"></a></span>
+<span id="cb18-25"><a href="geometric-constaints.html#cb18-25"></a>pgls2&lt;-<span class="st"> </span><span class="kw">gls</span>(Median_diff_median<span class="op">~</span>Summer_range,<span class="dt">correlation=</span><span class="kw">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="dt">data=</span>glsdata)</span>
+<span id="cb18-26"><a href="geometric-constaints.html#cb18-26"></a>k&lt;-<span class="kw">summary</span>(pgls2)</span>
+<span id="cb18-27"><a href="geometric-constaints.html#cb18-27"></a>k</span>
+<span id="cb18-28"><a href="geometric-constaints.html#cb18-28"></a></span>
+<span id="cb18-29"><a href="geometric-constaints.html#cb18-29"></a>pgls3 &lt;-<span class="st"> </span><span class="kw">gls</span>(Median_diff_lower<span class="op">~</span>Summer_range,<span class="dt">correlation=</span><span class="kw">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="dt">data=</span>glsdata)</span>
+<span id="cb18-30"><a href="geometric-constaints.html#cb18-30"></a>l&lt;-<span class="kw">summary</span>(pgls3)</span>
+<span id="cb18-31"><a href="geometric-constaints.html#cb18-31"></a>l</span>
+<span id="cb18-32"><a href="geometric-constaints.html#cb18-32"></a></span>
+<span id="cb18-33"><a href="geometric-constaints.html#cb18-33"></a>outputj &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(j<span class="op">$</span>tTable)</span>
+<span id="cb18-34"><a href="geometric-constaints.html#cb18-34"></a>outputj<span class="op">$</span>Lambda &lt;-<span class="st"> </span>j<span class="op">$</span>modelStruct</span>
+<span id="cb18-35"><a href="geometric-constaints.html#cb18-35"></a>outputj &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(outputj)</span>
+<span id="cb18-36"><a href="geometric-constaints.html#cb18-36"></a>outputk &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(k<span class="op">$</span>tTable)</span>
+<span id="cb18-37"><a href="geometric-constaints.html#cb18-37"></a>outputk<span class="op">$</span>Lambda &lt;-<span class="st"> </span>k<span class="op">$</span>modelStruct</span>
+<span id="cb18-38"><a href="geometric-constaints.html#cb18-38"></a>outputk &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(outputk)</span>
+<span id="cb18-39"><a href="geometric-constaints.html#cb18-39"></a>outputl &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(l<span class="op">$</span>tTable)</span>
+<span id="cb18-40"><a href="geometric-constaints.html#cb18-40"></a>outputl<span class="op">$</span>Lambda &lt;-<span class="st"> </span>l<span class="op">$</span>modelStruct</span>
+<span id="cb18-41"><a href="geometric-constaints.html#cb18-41"></a>outputl &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(outputl)</span>
+<span id="cb18-42"><a href="geometric-constaints.html#cb18-42"></a></span>
+<span id="cb18-43"><a href="geometric-constaints.html#cb18-43"></a><span class="co"># write .csv files</span></span>
+<span id="cb18-44"><a href="geometric-constaints.html#cb18-44"></a><span class="kw">write.csv</span>(outputj,<span class="dt">file=</span><span class="st">&quot;East_shift_upper~Summer_range_higheffort.csv&quot;</span>,<span class="dt">row.names=</span><span class="ot">FALSE</span>)</span>
+<span id="cb18-45"><a href="geometric-constaints.html#cb18-45"></a><span class="kw">write.csv</span>(outputk,<span class="dt">file=</span><span class="st">&quot;East_shift_median~Summer_range_higheffort.csv&quot;</span>,<span class="dt">row.names=</span><span class="ot">FALSE</span>)</span>
+<span id="cb18-46"><a href="geometric-constaints.html#cb18-46"></a><span class="kw">write.csv</span>(outputl,<span class="dt">file=</span><span class="st">&quot;East_shift_lower~Summer_range_higheffort.csv&quot;</span>,<span class="dt">row.names=</span><span class="ot">FALSE</span>)</span>
+<span id="cb18-47"><a href="geometric-constaints.html#cb18-47"></a></span>
+<span id="cb18-48"><a href="geometric-constaints.html#cb18-48"></a><span class="co">### East_ele_range_higheffort was used to produce Figure 3A with Median_diff_median ~ Summer_range</span></span></code></pre></div>
+</div>
+<div id="absolute-shift-summer-elevational-distribution" class="section level2">
+<h2><span class="header-section-number">7.2</span> Absolute shift ~ Summer Elevational Distribution</h2>
+<p>Now we test for an association between absolute elevational shift and the estimated summer elevation of the species. To test whether elevational shifts are greater for high or low elevation birds simply because they have more elevation to potentially shift (upslope or downslope), we calculated absolute relative elevational shift as the elevational shift at each elevational limit (upper, median, lower) divided by the predicted elevation for the respective limit (i.e., elevational shift at upper limit / elevational upper limit)</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb19-1"><a href="geometric-constaints.html#cb19-1"></a></span>
+<span id="cb19-2"><a href="geometric-constaints.html#cb19-2"></a><span class="co">## the below analysis should be repeated across other levels of sampling effort</span></span>
+<span id="cb19-3"><a href="geometric-constaints.html#cb19-3"></a></span>
+<span id="cb19-4"><a href="geometric-constaints.html#cb19-4"></a>x &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;results/East_ele_range_higheffort.csv&quot;</span>)</span>
+<span id="cb19-5"><a href="geometric-constaints.html#cb19-5"></a></span>
+<span id="cb19-6"><a href="geometric-constaints.html#cb19-6"></a>x<span class="op">$</span>absrelshift_upper &lt;-<span class="st"> </span><span class="kw">abs</span>(x<span class="op">$</span>Diff_ratio_upper)</span>
+<span id="cb19-7"><a href="geometric-constaints.html#cb19-7"></a>x<span class="op">$</span>absrelshift_median &lt;-<span class="st"> </span><span class="kw">abs</span>(x<span class="op">$</span>Diff_ratio_median)</span>
+<span id="cb19-8"><a href="geometric-constaints.html#cb19-8"></a>x<span class="op">$</span>absrelshift_lower &lt;-<span class="st"> </span><span class="kw">abs</span>(x<span class="op">$</span>Diff_ratio_lower)</span>
+<span id="cb19-9"><a href="geometric-constaints.html#cb19-9"></a></span>
+<span id="cb19-10"><a href="geometric-constaints.html#cb19-10"></a>pruned.tree &lt;-<span class="st"> </span><span class="kw">drop.tip</span>(tree1,tree1<span class="op">$</span>tip.label[<span class="op">-</span><span class="kw">match</span>(x<span class="op">$</span>Tree.name, tree1<span class="op">$</span>tip.label)])</span>
+<span id="cb19-11"><a href="geometric-constaints.html#cb19-11"></a>pruned.tree</span>
+<span id="cb19-12"><a href="geometric-constaints.html#cb19-12"></a></span>
+<span id="cb19-13"><a href="geometric-constaints.html#cb19-13"></a>glsdata &lt;-<span class="st"> </span>x[<span class="kw">match</span>(pruned.tree<span class="op">$</span>tip.label, x<span class="op">$</span>Tree.name),]</span>
+<span id="cb19-14"><a href="geometric-constaints.html#cb19-14"></a>pgls1 &lt;-<span class="st"> </span><span class="kw">gls</span>(absrelshift_upper<span class="op">~</span>Median_S_upper,<span class="dt">correlation=</span><span class="kw">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="dt">data=</span>glsdata)</span>
+<span id="cb19-15"><a href="geometric-constaints.html#cb19-15"></a>j&lt;-<span class="kw">summary</span>(pgls1)</span>
+<span id="cb19-16"><a href="geometric-constaints.html#cb19-16"></a>j</span>
+<span id="cb19-17"><a href="geometric-constaints.html#cb19-17"></a></span>
+<span id="cb19-18"><a href="geometric-constaints.html#cb19-18"></a>pgls2 &lt;-<span class="kw">gls</span>(absrelshift_median<span class="op">~</span>Median_S_median,<span class="dt">correlation=</span><span class="kw">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="dt">data=</span>glsdata)</span>
+<span id="cb19-19"><a href="geometric-constaints.html#cb19-19"></a>k&lt;-<span class="kw">summary</span>(pgls2)</span>
+<span id="cb19-20"><a href="geometric-constaints.html#cb19-20"></a>k</span>
+<span id="cb19-21"><a href="geometric-constaints.html#cb19-21"></a></span>
+<span id="cb19-22"><a href="geometric-constaints.html#cb19-22"></a>pgls3 &lt;-<span class="kw">gls</span>(absrelshift_lower<span class="op">~</span>Median_S_lower,<span class="dt">correlation=</span><span class="kw">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="dt">data=</span>glsdata)</span>
+<span id="cb19-23"><a href="geometric-constaints.html#cb19-23"></a>l &lt;-<span class="st"> </span><span class="kw">summary</span>(pgls3)</span>
+<span id="cb19-24"><a href="geometric-constaints.html#cb19-24"></a>l</span>
+<span id="cb19-25"><a href="geometric-constaints.html#cb19-25"></a></span>
+<span id="cb19-26"><a href="geometric-constaints.html#cb19-26"></a>outputj&lt;-<span class="kw">as.data.frame</span>(j<span class="op">$</span>tTable)</span>
+<span id="cb19-27"><a href="geometric-constaints.html#cb19-27"></a>outputj<span class="op">$</span>Lambda&lt;-j<span class="op">$</span>modelStruct</span>
+<span id="cb19-28"><a href="geometric-constaints.html#cb19-28"></a>outputj&lt;-<span class="kw">as.matrix</span>(outputj)</span>
+<span id="cb19-29"><a href="geometric-constaints.html#cb19-29"></a>outputk&lt;-<span class="kw">as.data.frame</span>(k<span class="op">$</span>tTable)</span>
+<span id="cb19-30"><a href="geometric-constaints.html#cb19-30"></a>outputk<span class="op">$</span>Lambda&lt;-k<span class="op">$</span>modelStruct</span>
+<span id="cb19-31"><a href="geometric-constaints.html#cb19-31"></a>outputk&lt;-<span class="kw">as.matrix</span>(outputk)</span>
+<span id="cb19-32"><a href="geometric-constaints.html#cb19-32"></a>outputl&lt;-<span class="kw">as.data.frame</span>(l<span class="op">$</span>tTable)</span>
+<span id="cb19-33"><a href="geometric-constaints.html#cb19-33"></a>outputl<span class="op">$</span>Lambda&lt;-l<span class="op">$</span>modelStruct</span>
+<span id="cb19-34"><a href="geometric-constaints.html#cb19-34"></a>outputl&lt;-<span class="kw">as.matrix</span>(outputl)</span>
+<span id="cb19-35"><a href="geometric-constaints.html#cb19-35"></a></span>
+<span id="cb19-36"><a href="geometric-constaints.html#cb19-36"></a><span class="kw">write.csv</span>(outputj,<span class="dt">file=</span><span class="st">&quot;East_absrelshift_upper~Median_S_upper_higheffort.csv&quot;</span>,<span class="dt">row.names=</span><span class="ot">FALSE</span>)</span>
+<span id="cb19-37"><a href="geometric-constaints.html#cb19-37"></a><span class="kw">write.csv</span>(outputk,<span class="dt">file=</span><span class="st">&quot;East_absrelshift_median~Median_S_median_higheffort.csv&quot;</span>,<span class="dt">row.names=</span><span class="ot">FALSE</span>)</span>
+<span id="cb19-38"><a href="geometric-constaints.html#cb19-38"></a><span class="kw">write.csv</span>(outputl,<span class="dt">file=</span><span class="st">&quot;East_absrelshift_lower~Median_S_lower_higheffort.csv.csv&quot;</span>,<span class="dt">row.names=</span><span class="ot">FALSE</span>)</span>
+<span id="cb19-39"><a href="geometric-constaints.html#cb19-39"></a></span>
+<span id="cb19-40"><a href="geometric-constaints.html#cb19-40"></a><span class="co">## East_ele_range_higheffort was used to produce figure 3C with absrelshift_median ~ Median_S_median</span></span></code></pre></div>
+<div class="figure">
+<img src="figs/fig03.jpg" alt="" />
+<p class="caption"><strong>Geometric constraints do not drive elevational shifts.</strong>
+Dashed lines represent predicted relationship based on linear regression model. Error bands denote standard errors. Blue lines and dots represent downslope shifts while red lines and dots are birds that shift upslope. Top Panel: Relationship between median shift upslope or downslope and summer elevational range in eastern (3A) and western Himalayas (3B), both statistically significant (Supplementary Table 2). Bottom Panel: Relationship between relative elevational shift and summer elevation (median distribution). The relationship was not significant in the east (3C) but significant in the west (3D).</p>
+</div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="extent-of-elevational-migration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="phylogenetic-generalized-least-squares-regressions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/vjjan91/elevMigration/edit/master/06_geometric-constraints.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

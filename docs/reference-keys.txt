@@ -25,7 +25,9 @@ extent-of-elevational-migration
 load-necessary-libraries-3
 eastern-himalayas
 western-himalayas
-geometric-constaints-pgls
+geometric-constaints
+calculations-across-multiple-levels-of-sampling-effort
+absolute-shift-summer-elevational-distribution
 phylogenetic-generalized-least-squares-regressions
 remove-non-himalayan-species
 pgls-models-for-the-eastern-himalayas
