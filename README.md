@@ -19,7 +19,7 @@ We describe what each script (`.Rmd`) of this repository is intended to achieve 
 
 - _01_spatial-thinning.Rmd:_. In this script, we spatially thin a list of localities for the sake of mapping and creating a representative figure of checklist locations for the eastern and Western Himalayas.
 
-- _02_elevation-temperature.Rmd:_. In this script, we extracted minimum and maximum temperature for the months of January and June across every 100 m elevational band for both the eastern and western Himalayas.  
+- _02_elevation-temperature.Rmd:_. In this script, we extracted minimum and maximum temperature for the months of January and June across every 100 m elevational band for both the eastern and western Himalayas.    
 
 - _03_eBird-data-processing.Rmd:_. Here, we processed the [eBird](https://ebird.org/home) by applying a number of filters.   
 
