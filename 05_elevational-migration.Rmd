@@ -5,7 +5,7 @@ editor_options:
 
 # Extent of elevational migration
 
-In this script, we calculate the median migration extent, breeding and wintering elevation for all combinations of elevayional limit and sampling effort-seperately for the eastern and western Himalayas
+In this script, we calculate the median migration extent, breeding and wintering elevation for all combinations of elevational limit and sampling effort-seperately for the eastern and western Himalayas
 
 ## Load necessary libraries
 ```{r}
@@ -19,20 +19,44 @@ library(tidyverse)
 library(phangorn)
 ```
 
+# load previously generated .Rdata files for analyses
+
+```{r}
+load("results/eBird_elev.RData")
+dat.1<-as.data.frame(dat.1)
+dat.1<-dat.1[,-27]
+
+#### Keep only full species data
+dat.1<-dat.1 %>% filter(CATEGORY == "species" | CATEGORY == "issf")
+
+##Separating eastern and western himalayas
+dat1W<-dat.1 %>% filter (LONGITUDE < 83)
+dat1E<-dat.1 %>% filter (LONGITUDE > 83)
+rm(dat.1)
+```
+
+
 ## Eastern Himalayas
 ```{r}
-# load previously generated .Rdata files for analyses
+
+#### Creating a list of unique species
+
+uniSpe_east <- dat1E %>% filter(CATEGORY == "species" | CATEGORY == "issf")
+uniSpe_east <- unique(uniSpe_east[, "COMMON.NAME"]) %>% data.frame()
+
+colnames(uniSpe_east) <- "Species"
+
 
 for (minSample in c(30, 60)) {
   for (ds in c("05.q1", "05.q2", "05.q3", "95.q1", "95.q2", "95.q3", "50.q1", "50.q2", "50.q3")) {
-    load(paste("eBird_resampled_east_", ds, ".Rdata", sep = ""))
+    load(paste("results/eBird_woNepal_resampled_east_", ds, ".Rdata", sep = ""))
     B.elev <- sapply(1:1000, function(x) rs[[x]][, 1])
     B.n <-    sapply(1:1000, function(x) rs[[x]][, 2])
     W.elev <- sapply(1:1000, function(x) rs[[x]][, 3])
     W.n <-    sapply(1:1000, function(x) rs[[x]][, 4])
     
     diff <- B.elev - W.elev
-    dimnames(diff)<-list(uniSpe[,1],1:1000)
+    dimnames(diff)<-list(uniSpe_east[,1],1:1000)
     
     # For each species exclude trials where it has been detected less than 30/60 times in winter or summer
     if (minSample == 30) diff[W.n < 30 | B.n < 30] <- NA
@@ -50,9 +74,9 @@ for (minSample in c(30, 60)) {
     med.CI$Species <- rownames(med.CI)
     med.CI<-med.CI[,-c(1,2,3)]
     
-    ## adding breeding elevations to the same table
+    ## adding median breeding elevations to the same table
     
-    dimnames(B.elev)<-list(uniSpe[,1],1:1000)
+    dimnames(B.elev)<-list(uniSpe_east[,1],1:1000)
     if (minSample == 30) B.elev[W.n < 30 | B.n < 30] <- NA
     if (minSample == 60) B.elev[W.n < 60 | B.n < 60] <- NA 
     B.sel <- B.elev[apply(B.elev, 1, FUN = function(x) sum(is.na(x))) < 1000, ]
@@ -66,9 +90,9 @@ for (minSample in c(30, 60)) {
     med.S.CI$Species <- rownames(med.S.CI)
     med.S.CI<-med.S.CI[,-c(1,2,3)]
     
-    ## adding winter elevations to the same table
+    ## adding median winter elevations to the same table
     
-    dimnames(W.elev)<-list(uniSpe[,1],1:1000)
+    dimnames(W.elev)<-list(uniSpe_east[,1],1:1000)
     if (minSample == 30) W.elev[W.n < 30 | B.n < 30] <- NA
     if (minSample == 60) W.elev[W.n < 60 | B.n < 60] <- NA 
     W.sel <- W.elev[apply(W.elev, 1, FUN = function(x) sum(is.na(x))) < 1000, ]
@@ -86,23 +110,28 @@ for (minSample in c(30, 60)) {
     
     ts <- ts[c("Species", "Group", "Median_S", "LCI_S", "UCI_S","Median_W","LCI_W","UCI_W","Median_diff","LCI_diff", "UCI_diff")]
     
-    write.csv(ts, file = paste("birdlist_east_",ds,".sam",minSample, ".csv", sep = ""), row.names = F)
+    write.csv(ts, file = paste("results/final_birdlist_east_",ds,".sam",minSample, ".csv", sep = ""), row.names = F)
   }
 }
+
 ```
 
 ## Western Himalayas
 ```{r}
+uniSpe_west <- dat1W %>% filter(CATEGORY == "species" | CATEGORY == "issf")
+uniSpe_west <- unique(uniSpe_west[, "COMMON.NAME"]) %>% data.frame()
+colnames(uniSpe_west) <- "Species"
+
 for (minSample in c(30, 60)) {
   for (ds in c("05.q1", "05.q2", "05.q3", "95.q1", "95.q2", "95.q3", "50.q1", "50.q2", "50.q3")) {
-    load(paste("eBird_resampled_west_", ds, ".Rdata", sep = ""))
+    load(paste("results/eBird_woNepal_resampled_west_", ds, ".Rdata", sep = ""))
     B.elev <- sapply(1:1000, function(x) rs[[x]][, 1])
     B.n <-    sapply(1:1000, function(x) rs[[x]][, 2])
     W.elev <- sapply(1:1000, function(x) rs[[x]][, 3])
     W.n <-    sapply(1:1000, function(x) rs[[x]][, 4])
     
     diff <- B.elev - W.elev
-    dimnames(diff)<-list(uniSpe[,1],1:1000)
+    dimnames(diff)<-list(uniSpe_west[,1],1:1000)
     
     # For each species exclude trials where it has been detected less than 30/60 times in winter or summer
     if (minSample == 30) diff[W.n < 30 | B.n < 30] <- NA
@@ -120,9 +149,9 @@ for (minSample in c(30, 60)) {
     med.CI$Species <- rownames(med.CI)
     med.CI<-med.CI[,-c(1,2,3)]
     
-    ## adding breeding elevations to the same table
+    ## adding median breeding elevations to the same table
     
-    dimnames(B.elev)<-list(uniSpe[,1],1:1000)
+    dimnames(B.elev)<-list(uniSpe_west[,1],1:1000)
     if (minSample == 30) B.elev[W.n < 30 | B.n < 30] <- NA
     if (minSample == 60) B.elev[W.n < 60 | B.n < 60] <- NA 
     B.sel <- B.elev[apply(B.elev, 1, FUN = function(x) sum(is.na(x))) < 1000, ]
@@ -136,9 +165,9 @@ for (minSample in c(30, 60)) {
     med.S.CI$Species <- rownames(med.S.CI)
     med.S.CI<-med.S.CI[,-c(1,2,3)]
     
-    ## adding winter elevations to the same table
+    ## adding median winter elevations to the same table
     
-    dimnames(W.elev)<-list(uniSpe[,1],1:1000)
+    dimnames(W.elev)<-list(uniSpe_west[,1],1:1000)
     if (minSample == 30) W.elev[W.n < 30 | B.n < 30] <- NA
     if (minSample == 60) W.elev[W.n < 60 | B.n < 60] <- NA 
     W.sel <- W.elev[apply(W.elev, 1, FUN = function(x) sum(is.na(x))) < 1000, ]
@@ -156,9 +185,10 @@ for (minSample in c(30, 60)) {
     
     ts <- ts[c("Species", "Group", "Median_S", "LCI_S", "UCI_S","Median_W","LCI_W","UCI_W","Median_diff","LCI_diff", "UCI_diff")]
     
-    write.csv(ts, file = paste("birdlist_west",ds,".sam",minSample, ".csv", sep = ""), row.names = F)
+    write.csv(ts, file = paste("results/final_birdlist_west",ds,".sam",minSample, ".csv", sep = ""), row.names = F)
   }
 }
+
 ```
 
 ![**Elevational shift in the eastern and western Himalayas**
