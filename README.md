@@ -71,4 +71,4 @@ Vijay Ramesh, Tarun Menon, Sahas Barve (2022). _Source code and Supplementary ma
 Please contact the following in case of interest.  
 
 [Vijay Ramesh (repo maintainer)](https://evolecol.weebly.com/)  
-PhD student, Columbia University  
+Postdoctoral Fellow, Cornell Lab of Ornithology  
