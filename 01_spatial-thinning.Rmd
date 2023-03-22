@@ -5,7 +5,7 @@ editor_options:
 
 # Spatial thinning of occurrence data
 
-In this script, we spatially thin occurrence data for creating Figure 1. 
+In this script, we spatially thin occurrence data to create Figure 1.
 
 ## Load necessary libraries
 ```{r}

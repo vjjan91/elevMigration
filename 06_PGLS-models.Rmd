@@ -58,8 +58,6 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
 
 ```
 
-
-
 ## PGLS models for the Western Himalayas
 ```{r}
 for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.sam30","05.q3.sam60", "95.q1.sam30","95.q1.sam60", "95.q2.sam30","95.q2.sam60" ,"95.q3.sam30","95.q3.sam60" ,"50.q1.sam30","50.q1.sam60" ,"50.q2.sam30","50.q2.sam60" ,"50.q3.sam30", "50.q3.sam60")) {
@@ -126,12 +124,3 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
 }
 
 ```
-
-![**Determinants of elevational shift**
-Determinants of elevational shift in east Himalayan birds (top panel) and western Himalayan birds (bottom panel). Asterisks denote significant (P<0.05) differences. Dots represent model estimate and errors bars denote standard errors for PGLS models used in the comparative analyses. Color of the dot represents sampling effort (light grey: low, dark grey: medium and black: high). Figure represents PGLS model exploring elevational shift at the lower, medianmedian, and upper limits as driven by life history variables (Thermal Regime (TR), Dispersal ability (HWI) and Diet (INV=invertivores, OMN=omnivores, SED=seed eaters, VRT=vertivores)). Within diet classes, reference level is frugivorous diet. ](figs/fig04.jpg)  
-
-
-
-
-![**Phylogenetic paired t-test**
-For common species in across the east and the west, A) Seasonal elevational shift is not different in the east (black circles) and the west (blue triangles) (Phylogenetic paired t-test, P<0.001). B) Thermal regime is narrower in the east (black circles) for all species compared to the west (blue triangles) (P<0.001).](figs/fig05.jpg)  

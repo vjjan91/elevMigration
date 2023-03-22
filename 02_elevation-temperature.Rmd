@@ -1,9 +1,6 @@
 ---
-editor_options:
+editor_options: 
   chunk_output_type: console
-output:
-  html_document:
-    df_print: paged
 ---
 
 # Temperature-elevation associations  
@@ -15,6 +12,7 @@ In this script, we calculate temperatures across elevational bands in the Easter
 library(raster)
 library(stringi)
 library(glue)
+## devtools:::install_github("gearslaboratory/gdalUtils")
 library(gdalUtils)
 library(purrr)
 library(dplyr)
@@ -48,14 +46,16 @@ himalayas <- st_read("data/shapefiles/shapefile_himalaya.shp")
 mapview(himalayas)
 
 # Need to merge a few polygons to essentially split himalayas into the west and the east
-# This will have to be done at 83E for Nepal
+# We exclude Nepal in this version
 
 # Merge polygons for western himalayas
-west_toMerge <- himalayas[c(3,4,7,8,9,10),]
+west_toMerge <- himalayas[c(3,4,7,8,9),]
 westHim <- st_crop(west_toMerge,xmin=68.03321,ymin=23.69771,xmax=83,ymax=37.07761)
 
 # Merge polygons for eastern himalayas
-east_toMerge <- himalayas[c(1,2,5,6,10),]
+east_toMerge <- himalayas[c(1,2,5,6),]
+east_toMerge <- st_make_valid(east_toMerge)
+sf::sf_use_s2(FALSE)
 east_toMerge <- st_buffer(east_toMerge, dist=0)
 eastHim <- st_crop(east_toMerge,xmin=83,ymin=25.96462,xmax=97.4115,ymax=30.44728)
 ```
@@ -91,7 +91,7 @@ chelsaFiles <- list.files("data/chelsa/",
 
 # gather chelsa data over the east
 chelsaEast <- purrr::map(chelsaFiles, function(chr){
-  a <- raster(chr)
+  a <- raster::raster(chr)
   crs(a) <- crs(elevEast)
   a <- crop(a, as(eastHim, "Spatial"))
   return(a)
@@ -139,7 +139,7 @@ names(env_west) <- as.character(glue('{c(elev_names, chelsa_names)}'))
 ```{r}
 # make duplicate stack
 envEast <- env_east[[c("elev", chelsa_names)]]
-envWest <- env_West[[c("elev", chelsa_names)]]
+envWest <- env_west[[c("elev", chelsa_names)]]
 
 # convert to list
 envEast <- as.list(envEast)
@@ -172,8 +172,8 @@ envWest <- drop_na(envWest) %>%
          tempRange_June = (maxTemp_June_mean - minTemp_June_mean))
 
 # Write results to a .csv
-west_data <- write.csv(env,"results/westHim_100.csv", row.names = F) 
-east_data <- write.csv(env,"results/eastHim_100.csv", row.names = F)
+west_data <- write.csv(envWest,"results/westHim_100.csv", row.names = F)
+east_data <- write.csv(envEast,"results/eastHim_100.csv", row.names = F)
 ```
 
 ## Plot temperature as a function of elevation

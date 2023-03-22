@@ -13,7 +13,6 @@ library(tidyverse)
 library(sf)
 library(raster)
 library(parallel)
-
 ```
 
 ## Loading custom functions to process eBird data
@@ -96,10 +95,7 @@ India<-India %>% filter(LATITUDE>26,LONGITUDE<100)
 
 dat <-rbind(India,Bhutan)
 
-
-
 # Keep only unique locations used
-
 datll<-dat%>% filter(month %in% c(1,2,5,6,7,8,12)) %>% distinct(LATITUDE,LONGITUDE, .keep_all = T)%>%select(LOCALITY.ID,LATITUDE,LONGITUDE)
 write.csv(datll, "results/unique_loc.csv", row.names = F)
 
@@ -121,4 +117,3 @@ dat <- cbind(dat,elevDat)
 # save Rdata file (uploaded to GitHub)
 save(dat, file = "results/eBird_elev.RData")
 ```
-
