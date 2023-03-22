@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Section 5 Resampling analysis | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons</title>
   <meta name="description" content="Section 5 Resampling analysis | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Section 5 Resampling analysis | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
   <meta property="og:type" content="book" />
-  
   
   
   <meta name="github-repo" content="vjjan91/elevMigration" />
@@ -26,7 +25,7 @@
 <meta name="author" content="Vijay Ramesh" />
 
 
-<meta name="date" content="2022-05-14" />
+<meta name="date" content="2023-03-22" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,24 +51,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,13 +88,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -108,7 +107,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -136,17 +135,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.2</b> Attribution</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.3</b> Data access</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#the-data-used-in-this-work-is-archived-on-zenodo."><i class="fa fa-check"></i><b>1.4</b> The data used in this work is archived on Zenodo.</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a><ul>
+<li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
 <li class="chapter" data-level="2.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a><ul>
+<li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-necessary-libraries-1"><i class="fa fa-check"></i><b>3.1</b> Load necessary libraries</a></li>
 <li class="chapter" data-level="3.2" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-shapefiles"><i class="fa fa-check"></i><b>3.2</b> Load shapefiles</a></li>
 <li class="chapter" data-level="3.3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#prepare-elevation-rasters"><i class="fa fa-check"></i><b>3.3</b> Prepare elevation rasters</a></li>
@@ -154,26 +156,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#extracting-data-across-elevational-bands"><i class="fa fa-check"></i><b>3.5</b> Extracting data across elevational bands</a></li>
 <li class="chapter" data-level="3.6" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#plot-temperature-as-a-function-of-elevation"><i class="fa fa-check"></i><b>3.6</b> Plot temperature as a function of elevation</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html"><i class="fa fa-check"></i><b>4</b> Processing eBird data</a><ul>
+<li class="chapter" data-level="4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html"><i class="fa fa-check"></i><b>4</b> Processing eBird data</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#load-necessary-libraries-2"><i class="fa fa-check"></i><b>4.1</b> Load necessary libraries</a></li>
 <li class="chapter" data-level="4.2" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#loading-custom-functions-to-process-ebird-data"><i class="fa fa-check"></i><b>4.2</b> Loading custom functions to process eBird data</a></li>
 <li class="chapter" data-level="4.3" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#use-the-function-written-above-to-extract-ebird-data"><i class="fa fa-check"></i><b>4.3</b> Use the function written above to extract eBird data</a></li>
 <li class="chapter" data-level="4.4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#extract-elevation-at-unique-locations"><i class="fa fa-check"></i><b>4.4</b> Extract elevation at unique locations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="resampling-analysis.html"><a href="resampling-analysis.html"><i class="fa fa-check"></i><b>5</b> Resampling analysis</a><ul>
+<li class="chapter" data-level="5" data-path="resampling-analysis.html"><a href="resampling-analysis.html"><i class="fa fa-check"></i><b>5</b> Resampling analysis</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="resampling-analysis.html"><a href="resampling-analysis.html#load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations"><i class="fa fa-check"></i><b>5.1</b> Load .Rdata file containing elevation data across eBird sampling locations</a></li>
 <li class="chapter" data-level="5.2" data-path="resampling-analysis.html"><a href="resampling-analysis.html#create-resampled-datasets"><i class="fa fa-check"></i><b>5.2</b> Create resampled datasets</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html"><i class="fa fa-check"></i><b>6</b> Extent of elevational migration</a><ul>
+<li class="chapter" data-level="6" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html"><i class="fa fa-check"></i><b>6</b> Extent of elevational migration</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#load-necessary-libraries-3"><i class="fa fa-check"></i><b>6.1</b> Load necessary libraries</a></li>
-<li class="chapter" data-level="6.2" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#eastern-himalayas"><i class="fa fa-check"></i><b>6.2</b> Eastern Himalayas</a></li>
-<li class="chapter" data-level="6.3" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#western-himalayas"><i class="fa fa-check"></i><b>6.3</b> Western Himalayas</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="geometric-constaints.html"><a href="geometric-constaints.html"><i class="fa fa-check"></i><b>7</b> Geometric constaints</a><ul>
-<li class="chapter" data-level="7.1" data-path="geometric-constaints.html"><a href="geometric-constaints.html#calculations-across-multiple-levels-of-sampling-effort"><i class="fa fa-check"></i><b>7.1</b> Calculations across multiple levels of sampling effort</a></li>
-<li class="chapter" data-level="7.2" data-path="geometric-constaints.html"><a href="geometric-constaints.html#absolute-shift-summer-elevational-distribution"><i class="fa fa-check"></i><b>7.2</b> Absolute shift ~ Summer Elevational Distribution</a></li>
+<li class="chapter" data-level="7" data-path="load-previously-generated-.rdata-files-for-analyses.html"><a href="load-previously-generated-.rdata-files-for-analyses.html"><i class="fa fa-check"></i><b>7</b> load previously generated .Rdata files for analyses</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="load-previously-generated-.rdata-files-for-analyses.html"><a href="load-previously-generated-.rdata-files-for-analyses.html#eastern-himalayas"><i class="fa fa-check"></i><b>7.1</b> Eastern Himalayas</a></li>
+<li class="chapter" data-level="7.2" data-path="load-previously-generated-.rdata-files-for-analyses.html"><a href="load-previously-generated-.rdata-files-for-analyses.html#western-himalayas"><i class="fa fa-check"></i><b>7.2</b> Western Himalayas</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic generalized least squares regressions</a><ul>
+<li class="chapter" data-level="8" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic generalized least squares regressions</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#remove-non-himalayan-species"><i class="fa fa-check"></i><b>8.1</b> Remove non-Himalayan species</a></li>
 <li class="chapter" data-level="8.2" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-eastern-himalayas"><i class="fa fa-check"></i><b>8.2</b> PGLS models for the Eastern Himalayas</a></li>
 <li class="chapter" data-level="8.3" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-western-himalayas"><i class="fa fa-check"></i><b>8.3</b> PGLS models for the Western Himalayas</a></li>
@@ -196,136 +201,136 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="resampling-analysis" class="section level1">
-<h1><span class="header-section-number">Section 5</span> Resampling analysis</h1>
+<div id="resampling-analysis" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Section 5</span> Resampling analysis<a href="resampling-analysis.html#resampling-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Using the previously generated .Rdata file, we resample checklists for three levels of sampling effort at different elevational bands.</p>
-<div id="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations" class="section level2">
-<h2><span class="header-section-number">5.1</span> Load .Rdata file containing elevation data across eBird sampling locations</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb13-1"><a href="resampling-analysis.html#cb13-1"></a><span class="kw">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
-<span id="cb13-2"><a href="resampling-analysis.html#cb13-2"></a>dat &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(dat)</span>
-<span id="cb13-3"><a href="resampling-analysis.html#cb13-3"></a>dat &lt;-<span class="st"> </span>dat [,<span class="op">-</span><span class="dv">27</span>] <span class="co"># removing unnecessary columns</span></span>
+<div id="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Load .Rdata file containing elevation data across eBird sampling locations<a href="resampling-analysis.html#load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb13-1"><a href="resampling-analysis.html#cb13-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
+<span id="cb13-2"><a href="resampling-analysis.html#cb13-2"></a>dat <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dat)</span>
+<span id="cb13-3"><a href="resampling-analysis.html#cb13-3"></a>dat <span class="ot">&lt;-</span> dat [,<span class="sc">-</span><span class="dv">27</span>] <span class="co"># removing unnecessary columns</span></span>
 <span id="cb13-4"><a href="resampling-analysis.html#cb13-4"></a></span>
-<span id="cb13-5"><a href="resampling-analysis.html#cb13-5"></a><span class="co">## include only full species</span></span>
-<span id="cb13-6"><a href="resampling-analysis.html#cb13-6"></a>dat &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span></span>
-<span id="cb13-7"><a href="resampling-analysis.html#cb13-7"></a><span class="st">  </span><span class="kw">filter</span>(CATEGORY <span class="op">==</span><span class="st"> &quot;species&quot;</span> <span class="op">|</span><span class="st"> </span>CATEGORY <span class="op">==</span><span class="st"> &quot;issf&quot;</span>)</span>
+<span id="cb13-5"><a href="resampling-analysis.html#cb13-5"></a><span class="do">## include only full species</span></span>
+<span id="cb13-6"><a href="resampling-analysis.html#cb13-6"></a>dat <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="resampling-analysis.html#cb13-7"></a>  <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
 <span id="cb13-8"><a href="resampling-analysis.html#cb13-8"></a></span>
 <span id="cb13-9"><a href="resampling-analysis.html#cb13-9"></a><span class="co"># dividing eastern and western himalayas by the 83E longitude</span></span>
-<span id="cb13-10"><a href="resampling-analysis.html#cb13-10"></a>datWest &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span> (LONGITUDE <span class="op">&lt;</span><span class="st"> </span><span class="dv">83</span>)</span>
-<span id="cb13-11"><a href="resampling-analysis.html#cb13-11"></a>datEast &lt;-<span class="st"> </span>dat <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span> (LONGITUDE <span class="op">&gt;</span><span class="st"> </span><span class="dv">83</span>)</span></code></pre></div>
+<span id="cb13-10"><a href="resampling-analysis.html#cb13-10"></a>datWest <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
+<span id="cb13-11"><a href="resampling-analysis.html#cb13-11"></a>datEast <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span></code></pre></div>
 </div>
-<div id="create-resampled-datasets" class="section level2">
-<h2><span class="header-section-number">5.2</span> Create resampled datasets</h2>
+<div id="create-resampled-datasets" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Create resampled datasets<a href="resampling-analysis.html#create-resampled-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb14-1"><a href="resampling-analysis.html#cb14-1"></a><span class="co"># Creating resampled Dataset for the centre, lower, and upper limit of a species&#39; elevational distribution for 3 levels of sampling effort (number of checklists)- separately for east and west </span></span>
 <span id="cb14-2"><a href="resampling-analysis.html#cb14-2"></a></span>
-<span id="cb14-3"><a href="resampling-analysis.html#cb14-3"></a><span class="co">## Eastern Himalayas</span></span>
+<span id="cb14-3"><a href="resampling-analysis.html#cb14-3"></a><span class="do">## Eastern Himalayas</span></span>
 <span id="cb14-4"><a href="resampling-analysis.html#cb14-4"></a></span>
-<span id="cb14-5"><a href="resampling-analysis.html#cb14-5"></a><span class="co">## Number of checklists in either season in each elevational band</span></span>
-<span id="cb14-6"><a href="resampling-analysis.html#cb14-6"></a>Checklists &lt;-<span class="st"> </span>datEast[<span class="op">!</span><span class="kw">duplicated</span>(datEast<span class="op">$</span>group.id), ]</span>
-<span id="cb14-7"><a href="resampling-analysis.html#cb14-7"></a>Checklists<span class="op">$</span>elev_level &lt;-<span class="st"> </span><span class="kw">cut</span>(Checklists<span class="op">$</span>elevation, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">2500</span>, <span class="dv">3000</span>, <span class="ot">Inf</span>), <span class="dt">labels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)</span>
-<span id="cb14-8"><a href="resampling-analysis.html#cb14-8"></a>Checklists.S &lt;-<span class="st"> </span><span class="kw">subset</span>(Checklists, month <span class="op">%in%</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">7</span>) <span class="co"># summer</span></span>
-<span id="cb14-9"><a href="resampling-analysis.html#cb14-9"></a>Checklists.W &lt;-<span class="st"> </span><span class="kw">subset</span>(Checklists, month <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">11</span>, <span class="dv">12</span>)) <span class="co"># winter</span></span>
+<span id="cb14-5"><a href="resampling-analysis.html#cb14-5"></a><span class="do">## Number of checklists in either season in each elevational band</span></span>
+<span id="cb14-6"><a href="resampling-analysis.html#cb14-6"></a>Checklists <span class="ot">&lt;-</span> datEast[<span class="sc">!</span><span class="fu">duplicated</span>(datEast<span class="sc">$</span>group.id), ]</span>
+<span id="cb14-7"><a href="resampling-analysis.html#cb14-7"></a>Checklists<span class="sc">$</span>elev_level <span class="ot">&lt;-</span> <span class="fu">cut</span>(Checklists<span class="sc">$</span>elevation, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">2500</span>, <span class="dv">3000</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span>
+<span id="cb14-8"><a href="resampling-analysis.html#cb14-8"></a>Checklists.S <span class="ot">&lt;-</span> <span class="fu">subset</span>(Checklists, month <span class="sc">%in%</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>) <span class="co"># summer</span></span>
+<span id="cb14-9"><a href="resampling-analysis.html#cb14-9"></a>Checklists.W <span class="ot">&lt;-</span> <span class="fu">subset</span>(Checklists, month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">12</span>)) <span class="co"># winter</span></span>
 <span id="cb14-10"><a href="resampling-analysis.html#cb14-10"></a></span>
-<span id="cb14-11"><a href="resampling-analysis.html#cb14-11"></a>summer &lt;-<span class="st"> </span>Checklists.S <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-12"><a href="resampling-analysis.html#cb14-12"></a><span class="st">  </span><span class="kw">group_by</span>(elev_level) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-13"><a href="resampling-analysis.html#cb14-13"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">summer =</span> <span class="kw">n_distinct</span>(group.id))</span>
+<span id="cb14-11"><a href="resampling-analysis.html#cb14-11"></a>summer <span class="ot">&lt;-</span> Checklists.S <span class="sc">%&gt;%</span> </span>
+<span id="cb14-12"><a href="resampling-analysis.html#cb14-12"></a>  <span class="fu">group_by</span>(elev_level) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-13"><a href="resampling-analysis.html#cb14-13"></a>  <span class="fu">summarise</span>(<span class="at">summer =</span> <span class="fu">n_distinct</span>(group.id))</span>
 <span id="cb14-14"><a href="resampling-analysis.html#cb14-14"></a></span>
-<span id="cb14-15"><a href="resampling-analysis.html#cb14-15"></a>winter &lt;-<span class="st"> </span>Checklists.W <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-16"><a href="resampling-analysis.html#cb14-16"></a><span class="st">  </span><span class="kw">group_by</span>(elev_level) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb14-17"><a href="resampling-analysis.html#cb14-17"></a><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">winter =</span> <span class="kw">n_distinct</span>(group.id))</span>
+<span id="cb14-15"><a href="resampling-analysis.html#cb14-15"></a>winter <span class="ot">&lt;-</span> Checklists.W <span class="sc">%&gt;%</span> </span>
+<span id="cb14-16"><a href="resampling-analysis.html#cb14-16"></a>  <span class="fu">group_by</span>(elev_level) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-17"><a href="resampling-analysis.html#cb14-17"></a>  <span class="fu">summarise</span>(<span class="at">winter =</span> <span class="fu">n_distinct</span>(group.id))</span>
 <span id="cb14-18"><a href="resampling-analysis.html#cb14-18"></a></span>
-<span id="cb14-19"><a href="resampling-analysis.html#cb14-19"></a><span class="co">## if you want to output a table the number of checklists at each elevation band and season</span></span>
-<span id="cb14-20"><a href="resampling-analysis.html#cb14-20"></a>CL_ES &lt;-<span class="st"> </span><span class="kw">left_join</span>(summer, winter, <span class="dt">by =</span> <span class="st">&quot;elev_level&quot;</span>)</span>
-<span id="cb14-21"><a href="resampling-analysis.html#cb14-21"></a><span class="kw">levels</span>(CL_ES<span class="op">$</span>elev_level) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;0-500&quot;</span>,<span class="st">&quot;500-1000&quot;</span>,<span class="st">&quot;1000-1500&quot;</span>,<span class="st">&quot;1500-2000&quot;</span>,<span class="st">&quot;2000-2500&quot;</span>,<span class="st">&quot;2500-3000&quot;</span>,<span class="st">&quot;&gt;3000&quot;</span>)</span>
-<span id="cb14-22"><a href="resampling-analysis.html#cb14-22"></a><span class="kw">write.csv</span>(CL_ES, <span class="st">&quot;ChecklistNo_SeasonElevation_East.csv&quot;</span>, <span class="dt">row.names =</span> F)</span>
+<span id="cb14-19"><a href="resampling-analysis.html#cb14-19"></a><span class="do">## if you want to output a table the number of checklists at each elevation band and season</span></span>
+<span id="cb14-20"><a href="resampling-analysis.html#cb14-20"></a>CL_ES <span class="ot">&lt;-</span> <span class="fu">left_join</span>(summer, winter, <span class="at">by =</span> <span class="st">&quot;elev_level&quot;</span>)</span>
+<span id="cb14-21"><a href="resampling-analysis.html#cb14-21"></a><span class="fu">levels</span>(CL_ES<span class="sc">$</span>elev_level) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;0-500&quot;</span>,<span class="st">&quot;500-1000&quot;</span>,<span class="st">&quot;1000-1500&quot;</span>,<span class="st">&quot;1500-2000&quot;</span>,<span class="st">&quot;2000-2500&quot;</span>,<span class="st">&quot;2500-3000&quot;</span>,<span class="st">&quot;&gt;3000&quot;</span>)</span>
+<span id="cb14-22"><a href="resampling-analysis.html#cb14-22"></a><span class="fu">write.csv</span>(CL_ES, <span class="st">&quot;results/ChecklistNo_SeasonElevation_East.csv&quot;</span>, <span class="at">row.names =</span> F)</span>
 <span id="cb14-23"><a href="resampling-analysis.html#cb14-23"></a></span>
-<span id="cb14-24"><a href="resampling-analysis.html#cb14-24"></a><span class="co">## Sampling event IDs in each season and in each elevation band</span></span>
-<span id="cb14-25"><a href="resampling-analysis.html#cb14-25"></a>ID.S &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) Checklists.S<span class="op">$</span>group.id[Checklists.S<span class="op">$</span>elev_level <span class="op">==</span><span class="st"> </span>x])</span>
-<span id="cb14-26"><a href="resampling-analysis.html#cb14-26"></a>ID.W &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) Checklists.W<span class="op">$</span>group.id[Checklists.W<span class="op">$</span>elev_level <span class="op">==</span><span class="st"> </span>x])</span>
+<span id="cb14-24"><a href="resampling-analysis.html#cb14-24"></a><span class="do">## Sampling event IDs in each season and in each elevation band</span></span>
+<span id="cb14-25"><a href="resampling-analysis.html#cb14-25"></a>ID.S <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) Checklists.S<span class="sc">$</span>group.id[Checklists.S<span class="sc">$</span>elev_level <span class="sc">==</span> x])</span>
+<span id="cb14-26"><a href="resampling-analysis.html#cb14-26"></a>ID.W <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) Checklists.W<span class="sc">$</span>group.id[Checklists.W<span class="sc">$</span>elev_level <span class="sc">==</span> x])</span>
 <span id="cb14-27"><a href="resampling-analysis.html#cb14-27"></a></span>
-<span id="cb14-28"><a href="resampling-analysis.html#cb14-28"></a><span class="co">## Get unique species list</span></span>
-<span id="cb14-29"><a href="resampling-analysis.html#cb14-29"></a>uniSpe &lt;-<span class="st"> </span>datEast <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(CATEGORY <span class="op">==</span><span class="st"> &quot;species&quot;</span> <span class="op">|</span><span class="st"> </span>CATEGORY <span class="op">==</span><span class="st"> &quot;issf&quot;</span>)</span>
-<span id="cb14-30"><a href="resampling-analysis.html#cb14-30"></a>uniSpe &lt;-<span class="st"> </span><span class="kw">unique</span>(uniSpe[, <span class="st">&quot;COMMON.NAME&quot;</span>]) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>()</span>
+<span id="cb14-28"><a href="resampling-analysis.html#cb14-28"></a><span class="do">## Get unique species list</span></span>
+<span id="cb14-29"><a href="resampling-analysis.html#cb14-29"></a>uniSpe <span class="ot">&lt;-</span> datEast <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
+<span id="cb14-30"><a href="resampling-analysis.html#cb14-30"></a>uniSpe <span class="ot">&lt;-</span> <span class="fu">unique</span>(uniSpe[, <span class="st">&quot;COMMON.NAME&quot;</span>]) <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
 <span id="cb14-31"><a href="resampling-analysis.html#cb14-31"></a></span>
-<span id="cb14-32"><a href="resampling-analysis.html#cb14-32"></a><span class="co">## Get first second and third quartile of effort (number of checklists) across season and elevation</span></span>
-<span id="cb14-33"><a href="resampling-analysis.html#cb14-33"></a>efforts.S &lt;-<span class="st"> </span><span class="kw">summary</span>(Checklists.S<span class="op">$</span>elev_level)</span>
-<span id="cb14-34"><a href="resampling-analysis.html#cb14-34"></a>efforts.W &lt;-<span class="st"> </span><span class="kw">summary</span>(Checklists.W<span class="op">$</span>elev_level)</span>
-<span id="cb14-35"><a href="resampling-analysis.html#cb14-35"></a>qEffort &lt;-<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">c</span>(efforts.S, efforts.W), <span class="kw">c</span>(<span class="fl">0.25</span>,<span class="fl">0.50</span>,<span class="fl">0.75</span>))</span>
+<span id="cb14-32"><a href="resampling-analysis.html#cb14-32"></a><span class="do">## Get first second and third quartile of effort (number of checklists) across season and elevation</span></span>
+<span id="cb14-33"><a href="resampling-analysis.html#cb14-33"></a>efforts.S <span class="ot">&lt;-</span> <span class="fu">summary</span>(Checklists.S<span class="sc">$</span>elev_level)</span>
+<span id="cb14-34"><a href="resampling-analysis.html#cb14-34"></a>efforts.W <span class="ot">&lt;-</span> <span class="fu">summary</span>(Checklists.W<span class="sc">$</span>elev_level)</span>
+<span id="cb14-35"><a href="resampling-analysis.html#cb14-35"></a>qEffort <span class="ot">&lt;-</span> <span class="fu">quantile</span>(<span class="fu">c</span>(efforts.S, efforts.W), <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.50</span>,<span class="fl">0.75</span>))</span>
 <span id="cb14-36"><a href="resampling-analysis.html#cb14-36"></a></span>
 <span id="cb14-37"><a href="resampling-analysis.html#cb14-37"></a><span class="co"># resample for the lower limit (5th percentile), center (median), and upper limit (95th percentile) for a species elevational distribution</span></span>
-<span id="cb14-38"><a href="resampling-analysis.html#cb14-38"></a><span class="cf">for</span> (qt <span class="cf">in</span> <span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.50</span>, <span class="fl">0.95</span>)) {</span>
+<span id="cb14-38"><a href="resampling-analysis.html#cb14-38"></a><span class="cf">for</span> (qt <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.50</span>, <span class="fl">0.95</span>)) {</span>
 <span id="cb14-39"><a href="resampling-analysis.html#cb14-39"></a>  <span class="co">#resample for the levels of sampling effort</span></span>
-<span id="cb14-40"><a href="resampling-analysis.html#cb14-40"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {</span>
+<span id="cb14-40"><a href="resampling-analysis.html#cb14-40"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
 <span id="cb14-41"><a href="resampling-analysis.html#cb14-41"></a>    </span>
-<span id="cb14-42"><a href="resampling-analysis.html#cb14-42"></a><span class="co">## sample an equal number of checklists (3 levels of effort) from each elevation band </span></span>
-<span id="cb14-43"><a href="resampling-analysis.html#cb14-43"></a><span class="kw">set.seed</span>(<span class="dv">56789</span>)</span>
-<span id="cb14-44"><a href="resampling-analysis.html#cb14-44"></a>sampleID.S &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {<span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) <span class="kw">sample</span>(ID.S[[x]], qEffort[i], <span class="dt">replace=</span>T)))})</span>
-<span id="cb14-45"><a href="resampling-analysis.html#cb14-45"></a><span class="kw">set.seed</span>(<span class="dv">56789</span>)</span>
-<span id="cb14-46"><a href="resampling-analysis.html#cb14-46"></a>sampleID.W &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {<span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) <span class="kw">sample</span>(ID.W[[x]], qEffort[i], <span class="dt">replace=</span>T)))})</span>
+<span id="cb14-42"><a href="resampling-analysis.html#cb14-42"></a><span class="do">## sample an equal number of checklists (3 levels of effort) from each elevation band </span></span>
+<span id="cb14-43"><a href="resampling-analysis.html#cb14-43"></a><span class="fu">set.seed</span>(<span class="dv">56789</span>)</span>
+<span id="cb14-44"><a href="resampling-analysis.html#cb14-44"></a>sampleID.S <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {<span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) <span class="fu">sample</span>(ID.S[[x]], qEffort[i], <span class="at">replace=</span>T)))})</span>
+<span id="cb14-45"><a href="resampling-analysis.html#cb14-45"></a><span class="fu">set.seed</span>(<span class="dv">56789</span>)</span>
+<span id="cb14-46"><a href="resampling-analysis.html#cb14-46"></a>sampleID.W <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {<span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) <span class="fu">sample</span>(ID.W[[x]], qEffort[i], <span class="at">replace=</span>T)))})</span>
 <span id="cb14-47"><a href="resampling-analysis.html#cb14-47"></a></span>
 <span id="cb14-48"><a href="resampling-analysis.html#cb14-48"></a><span class="co"># calculate the lower, median and upper elevation distribution for each bird species in the two seasons</span></span>
 <span id="cb14-49"><a href="resampling-analysis.html#cb14-49"></a></span>
 <span id="cb14-50"><a href="resampling-analysis.html#cb14-50"></a><span class="co"># This step takes awhile</span></span>
 <span id="cb14-51"><a href="resampling-analysis.html#cb14-51"></a><span class="co"># We used parallel processing</span></span>
 <span id="cb14-52"><a href="resampling-analysis.html#cb14-52"></a></span>
-<span id="cb14-53"><a href="resampling-analysis.html#cb14-53"></a>  rs&lt;-<span class="st"> </span><span class="kw">mclapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {</span>
-<span id="cb14-54"><a href="resampling-analysis.html#cb14-54"></a>  m &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">sapply</span>(uniSpe[, <span class="dv">1</span>], <span class="cf">function</span>(x){</span>
-<span id="cb14-55"><a href="resampling-analysis.html#cb14-55"></a>    occs.S &lt;-<span class="st"> </span><span class="kw">subset</span>(datEast, COMMON.NAME <span class="op">==</span>x <span class="op">&amp;</span><span class="st"> </span>group.id <span class="op">%in%</span><span class="st"> </span>sampleID.S[[y]], <span class="dt">select=</span><span class="st">&quot;elevation&quot;</span>)</span>
-<span id="cb14-56"><a href="resampling-analysis.html#cb14-56"></a>    occs.W &lt;-<span class="st"> </span><span class="kw">subset</span>(datEast, COMMON.NAME<span class="op">==</span>x <span class="op">&amp;</span><span class="st"> </span>group.id <span class="op">%in%</span><span class="st"> </span>sampleID.W[[y]], <span class="dt">select=</span><span class="st">&quot;elevation&quot;</span>)</span>
-<span id="cb14-57"><a href="resampling-analysis.html#cb14-57"></a>    B.n &lt;-<span class="st"> </span><span class="kw">nrow</span>(occs.S)</span>
-<span id="cb14-58"><a href="resampling-analysis.html#cb14-58"></a>    W.n &lt;-<span class="st"> </span><span class="kw">nrow</span>(occs.W)</span>
-<span id="cb14-59"><a href="resampling-analysis.html#cb14-59"></a>    B.elev &lt;-<span class="st"> </span><span class="cf">if</span> (B.n <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">quantile</span>(occs.S<span class="op">$</span>elevation, qt) <span class="cf">else</span> <span class="ot">NA</span></span>
-<span id="cb14-60"><a href="resampling-analysis.html#cb14-60"></a>    W.elev &lt;-<span class="st"> </span><span class="cf">if</span> (W.n <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">quantile</span>(occs.W<span class="op">$</span>elevation, qt) <span class="cf">else</span> <span class="ot">NA</span></span>
-<span id="cb14-61"><a href="resampling-analysis.html#cb14-61"></a>    <span class="kw">return</span>(<span class="kw">c</span>(<span class="dt">B.elev =</span> B.elev, <span class="dt">B.n =</span> B.n, <span class="dt">W.elev =</span> W.elev, <span class="dt">W.n =</span> W.n))</span>
+<span id="cb14-53"><a href="resampling-analysis.html#cb14-53"></a>  rs<span class="ot">&lt;-</span> <span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {</span>
+<span id="cb14-54"><a href="resampling-analysis.html#cb14-54"></a>  m <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(uniSpe[, <span class="dv">1</span>], <span class="cf">function</span>(x){</span>
+<span id="cb14-55"><a href="resampling-analysis.html#cb14-55"></a>    occs.S <span class="ot">&lt;-</span> <span class="fu">subset</span>(datEast, COMMON.NAME <span class="sc">==</span>x <span class="sc">&amp;</span> group.id <span class="sc">%in%</span> sampleID.S[[y]], <span class="at">select=</span><span class="st">&quot;elevation&quot;</span>)</span>
+<span id="cb14-56"><a href="resampling-analysis.html#cb14-56"></a>    occs.W <span class="ot">&lt;-</span> <span class="fu">subset</span>(datEast, COMMON.NAME<span class="sc">==</span>x <span class="sc">&amp;</span> group.id <span class="sc">%in%</span> sampleID.W[[y]], <span class="at">select=</span><span class="st">&quot;elevation&quot;</span>)</span>
+<span id="cb14-57"><a href="resampling-analysis.html#cb14-57"></a>    B.n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(occs.S)</span>
+<span id="cb14-58"><a href="resampling-analysis.html#cb14-58"></a>    W.n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(occs.W)</span>
+<span id="cb14-59"><a href="resampling-analysis.html#cb14-59"></a>    B.elev <span class="ot">&lt;-</span> <span class="cf">if</span> (B.n <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">quantile</span>(occs.S<span class="sc">$</span>elevation, qt) <span class="cf">else</span> <span class="cn">NA</span></span>
+<span id="cb14-60"><a href="resampling-analysis.html#cb14-60"></a>    W.elev <span class="ot">&lt;-</span> <span class="cf">if</span> (W.n <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">quantile</span>(occs.W<span class="sc">$</span>elevation, qt) <span class="cf">else</span> <span class="cn">NA</span></span>
+<span id="cb14-61"><a href="resampling-analysis.html#cb14-61"></a>    <span class="fu">return</span>(<span class="fu">c</span>(<span class="at">B.elev =</span> B.elev, <span class="at">B.n =</span> B.n, <span class="at">W.elev =</span> W.elev, <span class="at">W.n =</span> W.n))</span>
 <span id="cb14-62"><a href="resampling-analysis.html#cb14-62"></a>  }))</span>
-<span id="cb14-63"><a href="resampling-analysis.html#cb14-63"></a>}, <span class="dt">mc.cores =</span> <span class="dv">15</span>)</span>
-<span id="cb14-64"><a href="resampling-analysis.html#cb14-64"></a>  <span class="kw">save</span>(rs,<span class="dt">file =</span> <span class="kw">paste0</span>(<span class="st">&quot;eBird_resampled_east_&quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, qt<span class="op">*</span><span class="dv">100</span>),<span class="st">&quot;.q&quot;</span>, i ,<span class="st">&quot;.RData&quot;</span>))</span>
+<span id="cb14-63"><a href="resampling-analysis.html#cb14-63"></a>}, <span class="at">mc.cores =</span> <span class="dv">7</span>)</span>
+<span id="cb14-64"><a href="resampling-analysis.html#cb14-64"></a>  <span class="fu">save</span>(rs,<span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&quot;results/eBird_woNepal_resampled_east_&quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, qt<span class="sc">*</span><span class="dv">100</span>),<span class="st">&quot;.q&quot;</span>, i ,<span class="st">&quot;.RData&quot;</span>))</span>
 <span id="cb14-65"><a href="resampling-analysis.html#cb14-65"></a>  }</span>
 <span id="cb14-66"><a href="resampling-analysis.html#cb14-66"></a>}</span>
 <span id="cb14-67"><a href="resampling-analysis.html#cb14-67"></a></span>
-<span id="cb14-68"><a href="resampling-analysis.html#cb14-68"></a><span class="co">## Repeat the above process for Westenr Himalayas</span></span>
+<span id="cb14-68"><a href="resampling-analysis.html#cb14-68"></a><span class="do">## Repeat the above process for Western Himalayas</span></span>
 <span id="cb14-69"><a href="resampling-analysis.html#cb14-69"></a></span>
-<span id="cb14-70"><a href="resampling-analysis.html#cb14-70"></a>Checklists &lt;-<span class="st"> </span>datWest[<span class="op">!</span><span class="kw">duplicated</span>(datWest<span class="op">$</span>group.id), ]</span>
-<span id="cb14-71"><a href="resampling-analysis.html#cb14-71"></a>Checklists<span class="op">$</span>elev_level &lt;-<span class="st"> </span><span class="kw">cut</span>(Checklists<span class="op">$</span>elevation, <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">2500</span>, <span class="dv">3000</span>, <span class="ot">Inf</span>), <span class="dt">labels =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">7</span>)</span>
-<span id="cb14-72"><a href="resampling-analysis.html#cb14-72"></a>Checklists.S &lt;-<span class="st"> </span><span class="kw">subset</span>(Checklists, month <span class="op">%in%</span><span class="st"> </span><span class="dv">3</span><span class="op">:</span><span class="dv">7</span>)</span>
-<span id="cb14-73"><a href="resampling-analysis.html#cb14-73"></a>Checklists.W &lt;-<span class="st"> </span><span class="kw">subset</span>(Checklists, month <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">11</span>, <span class="dv">12</span>))</span>
+<span id="cb14-70"><a href="resampling-analysis.html#cb14-70"></a>Checklists <span class="ot">&lt;-</span> datWest[<span class="sc">!</span><span class="fu">duplicated</span>(datWest<span class="sc">$</span>group.id), ]</span>
+<span id="cb14-71"><a href="resampling-analysis.html#cb14-71"></a>Checklists<span class="sc">$</span>elev_level <span class="ot">&lt;-</span> <span class="fu">cut</span>(Checklists<span class="sc">$</span>elevation, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">500</span>, <span class="dv">1000</span>, <span class="dv">1500</span>, <span class="dv">2000</span>, <span class="dv">2500</span>, <span class="dv">3000</span>, <span class="cn">Inf</span>), <span class="at">labels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>)</span>
+<span id="cb14-72"><a href="resampling-analysis.html#cb14-72"></a>Checklists.S <span class="ot">&lt;-</span> <span class="fu">subset</span>(Checklists, month <span class="sc">%in%</span> <span class="dv">5</span><span class="sc">:</span><span class="dv">8</span>)</span>
+<span id="cb14-73"><a href="resampling-analysis.html#cb14-73"></a>Checklists.W <span class="ot">&lt;-</span> <span class="fu">subset</span>(Checklists, month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">12</span>))</span>
 <span id="cb14-74"><a href="resampling-analysis.html#cb14-74"></a></span>
-<span id="cb14-75"><a href="resampling-analysis.html#cb14-75"></a>summer &lt;-<span class="st"> </span>Checklists.S <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(elev_level) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">summer =</span> <span class="kw">n_distinct</span>(group.id))</span>
-<span id="cb14-76"><a href="resampling-analysis.html#cb14-76"></a>winter &lt;-<span class="st"> </span>Checklists.W <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(elev_level) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">summarise</span>(<span class="dt">winter =</span> <span class="kw">n_distinct</span>(group.id))</span>
+<span id="cb14-75"><a href="resampling-analysis.html#cb14-75"></a>summer <span class="ot">&lt;-</span> Checklists.S <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(elev_level) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">summer =</span> <span class="fu">n_distinct</span>(group.id))</span>
+<span id="cb14-76"><a href="resampling-analysis.html#cb14-76"></a>winter <span class="ot">&lt;-</span> Checklists.W <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(elev_level) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">winter =</span> <span class="fu">n_distinct</span>(group.id))</span>
 <span id="cb14-77"><a href="resampling-analysis.html#cb14-77"></a></span>
-<span id="cb14-78"><a href="resampling-analysis.html#cb14-78"></a>CL_ES &lt;-<span class="st"> </span><span class="kw">left_join</span>(summer,winter, <span class="dt">by =</span> <span class="st">&quot;elev_level&quot;</span>)</span>
-<span id="cb14-79"><a href="resampling-analysis.html#cb14-79"></a><span class="kw">levels</span>(CL_ES<span class="op">$</span>elev_level) &lt;-<span class="kw">c</span>(<span class="st">&quot;0-500&quot;</span>,<span class="st">&quot;500-1000&quot;</span>,<span class="st">&quot;1000-1500&quot;</span>,<span class="st">&quot;1500-2000&quot;</span>,<span class="st">&quot;2000-2500&quot;</span>,<span class="st">&quot;2500-3000&quot;</span>,<span class="st">&quot;&gt;3000&quot;</span>)</span>
-<span id="cb14-80"><a href="resampling-analysis.html#cb14-80"></a><span class="kw">write.csv</span>(CL_ES, <span class="st">&quot;ChecklistNo_SeasonElevation_West.csv&quot;</span>, <span class="dt">row.names =</span> F )</span>
+<span id="cb14-78"><a href="resampling-analysis.html#cb14-78"></a>CL_ES <span class="ot">&lt;-</span> <span class="fu">left_join</span>(summer,winter, <span class="at">by =</span> <span class="st">&quot;elev_level&quot;</span>)</span>
+<span id="cb14-79"><a href="resampling-analysis.html#cb14-79"></a><span class="fu">levels</span>(CL_ES<span class="sc">$</span>elev_level) <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;0-500&quot;</span>,<span class="st">&quot;500-1000&quot;</span>,<span class="st">&quot;1000-1500&quot;</span>,<span class="st">&quot;1500-2000&quot;</span>,<span class="st">&quot;2000-2500&quot;</span>,<span class="st">&quot;2500-3000&quot;</span>,<span class="st">&quot;&gt;3000&quot;</span>)</span>
+<span id="cb14-80"><a href="resampling-analysis.html#cb14-80"></a><span class="fu">write.csv</span>(CL_ES, <span class="st">&quot;results/ChecklistNo_SeasonElevation_West.csv&quot;</span>, <span class="at">row.names =</span> F )</span>
 <span id="cb14-81"><a href="resampling-analysis.html#cb14-81"></a></span>
-<span id="cb14-82"><a href="resampling-analysis.html#cb14-82"></a>ID.S &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) Checklists.S<span class="op">$</span>group.id[Checklists.S<span class="op">$</span>elev_level <span class="op">==</span><span class="st"> </span>x])</span>
-<span id="cb14-83"><a href="resampling-analysis.html#cb14-83"></a>ID.W &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) Checklists.W<span class="op">$</span>group.id[Checklists.W<span class="op">$</span>elev_level <span class="op">==</span><span class="st"> </span>x])</span>
+<span id="cb14-82"><a href="resampling-analysis.html#cb14-82"></a>ID.S <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) Checklists.S<span class="sc">$</span>group.id[Checklists.S<span class="sc">$</span>elev_level <span class="sc">==</span> x])</span>
+<span id="cb14-83"><a href="resampling-analysis.html#cb14-83"></a>ID.W <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) Checklists.W<span class="sc">$</span>group.id[Checklists.W<span class="sc">$</span>elev_level <span class="sc">==</span> x])</span>
 <span id="cb14-84"><a href="resampling-analysis.html#cb14-84"></a></span>
-<span id="cb14-85"><a href="resampling-analysis.html#cb14-85"></a>uniSpe &lt;-<span class="st"> </span>datWest <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(CATEGORY <span class="op">==</span><span class="st"> &quot;species&quot;</span> <span class="op">|</span><span class="st"> </span>CATEGORY <span class="op">==</span><span class="st"> &quot;issf&quot;</span>)</span>
-<span id="cb14-86"><a href="resampling-analysis.html#cb14-86"></a>uniSpe &lt;-<span class="st"> </span><span class="kw">unique</span>(uniSpe[, <span class="st">&quot;COMMON.NAME&quot;</span>]) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">data.frame</span>()</span>
+<span id="cb14-85"><a href="resampling-analysis.html#cb14-85"></a>uniSpe <span class="ot">&lt;-</span> datWest <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
+<span id="cb14-86"><a href="resampling-analysis.html#cb14-86"></a>uniSpe <span class="ot">&lt;-</span> <span class="fu">unique</span>(uniSpe[, <span class="st">&quot;COMMON.NAME&quot;</span>]) <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
 <span id="cb14-87"><a href="resampling-analysis.html#cb14-87"></a></span>
-<span id="cb14-88"><a href="resampling-analysis.html#cb14-88"></a>efforts.S &lt;-<span class="st"> </span><span class="kw">summary</span>(Checklists.S<span class="op">$</span>elev_level)</span>
-<span id="cb14-89"><a href="resampling-analysis.html#cb14-89"></a>efforts.W &lt;-<span class="st"> </span><span class="kw">summary</span>(Checklists.W<span class="op">$</span>elev_level)</span>
-<span id="cb14-90"><a href="resampling-analysis.html#cb14-90"></a>qEffort &lt;-<span class="st"> </span><span class="kw">quantile</span>(<span class="kw">c</span>(efforts.S, efforts.W), <span class="kw">c</span>(<span class="fl">0.25</span>,<span class="fl">0.50</span>,<span class="fl">0.75</span>))</span>
+<span id="cb14-88"><a href="resampling-analysis.html#cb14-88"></a>efforts.S <span class="ot">&lt;-</span> <span class="fu">summary</span>(Checklists.S<span class="sc">$</span>elev_level)</span>
+<span id="cb14-89"><a href="resampling-analysis.html#cb14-89"></a>efforts.W <span class="ot">&lt;-</span> <span class="fu">summary</span>(Checklists.W<span class="sc">$</span>elev_level)</span>
+<span id="cb14-90"><a href="resampling-analysis.html#cb14-90"></a>qEffort <span class="ot">&lt;-</span> <span class="fu">quantile</span>(<span class="fu">c</span>(efforts.S, efforts.W), <span class="fu">c</span>(<span class="fl">0.25</span>,<span class="fl">0.50</span>,<span class="fl">0.75</span>))</span>
 <span id="cb14-91"><a href="resampling-analysis.html#cb14-91"></a></span>
-<span id="cb14-92"><a href="resampling-analysis.html#cb14-92"></a><span class="cf">for</span> (qt <span class="cf">in</span> <span class="kw">c</span>(<span class="fl">0.05</span>, <span class="fl">0.50</span>, <span class="fl">0.95</span>)) {</span>
-<span id="cb14-93"><a href="resampling-analysis.html#cb14-93"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) {</span>
+<span id="cb14-92"><a href="resampling-analysis.html#cb14-92"></a><span class="cf">for</span> (qt <span class="cf">in</span> <span class="fu">c</span>(<span class="fl">0.05</span>, <span class="fl">0.50</span>, <span class="fl">0.95</span>)) {</span>
+<span id="cb14-93"><a href="resampling-analysis.html#cb14-93"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) {</span>
 <span id="cb14-94"><a href="resampling-analysis.html#cb14-94"></a>    </span>
-<span id="cb14-95"><a href="resampling-analysis.html#cb14-95"></a><span class="kw">set.seed</span>(<span class="dv">56789</span>)</span>
-<span id="cb14-96"><a href="resampling-analysis.html#cb14-96"></a>sampleID.S &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {<span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) <span class="kw">sample</span>(ID.S[[x]], qEffort[i], <span class="dt">replace=</span>T)))})</span>
-<span id="cb14-97"><a href="resampling-analysis.html#cb14-97"></a><span class="kw">set.seed</span>(<span class="dv">56789</span>)</span>
-<span id="cb14-98"><a href="resampling-analysis.html#cb14-98"></a>sampleID.W &lt;-<span class="st"> </span><span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {<span class="kw">unlist</span>(<span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) <span class="kw">sample</span>(ID.W[[x]], qEffort[i], <span class="dt">replace=</span>T)))})</span>
+<span id="cb14-95"><a href="resampling-analysis.html#cb14-95"></a><span class="fu">set.seed</span>(<span class="dv">56789</span>)</span>
+<span id="cb14-96"><a href="resampling-analysis.html#cb14-96"></a>sampleID.S <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {<span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) <span class="fu">sample</span>(ID.S[[x]], qEffort[i], <span class="at">replace=</span>T)))})</span>
+<span id="cb14-97"><a href="resampling-analysis.html#cb14-97"></a><span class="fu">set.seed</span>(<span class="dv">56789</span>)</span>
+<span id="cb14-98"><a href="resampling-analysis.html#cb14-98"></a>sampleID.W <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {<span class="fu">unlist</span>(<span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="cf">function</span>(x) <span class="fu">sample</span>(ID.W[[x]], qEffort[i], <span class="at">replace=</span>T)))})</span>
 <span id="cb14-99"><a href="resampling-analysis.html#cb14-99"></a></span>
-<span id="cb14-100"><a href="resampling-analysis.html#cb14-100"></a>  rs&lt;-<span class="st"> </span><span class="kw">mclapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {</span>
-<span id="cb14-101"><a href="resampling-analysis.html#cb14-101"></a>    m &lt;-<span class="st"> </span><span class="kw">t</span>(<span class="kw">sapply</span>(uniSpe[, <span class="dv">1</span>], <span class="cf">function</span>(x){</span>
-<span id="cb14-102"><a href="resampling-analysis.html#cb14-102"></a>      occs.S &lt;-<span class="st"> </span><span class="kw">subset</span>(datWest, COMMON.NAME <span class="op">==</span>x <span class="op">&amp;</span><span class="st"> </span>group.id <span class="op">%in%</span><span class="st"> </span>sampleID.S[[y]], <span class="dt">select=</span><span class="st">&quot;elevation&quot;</span>)</span>
-<span id="cb14-103"><a href="resampling-analysis.html#cb14-103"></a>      occs.W &lt;-<span class="st"> </span><span class="kw">subset</span>(datWest, COMMON.NAME<span class="op">==</span>x <span class="op">&amp;</span><span class="st"> </span>group.id <span class="op">%in%</span><span class="st"> </span>sampleID.W[[y]], <span class="dt">select=</span><span class="st">&quot;elevation&quot;</span>)</span>
-<span id="cb14-104"><a href="resampling-analysis.html#cb14-104"></a>      B.n &lt;-<span class="st"> </span><span class="kw">nrow</span>(occs.S)</span>
-<span id="cb14-105"><a href="resampling-analysis.html#cb14-105"></a>      W.n &lt;-<span class="st"> </span><span class="kw">nrow</span>(occs.W)</span>
-<span id="cb14-106"><a href="resampling-analysis.html#cb14-106"></a>      B.elev &lt;-<span class="st"> </span><span class="cf">if</span> (B.n <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">quantile</span>(occs.S<span class="op">$</span>elevation, qt) <span class="cf">else</span> <span class="ot">NA</span></span>
-<span id="cb14-107"><a href="resampling-analysis.html#cb14-107"></a>      W.elev &lt;-<span class="st"> </span><span class="cf">if</span> (W.n <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">quantile</span>(occs.W<span class="op">$</span>elevation, qt) <span class="cf">else</span> <span class="ot">NA</span></span>
-<span id="cb14-108"><a href="resampling-analysis.html#cb14-108"></a>      <span class="kw">return</span>(<span class="kw">c</span>(<span class="dt">B.elev =</span> B.elev, <span class="dt">B.n =</span> B.n, <span class="dt">W.elev =</span> W.elev, <span class="dt">W.n =</span> W.n))</span>
+<span id="cb14-100"><a href="resampling-analysis.html#cb14-100"></a>  rs<span class="ot">&lt;-</span> <span class="fu">mclapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>, <span class="cf">function</span>(y) {</span>
+<span id="cb14-101"><a href="resampling-analysis.html#cb14-101"></a>    m <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">sapply</span>(uniSpe[, <span class="dv">1</span>], <span class="cf">function</span>(x){</span>
+<span id="cb14-102"><a href="resampling-analysis.html#cb14-102"></a>      occs.S <span class="ot">&lt;-</span> <span class="fu">subset</span>(datWest, COMMON.NAME <span class="sc">==</span>x <span class="sc">&amp;</span> group.id <span class="sc">%in%</span> sampleID.S[[y]], <span class="at">select=</span><span class="st">&quot;elevation&quot;</span>)</span>
+<span id="cb14-103"><a href="resampling-analysis.html#cb14-103"></a>      occs.W <span class="ot">&lt;-</span> <span class="fu">subset</span>(datWest, COMMON.NAME<span class="sc">==</span>x <span class="sc">&amp;</span> group.id <span class="sc">%in%</span> sampleID.W[[y]], <span class="at">select=</span><span class="st">&quot;elevation&quot;</span>)</span>
+<span id="cb14-104"><a href="resampling-analysis.html#cb14-104"></a>      B.n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(occs.S)</span>
+<span id="cb14-105"><a href="resampling-analysis.html#cb14-105"></a>      W.n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(occs.W)</span>
+<span id="cb14-106"><a href="resampling-analysis.html#cb14-106"></a>      B.elev <span class="ot">&lt;-</span> <span class="cf">if</span> (B.n <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">quantile</span>(occs.S<span class="sc">$</span>elevation, qt) <span class="cf">else</span> <span class="cn">NA</span></span>
+<span id="cb14-107"><a href="resampling-analysis.html#cb14-107"></a>      W.elev <span class="ot">&lt;-</span> <span class="cf">if</span> (W.n <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">quantile</span>(occs.W<span class="sc">$</span>elevation, qt) <span class="cf">else</span> <span class="cn">NA</span></span>
+<span id="cb14-108"><a href="resampling-analysis.html#cb14-108"></a>      <span class="fu">return</span>(<span class="fu">c</span>(<span class="at">B.elev =</span> B.elev, <span class="at">B.n =</span> B.n, <span class="at">W.elev =</span> W.elev, <span class="at">W.n =</span> W.n))</span>
 <span id="cb14-109"><a href="resampling-analysis.html#cb14-109"></a>    }))</span>
-<span id="cb14-110"><a href="resampling-analysis.html#cb14-110"></a>  }, <span class="dt">mc.cores =</span> <span class="dv">15</span> )</span>
-<span id="cb14-111"><a href="resampling-analysis.html#cb14-111"></a>  <span class="kw">save</span>(rs,<span class="dt">file =</span> <span class="kw">paste0</span>(<span class="st">&quot;eBird_resampled_west_&quot;</span>, <span class="kw">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, qt<span class="op">*</span><span class="dv">100</span>),<span class="st">&quot;.q&quot;</span>, i,<span class="st">&quot;.RData&quot;</span>))</span>
+<span id="cb14-110"><a href="resampling-analysis.html#cb14-110"></a>  }, <span class="at">mc.cores =</span> <span class="dv">7</span> )</span>
+<span id="cb14-111"><a href="resampling-analysis.html#cb14-111"></a>  <span class="fu">save</span>(rs,<span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&quot;results/eBird_woNepal_resampled_west_&quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, qt<span class="sc">*</span><span class="dv">100</span>),<span class="st">&quot;.q&quot;</span>, i,<span class="st">&quot;.RData&quot;</span>))</span>
 <span id="cb14-112"><a href="resampling-analysis.html#cb14-112"></a>}</span>
 <span id="cb14-113"><a href="resampling-analysis.html#cb14-113"></a>}</span></code></pre></div>
 
