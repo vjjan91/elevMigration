@@ -33,12 +33,9 @@ The data processing for this project is described in the following sections. Nav
 Please contact the following in case of interest in the project.
 
 - Vijay Ramesh (repo maintainer)
-    - PhD student, Columbia University
+    - Postdoctoral Fellow, Cornell Lab of Ornithology
 
 ## Data access
 
 The data used in this work is archived on Zenodo.  
 ---
-
-![**Spatially thinned checklist locations of bird observations across the Himalayas.**
-Map showing sampling points included in our dataset for elevational migration in Himalayan birds. For ease of visualization, we spatially thinned localities to show only 710 unique locations, by ensuring a minimum distance of fifteen kilometres between each checklist locality. This process was carried using the thin function from the spThin package within the R programming environment (Aiello-Lammens et al., 2019; R Core Team, 2021). This map was created in ArcGIS Pro with a shaded relief from a high-resolution digital elevation model (SRTM).](figs/fig01.png)
