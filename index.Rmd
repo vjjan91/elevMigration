@@ -2,9 +2,9 @@
 knit: "bookdown::render_book"
 title: "Source code for _High elevation Himalayan birds shift elevations to track thermal regimes across seasons_"
 author:
-    - Sahas Barve
     - Tarun Menon
     - Vijay Ramesh
+    - Sahas Barve
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: 
