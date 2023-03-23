@@ -55,7 +55,6 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   write.csv(glsdata, file = paste("results/east_ordered",ds,".csv", sep = ""), row.names = F)
   write.csv(compile_eastmodels, "results/compile_eastmodels.csv", row.names = F)
 }
-
 ```
 
 ## PGLS models for the Western Himalayas
@@ -93,13 +92,10 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   write.csv(glsdata, file = paste("results/west_ordered",ds,".csv", sep = ""), row.names = F)
   write.csv(compile_westmodels, "results/compile_westmodels.csv", row.names = F)
 }
-
 ```
 
 ## Phylogenetic paired t-test
-
 ```{r}
-
 diff_ttest<-setNames(data.frame(matrix(ncol = 3, nrow = 0)), c("t", "df", "pvalue"))
 niche_ttest<-setNames(data.frame(matrix(ncol = 3, nrow = 0)), c("t", "df", "pvalue"))
 
@@ -122,5 +118,4 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   write.csv(diff_ttest, "results/diff_ttest.csv", row.names = F)
   write.csv(niche_ttest, "results/niche_ttest.csv", row.names = F)
 }
-
 ```

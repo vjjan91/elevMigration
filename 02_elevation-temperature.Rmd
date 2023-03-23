@@ -105,7 +105,6 @@ chelsaWest <- purrr::map(chelsaFiles, function(chr){
   return(a)
 })
 
-
 # Divide temperature values by 10 for east
 chelsaEast[[1]] <- chelsaEast[[1]]/10
 chelsaEast[[2]] <- chelsaEast[[2]]/10
@@ -222,4 +221,3 @@ fig_climate_elevWest <- ggplot(envWest)+
 ggsave(fig_climate_elevWest, filename = "figs/fig_westHim_elev100.png", 
        height = 10, width = 14, device = png(), dpi = 300, units="in"); dev.off()
 ```
-

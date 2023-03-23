@@ -24,18 +24,18 @@ github-repo: vjjan91/elevMigration
 
 This is the readable version containing analysis that models the extent of elevational migration in Himalayan birds using community science data (eBird).   
 
-## Data processing
+### Data processing
 
 The data processing for this project is described in the following sections. Navigate through them using the links in the sidebar.
 
-## Attribution
+### Attribution
 
 Please contact the following in case of interest in the project.
 
 - Vijay Ramesh (repo maintainer)
     - Postdoctoral Fellow, Cornell Lab of Ornithology
 
-## Data access
+### Data access
 
 The data used in this work is archived on Zenodo.  
 ---

@@ -19,7 +19,7 @@ library(tidyverse)
 library(phangorn)
 ```
 
-# load previously generated .Rdata files for analyses
+## Load previously generated .Rdata files for analyses
 
 ```{r}
 load("results/eBird_elev.RData")
