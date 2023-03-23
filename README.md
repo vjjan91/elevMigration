@@ -3,7 +3,7 @@
 <!-- badges: start -->
 
   [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6545050.svg)](https://doi.org/10.5281/zenodo.6545050)
+  [![DOI](https://zenodo.org/badge/353883213.svg)](https://zenodo.org/badge/latestdoi/353883213)
 
 <!-- badges: end -->
 
@@ -63,7 +63,7 @@ This folder contains outputs that were obtained by running the above scripts.
 
 To cite this repository:     
 
-Vijay Ramesh, Tarun Menon, Sahas Barve (2023). _Source code and Supplementary material for "High elevation Himalayan birds shift elevations to track thermal regimes across seasons"_ (v1.1). Zenodo. https://doi.org/10.5281/zenodo.6545050. 
+Vijay Ramesh, Tarun Menon, Sahas Barve (2023). _Source code and Supplementary material for "High elevation Himalayan birds shift elevations to track thermal regimes across seasons"_ (v1.3). Zenodo. https://doi.org/10.5281/zenodo.7762131. 
 
 ## Contact information
 
