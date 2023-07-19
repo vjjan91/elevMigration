@@ -45,17 +45,20 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   x<-left_join(x, sheard_trait, by = "Tree.name")%>% mutate(Diet = fct_recode(Diet, "omnivore" = "nectar", "omnivore" = "scav", "seeds"="plants"))
   pruned.tree<-drop.tip(tree1,tree1$tip.label[-match(x$Tree.name, tree1$tip.label)])
   glsdata<-x[match(pruned.tree$tip.label, x$Tree.name),]
-  pgls2<-gls(Median_diff~ThermalRegime+HWI+Diet,correlation=corPagel(1,pruned.tree),data=glsdata)
+ pgls2<-gls(Median_diff~ThermalRegime+HWI+relevel(Diet, ref = "invertebrates"),correlation=corPagel(1,pruned.tree),data=glsdata)
   k<-summary(pgls2)
   outputk<-as.data.frame(k$tTable)
   outputk$dataset<-ds
   outputk$Variable<-rownames(outputk)
   compile_eastmodels<-rbind(compile_eastmodels,outputk)
   
-  write.csv(glsdata, file = paste("results/east_ordered",ds,".csv", sep = ""), row.names = F)
   write.csv(compile_eastmodels, "results/compile_eastmodels.csv", row.names = F)
 }
 
+east_p<-read.csv("results/compile_eastmodels.csv")
+east_p$adjP<-p.adjust(east_p$p.value, method = "fdr")
+
+write.csv(east_p, "results/compile_eastmodels_padj.csv")
 ```
 
 
@@ -85,16 +88,20 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   x<-left_join(x, sheard_trait, by = "Tree.name")%>% mutate(Diet = fct_recode(Diet, "omnivore" = "nectar", "omnivore" = "scav", "seeds"="plants"))
   pruned.tree<-drop.tip(tree1,tree1$tip.label[-match(x$Tree.name, tree1$tip.label)])
   glsdata<-x[match(pruned.tree$tip.label, x$Tree.name),]
-  pgls2<-gls(Median_diff~ThermalRegime+HWI+Diet,correlation=corPagel(1,pruned.tree),data=glsdata)
+  pgls2<-gls(Median_diff~ThermalRegime+HWI+relevel(Diet, ref = "invertebrates"),correlation=corPagel(1,pruned.tree),data=glsdata)
   k<-summary(pgls2)
   outputk<-as.data.frame(k$tTable)
   outputk$dataset<-ds
   outputk$Variable<-rownames(outputk)
   compile_westmodels<-rbind(compile_westmodels,outputk)
   
-  write.csv(glsdata, file = paste("results/west_ordered",ds,".csv", sep = ""), row.names = F)
   write.csv(compile_westmodels, "results/compile_westmodels.csv", row.names = F)
 }
+
+west_p<-read.csv("results/compile_westmodels.csv")
+west_p$adjP<-p.adjust(west_p$p.value, method = "fdr")
+
+write.csv(east_p, "results/compile_westmodels_padj.csv")
 
 ```
 
