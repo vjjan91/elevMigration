@@ -19,7 +19,7 @@ library(tidyverse)
 library(phangorn)
 ```
 
-# load previously generated .Rdata files for analyses
+## Load previously generated .Rdata files for analyses
 
 ```{r}
 load("results/eBird_elev.RData")
@@ -34,7 +34,6 @@ dat1W<-dat.1 %>% filter (LONGITUDE < 83)
 dat1E<-dat.1 %>% filter (LONGITUDE > 83)
 rm(dat.1)
 ```
-
 
 ## Eastern Himalayas
 ```{r}
@@ -113,7 +112,6 @@ for (minSample in c(30, 60)) {
     write.csv(ts, file = paste("results/final_birdlist_east_",ds,".sam",minSample, ".csv", sep = ""), row.names = F)
   }
 }
-
 ```
 
 ## Western Himalayas
@@ -188,8 +186,5 @@ for (minSample in c(30, 60)) {
     write.csv(ts, file = paste("results/final_birdlist_west",ds,".sam",minSample, ".csv", sep = ""), row.names = F)
   }
 }
-
 ```
 
-![**Elevational shift in the eastern and western Himalayas**
-Elevational shift in the eastern Himalayas (A) and western Himalayas (B). Figures show species estimates (at high sampling effort) of median summer elevations (orange circles) in descending order and their respective median winter elevations (teal triangles). Errors bars indicate 95% confidence intervals estimated from the resampling protocol.](figs/fig02.jpg)

@@ -3,14 +3,13 @@
 <!-- badges: start -->
 
   [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6545050.svg)](https://doi.org/10.5281/zenodo.6545050)
+  [![DOI](https://zenodo.org/badge/353883213.svg)](https://zenodo.org/badge/latestdoi/353883213)
 
 <!-- badges: end -->
 
 This repository contains code and analysis for a manuscript that uses citizen science data to study elevational migration in Himalayan birds.
 
 ## [Readable version](https://vjjan91.github.io/elevMigration/)  
-
 A readable version of this analysis is available in bookdown format by clicking on the heading above.  
 
 ## Source code for the analyses
@@ -19,7 +18,7 @@ We describe what each script (`.Rmd`) of this repository is intended to achieve 
 
 - _01_spatial-thinning.Rmd:_. In this script, we spatially thin a list of localities for the sake of mapping and creating a representative figure of checklist locations for the eastern and Western Himalayas.
 
-- _02_elevation-temperature.Rmd:_. In this script, we extracted minimum and maximum temperature for the months of January and June across every 100 m elevational band for both the eastern and western Himalayas.  
+- _02_elevation-temperature.Rmd:_. In this script, we extracted minimum and maximum temperature for the months of January and June across every 100 m elevational band for both the eastern and western Himalayas.    
 
 - _03_eBird-data-processing.Rmd:_. Here, we processed the [eBird](https://ebird.org/home) by applying a number of filters.   
 
@@ -52,7 +51,7 @@ Please download the eBird sampling and EBD dataset from https://ebird.org/home p
 
 ### Climate and elevation data
 
-Please note that none of this data is uploaded to GitHub as a result of the size of the datasets.  
+Please note that none of this data is uploaded to GitHub as a result of the size of the datasets. This data can be accessed from [CHELSA](https://chelsa-climate.org/) and [WorldClim](https://www.worldclim.org/) respectively.    
  
 
 ## Results
@@ -64,11 +63,11 @@ This folder contains outputs that were obtained by running the above scripts.
 
 To cite this repository:     
 
-Vijay Ramesh, Tarun Menon, Sahas Barve (2022). _Source code and Supplementary material for "High elevation Himalayan birds shift elevations to track thermal regimes across seasons"_ (v1.1). Zenodo. https://doi.org/10.5281/zenodo.6545050. 
+Vijay Ramesh, Tarun Menon, Sahas Barve (2023). _Source code and Supplementary material for "High elevation Himalayan birds shift elevations to track thermal regimes across seasons"_ (v1.3). Zenodo. https://doi.org/10.5281/zenodo.7762131. 
 
 ## Contact information
 
 Please contact the following in case of interest.  
 
 [Vijay Ramesh (repo maintainer)](https://evolecol.weebly.com/)  
-PhD student, Columbia University  
+Postdoctoral Fellow, Cornell Lab of Ornithology  

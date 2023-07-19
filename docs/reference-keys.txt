@@ -23,11 +23,9 @@ load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations
 create-resampled-datasets
 extent-of-elevational-migration
 load-necessary-libraries-3
+load-previously-generated-.rdata-files-for-analyses
 eastern-himalayas
 western-himalayas
-geometric-constaints
-calculations-across-multiple-levels-of-sampling-effort
-absolute-shift-summer-elevational-distribution
 phylogenetic-generalized-least-squares-regressions
 remove-non-himalayan-species
 pgls-models-for-the-eastern-himalayas

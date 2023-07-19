@@ -6,11 +6,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Page not found | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons</title>
   <meta name="description" content="Page not found | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
-  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Page not found | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
   <meta property="og:type" content="book" />
-  
   
   
   <meta name="github-repo" content="vjjan91/elevMigration" />
@@ -21,12 +20,12 @@
   
   
 
-<meta name="author" content="Sahas Barve" />
 <meta name="author" content="Tarun Menon" />
 <meta name="author" content="Vijay Ramesh" />
+<meta name="author" content="Sahas Barve" />
 
 
-<meta name="date" content="2022-05-14" />
+<meta name="date" content="2023-03-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,24 +51,24 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
-<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 
 
 <style type="text/css">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -89,13 +88,13 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {   }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -108,7 +107,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -136,17 +135,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.2</b> Attribution</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.3</b> Data access</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#the-data-used-in-this-work-is-archived-on-zenodo."><i class="fa fa-check"></i><b>1.4</b> The data used in this work is archived on Zenodo.</a></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.0.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.0.1</b> Data processing</a></li>
+<li class="chapter" data-level="1.0.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.0.2</b> Attribution</a></li>
+<li class="chapter" data-level="1.0.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.0.3</b> Data access</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-data-used-in-this-work-is-archived-on-zenodo."><i class="fa fa-check"></i><b>1.1</b> The data used in this work is archived on Zenodo.</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a><ul>
+<li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
 <li class="chapter" data-level="2.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a><ul>
+<li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-necessary-libraries-1"><i class="fa fa-check"></i><b>3.1</b> Load necessary libraries</a></li>
 <li class="chapter" data-level="3.2" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#load-shapefiles"><i class="fa fa-check"></i><b>3.2</b> Load shapefiles</a></li>
 <li class="chapter" data-level="3.3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#prepare-elevation-rasters"><i class="fa fa-check"></i><b>3.3</b> Prepare elevation rasters</a></li>
@@ -154,30 +156,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.5" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#extracting-data-across-elevational-bands"><i class="fa fa-check"></i><b>3.5</b> Extracting data across elevational bands</a></li>
 <li class="chapter" data-level="3.6" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html#plot-temperature-as-a-function-of-elevation"><i class="fa fa-check"></i><b>3.6</b> Plot temperature as a function of elevation</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html"><i class="fa fa-check"></i><b>4</b> Processing eBird data</a><ul>
+<li class="chapter" data-level="4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html"><i class="fa fa-check"></i><b>4</b> Processing eBird data</a>
+<ul>
 <li class="chapter" data-level="4.1" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#load-necessary-libraries-2"><i class="fa fa-check"></i><b>4.1</b> Load necessary libraries</a></li>
 <li class="chapter" data-level="4.2" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#loading-custom-functions-to-process-ebird-data"><i class="fa fa-check"></i><b>4.2</b> Loading custom functions to process eBird data</a></li>
 <li class="chapter" data-level="4.3" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#use-the-function-written-above-to-extract-ebird-data"><i class="fa fa-check"></i><b>4.3</b> Use the function written above to extract eBird data</a></li>
 <li class="chapter" data-level="4.4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html#extract-elevation-at-unique-locations"><i class="fa fa-check"></i><b>4.4</b> Extract elevation at unique locations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="resampling-analysis.html"><a href="resampling-analysis.html"><i class="fa fa-check"></i><b>5</b> Resampling analysis</a><ul>
+<li class="chapter" data-level="5" data-path="resampling-analysis.html"><a href="resampling-analysis.html"><i class="fa fa-check"></i><b>5</b> Resampling analysis</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="resampling-analysis.html"><a href="resampling-analysis.html#load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations"><i class="fa fa-check"></i><b>5.1</b> Load .Rdata file containing elevation data across eBird sampling locations</a></li>
 <li class="chapter" data-level="5.2" data-path="resampling-analysis.html"><a href="resampling-analysis.html#create-resampled-datasets"><i class="fa fa-check"></i><b>5.2</b> Create resampled datasets</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html"><i class="fa fa-check"></i><b>6</b> Extent of elevational migration</a><ul>
+<li class="chapter" data-level="6" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html"><i class="fa fa-check"></i><b>6</b> Extent of elevational migration</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#load-necessary-libraries-3"><i class="fa fa-check"></i><b>6.1</b> Load necessary libraries</a></li>
-<li class="chapter" data-level="6.2" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#eastern-himalayas"><i class="fa fa-check"></i><b>6.2</b> Eastern Himalayas</a></li>
-<li class="chapter" data-level="6.3" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#western-himalayas"><i class="fa fa-check"></i><b>6.3</b> Western Himalayas</a></li>
+<li class="chapter" data-level="6.2" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#load-previously-generated-.rdata-files-for-analyses"><i class="fa fa-check"></i><b>6.2</b> Load previously generated .Rdata files for analyses</a></li>
+<li class="chapter" data-level="6.3" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#eastern-himalayas"><i class="fa fa-check"></i><b>6.3</b> Eastern Himalayas</a></li>
+<li class="chapter" data-level="6.4" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html#western-himalayas"><i class="fa fa-check"></i><b>6.4</b> Western Himalayas</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="geometric-constaints.html"><a href="geometric-constaints.html"><i class="fa fa-check"></i><b>7</b> Geometric constaints</a><ul>
-<li class="chapter" data-level="7.1" data-path="geometric-constaints.html"><a href="geometric-constaints.html#calculations-across-multiple-levels-of-sampling-effort"><i class="fa fa-check"></i><b>7.1</b> Calculations across multiple levels of sampling effort</a></li>
-<li class="chapter" data-level="7.2" data-path="geometric-constaints.html"><a href="geometric-constaints.html#absolute-shift-summer-elevational-distribution"><i class="fa fa-check"></i><b>7.2</b> Absolute shift ~ Summer Elevational Distribution</a></li>
-</ul></li>
-<li class="chapter" data-level="8" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html"><i class="fa fa-check"></i><b>8</b> Phylogenetic generalized least squares regressions</a><ul>
-<li class="chapter" data-level="8.1" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#remove-non-himalayan-species"><i class="fa fa-check"></i><b>8.1</b> Remove non-Himalayan species</a></li>
-<li class="chapter" data-level="8.2" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-eastern-himalayas"><i class="fa fa-check"></i><b>8.2</b> PGLS models for the Eastern Himalayas</a></li>
-<li class="chapter" data-level="8.3" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-western-himalayas"><i class="fa fa-check"></i><b>8.3</b> PGLS models for the Western Himalayas</a></li>
-<li class="chapter" data-level="8.4" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#phylogenetic-paired-t-test"><i class="fa fa-check"></i><b>8.4</b> Phylogenetic paired t-test</a></li>
+<li class="chapter" data-level="7" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic generalized least squares regressions</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#remove-non-himalayan-species"><i class="fa fa-check"></i><b>7.1</b> Remove non-Himalayan species</a></li>
+<li class="chapter" data-level="7.2" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-eastern-himalayas"><i class="fa fa-check"></i><b>7.2</b> PGLS models for the Eastern Himalayas</a></li>
+<li class="chapter" data-level="7.3" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-western-himalayas"><i class="fa fa-check"></i><b>7.3</b> PGLS models for the Western Himalayas</a></li>
+<li class="chapter" data-level="7.4" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#phylogenetic-paired-t-test"><i class="fa fa-check"></i><b>7.4</b> Phylogenetic paired t-test</a></li>
 </ul></li>
 </ul>
 
