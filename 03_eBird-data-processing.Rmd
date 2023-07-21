@@ -13,7 +13,6 @@ library(tidyverse)
 library(sf)
 library(raster)
 library(parallel)
-
 ```
 
 ## Loading custom functions to process eBird data
