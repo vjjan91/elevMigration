@@ -5,7 +5,7 @@ editor_options:
 
 # Phylogenetic generalized least squares regressions
 
-Here, we used a phylogenetic generalized least squares regression to test if thermal regime, dispersal ability, and diet significantly drive Himalayan bird elevational shift.  
+Here, we used phylogenetic generalized least squares regression to test if thermal regime, dispersal ability, and diet significantly drive Himalayan bird elevational shift.  
 
 ## Remove non-Himalayan species
 ```{r}
@@ -62,8 +62,6 @@ east_p$adjP<-p.adjust(east_p$p.value, method = "fdr")
 write.csv(east_p, "results/compile_eastmodels_padj.csv")
 ```
 
-
-
 ## PGLS models for the Western Himalayas
 ```{r}
 for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.sam30","05.q3.sam60", "95.q1.sam30","95.q1.sam60", "95.q2.sam30","95.q2.sam60" ,"95.q3.sam30","95.q3.sam60" ,"50.q1.sam30","50.q1.sam60" ,"50.q2.sam30","50.q2.sam60" ,"50.q3.sam30", "50.q3.sam60")) {
@@ -108,9 +106,7 @@ write.csv(east_p, "results/compile_westmodels_padj.csv")
 ```
 
 ## Phylogenetic paired t-test
-
 ```{r}
-
 diff_ttest<-setNames(data.frame(matrix(ncol = 3, nrow = 0)), c("t", "df", "pvalue"))
 niche_ttest<-setNames(data.frame(matrix(ncol = 3, nrow = 0)), c("t", "df", "pvalue"))
 
@@ -133,14 +129,4 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   write.csv(diff_ttest, "results/diff_ttest.csv", row.names = F)
   write.csv(niche_ttest, "results/niche_ttest.csv", row.names = F)
 }
-
 ```
-
-![**Determinants of elevational shift**
-Determinants of elevational shift in east Himalayan birds (top panel) and western Himalayan birds (bottom panel). Asterisks denote significant (P<0.05) differences. Dots represent model estimate and errors bars denote standard errors for PGLS models used in the comparative analyses. Color of the dot represents sampling effort (light grey: low, dark grey: medium and black: high). Figure represents PGLS model exploring elevational shift at the lower, medianmedian, and upper limits as driven by life history variables (Thermal Regime (TR), Dispersal ability (HWI) and Diet (INV=invertivores, OMN=omnivores, SED=seed eaters, VRT=vertivores)). Within diet classes, reference level is frugivorous diet. ](figs/fig04.jpg)  
-
-
-
-
-![**Phylogenetic paired t-test**
-For common species in across the east and the west, A) Seasonal elevational shift is not different in the east (black circles) and the west (blue triangles) (Phylogenetic paired t-test, P<0.001). B) Thermal regime is narrower in the east (black circles) for all species compared to the west (blue triangles) (P<0.001).](figs/fig05.jpg)  

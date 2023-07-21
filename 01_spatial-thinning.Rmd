@@ -9,7 +9,6 @@ In this script, we spatially thin occurrence data for creating Figure 1.
 
 ## Load necessary libraries
 ```{r}
-# load libraries
 library(sf)
 library(dplyr)
 library(spThin)
@@ -17,7 +16,6 @@ library(spThin)
 
 ## Load data
 ```{r}
-# load sheet of all localties
 loc <- read.csv("data/localities-for-map.csv")
 head(loc)
 

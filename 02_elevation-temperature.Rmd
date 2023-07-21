@@ -1,9 +1,6 @@
 ---
 editor_options:
   chunk_output_type: console
-output:
-  html_document:
-    df_print: paged
 ---
 
 # Temperature-elevation associations  

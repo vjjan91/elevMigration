@@ -18,7 +18,7 @@ library(parallel)
 
 ## Loading custom functions to process eBird data
 ```{r}
-# This function processes the ebird data as long as the path where the data is stored and list of countries are mentioned 
+# This function processes the eBird data as long as the path where the data is stored and list of countries are mentioned 
 
 readcleanrawdata = function(rawpath)
 {
@@ -77,7 +77,6 @@ readcleanrawdata = function(rawpath)
   
   return(data)
 }
-
 ```
 
 ## Use the function written above to extract eBird data
@@ -88,21 +87,18 @@ readcleanrawdata = function(rawpath)
 
 # extract data for the following list of countries
 
-Bhutan<-readcleanrawdata("ebd_BT_relAug-2022.txt")
-India<-rbind(readcleanrawdata("ebd_IN-JK_relAug-2022.txt"), readcleanrawdata("ebd_IN-LA_relAug-2022.txt"), readcleanrawdata("ebd_IN-HP_relAug-2022.txt"), readcleanrawdata("ebd_IN-AR_relAug-2022.txt"), readcleanrawdata("ebd_IN-WB_relAug-2022.txt"), readcleanrawdata("ebd_IN-UL_relAug-2022.txt"), readcleanrawdata("ebd_IN-SK_relAug-2022.txt"))
+Bhutan <- readcleanrawdata("ebd_BT_relAug-2022.txt")
+India <- rbind(readcleanrawdata("ebd_IN-JK_relAug-2022.txt"), readcleanrawdata("ebd_IN-LA_relAug-2022.txt"), readcleanrawdata("ebd_IN-HP_relAug-2022.txt"), readcleanrawdata("ebd_IN-AR_relAug-2022.txt"), readcleanrawdata("ebd_IN-WB_relAug-2022.txt"), readcleanrawdata("ebd_IN-UL_relAug-2022.txt"), readcleanrawdata("ebd_IN-SK_relAug-2022.txt"))
 
 ## Removing non himalayan regions
 India<-India %>% filter(LATITUDE>26,LONGITUDE<100)
 
 dat <-rbind(India,Bhutan)
 
-
-
 # Keep only unique locations used
 
 datll<-dat%>% filter(month %in% c(1,2,5,6,7,8,12)) %>% distinct(LATITUDE,LONGITUDE, .keep_all = T)%>%select(LOCALITY.ID,LATITUDE,LONGITUDE)
 write.csv(datll, "results/unique_loc.csv", row.names = F)
-
 ```
 
 ## Extract elevation at unique locations
