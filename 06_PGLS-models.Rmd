@@ -52,6 +52,7 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   outputk$Variable<-rownames(outputk)
   compile_eastmodels<-rbind(compile_eastmodels,outputk)
   
+  write.csv(glsdata, file = paste("results/east_ordered",ds,".csv", sep = ""), row.names = F)
   write.csv(compile_eastmodels, "results/compile_eastmodels.csv", row.names = F)
 }
 
@@ -95,6 +96,7 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   outputk$Variable<-rownames(outputk)
   compile_westmodels<-rbind(compile_westmodels,outputk)
   
+  write.csv(glsdata, file = paste("results/west_ordered",ds,".csv", sep = ""), row.names = F)
   write.csv(compile_westmodels, "results/compile_westmodels.csv", row.names = F)
 }
 
