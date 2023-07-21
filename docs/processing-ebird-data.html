@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 4 Processing eBird data | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons</title>
-  <meta name="description" content="Section 4 Processing eBird data | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <title>Section 4 Processing eBird data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <meta name="description" content="Section 4 Processing eBird data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 4 Processing eBird data | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta property="og:title" content="Section 4 Processing eBird data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 4 Processing eBird data | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta name="twitter:title" content="Section 4 Processing eBird data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
   
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Sahas Barve" />
 
 
-<meta name="date" content="2023-03-23" />
+<meta name="date" content="2023-07-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -121,6 +121,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,10 +141,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.0.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.0.1</b> Data processing</a></li>
-<li class="chapter" data-level="1.0.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.0.2</b> Attribution</a></li>
-<li class="chapter" data-level="1.0.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.0.3</b> Data access</a></li>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-data-used-in-this-work-is-archived-on-zenodo."><i class="fa fa-check"></i><b>1.1</b> The data used in this work is archived on Zenodo.</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.2</b> Attribution</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.3</b> Data access</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
 <ul>
@@ -191,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>High elevation Himalayan birds shift elevations to track thermal regimes across seasons</em></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</em></a>
           </h1>
         </div>
 
@@ -211,7 +214,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="loading-custom-functions-to-process-ebird-data" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Loading custom functions to process eBird data<a href="processing-ebird-data.html#loading-custom-functions-to-process-ebird-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb10-1"><a href="processing-ebird-data.html#cb10-1"></a><span class="co"># This function processes the ebird data as long as the path where the data is stored and list of countries are mentioned </span></span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb10-1"><a href="processing-ebird-data.html#cb10-1"></a><span class="co"># This function processes the eBird data as long as the path where the data is stored and list of countries are mentioned </span></span>
 <span id="cb10-2"><a href="processing-ebird-data.html#cb10-2"></a></span>
 <span id="cb10-3"><a href="processing-ebird-data.html#cb10-3"></a>readcleanrawdata <span class="ot">=</span> <span class="cf">function</span>(rawpath)</span>
 <span id="cb10-4"><a href="processing-ebird-data.html#cb10-4"></a>{</span>
@@ -279,8 +282,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-4"><a href="processing-ebird-data.html#cb11-4"></a></span>
 <span id="cb11-5"><a href="processing-ebird-data.html#cb11-5"></a><span class="co"># extract data for the following list of countries</span></span>
 <span id="cb11-6"><a href="processing-ebird-data.html#cb11-6"></a></span>
-<span id="cb11-7"><a href="processing-ebird-data.html#cb11-7"></a>Bhutan<span class="ot">&lt;-</span><span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_BT_relAug-2022.txt&quot;</span>)</span>
-<span id="cb11-8"><a href="processing-ebird-data.html#cb11-8"></a>India<span class="ot">&lt;-</span><span class="fu">rbind</span>(<span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-JK_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-LA_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-HP_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-AR_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-WB_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-UL_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-SK_relAug-2022.txt&quot;</span>))</span>
+<span id="cb11-7"><a href="processing-ebird-data.html#cb11-7"></a>Bhutan <span class="ot">&lt;-</span> <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_BT_relAug-2022.txt&quot;</span>)</span>
+<span id="cb11-8"><a href="processing-ebird-data.html#cb11-8"></a>India <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-JK_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-LA_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-HP_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-AR_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-WB_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-UL_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-SK_relAug-2022.txt&quot;</span>))</span>
 <span id="cb11-9"><a href="processing-ebird-data.html#cb11-9"></a></span>
 <span id="cb11-10"><a href="processing-ebird-data.html#cb11-10"></a><span class="do">## Removing non himalayan regions</span></span>
 <span id="cb11-11"><a href="processing-ebird-data.html#cb11-11"></a>India<span class="ot">&lt;-</span>India <span class="sc">%&gt;%</span> <span class="fu">filter</span>(LATITUDE<span class="sc">&gt;</span><span class="dv">26</span>,LONGITUDE<span class="sc">&lt;</span><span class="dv">100</span>)</span>
@@ -288,8 +291,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-13"><a href="processing-ebird-data.html#cb11-13"></a>dat <span class="ot">&lt;-</span><span class="fu">rbind</span>(India,Bhutan)</span>
 <span id="cb11-14"><a href="processing-ebird-data.html#cb11-14"></a></span>
 <span id="cb11-15"><a href="processing-ebird-data.html#cb11-15"></a><span class="co"># Keep only unique locations used</span></span>
-<span id="cb11-16"><a href="processing-ebird-data.html#cb11-16"></a>datll<span class="ot">&lt;-</span>dat<span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">12</span>)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(LATITUDE,LONGITUDE, <span class="at">.keep_all =</span> T)<span class="sc">%&gt;%</span><span class="fu">select</span>(LOCALITY.ID,LATITUDE,LONGITUDE)</span>
-<span id="cb11-17"><a href="processing-ebird-data.html#cb11-17"></a><span class="fu">write.csv</span>(datll, <span class="st">&quot;results/unique_loc.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
+<span id="cb11-16"><a href="processing-ebird-data.html#cb11-16"></a></span>
+<span id="cb11-17"><a href="processing-ebird-data.html#cb11-17"></a>datll<span class="ot">&lt;-</span>dat<span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">12</span>)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(LATITUDE,LONGITUDE, <span class="at">.keep_all =</span> T)<span class="sc">%&gt;%</span><span class="fu">select</span>(LOCALITY.ID,LATITUDE,LONGITUDE)</span>
+<span id="cb11-18"><a href="processing-ebird-data.html#cb11-18"></a><span class="fu">write.csv</span>(datll, <span class="st">&quot;results/unique_loc.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
 </div>
 <div id="extract-elevation-at-unique-locations" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Extract elevation at unique locations<a href="processing-ebird-data.html#extract-elevation-at-unique-locations" class="anchor-section" aria-label="Anchor link to header"></a></h2>

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 3 Temperature-elevation associations | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons</title>
-  <meta name="description" content="Section 3 Temperature-elevation associations | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <title>Section 3 Temperature-elevation associations | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <meta name="description" content="Section 3 Temperature-elevation associations | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 3 Temperature-elevation associations | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta property="og:title" content="Section 3 Temperature-elevation associations | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 3 Temperature-elevation associations | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta name="twitter:title" content="Section 3 Temperature-elevation associations | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
   
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Sahas Barve" />
 
 
-<meta name="date" content="2023-03-23" />
+<meta name="date" content="2023-07-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -121,6 +121,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,10 +141,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.0.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.0.1</b> Data processing</a></li>
-<li class="chapter" data-level="1.0.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.0.2</b> Attribution</a></li>
-<li class="chapter" data-level="1.0.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.0.3</b> Data access</a></li>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-data-used-in-this-work-is-archived-on-zenodo."><i class="fa fa-check"></i><b>1.1</b> The data used in this work is archived on Zenodo.</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.2</b> Attribution</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.3</b> Data access</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
 <ul>
@@ -191,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>High elevation Himalayan birds shift elevations to track thermal regimes across seasons</em></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</em></a>
           </h1>
         </div>
 
@@ -207,30 +210,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb3-1"><a href="temperature-elevation-associations.html#cb3-1"></a><span class="fu">library</span>(raster)</span>
 <span id="cb3-2"><a href="temperature-elevation-associations.html#cb3-2"></a><span class="fu">library</span>(stringi)</span>
 <span id="cb3-3"><a href="temperature-elevation-associations.html#cb3-3"></a><span class="fu">library</span>(glue)</span>
-<span id="cb3-4"><a href="temperature-elevation-associations.html#cb3-4"></a><span class="do">## devtools:::install_github(&quot;gearslaboratory/gdalUtils&quot;)</span></span>
-<span id="cb3-5"><a href="temperature-elevation-associations.html#cb3-5"></a><span class="fu">library</span>(gdalUtils)</span>
-<span id="cb3-6"><a href="temperature-elevation-associations.html#cb3-6"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb3-7"><a href="temperature-elevation-associations.html#cb3-7"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-8"><a href="temperature-elevation-associations.html#cb3-8"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb3-9"><a href="temperature-elevation-associations.html#cb3-9"></a><span class="fu">library</span>(scales)</span>
-<span id="cb3-10"><a href="temperature-elevation-associations.html#cb3-10"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-11"><a href="temperature-elevation-associations.html#cb3-11"></a><span class="fu">library</span>(ggthemes)</span>
-<span id="cb3-12"><a href="temperature-elevation-associations.html#cb3-12"></a><span class="fu">library</span>(sf)</span>
-<span id="cb3-13"><a href="temperature-elevation-associations.html#cb3-13"></a><span class="fu">library</span>(mapview)</span>
-<span id="cb3-14"><a href="temperature-elevation-associations.html#cb3-14"></a><span class="fu">library</span>(rgeos)</span>
-<span id="cb3-15"><a href="temperature-elevation-associations.html#cb3-15"></a></span>
-<span id="cb3-16"><a href="temperature-elevation-associations.html#cb3-16"></a><span class="co"># get ci func</span></span>
-<span id="cb3-17"><a href="temperature-elevation-associations.html#cb3-17"></a>ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span><span class="fu">sd</span>(x, <span class="at">na.rm =</span> T)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x))}</span>
-<span id="cb3-18"><a href="temperature-elevation-associations.html#cb3-18"></a></span>
-<span id="cb3-19"><a href="temperature-elevation-associations.html#cb3-19"></a><span class="co"># prep mode function to aggregate</span></span>
-<span id="cb3-20"><a href="temperature-elevation-associations.html#cb3-20"></a>funcMode <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> T) {</span>
-<span id="cb3-21"><a href="temperature-elevation-associations.html#cb3-21"></a>  ux <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
-<span id="cb3-22"><a href="temperature-elevation-associations.html#cb3-22"></a>  ux[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, ux)))]</span>
-<span id="cb3-23"><a href="temperature-elevation-associations.html#cb3-23"></a>}</span>
-<span id="cb3-24"><a href="temperature-elevation-associations.html#cb3-24"></a></span>
-<span id="cb3-25"><a href="temperature-elevation-associations.html#cb3-25"></a><span class="co"># a basic test</span></span>
-<span id="cb3-26"><a href="temperature-elevation-associations.html#cb3-26"></a>assertthat<span class="sc">::</span><span class="fu">assert_that</span>(<span class="fu">funcMode</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)) <span class="sc">==</span> <span class="fu">as.character</span>(<span class="dv">2</span>), </span>
-<span id="cb3-27"><a href="temperature-elevation-associations.html#cb3-27"></a>                        <span class="at">msg =</span> <span class="st">&quot;problem in the mode function&quot;</span>) <span class="co"># works</span></span></code></pre></div>
+<span id="cb3-4"><a href="temperature-elevation-associations.html#cb3-4"></a><span class="fu">library</span>(gdalUtils)</span>
+<span id="cb3-5"><a href="temperature-elevation-associations.html#cb3-5"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb3-6"><a href="temperature-elevation-associations.html#cb3-6"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-7"><a href="temperature-elevation-associations.html#cb3-7"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb3-8"><a href="temperature-elevation-associations.html#cb3-8"></a><span class="fu">library</span>(scales)</span>
+<span id="cb3-9"><a href="temperature-elevation-associations.html#cb3-9"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-10"><a href="temperature-elevation-associations.html#cb3-10"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb3-11"><a href="temperature-elevation-associations.html#cb3-11"></a><span class="fu">library</span>(sf)</span>
+<span id="cb3-12"><a href="temperature-elevation-associations.html#cb3-12"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb3-13"><a href="temperature-elevation-associations.html#cb3-13"></a><span class="fu">library</span>(rgeos)</span>
+<span id="cb3-14"><a href="temperature-elevation-associations.html#cb3-14"></a></span>
+<span id="cb3-15"><a href="temperature-elevation-associations.html#cb3-15"></a><span class="co"># get ci func</span></span>
+<span id="cb3-16"><a href="temperature-elevation-associations.html#cb3-16"></a>ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span><span class="fu">sd</span>(x, <span class="at">na.rm =</span> T)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x))}</span>
+<span id="cb3-17"><a href="temperature-elevation-associations.html#cb3-17"></a></span>
+<span id="cb3-18"><a href="temperature-elevation-associations.html#cb3-18"></a><span class="co"># prep mode function to aggregate</span></span>
+<span id="cb3-19"><a href="temperature-elevation-associations.html#cb3-19"></a>funcMode <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> T) {</span>
+<span id="cb3-20"><a href="temperature-elevation-associations.html#cb3-20"></a>  ux <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb3-21"><a href="temperature-elevation-associations.html#cb3-21"></a>  ux[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, ux)))]</span>
+<span id="cb3-22"><a href="temperature-elevation-associations.html#cb3-22"></a>}</span>
+<span id="cb3-23"><a href="temperature-elevation-associations.html#cb3-23"></a></span>
+<span id="cb3-24"><a href="temperature-elevation-associations.html#cb3-24"></a><span class="co"># a basic test</span></span>
+<span id="cb3-25"><a href="temperature-elevation-associations.html#cb3-25"></a>assertthat<span class="sc">::</span><span class="fu">assert_that</span>(<span class="fu">funcMode</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)) <span class="sc">==</span> <span class="fu">as.character</span>(<span class="dv">2</span>), </span>
+<span id="cb3-26"><a href="temperature-elevation-associations.html#cb3-26"></a>                        <span class="at">msg =</span> <span class="st">&quot;problem in the mode function&quot;</span>) <span class="co"># works</span></span></code></pre></div>
 </div>
 <div id="load-shapefiles" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Load shapefiles<a href="temperature-elevation-associations.html#load-shapefiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -240,18 +242,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-4"><a href="temperature-elevation-associations.html#cb4-4"></a><span class="fu">mapview</span>(himalayas)</span>
 <span id="cb4-5"><a href="temperature-elevation-associations.html#cb4-5"></a></span>
 <span id="cb4-6"><a href="temperature-elevation-associations.html#cb4-6"></a><span class="co"># Need to merge a few polygons to essentially split himalayas into the west and the east</span></span>
-<span id="cb4-7"><a href="temperature-elevation-associations.html#cb4-7"></a><span class="co"># We exclude Nepal in this version</span></span>
+<span id="cb4-7"><a href="temperature-elevation-associations.html#cb4-7"></a><span class="co"># This will have to be done at 83E for Nepal</span></span>
 <span id="cb4-8"><a href="temperature-elevation-associations.html#cb4-8"></a></span>
 <span id="cb4-9"><a href="temperature-elevation-associations.html#cb4-9"></a><span class="co"># Merge polygons for western himalayas</span></span>
-<span id="cb4-10"><a href="temperature-elevation-associations.html#cb4-10"></a>west_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>),]</span>
+<span id="cb4-10"><a href="temperature-elevation-associations.html#cb4-10"></a>west_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>),]</span>
 <span id="cb4-11"><a href="temperature-elevation-associations.html#cb4-11"></a>westHim <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(west_toMerge,<span class="at">xmin=</span><span class="fl">68.03321</span>,<span class="at">ymin=</span><span class="fl">23.69771</span>,<span class="at">xmax=</span><span class="dv">83</span>,<span class="at">ymax=</span><span class="fl">37.07761</span>)</span>
 <span id="cb4-12"><a href="temperature-elevation-associations.html#cb4-12"></a></span>
 <span id="cb4-13"><a href="temperature-elevation-associations.html#cb4-13"></a><span class="co"># Merge polygons for eastern himalayas</span></span>
-<span id="cb4-14"><a href="temperature-elevation-associations.html#cb4-14"></a>east_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>),]</span>
-<span id="cb4-15"><a href="temperature-elevation-associations.html#cb4-15"></a>east_toMerge <span class="ot">&lt;-</span> <span class="fu">st_make_valid</span>(east_toMerge)</span>
-<span id="cb4-16"><a href="temperature-elevation-associations.html#cb4-16"></a>sf<span class="sc">::</span><span class="fu">sf_use_s2</span>(<span class="cn">FALSE</span>)</span>
-<span id="cb4-17"><a href="temperature-elevation-associations.html#cb4-17"></a>east_toMerge <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(east_toMerge, <span class="at">dist=</span><span class="dv">0</span>)</span>
-<span id="cb4-18"><a href="temperature-elevation-associations.html#cb4-18"></a>eastHim <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(east_toMerge,<span class="at">xmin=</span><span class="dv">83</span>,<span class="at">ymin=</span><span class="fl">25.96462</span>,<span class="at">xmax=</span><span class="fl">97.4115</span>,<span class="at">ymax=</span><span class="fl">30.44728</span>)</span></code></pre></div>
+<span id="cb4-14"><a href="temperature-elevation-associations.html#cb4-14"></a>east_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">10</span>),]</span>
+<span id="cb4-15"><a href="temperature-elevation-associations.html#cb4-15"></a>east_toMerge <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(east_toMerge, <span class="at">dist=</span><span class="dv">0</span>)</span>
+<span id="cb4-16"><a href="temperature-elevation-associations.html#cb4-16"></a>eastHim <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(east_toMerge,<span class="at">xmin=</span><span class="dv">83</span>,<span class="at">ymin=</span><span class="fl">25.96462</span>,<span class="at">xmax=</span><span class="fl">97.4115</span>,<span class="at">ymax=</span><span class="fl">30.44728</span>)</span></code></pre></div>
 </div>
 <div id="prepare-elevation-rasters" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Prepare elevation rasters<a href="temperature-elevation-associations.html#prepare-elevation-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -283,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-8"><a href="temperature-elevation-associations.html#cb6-8"></a></span>
 <span id="cb6-9"><a href="temperature-elevation-associations.html#cb6-9"></a><span class="co"># gather chelsa data over the east</span></span>
 <span id="cb6-10"><a href="temperature-elevation-associations.html#cb6-10"></a>chelsaEast <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(chelsaFiles, <span class="cf">function</span>(chr){</span>
-<span id="cb6-11"><a href="temperature-elevation-associations.html#cb6-11"></a>  a <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">raster</span>(chr)</span>
+<span id="cb6-11"><a href="temperature-elevation-associations.html#cb6-11"></a>  a <span class="ot">&lt;-</span> <span class="fu">raster</span>(chr)</span>
 <span id="cb6-12"><a href="temperature-elevation-associations.html#cb6-12"></a>  <span class="fu">crs</span>(a) <span class="ot">&lt;-</span> <span class="fu">crs</span>(elevEast)</span>
 <span id="cb6-13"><a href="temperature-elevation-associations.html#cb6-13"></a>  a <span class="ot">&lt;-</span> <span class="fu">crop</span>(a, <span class="fu">as</span>(eastHim, <span class="st">&quot;Spatial&quot;</span>))</span>
 <span id="cb6-14"><a href="temperature-elevation-associations.html#cb6-14"></a>  <span class="fu">return</span>(a)</span>
@@ -297,39 +297,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-22"><a href="temperature-elevation-associations.html#cb6-22"></a>  <span class="fu">return</span>(a)</span>
 <span id="cb6-23"><a href="temperature-elevation-associations.html#cb6-23"></a>})</span>
 <span id="cb6-24"><a href="temperature-elevation-associations.html#cb6-24"></a></span>
-<span id="cb6-25"><a href="temperature-elevation-associations.html#cb6-25"></a><span class="co"># Divide temperature values by 10 for east</span></span>
-<span id="cb6-26"><a href="temperature-elevation-associations.html#cb6-26"></a>chelsaEast[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-27"><a href="temperature-elevation-associations.html#cb6-27"></a>chelsaEast[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-28"><a href="temperature-elevation-associations.html#cb6-28"></a>chelsaEast[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-29"><a href="temperature-elevation-associations.html#cb6-29"></a>chelsaEast[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-30"><a href="temperature-elevation-associations.html#cb6-30"></a></span>
-<span id="cb6-31"><a href="temperature-elevation-associations.html#cb6-31"></a><span class="co"># Divide temperature values by 10 for the west</span></span>
-<span id="cb6-32"><a href="temperature-elevation-associations.html#cb6-32"></a>chelsaWest[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-33"><a href="temperature-elevation-associations.html#cb6-33"></a>chelsaWest[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-34"><a href="temperature-elevation-associations.html#cb6-34"></a>chelsaWest[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-35"><a href="temperature-elevation-associations.html#cb6-35"></a>chelsaWest[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-36"><a href="temperature-elevation-associations.html#cb6-36"></a></span>
-<span id="cb6-37"><a href="temperature-elevation-associations.html#cb6-37"></a><span class="co"># stack chelsa data for the east and west</span></span>
-<span id="cb6-38"><a href="temperature-elevation-associations.html#cb6-38"></a>chelsaEast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaEast)</span>
-<span id="cb6-39"><a href="temperature-elevation-associations.html#cb6-39"></a>chelsaWest <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaWest)</span>
-<span id="cb6-40"><a href="temperature-elevation-associations.html#cb6-40"></a></span>
-<span id="cb6-41"><a href="temperature-elevation-associations.html#cb6-41"></a><span class="do">### Stack prepared rasters</span></span>
-<span id="cb6-42"><a href="temperature-elevation-associations.html#cb6-42"></a><span class="co"># stack rasters for efficient reprojection later</span></span>
-<span id="cb6-43"><a href="temperature-elevation-associations.html#cb6-43"></a>env_east <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevEast, chelsaEast)</span>
-<span id="cb6-44"><a href="temperature-elevation-associations.html#cb6-44"></a>env_west <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevWest, chelsaWest)</span>
-<span id="cb6-45"><a href="temperature-elevation-associations.html#cb6-45"></a></span>
-<span id="cb6-46"><a href="temperature-elevation-associations.html#cb6-46"></a><span class="co"># get proper names</span></span>
-<span id="cb6-47"><a href="temperature-elevation-associations.html#cb6-47"></a>elev_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, <span class="st">&quot;slope&quot;</span>, <span class="st">&quot;aspect&quot;</span>)</span>
-<span id="cb6-48"><a href="temperature-elevation-associations.html#cb6-48"></a>chelsa_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;maxTemp_Jan&quot;</span>, <span class="st">&quot;maxTemp_June&quot;</span>,<span class="st">&quot;minTemp_Jan&quot;</span>,<span class="st">&quot;minTemp_June&quot;</span>)</span>
-<span id="cb6-49"><a href="temperature-elevation-associations.html#cb6-49"></a></span>
-<span id="cb6-50"><a href="temperature-elevation-associations.html#cb6-50"></a><span class="fu">names</span>(env_east) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span>
-<span id="cb6-51"><a href="temperature-elevation-associations.html#cb6-51"></a><span class="fu">names</span>(env_west) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span></code></pre></div>
+<span id="cb6-25"><a href="temperature-elevation-associations.html#cb6-25"></a></span>
+<span id="cb6-26"><a href="temperature-elevation-associations.html#cb6-26"></a><span class="co"># Divide temperature values by 10 for east</span></span>
+<span id="cb6-27"><a href="temperature-elevation-associations.html#cb6-27"></a>chelsaEast[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-28"><a href="temperature-elevation-associations.html#cb6-28"></a>chelsaEast[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-29"><a href="temperature-elevation-associations.html#cb6-29"></a>chelsaEast[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-30"><a href="temperature-elevation-associations.html#cb6-30"></a>chelsaEast[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-31"><a href="temperature-elevation-associations.html#cb6-31"></a></span>
+<span id="cb6-32"><a href="temperature-elevation-associations.html#cb6-32"></a><span class="co"># Divide temperature values by 10 for the west</span></span>
+<span id="cb6-33"><a href="temperature-elevation-associations.html#cb6-33"></a>chelsaWest[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-34"><a href="temperature-elevation-associations.html#cb6-34"></a>chelsaWest[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-35"><a href="temperature-elevation-associations.html#cb6-35"></a>chelsaWest[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-36"><a href="temperature-elevation-associations.html#cb6-36"></a>chelsaWest[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-37"><a href="temperature-elevation-associations.html#cb6-37"></a></span>
+<span id="cb6-38"><a href="temperature-elevation-associations.html#cb6-38"></a><span class="co"># stack chelsa data for the east and west</span></span>
+<span id="cb6-39"><a href="temperature-elevation-associations.html#cb6-39"></a>chelsaEast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaEast)</span>
+<span id="cb6-40"><a href="temperature-elevation-associations.html#cb6-40"></a>chelsaWest <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaWest)</span>
+<span id="cb6-41"><a href="temperature-elevation-associations.html#cb6-41"></a></span>
+<span id="cb6-42"><a href="temperature-elevation-associations.html#cb6-42"></a><span class="do">### Stack prepared rasters</span></span>
+<span id="cb6-43"><a href="temperature-elevation-associations.html#cb6-43"></a><span class="co"># stack rasters for efficient reprojection later</span></span>
+<span id="cb6-44"><a href="temperature-elevation-associations.html#cb6-44"></a>env_east <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevEast, chelsaEast)</span>
+<span id="cb6-45"><a href="temperature-elevation-associations.html#cb6-45"></a>env_west <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevWest, chelsaWest)</span>
+<span id="cb6-46"><a href="temperature-elevation-associations.html#cb6-46"></a></span>
+<span id="cb6-47"><a href="temperature-elevation-associations.html#cb6-47"></a><span class="co"># get proper names</span></span>
+<span id="cb6-48"><a href="temperature-elevation-associations.html#cb6-48"></a>elev_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, <span class="st">&quot;slope&quot;</span>, <span class="st">&quot;aspect&quot;</span>)</span>
+<span id="cb6-49"><a href="temperature-elevation-associations.html#cb6-49"></a>chelsa_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;maxTemp_Jan&quot;</span>, <span class="st">&quot;maxTemp_June&quot;</span>,<span class="st">&quot;minTemp_Jan&quot;</span>,<span class="st">&quot;minTemp_June&quot;</span>)</span>
+<span id="cb6-50"><a href="temperature-elevation-associations.html#cb6-50"></a></span>
+<span id="cb6-51"><a href="temperature-elevation-associations.html#cb6-51"></a><span class="fu">names</span>(env_east) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span>
+<span id="cb6-52"><a href="temperature-elevation-associations.html#cb6-52"></a><span class="fu">names</span>(env_west) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span></code></pre></div>
 </div>
 <div id="extracting-data-across-elevational-bands" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Extracting data across elevational bands<a href="temperature-elevation-associations.html#extracting-data-across-elevational-bands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb7-1"><a href="temperature-elevation-associations.html#cb7-1"></a><span class="co"># make duplicate stack</span></span>
 <span id="cb7-2"><a href="temperature-elevation-associations.html#cb7-2"></a>envEast <span class="ot">&lt;-</span> env_east[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
-<span id="cb7-3"><a href="temperature-elevation-associations.html#cb7-3"></a>envWest <span class="ot">&lt;-</span> env_west[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
+<span id="cb7-3"><a href="temperature-elevation-associations.html#cb7-3"></a>envWest <span class="ot">&lt;-</span> env_West[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
 <span id="cb7-4"><a href="temperature-elevation-associations.html#cb7-4"></a></span>
 <span id="cb7-5"><a href="temperature-elevation-associations.html#cb7-5"></a><span class="co"># convert to list</span></span>
 <span id="cb7-6"><a href="temperature-elevation-associations.html#cb7-6"></a>envEast <span class="ot">&lt;-</span> <span class="fu">as.list</span>(envEast)</span>
@@ -362,8 +363,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-33"><a href="temperature-elevation-associations.html#cb7-33"></a>         <span class="at">tempRange_June =</span> (maxTemp_June_mean <span class="sc">-</span> minTemp_June_mean))</span>
 <span id="cb7-34"><a href="temperature-elevation-associations.html#cb7-34"></a></span>
 <span id="cb7-35"><a href="temperature-elevation-associations.html#cb7-35"></a><span class="co"># Write results to a .csv</span></span>
-<span id="cb7-36"><a href="temperature-elevation-associations.html#cb7-36"></a>west_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(envWest,<span class="st">&quot;results/westHim_100.csv&quot;</span>, <span class="at">row.names =</span> F)</span>
-<span id="cb7-37"><a href="temperature-elevation-associations.html#cb7-37"></a>east_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(envEast,<span class="st">&quot;results/eastHim_100.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
+<span id="cb7-36"><a href="temperature-elevation-associations.html#cb7-36"></a>west_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/westHim_100.csv&quot;</span>, <span class="at">row.names =</span> F) </span>
+<span id="cb7-37"><a href="temperature-elevation-associations.html#cb7-37"></a>east_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/eastHim_100.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
 </div>
 <div id="plot-temperature-as-a-function-of-elevation" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Plot temperature as a function of elevation<a href="temperature-elevation-associations.html#plot-temperature-as-a-function-of-elevation" class="anchor-section" aria-label="Anchor link to header"></a></h2>

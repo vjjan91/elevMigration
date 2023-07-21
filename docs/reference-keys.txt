@@ -2,7 +2,6 @@ introduction
 data-processing
 attribution
 data-access
-the-data-used-in-this-work-is-archived-on-zenodo.
 spatial-thinning-of-occurrence-data
 load-necessary-libraries
 load-data

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 7 Phylogenetic generalized least squares regressions | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons</title>
-  <meta name="description" content="Section 7 Phylogenetic generalized least squares regressions | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
-  <meta name="generator" content="bookdown 0.27 and GitBook 2.6.7" />
+  <title>Section 7 Phylogenetic generalized least squares regressions | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <meta name="description" content="Section 7 Phylogenetic generalized least squares regressions | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 7 Phylogenetic generalized least squares regressions | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta property="og:title" content="Section 7 Phylogenetic generalized least squares regressions | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 7 Phylogenetic generalized least squares regressions | Source code for High elevation Himalayan birds shift elevations to track thermal regimes across seasons" />
+  <meta name="twitter:title" content="Section 7 Phylogenetic generalized least squares regressions | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
   
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Sahas Barve" />
 
 
-<meta name="date" content="2023-03-23" />
+<meta name="date" content="2023-07-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -121,6 +121,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -137,10 +141,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul class="summary">
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.0.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.0.1</b> Data processing</a></li>
-<li class="chapter" data-level="1.0.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.0.2</b> Attribution</a></li>
-<li class="chapter" data-level="1.0.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.0.3</b> Data access</a></li>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-data-used-in-this-work-is-archived-on-zenodo."><i class="fa fa-check"></i><b>1.1</b> The data used in this work is archived on Zenodo.</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#attribution"><i class="fa fa-check"></i><b>1.2</b> Attribution</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#data-access"><i class="fa fa-check"></i><b>1.3</b> Data access</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
 <ul>
@@ -191,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>High elevation Himalayan birds shift elevations to track thermal regimes across seasons</em></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</em></a>
           </h1>
         </div>
 
@@ -201,7 +204,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="phylogenetic-generalized-least-squares-regressions" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">Section 7</span> Phylogenetic generalized least squares regressions<a href="phylogenetic-generalized-least-squares-regressions.html#phylogenetic-generalized-least-squares-regressions" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Here, we used a phylogenetic generalized least squares regression to test if thermal regime, dispersal ability, and diet significantly drive Himalayan bird elevational shift.</p>
+<p>Here, we used phylogenetic generalized least squares regression to test if thermal regime, dispersal ability, and diet significantly drive Himalayan bird elevational shift.</p>
 <div id="remove-non-himalayan-species" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Remove non-Himalayan species<a href="phylogenetic-generalized-least-squares-regressions.html#remove-non-himalayan-species" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb19-1"><a href="phylogenetic-generalized-least-squares-regressions.html#cb19-1"></a><span class="co"># first we remove species that are non-Himalayan</span></span>
@@ -239,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-28"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-28"></a>  x<span class="ot">&lt;-</span><span class="fu">left_join</span>(x, sheard_trait, <span class="at">by =</span> <span class="st">&quot;Tree.name&quot;</span>)<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Diet =</span> <span class="fu">fct_recode</span>(Diet, <span class="st">&quot;omnivore&quot;</span> <span class="ot">=</span> <span class="st">&quot;nectar&quot;</span>, <span class="st">&quot;omnivore&quot;</span> <span class="ot">=</span> <span class="st">&quot;scav&quot;</span>, <span class="st">&quot;seeds&quot;</span><span class="ot">=</span><span class="st">&quot;plants&quot;</span>))</span>
 <span id="cb20-29"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-29"></a>  pruned.tree<span class="ot">&lt;-</span><span class="fu">drop.tip</span>(tree1,tree1<span class="sc">$</span>tip.label[<span class="sc">-</span><span class="fu">match</span>(x<span class="sc">$</span>Tree.name, tree1<span class="sc">$</span>tip.label)])</span>
 <span id="cb20-30"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-30"></a>  glsdata<span class="ot">&lt;-</span>x[<span class="fu">match</span>(pruned.tree<span class="sc">$</span>tip.label, x<span class="sc">$</span>Tree.name),]</span>
-<span id="cb20-31"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-31"></a>  pgls2<span class="ot">&lt;-</span><span class="fu">gls</span>(Median_diff<span class="sc">~</span>ThermalRegime<span class="sc">+</span>HWI<span class="sc">+</span>Diet,<span class="at">correlation=</span><span class="fu">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="at">data=</span>glsdata)</span>
+<span id="cb20-31"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-31"></a> pgls2<span class="ot">&lt;-</span><span class="fu">gls</span>(Median_diff<span class="sc">~</span>ThermalRegime<span class="sc">+</span>HWI<span class="sc">+</span><span class="fu">relevel</span>(Diet, <span class="at">ref =</span> <span class="st">&quot;invertebrates&quot;</span>),<span class="at">correlation=</span><span class="fu">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="at">data=</span>glsdata)</span>
 <span id="cb20-32"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-32"></a>  k<span class="ot">&lt;-</span><span class="fu">summary</span>(pgls2)</span>
 <span id="cb20-33"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-33"></a>  outputk<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(k<span class="sc">$</span>tTable)</span>
 <span id="cb20-34"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-34"></a>  outputk<span class="sc">$</span>dataset<span class="ot">&lt;-</span>ds</span>
@@ -248,7 +251,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-37"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-37"></a>  </span>
 <span id="cb20-38"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-38"></a>  <span class="fu">write.csv</span>(glsdata, <span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;results/east_ordered&quot;</span>,ds,<span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">row.names =</span> F)</span>
 <span id="cb20-39"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-39"></a>  <span class="fu">write.csv</span>(compile_eastmodels, <span class="st">&quot;results/compile_eastmodels.csv&quot;</span>, <span class="at">row.names =</span> F)</span>
-<span id="cb20-40"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-40"></a>}</span></code></pre></div>
+<span id="cb20-40"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-40"></a>}</span>
+<span id="cb20-41"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-41"></a></span>
+<span id="cb20-42"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-42"></a>east_p<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;results/compile_eastmodels.csv&quot;</span>)</span>
+<span id="cb20-43"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-43"></a>east_p<span class="sc">$</span>adjP<span class="ot">&lt;-</span><span class="fu">p.adjust</span>(east_p<span class="sc">$</span>p.value, <span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb20-44"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-44"></a></span>
+<span id="cb20-45"><a href="phylogenetic-generalized-least-squares-regressions.html#cb20-45"></a><span class="fu">write.csv</span>(east_p, <span class="st">&quot;results/compile_eastmodels_padj.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="pgls-models-for-the-western-himalayas" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> PGLS models for the Western Himalayas<a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-western-himalayas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -275,7 +283,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-21"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-21"></a>  x<span class="ot">&lt;-</span><span class="fu">left_join</span>(x, sheard_trait, <span class="at">by =</span> <span class="st">&quot;Tree.name&quot;</span>)<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Diet =</span> <span class="fu">fct_recode</span>(Diet, <span class="st">&quot;omnivore&quot;</span> <span class="ot">=</span> <span class="st">&quot;nectar&quot;</span>, <span class="st">&quot;omnivore&quot;</span> <span class="ot">=</span> <span class="st">&quot;scav&quot;</span>, <span class="st">&quot;seeds&quot;</span><span class="ot">=</span><span class="st">&quot;plants&quot;</span>))</span>
 <span id="cb21-22"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-22"></a>  pruned.tree<span class="ot">&lt;-</span><span class="fu">drop.tip</span>(tree1,tree1<span class="sc">$</span>tip.label[<span class="sc">-</span><span class="fu">match</span>(x<span class="sc">$</span>Tree.name, tree1<span class="sc">$</span>tip.label)])</span>
 <span id="cb21-23"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-23"></a>  glsdata<span class="ot">&lt;-</span>x[<span class="fu">match</span>(pruned.tree<span class="sc">$</span>tip.label, x<span class="sc">$</span>Tree.name),]</span>
-<span id="cb21-24"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-24"></a>  pgls2<span class="ot">&lt;-</span><span class="fu">gls</span>(Median_diff<span class="sc">~</span>ThermalRegime<span class="sc">+</span>HWI<span class="sc">+</span>Diet,<span class="at">correlation=</span><span class="fu">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="at">data=</span>glsdata)</span>
+<span id="cb21-24"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-24"></a>  pgls2<span class="ot">&lt;-</span><span class="fu">gls</span>(Median_diff<span class="sc">~</span>ThermalRegime<span class="sc">+</span>HWI<span class="sc">+</span><span class="fu">relevel</span>(Diet, <span class="at">ref =</span> <span class="st">&quot;invertebrates&quot;</span>),<span class="at">correlation=</span><span class="fu">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="at">data=</span>glsdata)</span>
 <span id="cb21-25"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-25"></a>  k<span class="ot">&lt;-</span><span class="fu">summary</span>(pgls2)</span>
 <span id="cb21-26"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-26"></a>  outputk<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(k<span class="sc">$</span>tTable)</span>
 <span id="cb21-27"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-27"></a>  outputk<span class="sc">$</span>dataset<span class="ot">&lt;-</span>ds</span>
@@ -284,7 +292,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb21-30"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-30"></a>  </span>
 <span id="cb21-31"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-31"></a>  <span class="fu">write.csv</span>(glsdata, <span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;results/west_ordered&quot;</span>,ds,<span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">row.names =</span> F)</span>
 <span id="cb21-32"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-32"></a>  <span class="fu">write.csv</span>(compile_westmodels, <span class="st">&quot;results/compile_westmodels.csv&quot;</span>, <span class="at">row.names =</span> F)</span>
-<span id="cb21-33"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-33"></a>}</span></code></pre></div>
+<span id="cb21-33"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-33"></a>}</span>
+<span id="cb21-34"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-34"></a></span>
+<span id="cb21-35"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-35"></a>west_p<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;results/compile_westmodels.csv&quot;</span>)</span>
+<span id="cb21-36"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-36"></a>west_p<span class="sc">$</span>adjP<span class="ot">&lt;-</span><span class="fu">p.adjust</span>(west_p<span class="sc">$</span>p.value, <span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb21-37"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-37"></a></span>
+<span id="cb21-38"><a href="phylogenetic-generalized-least-squares-regressions.html#cb21-38"></a><span class="fu">write.csv</span>(east_p, <span class="st">&quot;results/compile_westmodels_padj.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="phylogenetic-paired-t-test" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Phylogenetic paired t-test<a href="phylogenetic-generalized-least-squares-regressions.html#phylogenetic-paired-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
