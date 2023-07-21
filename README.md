@@ -1,4 +1,4 @@
-## Source code for _High elevation Himalayan birds shift elevations to track thermal regimes across seasons_
+## Source code for _Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons_
 
 <!-- badges: start -->
 
