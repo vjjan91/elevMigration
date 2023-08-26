@@ -38,8 +38,8 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   x<-read.csv(paste("results/birdlist_east", ds, ".csv", sep = ""))
   x$elev_roundS<-round(x$Median_S,-2)
   x$elev_roundW<-round(x$Median_W,-2)
-  x<-left_join(x,west_100_S, by = "elev_roundS")
-  x<-left_join(x,west_100_W, by = "elev_roundW")
+  x<-left_join(x,east_100_S, by = "elev_roundS")
+  x<-left_join(x,east_100_W, by = "elev_roundW")
   x$ThermalRegime<-x$maxTemp_June_mean-x$minTemp_Jan_mean
   x<-left_join(x,jetzname, by = "Species")
   x<-left_join(x, sheard_trait, by = "Tree.name")%>% mutate(Diet = fct_recode(Diet, "omnivore" = "nectar", "omnivore" = "scav", "seeds"="plants"))
