@@ -4,7 +4,8 @@ bookdown::gitbook:
   split_by: section
   config:
     toc:
-      collapse: none
+      collapse: section
+      after: null
       before: |
         <li><a href="./">Himalayan bird elevational migration</a></li>
       after: |
@@ -13,6 +14,8 @@ bookdown::gitbook:
     sharing:
       github: yes
       facebook: no
-      
+
+collapse: section
+      after: null      
 bookdown::html_chapters:
   css: [css/style.css, css/toc.css]
