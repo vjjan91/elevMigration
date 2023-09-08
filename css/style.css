@@ -32,7 +32,7 @@ blockquote > p:first-child {
 .level1 h1 {
   border-bottom: 1px solid;
 }
-h1, h2, h3, h4, h5, h6 {
+h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 h1.title {

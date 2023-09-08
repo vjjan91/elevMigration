@@ -7,14 +7,14 @@ editor_options:
 
 In this script, we spatially thin occurrence data for creating Figure 1. 
 
-### Load necessary libraries
+## Load necessary libraries
 ```{r}
 library(sf)
 library(dplyr)
 library(spThin)
 ```
 
-### Load data
+## Load data
 ```{r}
 loc <- read.csv("data/localities-for-map.csv")
 head(loc)
