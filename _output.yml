@@ -1,7 +1,7 @@
 bookdown::gitbook:
   dev: svglite
   css: css/style.css
-  split_by: section
+  code_folding: show
   config:
     toc:
       collapse: none
