@@ -5,7 +5,6 @@ bookdown::gitbook:
   config:
     toc:
       collapse: section
-      after: null
       before: |
         <li><a href="./">Himalayan bird elevational migration</a></li>
       after: |
