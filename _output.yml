@@ -14,7 +14,5 @@ bookdown::gitbook:
       github: yes
       facebook: no
 
-collapse: section
-      after: null      
 bookdown::html_chapters:
   css: [css/style.css, css/toc.css]
