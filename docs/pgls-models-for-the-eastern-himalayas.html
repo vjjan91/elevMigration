@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="pgls-models-for-the-eastern-himalayas" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> PGLS models for the Eastern Himalayas<a href="pgls-models-for-the-eastern-himalayas.html#pgls-models-for-the-eastern-himalayas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb20-1"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-1"></a><span class="cf">for</span> (ds <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&quot;05.q1.sam30&quot;</span>, <span class="st">&quot;05.q1.sam60&quot;</span>, <span class="st">&quot;05.q2.sam30&quot;</span>,<span class="st">&quot;05.q2.sam60&quot;</span>, <span class="st">&quot;05.q3.sam30&quot;</span>,<span class="st">&quot;05.q3.sam60&quot;</span>, <span class="st">&quot;95.q1.sam30&quot;</span>,<span class="st">&quot;95.q1.sam60&quot;</span>, <span class="st">&quot;95.q2.sam30&quot;</span>,<span class="st">&quot;95.q2.sam60&quot;</span> ,<span class="st">&quot;95.q3.sam30&quot;</span>,<span class="st">&quot;95.q3.sam60&quot;</span> ,<span class="st">&quot;50.q1.sam30&quot;</span>,<span class="st">&quot;50.q1.sam60&quot;</span> ,<span class="st">&quot;50.q2.sam30&quot;</span>,<span class="st">&quot;50.q2.sam60&quot;</span> ,<span class="st">&quot;50.q3.sam30&quot;</span>, <span class="st">&quot;50.q3.sam60&quot;</span>)) {</span>
 <span id="cb20-2"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-2"></a>  x<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="fu">paste</span>(<span class="st">&quot;results/final_birdlist_east_&quot;</span>, ds, <span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
 <span id="cb20-3"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-3"></a>  x<span class="ot">&lt;-</span>x[<span class="sc">!</span>(x<span class="sc">$</span>Species <span class="sc">%in%</span> rem<span class="sc">$</span>Species),]</span>
@@ -254,6 +256,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb20-43"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-43"></a>east_p<span class="sc">$</span>adjP<span class="ot">&lt;-</span><span class="fu">p.adjust</span>(east_p<span class="sc">$</span>p.value, <span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
 <span id="cb20-44"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-44"></a></span>
 <span id="cb20-45"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-45"></a><span class="fu">write.csv</span>(east_p, <span class="st">&quot;results/compile_eastmodels_padj.csv&quot;</span>)</span></code></pre></div>
+</details>
 </div>
             </section>
 
@@ -309,7 +312,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,8 +210,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="remove-non-himalayan-species" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Remove non-Himalayan species<a href="remove-non-himalayan-species.html#remove-non-himalayan-species" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb19"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb19-1"><a href="remove-non-himalayan-species.html#cb19-1"></a><span class="co"># first we remove species that are non-Himalayan</span></span>
 <span id="cb19-2"><a href="remove-non-himalayan-species.html#cb19-2"></a>rem <span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;data/SpeciesList_nonhimalayan.csv.csv&quot;</span>)</span></code></pre></div>
+</details>
 </div>
             </section>
 
@@ -266,7 +269,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

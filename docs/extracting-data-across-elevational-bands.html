@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="extracting-data-across-elevational-bands" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Extracting data across elevational bands<a href="extracting-data-across-elevational-bands.html#extracting-data-across-elevational-bands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb7-1"><a href="extracting-data-across-elevational-bands.html#cb7-1"></a><span class="co"># make duplicate stack</span></span>
 <span id="cb7-2"><a href="extracting-data-across-elevational-bands.html#cb7-2"></a>envEast <span class="ot">&lt;-</span> env_east[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
 <span id="cb7-3"><a href="extracting-data-across-elevational-bands.html#cb7-3"></a>envWest <span class="ot">&lt;-</span> env_West[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
@@ -246,6 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-35"><a href="extracting-data-across-elevational-bands.html#cb7-35"></a><span class="co"># Write results to a .csv</span></span>
 <span id="cb7-36"><a href="extracting-data-across-elevational-bands.html#cb7-36"></a>west_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/westHim_100.csv&quot;</span>, <span class="at">row.names =</span> F) </span>
 <span id="cb7-37"><a href="extracting-data-across-elevational-bands.html#cb7-37"></a>east_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/eastHim_100.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
+</details>
 </div>
             </section>
 
@@ -301,7 +304,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

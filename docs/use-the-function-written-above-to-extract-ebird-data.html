@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="use-the-function-written-above-to-extract-ebird-data" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Use the function written above to extract eBird data<a href="use-the-function-written-above-to-extract-ebird-data.html#use-the-function-written-above-to-extract-ebird-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb11-1"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-1"></a><span class="co"># please download the latest versions of eBird data from https://ebird.org/data/download and set the file path accordingly. Since these two datasets are extremely large, we have not uploaded the same to github.</span></span>
 <span id="cb11-2"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-2"></a></span>
 <span id="cb11-3"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-3"></a><span class="co"># In this study, the latest version of the data corresponds to July 31st 2021</span></span>
@@ -227,6 +229,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-16"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-16"></a></span>
 <span id="cb11-17"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-17"></a>datll<span class="ot">&lt;-</span>dat<span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">12</span>)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(LATITUDE,LONGITUDE, <span class="at">.keep_all =</span> T)<span class="sc">%&gt;%</span><span class="fu">select</span>(LOCALITY.ID,LATITUDE,LONGITUDE)</span>
 <span id="cb11-18"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-18"></a><span class="fu">write.csv</span>(datll, <span class="st">&quot;results/unique_loc.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
+</details>
 </div>
             </section>
 
@@ -282,7 +285,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -149,8 +150,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
 <ul>
-<li class="chapter" data-level="2.0.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.0.1</b> Load necessary libraries</a></li>
-<li class="chapter" data-level="2.0.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.0.2</b> Load data</a></li>
+<li class="chapter" data-level="2.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="2.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a>
 <ul>
@@ -212,6 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this script, we calculate temperatures across elevational bands in the Eastern and Western Himalayas.</p>
 <div id="load-necessary-libraries-1" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Load necessary libraries<a href="temperature-elevation-associations.html#load-necessary-libraries-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb3-1"><a href="temperature-elevation-associations.html#cb3-1"></a><span class="fu">library</span>(raster)</span>
 <span id="cb3-2"><a href="temperature-elevation-associations.html#cb3-2"></a><span class="fu">library</span>(stringi)</span>
 <span id="cb3-3"><a href="temperature-elevation-associations.html#cb3-3"></a><span class="fu">library</span>(glue)</span>
@@ -238,9 +240,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-24"><a href="temperature-elevation-associations.html#cb3-24"></a><span class="co"># a basic test</span></span>
 <span id="cb3-25"><a href="temperature-elevation-associations.html#cb3-25"></a>assertthat<span class="sc">::</span><span class="fu">assert_that</span>(<span class="fu">funcMode</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)) <span class="sc">==</span> <span class="fu">as.character</span>(<span class="dv">2</span>), </span>
 <span id="cb3-26"><a href="temperature-elevation-associations.html#cb3-26"></a>                        <span class="at">msg =</span> <span class="st">&quot;problem in the mode function&quot;</span>) <span class="co"># works</span></span></code></pre></div>
+</details>
 </div>
 <div id="load-shapefiles" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Load shapefiles<a href="temperature-elevation-associations.html#load-shapefiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb4-1"><a href="temperature-elevation-associations.html#cb4-1"></a><span class="co"># Load shapefiles</span></span>
 <span id="cb4-2"><a href="temperature-elevation-associations.html#cb4-2"></a><span class="co"># Please note the below shapefile consists of multiple polygons that combines the east and west</span></span>
 <span id="cb4-3"><a href="temperature-elevation-associations.html#cb4-3"></a>himalayas <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/shapefile_himalaya.shp&quot;</span>)</span>
@@ -257,9 +261,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-14"><a href="temperature-elevation-associations.html#cb4-14"></a>east_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">10</span>),]</span>
 <span id="cb4-15"><a href="temperature-elevation-associations.html#cb4-15"></a>east_toMerge <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(east_toMerge, <span class="at">dist=</span><span class="dv">0</span>)</span>
 <span id="cb4-16"><a href="temperature-elevation-associations.html#cb4-16"></a>eastHim <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(east_toMerge,<span class="at">xmin=</span><span class="dv">83</span>,<span class="at">ymin=</span><span class="fl">25.96462</span>,<span class="at">xmax=</span><span class="fl">97.4115</span>,<span class="at">ymax=</span><span class="fl">30.44728</span>)</span></code></pre></div>
+</details>
 </div>
 <div id="prepare-elevation-rasters" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Prepare elevation rasters<a href="temperature-elevation-associations.html#prepare-elevation-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb5-1"><a href="temperature-elevation-associations.html#cb5-1"></a><span class="co"># load elevation and crop to hills size, then mask by hills</span></span>
 <span id="cb5-2"><a href="temperature-elevation-associations.html#cb5-2"></a><span class="co"># Please note that this file is large and is not uploaded to GitHub and can be downloaded from SRTM (Farr et al. 2007)</span></span>
 <span id="cb5-3"><a href="temperature-elevation-associations.html#cb5-3"></a>alt <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&quot;data/elevation/alt&quot;</span>)</span>
@@ -275,9 +281,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-13"><a href="temperature-elevation-associations.html#cb5-13"></a>elevEast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(alt.east, slopeEast)</span>
 <span id="cb5-14"><a href="temperature-elevation-associations.html#cb5-14"></a>elevWest <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(alt.west, slopeWest)</span>
 <span id="cb5-15"><a href="temperature-elevation-associations.html#cb5-15"></a><span class="fu">rm</span>(alt.east,alt.west); <span class="fu">gc</span>()</span></code></pre></div>
+</details>
 </div>
 <div id="prepare-climate-rasters" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Prepare climate rasters<a href="temperature-elevation-associations.html#prepare-climate-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb6-1"><a href="temperature-elevation-associations.html#cb6-1"></a><span class="co"># list chelsa files</span></span>
 <span id="cb6-2"><a href="temperature-elevation-associations.html#cb6-2"></a><span class="co"># CHELSA files are not uploaded to GitHub as they are extremely large and can be downloaded from https://chelsa-climate.org/</span></span>
 <span id="cb6-3"><a href="temperature-elevation-associations.html#cb6-3"></a><span class="co"># Please note that we downloaded four rasters corresponding to minimum and maximum temperatures for the months of January and June</span></span>
@@ -330,9 +338,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-50"><a href="temperature-elevation-associations.html#cb6-50"></a></span>
 <span id="cb6-51"><a href="temperature-elevation-associations.html#cb6-51"></a><span class="fu">names</span>(env_east) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span>
 <span id="cb6-52"><a href="temperature-elevation-associations.html#cb6-52"></a><span class="fu">names</span>(env_west) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span></code></pre></div>
+</details>
 </div>
 <div id="extracting-data-across-elevational-bands" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Extracting data across elevational bands<a href="temperature-elevation-associations.html#extracting-data-across-elevational-bands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb7-1"><a href="temperature-elevation-associations.html#cb7-1"></a><span class="co"># make duplicate stack</span></span>
 <span id="cb7-2"><a href="temperature-elevation-associations.html#cb7-2"></a>envEast <span class="ot">&lt;-</span> env_east[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
 <span id="cb7-3"><a href="temperature-elevation-associations.html#cb7-3"></a>envWest <span class="ot">&lt;-</span> env_West[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
@@ -370,9 +380,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-35"><a href="temperature-elevation-associations.html#cb7-35"></a><span class="co"># Write results to a .csv</span></span>
 <span id="cb7-36"><a href="temperature-elevation-associations.html#cb7-36"></a>west_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/westHim_100.csv&quot;</span>, <span class="at">row.names =</span> F) </span>
 <span id="cb7-37"><a href="temperature-elevation-associations.html#cb7-37"></a>east_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/eastHim_100.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
+</details>
 </div>
 <div id="plot-temperature-as-a-function-of-elevation" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Plot temperature as a function of elevation<a href="temperature-elevation-associations.html#plot-temperature-as-a-function-of-elevation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="temperature-elevation-associations.html#cb8-1"></a><span class="co"># eastern Himalayas</span></span>
 <span id="cb8-2"><a href="temperature-elevation-associations.html#cb8-2"></a>fig_climate_elevEast <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(envEast)<span class="sc">+</span></span>
 <span id="cb8-3"><a href="temperature-elevation-associations.html#cb8-3"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean),</span>
@@ -416,6 +428,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-41"><a href="temperature-elevation-associations.html#cb8-41"></a><span class="co"># save ggplots accordingly</span></span>
 <span id="cb8-42"><a href="temperature-elevation-associations.html#cb8-42"></a><span class="fu">ggsave</span>(fig_climate_elevWest, <span class="at">filename =</span> <span class="st">&quot;figs/fig_westHim_elev100.png&quot;</span>, </span>
 <span id="cb8-43"><a href="temperature-elevation-associations.html#cb8-43"></a>       <span class="at">height =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">device =</span> <span class="fu">png</span>(), <span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>); <span class="fu">dev.off</span>()</span></code></pre></div>
+</details>
 
 </div>
 </div>
@@ -473,7 +486,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

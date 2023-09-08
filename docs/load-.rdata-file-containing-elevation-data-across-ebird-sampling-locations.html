@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Load .Rdata file containing elevation data across eBird sampling locations<a href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html#load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb13-1"><a href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html#cb13-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
 <span id="cb13-2"><a href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html#cb13-2"></a>dat <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dat)</span>
 <span id="cb13-3"><a href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html#cb13-3"></a>dat <span class="ot">&lt;-</span> dat [,<span class="sc">-</span><span class="dv">27</span>] <span class="co"># removing unnecessary columns</span></span>
@@ -220,6 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-9"><a href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html#cb13-9"></a><span class="co"># dividing eastern and western himalayas by the 83E longitude</span></span>
 <span id="cb13-10"><a href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html#cb13-10"></a>datWest <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
 <span id="cb13-11"><a href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html#cb13-11"></a>datEast <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span></code></pre></div>
+</details>
 </div>
             </section>
 
@@ -275,7 +278,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

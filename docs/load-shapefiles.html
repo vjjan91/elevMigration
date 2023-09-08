@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="load-shapefiles" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Load shapefiles<a href="load-shapefiles.html#load-shapefiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb4-1"><a href="load-shapefiles.html#cb4-1"></a><span class="co"># Load shapefiles</span></span>
 <span id="cb4-2"><a href="load-shapefiles.html#cb4-2"></a><span class="co"># Please note the below shapefile consists of multiple polygons that combines the east and west</span></span>
 <span id="cb4-3"><a href="load-shapefiles.html#cb4-3"></a>himalayas <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/shapefile_himalaya.shp&quot;</span>)</span>
@@ -225,6 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-14"><a href="load-shapefiles.html#cb4-14"></a>east_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">10</span>),]</span>
 <span id="cb4-15"><a href="load-shapefiles.html#cb4-15"></a>east_toMerge <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(east_toMerge, <span class="at">dist=</span><span class="dv">0</span>)</span>
 <span id="cb4-16"><a href="load-shapefiles.html#cb4-16"></a>eastHim <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(east_toMerge,<span class="at">xmin=</span><span class="dv">83</span>,<span class="at">ymin=</span><span class="fl">25.96462</span>,<span class="at">xmax=</span><span class="fl">97.4115</span>,<span class="at">ymax=</span><span class="fl">30.44728</span>)</span></code></pre></div>
+</details>
 </div>
             </section>
 
@@ -280,7 +283,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

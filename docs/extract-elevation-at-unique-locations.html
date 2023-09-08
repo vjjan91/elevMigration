@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="extract-elevation-at-unique-locations" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Extract elevation at unique locations<a href="extract-elevation-at-unique-locations.html#extract-elevation-at-unique-locations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb12-1"><a href="extract-elevation-at-unique-locations.html#cb12-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(dat, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>,<span class="st">&quot;LATITUDE&quot;</span>), <span class="at">crs=</span><span class="dv">4326</span>, <span class="at">remove =</span> <span class="st">&quot;F&quot;</span>)</span>
 <span id="cb12-2"><a href="extract-elevation-at-unique-locations.html#cb12-2"></a></span>
 <span id="cb12-3"><a href="extract-elevation-at-unique-locations.html#cb12-3"></a><span class="co"># Loading the elevation data</span></span>
@@ -222,6 +224,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-11"><a href="extract-elevation-at-unique-locations.html#cb12-11"></a></span>
 <span id="cb12-12"><a href="extract-elevation-at-unique-locations.html#cb12-12"></a><span class="co"># save Rdata file (uploaded to GitHub)</span></span>
 <span id="cb12-13"><a href="extract-elevation-at-unique-locations.html#cb12-13"></a><span class="fu">save</span>(dat, <span class="at">file =</span> <span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span></code></pre></div>
+</details>
 
 </div>
 <!-- </div> -->
@@ -279,7 +282,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

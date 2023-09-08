@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="plot-temperature-as-a-function-of-elevation" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Plot temperature as a function of elevation<a href="plot-temperature-as-a-function-of-elevation.html#plot-temperature-as-a-function-of-elevation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-1"></a><span class="co"># eastern Himalayas</span></span>
 <span id="cb8-2"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-2"></a>fig_climate_elevEast <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(envEast)<span class="sc">+</span></span>
 <span id="cb8-3"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-3"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean),</span>
@@ -252,6 +254,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb8-41"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-41"></a><span class="co"># save ggplots accordingly</span></span>
 <span id="cb8-42"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-42"></a><span class="fu">ggsave</span>(fig_climate_elevWest, <span class="at">filename =</span> <span class="st">&quot;figs/fig_westHim_elev100.png&quot;</span>, </span>
 <span id="cb8-43"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-43"></a>       <span class="at">height =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">device =</span> <span class="fu">png</span>(), <span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>); <span class="fu">dev.off</span>()</span></code></pre></div>
+</details>
 
 </div>
 <!-- </div> -->
@@ -309,7 +312,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

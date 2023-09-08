@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="load-data" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Load data<a href="load-data.html#load-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb2-1"><a href="load-data.html#cb2-1"></a>loc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/localities-for-map.csv&quot;</span>)</span>
 <span id="cb2-2"><a href="load-data.html#cb2-2"></a><span class="fu">head</span>(loc)</span>
 <span id="cb2-3"><a href="load-data.html#cb2-3"></a></span>
@@ -237,6 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-26"><a href="load-data.html#cb2-26"></a>         <span class="at">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)</span>
 <span id="cb2-27"><a href="load-data.html#cb2-27"></a><span class="fu">st_write</span>(shp[shp<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;west&quot;</span>,],<span class="st">&quot;data/shapefiles/localities-west.shp&quot;</span>,</span>
 <span id="cb2-28"><a href="load-data.html#cb2-28"></a>         <span class="at">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)</span></code></pre></div>
+</details>
 
 </div>
 <!-- </div> -->
@@ -294,7 +297,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

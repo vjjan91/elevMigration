@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="prepare-elevation-rasters" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Prepare elevation rasters<a href="prepare-elevation-rasters.html#prepare-elevation-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb5-1"><a href="prepare-elevation-rasters.html#cb5-1"></a><span class="co"># load elevation and crop to hills size, then mask by hills</span></span>
 <span id="cb5-2"><a href="prepare-elevation-rasters.html#cb5-2"></a><span class="co"># Please note that this file is large and is not uploaded to GitHub and can be downloaded from SRTM (Farr et al. 2007)</span></span>
 <span id="cb5-3"><a href="prepare-elevation-rasters.html#cb5-3"></a>alt <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&quot;data/elevation/alt&quot;</span>)</span>
@@ -224,6 +226,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-13"><a href="prepare-elevation-rasters.html#cb5-13"></a>elevEast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(alt.east, slopeEast)</span>
 <span id="cb5-14"><a href="prepare-elevation-rasters.html#cb5-14"></a>elevWest <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(alt.west, slopeWest)</span>
 <span id="cb5-15"><a href="prepare-elevation-rasters.html#cb5-15"></a><span class="fu">rm</span>(alt.east,alt.west); <span class="fu">gc</span>()</span></code></pre></div>
+</details>
 </div>
             </section>
 
@@ -279,7 +282,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="prepare-climate-rasters" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Prepare climate rasters<a href="prepare-climate-rasters.html#prepare-climate-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb6-1"><a href="prepare-climate-rasters.html#cb6-1"></a><span class="co"># list chelsa files</span></span>
 <span id="cb6-2"><a href="prepare-climate-rasters.html#cb6-2"></a><span class="co"># CHELSA files are not uploaded to GitHub as they are extremely large and can be downloaded from https://chelsa-climate.org/</span></span>
 <span id="cb6-3"><a href="prepare-climate-rasters.html#cb6-3"></a><span class="co"># Please note that we downloaded four rasters corresponding to minimum and maximum temperatures for the months of January and June</span></span>
@@ -261,6 +263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-50"><a href="prepare-climate-rasters.html#cb6-50"></a></span>
 <span id="cb6-51"><a href="prepare-climate-rasters.html#cb6-51"></a><span class="fu">names</span>(env_east) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span>
 <span id="cb6-52"><a href="prepare-climate-rasters.html#cb6-52"></a><span class="fu">names</span>(env_west) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span></code></pre></div>
+</details>
 </div>
             </section>
 
@@ -316,7 +319,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

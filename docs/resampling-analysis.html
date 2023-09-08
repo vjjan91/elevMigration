@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -149,8 +150,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
 <ul>
-<li class="chapter" data-level="2.0.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.0.1</b> Load necessary libraries</a></li>
-<li class="chapter" data-level="2.0.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.0.2</b> Load data</a></li>
+<li class="chapter" data-level="2.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="2.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a>
 <ul>
@@ -212,6 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Using the previously generated .Rdata file, we resample checklists for three levels of sampling effort at different elevational bands.</p>
 <div id="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Load .Rdata file containing elevation data across eBird sampling locations<a href="resampling-analysis.html#load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb13"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb13-1"><a href="resampling-analysis.html#cb13-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
 <span id="cb13-2"><a href="resampling-analysis.html#cb13-2"></a>dat <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(dat)</span>
 <span id="cb13-3"><a href="resampling-analysis.html#cb13-3"></a>dat <span class="ot">&lt;-</span> dat [,<span class="sc">-</span><span class="dv">27</span>] <span class="co"># removing unnecessary columns</span></span>
@@ -223,9 +225,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb13-9"><a href="resampling-analysis.html#cb13-9"></a><span class="co"># dividing eastern and western himalayas by the 83E longitude</span></span>
 <span id="cb13-10"><a href="resampling-analysis.html#cb13-10"></a>datWest <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
 <span id="cb13-11"><a href="resampling-analysis.html#cb13-11"></a>datEast <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span></code></pre></div>
+</details>
 </div>
 <div id="create-resampled-datasets" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Create resampled datasets<a href="resampling-analysis.html#create-resampled-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb14-1"><a href="resampling-analysis.html#cb14-1"></a><span class="co"># Creating resampled Dataset for the centre, lower, and upper limit of a species&#39; elevational distribution for 3 levels of sampling effort (number of checklists)- separately for east and west </span></span>
 <span id="cb14-2"><a href="resampling-analysis.html#cb14-2"></a></span>
 <span id="cb14-3"><a href="resampling-analysis.html#cb14-3"></a><span class="do">## Eastern Himalayas</span></span>
@@ -339,6 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-111"><a href="resampling-analysis.html#cb14-111"></a>  <span class="fu">save</span>(rs,<span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&quot;results/eBird_woNepal_resampled_west_&quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, qt<span class="sc">*</span><span class="dv">100</span>),<span class="st">&quot;.q&quot;</span>, i,<span class="st">&quot;.RData&quot;</span>))</span>
 <span id="cb14-112"><a href="resampling-analysis.html#cb14-112"></a>}</span>
 <span id="cb14-113"><a href="resampling-analysis.html#cb14-113"></a>}</span></code></pre></div>
+</details>
 
 </div>
 </div>
@@ -396,7 +401,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

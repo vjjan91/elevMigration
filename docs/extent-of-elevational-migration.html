@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -149,8 +150,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
 <ul>
-<li class="chapter" data-level="2.0.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.0.1</b> Load necessary libraries</a></li>
-<li class="chapter" data-level="2.0.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.0.2</b> Load data</a></li>
+<li class="chapter" data-level="2.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="2.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a>
 <ul>
@@ -212,6 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this script, we calculate the median migration extent, breeding and wintering elevation for all combinations of elevational limit and sampling effort separately for the eastern and western Himalayas</p>
 <div id="load-necessary-libraries-3" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Load necessary libraries<a href="extent-of-elevational-migration.html#load-necessary-libraries-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb15-1"><a href="extent-of-elevational-migration.html#cb15-1"></a><span class="fu">library</span>(ape)</span>
 <span id="cb15-2"><a href="extent-of-elevational-migration.html#cb15-2"></a><span class="fu">library</span>(geiger)</span>
 <span id="cb15-3"><a href="extent-of-elevational-migration.html#cb15-3"></a><span class="fu">library</span>(phytools)</span>
@@ -220,9 +222,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-6"><a href="extent-of-elevational-migration.html#cb15-6"></a><span class="fu">library</span>(nlme)</span>
 <span id="cb15-7"><a href="extent-of-elevational-migration.html#cb15-7"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb15-8"><a href="extent-of-elevational-migration.html#cb15-8"></a><span class="fu">library</span>(phangorn)</span></code></pre></div>
+</details>
 </div>
 <div id="load-previously-generated-.rdata-files-for-analyses" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Load previously generated .Rdata files for analyses<a href="extent-of-elevational-migration.html#load-previously-generated-.rdata-files-for-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="extent-of-elevational-migration.html#cb16-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
 <span id="cb16-2"><a href="extent-of-elevational-migration.html#cb16-2"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(dat<span class="fl">.1</span>)</span>
 <span id="cb16-3"><a href="extent-of-elevational-migration.html#cb16-3"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span>[,<span class="sc">-</span><span class="dv">27</span>]</span>
@@ -234,9 +238,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-9"><a href="extent-of-elevational-migration.html#cb16-9"></a>dat1W<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
 <span id="cb16-10"><a href="extent-of-elevational-migration.html#cb16-10"></a>dat1E<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span>
 <span id="cb16-11"><a href="extent-of-elevational-migration.html#cb16-11"></a><span class="fu">rm</span>(dat<span class="fl">.1</span>)</span></code></pre></div>
+</details>
 </div>
 <div id="eastern-himalayas" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Eastern Himalayas<a href="extent-of-elevational-migration.html#eastern-himalayas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb17-1"><a href="extent-of-elevational-migration.html#cb17-1"></a></span>
 <span id="cb17-2"><a href="extent-of-elevational-migration.html#cb17-2"></a><span class="do">#### Creating a list of unique species</span></span>
 <span id="cb17-3"><a href="extent-of-elevational-migration.html#cb17-3"></a></span>
@@ -312,9 +318,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb17-73"><a href="extent-of-elevational-migration.html#cb17-73"></a>    <span class="fu">write.csv</span>(ts, <span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;results/final_birdlist_east_&quot;</span>,ds,<span class="st">&quot;.sam&quot;</span>,minSample, <span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">row.names =</span> F)</span>
 <span id="cb17-74"><a href="extent-of-elevational-migration.html#cb17-74"></a>  }</span>
 <span id="cb17-75"><a href="extent-of-elevational-migration.html#cb17-75"></a>}</span></code></pre></div>
+</details>
 </div>
 <div id="western-himalayas" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Western Himalayas<a href="extent-of-elevational-migration.html#western-himalayas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb18-1"><a href="extent-of-elevational-migration.html#cb18-1"></a>uniSpe_west <span class="ot">&lt;-</span> dat1W <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
 <span id="cb18-2"><a href="extent-of-elevational-migration.html#cb18-2"></a>uniSpe_west <span class="ot">&lt;-</span> <span class="fu">unique</span>(uniSpe_west[, <span class="st">&quot;COMMON.NAME&quot;</span>]) <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
 <span id="cb18-3"><a href="extent-of-elevational-migration.html#cb18-3"></a><span class="fu">colnames</span>(uniSpe_west) <span class="ot">&lt;-</span> <span class="st">&quot;Species&quot;</span></span>
@@ -385,6 +393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-68"><a href="extent-of-elevational-migration.html#cb18-68"></a>    <span class="fu">write.csv</span>(ts, <span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;results/final_birdlist_west&quot;</span>,ds,<span class="st">&quot;.sam&quot;</span>,minSample, <span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">row.names =</span> F)</span>
 <span id="cb18-69"><a href="extent-of-elevational-migration.html#cb18-69"></a>  }</span>
 <span id="cb18-70"><a href="extent-of-elevational-migration.html#cb18-70"></a>}</span></code></pre></div>
+</details>
 
 </div>
 </div>
@@ -442,7 +451,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

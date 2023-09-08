@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="create-resampled-datasets" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Create resampled datasets<a href="create-resampled-datasets.html#create-resampled-datasets" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb14"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb14-1"><a href="create-resampled-datasets.html#cb14-1"></a><span class="co"># Creating resampled Dataset for the centre, lower, and upper limit of a species&#39; elevational distribution for 3 levels of sampling effort (number of checklists)- separately for east and west </span></span>
 <span id="cb14-2"><a href="create-resampled-datasets.html#cb14-2"></a></span>
 <span id="cb14-3"><a href="create-resampled-datasets.html#cb14-3"></a><span class="do">## Eastern Himalayas</span></span>
@@ -322,6 +324,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb14-111"><a href="create-resampled-datasets.html#cb14-111"></a>  <span class="fu">save</span>(rs,<span class="at">file =</span> <span class="fu">paste0</span>(<span class="st">&quot;results/eBird_woNepal_resampled_west_&quot;</span>, <span class="fu">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, qt<span class="sc">*</span><span class="dv">100</span>),<span class="st">&quot;.q&quot;</span>, i,<span class="st">&quot;.RData&quot;</span>))</span>
 <span id="cb14-112"><a href="create-resampled-datasets.html#cb14-112"></a>}</span>
 <span id="cb14-113"><a href="create-resampled-datasets.html#cb14-113"></a>}</span></code></pre></div>
+</details>
 
 </div>
 <!-- </div> -->
@@ -379,7 +382,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

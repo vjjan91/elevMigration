@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="western-himalayas" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Western Himalayas<a href="western-himalayas.html#western-himalayas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb18-1"><a href="western-himalayas.html#cb18-1"></a>uniSpe_west <span class="ot">&lt;-</span> dat1W <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
 <span id="cb18-2"><a href="western-himalayas.html#cb18-2"></a>uniSpe_west <span class="ot">&lt;-</span> <span class="fu">unique</span>(uniSpe_west[, <span class="st">&quot;COMMON.NAME&quot;</span>]) <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
 <span id="cb18-3"><a href="western-himalayas.html#cb18-3"></a><span class="fu">colnames</span>(uniSpe_west) <span class="ot">&lt;-</span> <span class="st">&quot;Species&quot;</span></span>
@@ -279,6 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-68"><a href="western-himalayas.html#cb18-68"></a>    <span class="fu">write.csv</span>(ts, <span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;results/final_birdlist_west&quot;</span>,ds,<span class="st">&quot;.sam&quot;</span>,minSample, <span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">row.names =</span> F)</span>
 <span id="cb18-69"><a href="western-himalayas.html#cb18-69"></a>  }</span>
 <span id="cb18-70"><a href="western-himalayas.html#cb18-70"></a>}</span></code></pre></div>
+</details>
 
 </div>
 <!-- </div> -->
@@ -336,7 +339,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

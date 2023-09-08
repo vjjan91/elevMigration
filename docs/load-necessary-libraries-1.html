@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="load-necessary-libraries-1" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Load necessary libraries<a href="load-necessary-libraries-1.html#load-necessary-libraries-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb3-1"><a href="load-necessary-libraries-1.html#cb3-1"></a><span class="fu">library</span>(raster)</span>
 <span id="cb3-2"><a href="load-necessary-libraries-1.html#cb3-2"></a><span class="fu">library</span>(stringi)</span>
 <span id="cb3-3"><a href="load-necessary-libraries-1.html#cb3-3"></a><span class="fu">library</span>(glue)</span>
@@ -235,6 +237,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-24"><a href="load-necessary-libraries-1.html#cb3-24"></a><span class="co"># a basic test</span></span>
 <span id="cb3-25"><a href="load-necessary-libraries-1.html#cb3-25"></a>assertthat<span class="sc">::</span><span class="fu">assert_that</span>(<span class="fu">funcMode</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)) <span class="sc">==</span> <span class="fu">as.character</span>(<span class="dv">2</span>), </span>
 <span id="cb3-26"><a href="load-necessary-libraries-1.html#cb3-26"></a>                        <span class="at">msg =</span> <span class="st">&quot;problem in the mode function&quot;</span>) <span class="co"># works</span></span></code></pre></div>
+</details>
 </div>
             </section>
 
@@ -290,7 +293,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

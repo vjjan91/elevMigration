@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -209,6 +210,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="phylogenetic-paired-t-test" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Phylogenetic paired t-test<a href="phylogenetic-paired-t-test.html#phylogenetic-paired-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb22-1"><a href="phylogenetic-paired-t-test.html#cb22-1"></a>diff_ttest<span class="ot">&lt;-</span><span class="fu">setNames</span>(<span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">0</span>)), <span class="fu">c</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;df&quot;</span>, <span class="st">&quot;pvalue&quot;</span>))</span>
 <span id="cb22-2"><a href="phylogenetic-paired-t-test.html#cb22-2"></a>niche_ttest<span class="ot">&lt;-</span><span class="fu">setNames</span>(<span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">0</span>)), <span class="fu">c</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;df&quot;</span>, <span class="st">&quot;pvalue&quot;</span>))</span>
 <span id="cb22-3"><a href="phylogenetic-paired-t-test.html#cb22-3"></a></span>
@@ -231,6 +233,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb22-20"><a href="phylogenetic-paired-t-test.html#cb22-20"></a>  <span class="fu">write.csv</span>(diff_ttest, <span class="st">&quot;results/diff_ttest.csv&quot;</span>, <span class="at">row.names =</span> F)</span>
 <span id="cb22-21"><a href="phylogenetic-paired-t-test.html#cb22-21"></a>  <span class="fu">write.csv</span>(niche_ttest, <span class="st">&quot;results/niche_ttest.csv&quot;</span>, <span class="at">row.names =</span> F)</span>
 <span id="cb22-22"><a href="phylogenetic-paired-t-test.html#cb22-22"></a>}</span></code></pre></div>
+</details>
 
 </div>
 <!-- </div> -->
@@ -288,7 +291,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

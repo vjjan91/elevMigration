@@ -50,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -149,8 +150,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
 <ul>
-<li class="chapter" data-level="2.0.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.0.1</b> Load necessary libraries</a></li>
-<li class="chapter" data-level="2.0.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.0.2</b> Load data</a></li>
+<li class="chapter" data-level="2.1" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="2.2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html#load-data"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a>
 <ul>
@@ -212,13 +213,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this script, we will process the community science data across the Eastern and Western Himalayas.</p>
 <div id="load-necessary-libraries-2" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Load necessary libraries<a href="processing-ebird-data.html#load-necessary-libraries-2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb9"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb9-1"><a href="processing-ebird-data.html#cb9-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb9-2"><a href="processing-ebird-data.html#cb9-2"></a><span class="fu">library</span>(sf)</span>
 <span id="cb9-3"><a href="processing-ebird-data.html#cb9-3"></a><span class="fu">library</span>(raster)</span>
 <span id="cb9-4"><a href="processing-ebird-data.html#cb9-4"></a><span class="fu">library</span>(parallel)</span></code></pre></div>
+</details>
 </div>
 <div id="loading-custom-functions-to-process-ebird-data" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Loading custom functions to process eBird data<a href="processing-ebird-data.html#loading-custom-functions-to-process-ebird-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb10"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb10-1"><a href="processing-ebird-data.html#cb10-1"></a><span class="co"># This function processes the eBird data as long as the path where the data is stored and list of countries are mentioned </span></span>
 <span id="cb10-2"><a href="processing-ebird-data.html#cb10-2"></a></span>
 <span id="cb10-3"><a href="processing-ebird-data.html#cb10-3"></a>readcleanrawdata <span class="ot">=</span> <span class="cf">function</span>(rawpath)</span>
@@ -284,9 +288,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-63"><a href="processing-ebird-data.html#cb10-63"></a>  </span>
 <span id="cb10-64"><a href="processing-ebird-data.html#cb10-64"></a>  <span class="fu">return</span>(data)</span>
 <span id="cb10-65"><a href="processing-ebird-data.html#cb10-65"></a>}</span></code></pre></div>
+</details>
 </div>
 <div id="use-the-function-written-above-to-extract-ebird-data" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Use the function written above to extract eBird data<a href="processing-ebird-data.html#use-the-function-written-above-to-extract-ebird-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb11-1"><a href="processing-ebird-data.html#cb11-1"></a><span class="co"># please download the latest versions of eBird data from https://ebird.org/data/download and set the file path accordingly. Since these two datasets are extremely large, we have not uploaded the same to github.</span></span>
 <span id="cb11-2"><a href="processing-ebird-data.html#cb11-2"></a></span>
 <span id="cb11-3"><a href="processing-ebird-data.html#cb11-3"></a><span class="co"># In this study, the latest version of the data corresponds to July 31st 2021</span></span>
@@ -305,9 +311,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-16"><a href="processing-ebird-data.html#cb11-16"></a></span>
 <span id="cb11-17"><a href="processing-ebird-data.html#cb11-17"></a>datll<span class="ot">&lt;-</span>dat<span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">12</span>)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(LATITUDE,LONGITUDE, <span class="at">.keep_all =</span> T)<span class="sc">%&gt;%</span><span class="fu">select</span>(LOCALITY.ID,LATITUDE,LONGITUDE)</span>
 <span id="cb11-18"><a href="processing-ebird-data.html#cb11-18"></a><span class="fu">write.csv</span>(datll, <span class="st">&quot;results/unique_loc.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
+</details>
 </div>
 <div id="extract-elevation-at-unique-locations" class="section level2 hasAnchor" number="4.4">
 <h2><span class="header-section-number">4.4</span> Extract elevation at unique locations<a href="processing-ebird-data.html#extract-elevation-at-unique-locations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb12"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb12-1"><a href="processing-ebird-data.html#cb12-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(dat, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>,<span class="st">&quot;LATITUDE&quot;</span>), <span class="at">crs=</span><span class="dv">4326</span>, <span class="at">remove =</span> <span class="st">&quot;F&quot;</span>)</span>
 <span id="cb12-2"><a href="processing-ebird-data.html#cb12-2"></a></span>
 <span id="cb12-3"><a href="processing-ebird-data.html#cb12-3"></a><span class="co"># Loading the elevation data</span></span>
@@ -321,6 +329,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-11"><a href="processing-ebird-data.html#cb12-11"></a></span>
 <span id="cb12-12"><a href="processing-ebird-data.html#cb12-12"></a><span class="co"># save Rdata file (uploaded to GitHub)</span></span>
 <span id="cb12-13"><a href="processing-ebird-data.html#cb12-13"></a><span class="fu">save</span>(dat, <span class="at">file =</span> <span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span></code></pre></div>
+</details>
 
 </div>
 </div>
@@ -378,7 +387,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });
