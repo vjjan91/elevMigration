@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7.2 PGLS models for the Eastern Himalayas | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <meta name="description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
+  <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7.2 PGLS models for the Eastern Himalayas | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
+  <meta name="github-repo" content="vjjan91/elevMigration" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7.2 PGLS models for the Eastern Himalayas | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  
+  <meta name="twitter:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
+  
+
+<meta name="author" content="Tarun Menon" />
+<meta name="author" content="Vijay Ramesh" />
+<meta name="author" content="Sahas Barve" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="remove-non-himalayan-species.html"/>
+<link rel="next" href="pgls-models-for-the-western-himalayas.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Himalayan bird elevational migration</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="data-processing.html"><a href="data-processing.html"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
+<li class="chapter" data-level="1.2" data-path="attribution.html"><a href="attribution.html"><i class="fa fa-check"></i><b>1.2</b> Attribution</a></li>
+<li class="chapter" data-level="1.3" data-path="data-access.html"><a href="data-access.html"><i class="fa fa-check"></i><b>1.3</b> Data access</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="spatial-thinning-of-occurrence-data.html"><a href="spatial-thinning-of-occurrence-data.html"><i class="fa fa-check"></i><b>2</b> Spatial thinning of occurrence data</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="load-necessary-libraries.html"><a href="load-necessary-libraries.html"><i class="fa fa-check"></i><b>2.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="2.2" data-path="load-data.html"><a href="load-data.html"><i class="fa fa-check"></i><b>2.2</b> Load data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="temperature-elevation-associations.html"><a href="temperature-elevation-associations.html"><i class="fa fa-check"></i><b>3</b> Temperature-elevation associations</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="load-necessary-libraries-1.html"><a href="load-necessary-libraries-1.html"><i class="fa fa-check"></i><b>3.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="3.2" data-path="load-shapefiles.html"><a href="load-shapefiles.html"><i class="fa fa-check"></i><b>3.2</b> Load shapefiles</a></li>
+<li class="chapter" data-level="3.3" data-path="prepare-elevation-rasters.html"><a href="prepare-elevation-rasters.html"><i class="fa fa-check"></i><b>3.3</b> Prepare elevation rasters</a></li>
+<li class="chapter" data-level="3.4" data-path="prepare-climate-rasters.html"><a href="prepare-climate-rasters.html"><i class="fa fa-check"></i><b>3.4</b> Prepare climate rasters</a></li>
+<li class="chapter" data-level="3.5" data-path="extracting-data-across-elevational-bands.html"><a href="extracting-data-across-elevational-bands.html"><i class="fa fa-check"></i><b>3.5</b> Extracting data across elevational bands</a></li>
+<li class="chapter" data-level="3.6" data-path="plot-temperature-as-a-function-of-elevation.html"><a href="plot-temperature-as-a-function-of-elevation.html"><i class="fa fa-check"></i><b>3.6</b> Plot temperature as a function of elevation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="processing-ebird-data.html"><a href="processing-ebird-data.html"><i class="fa fa-check"></i><b>4</b> Processing eBird data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="load-necessary-libraries-2.html"><a href="load-necessary-libraries-2.html"><i class="fa fa-check"></i><b>4.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="4.2" data-path="loading-custom-functions-to-process-ebird-data.html"><a href="loading-custom-functions-to-process-ebird-data.html"><i class="fa fa-check"></i><b>4.2</b> Loading custom functions to process eBird data</a></li>
+<li class="chapter" data-level="4.3" data-path="use-the-function-written-above-to-extract-ebird-data.html"><a href="use-the-function-written-above-to-extract-ebird-data.html"><i class="fa fa-check"></i><b>4.3</b> Use the function written above to extract eBird data</a></li>
+<li class="chapter" data-level="4.4" data-path="extract-elevation-at-unique-locations.html"><a href="extract-elevation-at-unique-locations.html"><i class="fa fa-check"></i><b>4.4</b> Extract elevation at unique locations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="resampling-analysis.html"><a href="resampling-analysis.html"><i class="fa fa-check"></i><b>5</b> Resampling analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html"><a href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html"><i class="fa fa-check"></i><b>5.1</b> Load .Rdata file containing elevation data across eBird sampling locations</a></li>
+<li class="chapter" data-level="5.2" data-path="create-resampled-datasets.html"><a href="create-resampled-datasets.html"><i class="fa fa-check"></i><b>5.2</b> Create resampled datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="extent-of-elevational-migration.html"><a href="extent-of-elevational-migration.html"><i class="fa fa-check"></i><b>6</b> Extent of elevational migration</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="load-necessary-libraries-3.html"><a href="load-necessary-libraries-3.html"><i class="fa fa-check"></i><b>6.1</b> Load necessary libraries</a></li>
+<li class="chapter" data-level="6.2" data-path="load-previously-generated-.rdata-files-for-analyses.html"><a href="load-previously-generated-.rdata-files-for-analyses.html"><i class="fa fa-check"></i><b>6.2</b> Load previously generated .Rdata files for analyses</a></li>
+<li class="chapter" data-level="6.3" data-path="eastern-himalayas.html"><a href="eastern-himalayas.html"><i class="fa fa-check"></i><b>6.3</b> Eastern Himalayas</a></li>
+<li class="chapter" data-level="6.4" data-path="western-himalayas.html"><a href="western-himalayas.html"><i class="fa fa-check"></i><b>6.4</b> Western Himalayas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html"><i class="fa fa-check"></i><b>7</b> Phylogenetic generalized least squares regressions</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="remove-non-himalayan-species.html"><a href="remove-non-himalayan-species.html"><i class="fa fa-check"></i><b>7.1</b> Remove non-Himalayan species</a></li>
+<li class="chapter" data-level="7.2" data-path="pgls-models-for-the-eastern-himalayas.html"><a href="pgls-models-for-the-eastern-himalayas.html"><i class="fa fa-check"></i><b>7.2</b> PGLS models for the Eastern Himalayas</a></li>
+<li class="chapter" data-level="7.3" data-path="pgls-models-for-the-western-himalayas.html"><a href="pgls-models-for-the-western-himalayas.html"><i class="fa fa-check"></i><b>7.3</b> PGLS models for the Western Himalayas</a></li>
+<li class="chapter" data-level="7.4" data-path="phylogenetic-paired-t-test.html"><a href="phylogenetic-paired-t-test.html"><i class="fa fa-check"></i><b>7.4</b> Phylogenetic paired t-test</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Source code for <em>Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</em></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="pgls-models-for-the-eastern-himalayas" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> PGLS models for the Eastern Himalayas<a href="pgls-models-for-the-eastern-himalayas.html#pgls-models-for-the-eastern-himalayas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb20-1"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-1"></a><span class="cf">for</span> (ds <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&quot;05.q1.sam30&quot;</span>, <span class="st">&quot;05.q1.sam60&quot;</span>, <span class="st">&quot;05.q2.sam30&quot;</span>,<span class="st">&quot;05.q2.sam60&quot;</span>, <span class="st">&quot;05.q3.sam30&quot;</span>,<span class="st">&quot;05.q3.sam60&quot;</span>, <span class="st">&quot;95.q1.sam30&quot;</span>,<span class="st">&quot;95.q1.sam60&quot;</span>, <span class="st">&quot;95.q2.sam30&quot;</span>,<span class="st">&quot;95.q2.sam60&quot;</span> ,<span class="st">&quot;95.q3.sam30&quot;</span>,<span class="st">&quot;95.q3.sam60&quot;</span> ,<span class="st">&quot;50.q1.sam30&quot;</span>,<span class="st">&quot;50.q1.sam60&quot;</span> ,<span class="st">&quot;50.q2.sam30&quot;</span>,<span class="st">&quot;50.q2.sam60&quot;</span> ,<span class="st">&quot;50.q3.sam30&quot;</span>, <span class="st">&quot;50.q3.sam60&quot;</span>)) {</span>
+<span id="cb20-2"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-2"></a>  x<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="fu">paste</span>(<span class="st">&quot;results/final_birdlist_east_&quot;</span>, ds, <span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb20-3"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-3"></a>  x<span class="ot">&lt;-</span>x[<span class="sc">!</span>(x<span class="sc">$</span>Species <span class="sc">%in%</span> rem<span class="sc">$</span>Species),]</span>
+<span id="cb20-4"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-4"></a>  <span class="fu">write.csv</span>(x,<span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;results/birdlist_east&quot;</span>,ds,<span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">row.names =</span> F) </span>
+<span id="cb20-5"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-5"></a>}</span>
+<span id="cb20-6"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-6"></a></span>
+<span id="cb20-7"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-7"></a><span class="co"># load necessary data for running statistical models </span></span>
+<span id="cb20-8"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-8"></a>east_100 <span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;results/eastHim_100.csv&quot;</span>) <span class="co">#temperature data</span></span>
+<span id="cb20-9"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-9"></a>east_100_S <span class="ot">&lt;-</span> east_100 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">contains</span>(<span class="st">&quot;Jan&quot;</span>)) <span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">elev_roundS =</span> elev_round) <span class="co">#winter</span></span>
+<span id="cb20-10"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-10"></a>east_100_W <span class="ot">&lt;-</span> east_100 <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span><span class="fu">contains</span>(<span class="st">&quot;June&quot;</span>))<span class="sc">%&gt;%</span> <span class="fu">rename</span>(<span class="at">elev_roundW =</span> elev_round) <span class="co">#summer</span></span>
+<span id="cb20-11"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-11"></a>jetzname <span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;data/for_PGLS_list3.csv&quot;</span>) <span class="co">#taxonomy used by birdtree.org</span></span>
+<span id="cb20-12"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-12"></a>sheard_trait <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/2020-sheard et al-species-trait-dat - speciesdata.csv&quot;</span>) <span class="sc">%&gt;%</span> <span class="co">#trait data set</span></span>
+<span id="cb20-13"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-13"></a>  <span class="fu">select</span>(HWI,Diet,Tree.name)</span>
+<span id="cb20-14"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-14"></a>tree <span class="ot">&lt;-</span><span class="fu">read.nexus</span>(<span class="st">&quot;data/birdtree.nex&quot;</span>)</span>
+<span id="cb20-15"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-15"></a>tree <span class="ot">&lt;-</span> <span class="fu">mcc</span>(tree) <span class="do">## maximum clade credibility tree</span></span>
+<span id="cb20-16"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-16"></a></span>
+<span id="cb20-17"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-17"></a></span>
+<span id="cb20-18"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-18"></a>compile_eastmodels<span class="ot">&lt;-</span><span class="fu">setNames</span>(<span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="dv">6</span>, <span class="at">nrow =</span> <span class="dv">0</span>)), <span class="fu">c</span>(<span class="st">&quot;Variable&quot;</span>, <span class="st">&quot;Value&quot;</span>, <span class="st">&quot;Std.Error&quot;</span>, <span class="st">&quot;t-value&quot;</span>, <span class="st">&quot;p-value&quot;</span>, <span class="st">&quot;ds&quot;</span>))</span>
+<span id="cb20-19"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-19"></a></span>
+<span id="cb20-20"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-20"></a><span class="cf">for</span> (ds <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&quot;05.q1.sam30&quot;</span>, <span class="st">&quot;05.q1.sam60&quot;</span>, <span class="st">&quot;05.q2.sam30&quot;</span>,<span class="st">&quot;05.q2.sam60&quot;</span>, <span class="st">&quot;05.q3.sam30&quot;</span>,<span class="st">&quot;05.q3.sam60&quot;</span>, <span class="st">&quot;95.q1.sam30&quot;</span>,<span class="st">&quot;95.q1.sam60&quot;</span>, <span class="st">&quot;95.q2.sam30&quot;</span>,<span class="st">&quot;95.q2.sam60&quot;</span> ,<span class="st">&quot;95.q3.sam30&quot;</span>,<span class="st">&quot;95.q3.sam60&quot;</span> ,<span class="st">&quot;50.q1.sam30&quot;</span>,<span class="st">&quot;50.q1.sam60&quot;</span> ,<span class="st">&quot;50.q2.sam30&quot;</span>,<span class="st">&quot;50.q2.sam60&quot;</span> ,<span class="st">&quot;50.q3.sam30&quot;</span>, <span class="st">&quot;50.q3.sam60&quot;</span>)) {</span>
+<span id="cb20-21"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-21"></a>  x<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="fu">paste</span>(<span class="st">&quot;results/birdlist_east&quot;</span>, ds, <span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb20-22"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-22"></a>  x<span class="sc">$</span>elev_roundS<span class="ot">&lt;-</span><span class="fu">round</span>(x<span class="sc">$</span>Median_S,<span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb20-23"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-23"></a>  x<span class="sc">$</span>elev_roundW<span class="ot">&lt;-</span><span class="fu">round</span>(x<span class="sc">$</span>Median_W,<span class="sc">-</span><span class="dv">2</span>)</span>
+<span id="cb20-24"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-24"></a>  x<span class="ot">&lt;-</span><span class="fu">left_join</span>(x,west_100_S, <span class="at">by =</span> <span class="st">&quot;elev_roundS&quot;</span>)</span>
+<span id="cb20-25"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-25"></a>  x<span class="ot">&lt;-</span><span class="fu">left_join</span>(x,west_100_W, <span class="at">by =</span> <span class="st">&quot;elev_roundW&quot;</span>)</span>
+<span id="cb20-26"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-26"></a>  x<span class="sc">$</span>ThermalRegime<span class="ot">&lt;-</span>x<span class="sc">$</span>maxTemp_June_mean<span class="sc">-</span>x<span class="sc">$</span>minTemp_Jan_mean</span>
+<span id="cb20-27"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-27"></a>  x<span class="ot">&lt;-</span><span class="fu">left_join</span>(x,jetzname, <span class="at">by =</span> <span class="st">&quot;Species&quot;</span>)</span>
+<span id="cb20-28"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-28"></a>  x<span class="ot">&lt;-</span><span class="fu">left_join</span>(x, sheard_trait, <span class="at">by =</span> <span class="st">&quot;Tree.name&quot;</span>)<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Diet =</span> <span class="fu">fct_recode</span>(Diet, <span class="st">&quot;omnivore&quot;</span> <span class="ot">=</span> <span class="st">&quot;nectar&quot;</span>, <span class="st">&quot;omnivore&quot;</span> <span class="ot">=</span> <span class="st">&quot;scav&quot;</span>, <span class="st">&quot;seeds&quot;</span><span class="ot">=</span><span class="st">&quot;plants&quot;</span>))</span>
+<span id="cb20-29"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-29"></a>  pruned.tree<span class="ot">&lt;-</span><span class="fu">drop.tip</span>(tree1,tree1<span class="sc">$</span>tip.label[<span class="sc">-</span><span class="fu">match</span>(x<span class="sc">$</span>Tree.name, tree1<span class="sc">$</span>tip.label)])</span>
+<span id="cb20-30"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-30"></a>  glsdata<span class="ot">&lt;-</span>x[<span class="fu">match</span>(pruned.tree<span class="sc">$</span>tip.label, x<span class="sc">$</span>Tree.name),]</span>
+<span id="cb20-31"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-31"></a> pgls2<span class="ot">&lt;-</span><span class="fu">gls</span>(Median_diff<span class="sc">~</span>ThermalRegime<span class="sc">+</span>HWI<span class="sc">+</span><span class="fu">relevel</span>(Diet, <span class="at">ref =</span> <span class="st">&quot;invertebrates&quot;</span>),<span class="at">correlation=</span><span class="fu">corPagel</span>(<span class="dv">1</span>,pruned.tree),<span class="at">data=</span>glsdata)</span>
+<span id="cb20-32"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-32"></a>  k<span class="ot">&lt;-</span><span class="fu">summary</span>(pgls2)</span>
+<span id="cb20-33"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-33"></a>  outputk<span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(k<span class="sc">$</span>tTable)</span>
+<span id="cb20-34"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-34"></a>  outputk<span class="sc">$</span>dataset<span class="ot">&lt;-</span>ds</span>
+<span id="cb20-35"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-35"></a>  outputk<span class="sc">$</span>Variable<span class="ot">&lt;-</span><span class="fu">rownames</span>(outputk)</span>
+<span id="cb20-36"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-36"></a>  compile_eastmodels<span class="ot">&lt;-</span><span class="fu">rbind</span>(compile_eastmodels,outputk)</span>
+<span id="cb20-37"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-37"></a>  </span>
+<span id="cb20-38"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-38"></a>  <span class="fu">write.csv</span>(glsdata, <span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;results/east_ordered&quot;</span>,ds,<span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">row.names =</span> F)</span>
+<span id="cb20-39"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-39"></a>  <span class="fu">write.csv</span>(compile_eastmodels, <span class="st">&quot;results/compile_eastmodels.csv&quot;</span>, <span class="at">row.names =</span> F)</span>
+<span id="cb20-40"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-40"></a>}</span>
+<span id="cb20-41"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-41"></a></span>
+<span id="cb20-42"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-42"></a>east_p<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="st">&quot;results/compile_eastmodels.csv&quot;</span>)</span>
+<span id="cb20-43"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-43"></a>east_p<span class="sc">$</span>adjP<span class="ot">&lt;-</span><span class="fu">p.adjust</span>(east_p<span class="sc">$</span>p.value, <span class="at">method =</span> <span class="st">&quot;fdr&quot;</span>)</span>
+<span id="cb20-44"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-44"></a></span>
+<span id="cb20-45"><a href="pgls-models-for-the-eastern-himalayas.html#cb20-45"></a><span class="fu">write.csv</span>(east_p, <span class="st">&quot;results/compile_eastmodels_padj.csv&quot;</span>)</span></code></pre></div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="remove-non-himalayan-species.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="pgls-models-for-the-western-himalayas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/vjjan91/elevMigration/edit/master/06_PGLS-models.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "none"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

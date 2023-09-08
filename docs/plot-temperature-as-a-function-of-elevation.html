@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 5 Resampling analysis | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <title>3.6 Plot temperature as a function of elevation | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
   <meta name="description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 5 Resampling analysis | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta property="og:title" content="3.6 Plot temperature as a function of elevation | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 5 Resampling analysis | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="twitter:title" content="3.6 Plot temperature as a function of elevation | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
   <meta name="twitter:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="extract-elevation-at-unique-locations.html"/>
-<link rel="next" href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html"/>
+<link rel="prev" href="extracting-data-across-elevational-bands.html"/>
+<link rel="next" href="processing-ebird-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -207,17 +207,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="resampling-analysis" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Section 5</span> Resampling analysis<a href="resampling-analysis.html#resampling-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Using the previously generated .Rdata file, we resample checklists for three levels of sampling effort at different elevational bands.</p>
+<div id="plot-temperature-as-a-function-of-elevation" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> Plot temperature as a function of elevation<a href="plot-temperature-as-a-function-of-elevation.html#plot-temperature-as-a-function-of-elevation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-1"></a><span class="co"># eastern Himalayas</span></span>
+<span id="cb8-2"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-2"></a>fig_climate_elevEast <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(envEast)<span class="sc">+</span></span>
+<span id="cb8-3"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-3"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean),</span>
+<span id="cb8-4"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-4"></a>            <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-5"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-5"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean, <span class="at">ymin=</span>mean<span class="sc">-</span>ci, <span class="at">ymax=</span>mean<span class="sc">+</span>ci),</span>
+<span id="cb8-6"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-6"></a>                  <span class="at">size =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
+<span id="cb8-7"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-7"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb8-8"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb8-9"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-9"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>clim_var, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-10"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-10"></a>  <span class="fu">theme_few</span>()<span class="sc">+</span></span>
+<span id="cb8-11"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-11"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;elevation (m) at 100m intervals&quot;</span>, <span class="at">y =</span> <span class="st">&quot;CHELSA variable value&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-12"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-12"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>), </span>
+<span id="cb8-13"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-13"></a>        <span class="at">axis.ticks.length.x =</span> <span class="fu">unit</span>(.<span class="dv">5</span>, <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb8-14"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-14"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb8-15"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-15"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-16"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-16"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="dv">1</span>,<span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb8-17"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-17"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
+<span id="cb8-18"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-18"></a></span>
+<span id="cb8-19"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-19"></a><span class="co"># save ggplots accordingly</span></span>
+<span id="cb8-20"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-20"></a><span class="fu">ggsave</span>(fig_climate_elevEast, <span class="at">filename =</span> <span class="st">&quot;figs/fig_eastHim_elev100.png&quot;</span>, </span>
+<span id="cb8-21"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-21"></a>       <span class="at">height =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">device =</span> <span class="fu">png</span>(), <span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>); <span class="fu">dev.off</span>()</span>
+<span id="cb8-22"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-22"></a></span>
+<span id="cb8-23"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-23"></a><span class="co"># western Himalayas</span></span>
+<span id="cb8-24"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-24"></a>fig_climate_elevWest <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(envWest)<span class="sc">+</span></span>
+<span id="cb8-25"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-25"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean),</span>
+<span id="cb8-26"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-26"></a>            <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-27"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-27"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean, <span class="at">ymin=</span>mean<span class="sc">-</span>ci, <span class="at">ymax=</span>mean<span class="sc">+</span>ci),</span>
+<span id="cb8-28"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-28"></a>                  <span class="at">size =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
+<span id="cb8-29"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-29"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb8-30"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-30"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb8-31"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-31"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>clim_var, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-32"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-32"></a>  <span class="fu">theme_few</span>()<span class="sc">+</span></span>
+<span id="cb8-33"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-33"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;elevation (m) at 100m intervals&quot;</span>, <span class="at">y =</span> <span class="st">&quot;CHELSA variable value&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-34"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-34"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>), </span>
+<span id="cb8-35"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-35"></a>        <span class="at">axis.ticks.length.x =</span> <span class="fu">unit</span>(.<span class="dv">5</span>, <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb8-36"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-36"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb8-37"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-37"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-38"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-38"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="dv">1</span>,<span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb8-39"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-39"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
+<span id="cb8-40"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-40"></a></span>
+<span id="cb8-41"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-41"></a><span class="co"># save ggplots accordingly</span></span>
+<span id="cb8-42"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-42"></a><span class="fu">ggsave</span>(fig_climate_elevWest, <span class="at">filename =</span> <span class="st">&quot;figs/fig_westHim_elev100.png&quot;</span>, </span>
+<span id="cb8-43"><a href="plot-temperature-as-a-function-of-elevation.html#cb8-43"></a>       <span class="at">height =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">device =</span> <span class="fu">png</span>(), <span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>); <span class="fu">dev.off</span>()</span></code></pre></div>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="extract-elevation-at-unique-locations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="load-.rdata-file-containing-elevation-data-across-ebird-sampling-locations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="extracting-data-across-elevational-bands.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="processing-ebird-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -248,7 +292,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/vjjan91/elevMigration/edit/master/04_resampling-analysis.Rmd",
+"link": "https://github.com/vjjan91/elevMigration/edit/master/02_elevation-temperature.Rmd",
 "text": "Edit"
 },
 "history": {
