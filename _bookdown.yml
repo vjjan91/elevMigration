@@ -1,12 +1,12 @@
-book_filename: "elevMigration_main_text"
-output: 
-  html_document: 
-    fig_caption: yes
-  pdf_document:
-    keep_tex: yes
+book_filename: "Elevational migration"
+repo: https://github.com/vjjan91/elevMigration
 delete_merged_file: true
 before_chapter_script: "common.R"
 output_dir: "docs"
 language:
+  label:
+    fig: "FIGURE "
+    tab: "TABLE "
   ui:
+    edit: "Edit"
     chapter_name: "Section "

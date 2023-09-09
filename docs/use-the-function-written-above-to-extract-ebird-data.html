@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <title>4.3 Use the function written above to extract eBird data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
   <meta name="description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta property="og:title" content="4.3 Use the function written above to extract eBird data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="twitter:title" content="4.3 Use the function written above to extract eBird data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
   <meta name="twitter:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="load-necessary-libraries-3.html"/>
-<link rel="next" href="eastern-himalayas.html"/>
+<link rel="prev" href="loading-custom-functions-to-process-ebird-data.html"/>
+<link rel="next" href="extract-elevation-at-unique-locations.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -208,20 +208,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="load-previously-generated-.rdata-files-for-analyses" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Load previously generated .Rdata files for analyses<a href="load-previously-generated-.rdata-files-for-analyses.html#load-previously-generated-.rdata-files-for-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="use-the-function-written-above-to-extract-ebird-data" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Use the function written above to extract eBird data<a href="use-the-function-written-above-to-extract-ebird-data.html#use-the-function-written-above-to-extract-ebird-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
-<span id="cb16-2"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-2"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(dat<span class="fl">.1</span>)</span>
-<span id="cb16-3"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-3"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span>[,<span class="sc">-</span><span class="dv">27</span>]</span>
-<span id="cb16-4"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-4"></a></span>
-<span id="cb16-5"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-5"></a><span class="do">#### Keep only full species data</span></span>
-<span id="cb16-6"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-6"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
-<span id="cb16-7"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-7"></a></span>
-<span id="cb16-8"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-8"></a><span class="do">##Separating eastern and western himalayas</span></span>
-<span id="cb16-9"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-9"></a>dat1W<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-10"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-10"></a>dat1E<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-11"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-11"></a><span class="fu">rm</span>(dat<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb11-1"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-1"></a><span class="co"># please download the latest versions of eBird data from https://ebird.org/data/download and set the file path accordingly. Since these two datasets are extremely large, we have not uploaded the same to github.</span></span>
+<span id="cb11-2"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-2"></a></span>
+<span id="cb11-3"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-3"></a><span class="co"># In this study, the latest version of the data corresponds to July 31st 2021</span></span>
+<span id="cb11-4"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-4"></a></span>
+<span id="cb11-5"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-5"></a><span class="co"># extract data for the following list of countries</span></span>
+<span id="cb11-6"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-6"></a></span>
+<span id="cb11-7"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-7"></a>Bhutan <span class="ot">&lt;-</span> <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_BT_relAug-2022.txt&quot;</span>)</span>
+<span id="cb11-8"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-8"></a>India <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-JK_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-LA_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-HP_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-AR_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-WB_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-UL_relAug-2022.txt&quot;</span>), <span class="fu">readcleanrawdata</span>(<span class="st">&quot;ebd_IN-SK_relAug-2022.txt&quot;</span>))</span>
+<span id="cb11-9"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-9"></a></span>
+<span id="cb11-10"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-10"></a><span class="do">## Removing non himalayan regions</span></span>
+<span id="cb11-11"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-11"></a>India<span class="ot">&lt;-</span>India <span class="sc">%&gt;%</span> <span class="fu">filter</span>(LATITUDE<span class="sc">&gt;</span><span class="dv">26</span>,LONGITUDE<span class="sc">&lt;</span><span class="dv">100</span>)</span>
+<span id="cb11-12"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-12"></a></span>
+<span id="cb11-13"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-13"></a>dat <span class="ot">&lt;-</span><span class="fu">rbind</span>(India,Bhutan)</span>
+<span id="cb11-14"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-14"></a></span>
+<span id="cb11-15"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-15"></a><span class="co"># Keep only unique locations used</span></span>
+<span id="cb11-16"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-16"></a></span>
+<span id="cb11-17"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-17"></a>datll<span class="ot">&lt;-</span>dat<span class="sc">%&gt;%</span> <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">12</span>)) <span class="sc">%&gt;%</span> <span class="fu">distinct</span>(LATITUDE,LONGITUDE, <span class="at">.keep_all =</span> T)<span class="sc">%&gt;%</span><span class="fu">select</span>(LOCALITY.ID,LATITUDE,LONGITUDE)</span>
+<span id="cb11-18"><a href="use-the-function-written-above-to-extract-ebird-data.html#cb11-18"></a><span class="fu">write.csv</span>(datll, <span class="st">&quot;results/unique_loc.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
 </details>
 </div>
             </section>
@@ -229,8 +236,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="load-necessary-libraries-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="eastern-himalayas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="loading-custom-functions-to-process-ebird-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="extract-elevation-at-unique-locations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -261,7 +268,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/vjjan91/elevMigration/edit/master/05_elevational-migration.Rmd",
+"link": "https://github.com/vjjan91/elevMigration/edit/master/03_eBird-data-processing.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <title>2.2 Load data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
   <meta name="description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta property="og:title" content="2.2 Load data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="twitter:title" content="2.2 Load data | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
   <meta name="twitter:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="load-necessary-libraries-3.html"/>
-<link rel="next" href="eastern-himalayas.html"/>
+<link rel="prev" href="load-necessary-libraries.html"/>
+<link rel="next" href="temperature-elevation-associations.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -208,29 +208,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="load-previously-generated-.rdata-files-for-analyses" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Load previously generated .Rdata files for analyses<a href="load-previously-generated-.rdata-files-for-analyses.html#load-previously-generated-.rdata-files-for-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="load-data" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Load data<a href="load-data.html#load-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
-<span id="cb16-2"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-2"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(dat<span class="fl">.1</span>)</span>
-<span id="cb16-3"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-3"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span>[,<span class="sc">-</span><span class="dv">27</span>]</span>
-<span id="cb16-4"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-4"></a></span>
-<span id="cb16-5"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-5"></a><span class="do">#### Keep only full species data</span></span>
-<span id="cb16-6"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-6"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
-<span id="cb16-7"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-7"></a></span>
-<span id="cb16-8"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-8"></a><span class="do">##Separating eastern and western himalayas</span></span>
-<span id="cb16-9"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-9"></a>dat1W<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-10"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-10"></a>dat1E<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-11"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-11"></a><span class="fu">rm</span>(dat<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb2-1"><a href="load-data.html#cb2-1"></a>loc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/localities-for-map.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="load-data.html#cb2-2"></a><span class="fu">head</span>(loc)</span>
+<span id="cb2-3"><a href="load-data.html#cb2-3"></a></span>
+<span id="cb2-4"><a href="load-data.html#cb2-4"></a>loc_unique <span class="ot">&lt;-</span> loc <span class="sc">%&gt;%</span> <span class="fu">distinct</span>()</span>
+<span id="cb2-5"><a href="load-data.html#cb2-5"></a></span>
+<span id="cb2-6"><a href="load-data.html#cb2-6"></a>loc_unique<span class="sc">$</span>species <span class="ot">&lt;-</span> <span class="st">&quot;species&quot;</span></span>
+<span id="cb2-7"><a href="load-data.html#cb2-7"></a></span>
+<span id="cb2-8"><a href="load-data.html#cb2-8"></a><span class="co"># carry out spatial thinning with a minimum distance of 15km between records</span></span>
+<span id="cb2-9"><a href="load-data.html#cb2-9"></a>thinned <span class="ot">&lt;-</span> <span class="fu">thin</span>(loc_unique,<span class="at">lat.col=</span><span class="st">&quot;LATITUDE&quot;</span>,<span class="at">long.col =</span> <span class="st">&quot;LONGITUDE&quot;</span>,</span>
+<span id="cb2-10"><a href="load-data.html#cb2-10"></a>                <span class="at">spec.col =</span> <span class="st">&quot;species&quot;</span>,<span class="at">thin.par =</span> <span class="dv">15</span>,<span class="at">reps=</span><span class="dv">1</span>,</span>
+<span id="cb2-11"><a href="load-data.html#cb2-11"></a>                <span class="at">write.files=</span>T, </span>
+<span id="cb2-12"><a href="load-data.html#cb2-12"></a>                <span class="at">out.dir=</span><span class="st">&quot;data/&quot;</span>,</span>
+<span id="cb2-13"><a href="load-data.html#cb2-13"></a>                <span class="at">out.base=</span><span class="st">&quot;localities-thinned&quot;</span>)</span>
+<span id="cb2-14"><a href="load-data.html#cb2-14"></a></span>
+<span id="cb2-15"><a href="load-data.html#cb2-15"></a><span class="co"># reload spatially thinned file</span></span>
+<span id="cb2-16"><a href="load-data.html#cb2-16"></a>thin_file <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;results/localities-for-map-thinned.csv&quot;</span>)</span>
+<span id="cb2-17"><a href="load-data.html#cb2-17"></a></span>
+<span id="cb2-18"><a href="load-data.html#cb2-18"></a>thin_file <span class="ot">&lt;-</span> thin_file <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="load-data.html#cb2-19"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">case_when</span>(LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span> <span class="sc">~</span> <span class="st">&quot;west&quot;</span>,</span>
+<span id="cb2-20"><a href="load-data.html#cb2-20"></a>                            LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span> <span class="sc">~</span> <span class="st">&quot;east&quot;</span>))</span>
+<span id="cb2-21"><a href="load-data.html#cb2-21"></a></span>
+<span id="cb2-22"><a href="load-data.html#cb2-22"></a>shp <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(thin_file, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>,<span class="st">&quot;LATITUDE&quot;</span>), <span class="at">crs=</span><span class="dv">4326</span>)</span>
+<span id="cb2-23"><a href="load-data.html#cb2-23"></a><span class="fu">str</span>(shp)</span>
+<span id="cb2-24"><a href="load-data.html#cb2-24"></a></span>
+<span id="cb2-25"><a href="load-data.html#cb2-25"></a><span class="fu">st_write</span>(shp[shp<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;east&quot;</span>,],<span class="st">&quot;data/shapefiles/localities-east.shp&quot;</span>,</span>
+<span id="cb2-26"><a href="load-data.html#cb2-26"></a>         <span class="at">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)</span>
+<span id="cb2-27"><a href="load-data.html#cb2-27"></a><span class="fu">st_write</span>(shp[shp<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;west&quot;</span>,],<span class="st">&quot;data/shapefiles/localities-west.shp&quot;</span>,</span>
+<span id="cb2-28"><a href="load-data.html#cb2-28"></a>         <span class="at">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)</span></code></pre></div>
 </details>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="load-necessary-libraries-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="eastern-himalayas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="load-necessary-libraries.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="temperature-elevation-associations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -261,7 +280,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/vjjan91/elevMigration/edit/master/05_elevational-migration.Rmd",
+"link": "https://github.com/vjjan91/elevMigration/edit/master/01_spatial-thinning.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <title>3.4 Prepare climate rasters | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
   <meta name="description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta property="og:title" content="3.4 Prepare climate rasters | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="twitter:title" content="3.4 Prepare climate rasters | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
   <meta name="twitter:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="load-necessary-libraries-3.html"/>
-<link rel="next" href="eastern-himalayas.html"/>
+<link rel="prev" href="prepare-elevation-rasters.html"/>
+<link rel="next" href="extracting-data-across-elevational-bands.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -208,20 +208,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="load-previously-generated-.rdata-files-for-analyses" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Load previously generated .Rdata files for analyses<a href="load-previously-generated-.rdata-files-for-analyses.html#load-previously-generated-.rdata-files-for-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prepare-climate-rasters" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Prepare climate rasters<a href="prepare-climate-rasters.html#prepare-climate-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
-<span id="cb16-2"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-2"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(dat<span class="fl">.1</span>)</span>
-<span id="cb16-3"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-3"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span>[,<span class="sc">-</span><span class="dv">27</span>]</span>
-<span id="cb16-4"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-4"></a></span>
-<span id="cb16-5"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-5"></a><span class="do">#### Keep only full species data</span></span>
-<span id="cb16-6"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-6"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
-<span id="cb16-7"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-7"></a></span>
-<span id="cb16-8"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-8"></a><span class="do">##Separating eastern and western himalayas</span></span>
-<span id="cb16-9"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-9"></a>dat1W<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-10"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-10"></a>dat1E<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-11"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-11"></a><span class="fu">rm</span>(dat<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb6-1"><a href="prepare-climate-rasters.html#cb6-1"></a><span class="co"># list chelsa files</span></span>
+<span id="cb6-2"><a href="prepare-climate-rasters.html#cb6-2"></a><span class="co"># CHELSA files are not uploaded to GitHub as they are extremely large and can be downloaded from https://chelsa-climate.org/</span></span>
+<span id="cb6-3"><a href="prepare-climate-rasters.html#cb6-3"></a><span class="co"># Please note that we downloaded four rasters corresponding to minimum and maximum temperatures for the months of January and June</span></span>
+<span id="cb6-4"><a href="prepare-climate-rasters.html#cb6-4"></a></span>
+<span id="cb6-5"><a href="prepare-climate-rasters.html#cb6-5"></a>chelsaFiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;data/chelsa/&quot;</span>, </span>
+<span id="cb6-6"><a href="prepare-climate-rasters.html#cb6-6"></a>                          <span class="at">full.names =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb6-7"><a href="prepare-climate-rasters.html#cb6-7"></a>                          <span class="at">pattern =</span> <span class="st">&quot;*.tif&quot;</span>)</span>
+<span id="cb6-8"><a href="prepare-climate-rasters.html#cb6-8"></a></span>
+<span id="cb6-9"><a href="prepare-climate-rasters.html#cb6-9"></a><span class="co"># gather chelsa data over the east</span></span>
+<span id="cb6-10"><a href="prepare-climate-rasters.html#cb6-10"></a>chelsaEast <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(chelsaFiles, <span class="cf">function</span>(chr){</span>
+<span id="cb6-11"><a href="prepare-climate-rasters.html#cb6-11"></a>  a <span class="ot">&lt;-</span> <span class="fu">raster</span>(chr)</span>
+<span id="cb6-12"><a href="prepare-climate-rasters.html#cb6-12"></a>  <span class="fu">crs</span>(a) <span class="ot">&lt;-</span> <span class="fu">crs</span>(elevEast)</span>
+<span id="cb6-13"><a href="prepare-climate-rasters.html#cb6-13"></a>  a <span class="ot">&lt;-</span> <span class="fu">crop</span>(a, <span class="fu">as</span>(eastHim, <span class="st">&quot;Spatial&quot;</span>))</span>
+<span id="cb6-14"><a href="prepare-climate-rasters.html#cb6-14"></a>  <span class="fu">return</span>(a)</span>
+<span id="cb6-15"><a href="prepare-climate-rasters.html#cb6-15"></a>})</span>
+<span id="cb6-16"><a href="prepare-climate-rasters.html#cb6-16"></a></span>
+<span id="cb6-17"><a href="prepare-climate-rasters.html#cb6-17"></a><span class="co"># gather chelsa data over the west</span></span>
+<span id="cb6-18"><a href="prepare-climate-rasters.html#cb6-18"></a>chelsaWest <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(chelsaFiles, <span class="cf">function</span>(chr){</span>
+<span id="cb6-19"><a href="prepare-climate-rasters.html#cb6-19"></a>  a <span class="ot">&lt;-</span> <span class="fu">raster</span>(chr)</span>
+<span id="cb6-20"><a href="prepare-climate-rasters.html#cb6-20"></a>  <span class="fu">crs</span>(a) <span class="ot">&lt;-</span> <span class="fu">crs</span>(elevWest)</span>
+<span id="cb6-21"><a href="prepare-climate-rasters.html#cb6-21"></a>  a <span class="ot">&lt;-</span> <span class="fu">crop</span>(a, <span class="fu">as</span>(westHim, <span class="st">&quot;Spatial&quot;</span>))</span>
+<span id="cb6-22"><a href="prepare-climate-rasters.html#cb6-22"></a>  <span class="fu">return</span>(a)</span>
+<span id="cb6-23"><a href="prepare-climate-rasters.html#cb6-23"></a>})</span>
+<span id="cb6-24"><a href="prepare-climate-rasters.html#cb6-24"></a></span>
+<span id="cb6-25"><a href="prepare-climate-rasters.html#cb6-25"></a></span>
+<span id="cb6-26"><a href="prepare-climate-rasters.html#cb6-26"></a><span class="co"># Divide temperature values by 10 for east</span></span>
+<span id="cb6-27"><a href="prepare-climate-rasters.html#cb6-27"></a>chelsaEast[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-28"><a href="prepare-climate-rasters.html#cb6-28"></a>chelsaEast[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-29"><a href="prepare-climate-rasters.html#cb6-29"></a>chelsaEast[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-30"><a href="prepare-climate-rasters.html#cb6-30"></a>chelsaEast[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-31"><a href="prepare-climate-rasters.html#cb6-31"></a></span>
+<span id="cb6-32"><a href="prepare-climate-rasters.html#cb6-32"></a><span class="co"># Divide temperature values by 10 for the west</span></span>
+<span id="cb6-33"><a href="prepare-climate-rasters.html#cb6-33"></a>chelsaWest[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-34"><a href="prepare-climate-rasters.html#cb6-34"></a>chelsaWest[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-35"><a href="prepare-climate-rasters.html#cb6-35"></a>chelsaWest[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-36"><a href="prepare-climate-rasters.html#cb6-36"></a>chelsaWest[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-37"><a href="prepare-climate-rasters.html#cb6-37"></a></span>
+<span id="cb6-38"><a href="prepare-climate-rasters.html#cb6-38"></a><span class="co"># stack chelsa data for the east and west</span></span>
+<span id="cb6-39"><a href="prepare-climate-rasters.html#cb6-39"></a>chelsaEast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaEast)</span>
+<span id="cb6-40"><a href="prepare-climate-rasters.html#cb6-40"></a>chelsaWest <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaWest)</span>
+<span id="cb6-41"><a href="prepare-climate-rasters.html#cb6-41"></a></span>
+<span id="cb6-42"><a href="prepare-climate-rasters.html#cb6-42"></a><span class="do">### Stack prepared rasters</span></span>
+<span id="cb6-43"><a href="prepare-climate-rasters.html#cb6-43"></a><span class="co"># stack rasters for efficient reprojection later</span></span>
+<span id="cb6-44"><a href="prepare-climate-rasters.html#cb6-44"></a>env_east <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevEast, chelsaEast)</span>
+<span id="cb6-45"><a href="prepare-climate-rasters.html#cb6-45"></a>env_west <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevWest, chelsaWest)</span>
+<span id="cb6-46"><a href="prepare-climate-rasters.html#cb6-46"></a></span>
+<span id="cb6-47"><a href="prepare-climate-rasters.html#cb6-47"></a><span class="co"># get proper names</span></span>
+<span id="cb6-48"><a href="prepare-climate-rasters.html#cb6-48"></a>elev_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, <span class="st">&quot;slope&quot;</span>, <span class="st">&quot;aspect&quot;</span>)</span>
+<span id="cb6-49"><a href="prepare-climate-rasters.html#cb6-49"></a>chelsa_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;maxTemp_Jan&quot;</span>, <span class="st">&quot;maxTemp_June&quot;</span>,<span class="st">&quot;minTemp_Jan&quot;</span>,<span class="st">&quot;minTemp_June&quot;</span>)</span>
+<span id="cb6-50"><a href="prepare-climate-rasters.html#cb6-50"></a></span>
+<span id="cb6-51"><a href="prepare-climate-rasters.html#cb6-51"></a><span class="fu">names</span>(env_east) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span>
+<span id="cb6-52"><a href="prepare-climate-rasters.html#cb6-52"></a><span class="fu">names</span>(env_west) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span></code></pre></div>
 </details>
 </div>
             </section>
@@ -229,8 +270,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="load-necessary-libraries-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="eastern-himalayas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="prepare-elevation-rasters.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="extracting-data-across-elevational-bands.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -261,7 +302,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/vjjan91/elevMigration/edit/master/05_elevational-migration.Rmd",
+"link": "https://github.com/vjjan91/elevMigration/edit/master/02_elevation-temperature.Rmd",
 "text": "Edit"
 },
 "history": {

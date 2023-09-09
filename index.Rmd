@@ -1,22 +1,18 @@
 --- 
-knit: "bookdown::render_book"
 title: "Source code for _Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons_"
 author:
     - Tarun Menon
     - Vijay Ramesh
     - Sahas Barve
-date: "`r Sys.Date()`"
+knit: "bookdown::render_book"
+documentclass: krantz
+date: "Last compiled on `r format(Sys.time(), '%d %B, %Y')`"
+colorlinks: yes
+lot: yes
+lof: yes
+fontsize: 12pt
 site: bookdown::bookdown_site
-output: 
-  bookdown::gitbook:
-    fig_caption: yes
-  bookdown::pdf_document2:
-    documentclass: scrreprt
-    toc-depth: 1
-    secnumdepth: 2
-    geometry: "left=4cm, right=3cm, top=2.5cm, bottom=2.5cm"
-biblio-style: apalike
-link-citations: yes
+description: "This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas"
 github-repo: vjjan91/elevMigration
 ---  
 

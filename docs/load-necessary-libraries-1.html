@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <title>3.1 Load necessary libraries | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
   <meta name="description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta property="og:title" content="3.1 Load necessary libraries | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="twitter:title" content="3.1 Load necessary libraries | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
   <meta name="twitter:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="load-necessary-libraries-3.html"/>
-<link rel="next" href="eastern-himalayas.html"/>
+<link rel="prev" href="temperature-elevation-associations.html"/>
+<link rel="next" href="load-shapefiles.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -208,20 +208,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="load-previously-generated-.rdata-files-for-analyses" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Load previously generated .Rdata files for analyses<a href="load-previously-generated-.rdata-files-for-analyses.html#load-previously-generated-.rdata-files-for-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="load-necessary-libraries-1" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Load necessary libraries<a href="load-necessary-libraries-1.html#load-necessary-libraries-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
-<span id="cb16-2"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-2"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(dat<span class="fl">.1</span>)</span>
-<span id="cb16-3"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-3"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span>[,<span class="sc">-</span><span class="dv">27</span>]</span>
-<span id="cb16-4"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-4"></a></span>
-<span id="cb16-5"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-5"></a><span class="do">#### Keep only full species data</span></span>
-<span id="cb16-6"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-6"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
-<span id="cb16-7"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-7"></a></span>
-<span id="cb16-8"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-8"></a><span class="do">##Separating eastern and western himalayas</span></span>
-<span id="cb16-9"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-9"></a>dat1W<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-10"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-10"></a>dat1E<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-11"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-11"></a><span class="fu">rm</span>(dat<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb3-1"><a href="load-necessary-libraries-1.html#cb3-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb3-2"><a href="load-necessary-libraries-1.html#cb3-2"></a><span class="fu">library</span>(stringi)</span>
+<span id="cb3-3"><a href="load-necessary-libraries-1.html#cb3-3"></a><span class="fu">library</span>(glue)</span>
+<span id="cb3-4"><a href="load-necessary-libraries-1.html#cb3-4"></a><span class="fu">library</span>(gdalUtils)</span>
+<span id="cb3-5"><a href="load-necessary-libraries-1.html#cb3-5"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb3-6"><a href="load-necessary-libraries-1.html#cb3-6"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-7"><a href="load-necessary-libraries-1.html#cb3-7"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb3-8"><a href="load-necessary-libraries-1.html#cb3-8"></a><span class="fu">library</span>(scales)</span>
+<span id="cb3-9"><a href="load-necessary-libraries-1.html#cb3-9"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-10"><a href="load-necessary-libraries-1.html#cb3-10"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb3-11"><a href="load-necessary-libraries-1.html#cb3-11"></a><span class="fu">library</span>(sf)</span>
+<span id="cb3-12"><a href="load-necessary-libraries-1.html#cb3-12"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb3-13"><a href="load-necessary-libraries-1.html#cb3-13"></a><span class="fu">library</span>(rgeos)</span>
+<span id="cb3-14"><a href="load-necessary-libraries-1.html#cb3-14"></a></span>
+<span id="cb3-15"><a href="load-necessary-libraries-1.html#cb3-15"></a><span class="co"># get ci func</span></span>
+<span id="cb3-16"><a href="load-necessary-libraries-1.html#cb3-16"></a>ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span><span class="fu">sd</span>(x, <span class="at">na.rm =</span> T)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x))}</span>
+<span id="cb3-17"><a href="load-necessary-libraries-1.html#cb3-17"></a></span>
+<span id="cb3-18"><a href="load-necessary-libraries-1.html#cb3-18"></a><span class="co"># prep mode function to aggregate</span></span>
+<span id="cb3-19"><a href="load-necessary-libraries-1.html#cb3-19"></a>funcMode <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> T) {</span>
+<span id="cb3-20"><a href="load-necessary-libraries-1.html#cb3-20"></a>  ux <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb3-21"><a href="load-necessary-libraries-1.html#cb3-21"></a>  ux[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, ux)))]</span>
+<span id="cb3-22"><a href="load-necessary-libraries-1.html#cb3-22"></a>}</span>
+<span id="cb3-23"><a href="load-necessary-libraries-1.html#cb3-23"></a></span>
+<span id="cb3-24"><a href="load-necessary-libraries-1.html#cb3-24"></a><span class="co"># a basic test</span></span>
+<span id="cb3-25"><a href="load-necessary-libraries-1.html#cb3-25"></a>assertthat<span class="sc">::</span><span class="fu">assert_that</span>(<span class="fu">funcMode</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)) <span class="sc">==</span> <span class="fu">as.character</span>(<span class="dv">2</span>), </span>
+<span id="cb3-26"><a href="load-necessary-libraries-1.html#cb3-26"></a>                        <span class="at">msg =</span> <span class="st">&quot;problem in the mode function&quot;</span>) <span class="co"># works</span></span></code></pre></div>
 </details>
 </div>
             </section>
@@ -229,8 +244,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="load-necessary-libraries-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="eastern-himalayas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="temperature-elevation-associations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="load-shapefiles.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -261,7 +276,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/vjjan91/elevMigration/edit/master/05_elevational-migration.Rmd",
+"link": "https://github.com/vjjan91/elevMigration/edit/master/02_elevation-temperature.Rmd",
 "text": "Edit"
 },
 "history": {

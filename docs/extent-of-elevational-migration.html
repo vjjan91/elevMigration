@@ -5,19 +5,19 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Section 6 Extent of elevational migration | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
-  <meta name="description" content="Section 6 Extent of elevational migration | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Section 6 Extent of elevational migration | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
-  
+  <meta property="og:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Section 6 Extent of elevational migration | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
-  
+  <meta name="twitter:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   
 
 <meta name="author" content="Tarun Menon" />
@@ -25,7 +25,6 @@
 <meta name="author" content="Sahas Barve" />
 
 
-<meta name="date" content="2023-07-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +50,7 @@
 
 
 
+<link href="libs/codefolding-lua-1.1/codefolding-lua.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
@@ -126,7 +126,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 </style>
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
 </head>
 
 <body>
@@ -139,6 +139,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
+<li><a href="./">Himalayan bird elevational migration</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#data-processing"><i class="fa fa-check"></i><b>1.1</b> Data processing</a></li>
@@ -185,6 +188,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.3" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#pgls-models-for-the-western-himalayas"><i class="fa fa-check"></i><b>7.3</b> PGLS models for the Western Himalayas</a></li>
 <li class="chapter" data-level="7.4" data-path="phylogenetic-generalized-least-squares-regressions.html"><a href="phylogenetic-generalized-least-squares-regressions.html#phylogenetic-paired-t-test"><i class="fa fa-check"></i><b>7.4</b> Phylogenetic paired t-test</a></li>
 </ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="_blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -207,6 +213,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In this script, we calculate the median migration extent, breeding and wintering elevation for all combinations of elevational limit and sampling effort separately for the eastern and western Himalayas</p>
 <div id="load-necessary-libraries-3" class="section level2 hasAnchor" number="6.1">
 <h2><span class="header-section-number">6.1</span> Load necessary libraries<a href="extent-of-elevational-migration.html#load-necessary-libraries-3" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb15"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb15-1"><a href="extent-of-elevational-migration.html#cb15-1"></a><span class="fu">library</span>(ape)</span>
 <span id="cb15-2"><a href="extent-of-elevational-migration.html#cb15-2"></a><span class="fu">library</span>(geiger)</span>
 <span id="cb15-3"><a href="extent-of-elevational-migration.html#cb15-3"></a><span class="fu">library</span>(phytools)</span>
@@ -215,9 +222,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb15-6"><a href="extent-of-elevational-migration.html#cb15-6"></a><span class="fu">library</span>(nlme)</span>
 <span id="cb15-7"><a href="extent-of-elevational-migration.html#cb15-7"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb15-8"><a href="extent-of-elevational-migration.html#cb15-8"></a><span class="fu">library</span>(phangorn)</span></code></pre></div>
+</details>
 </div>
 <div id="load-previously-generated-.rdata-files-for-analyses" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">6.2</span> Load previously generated .Rdata files for analyses<a href="extent-of-elevational-migration.html#load-previously-generated-.rdata-files-for-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="extent-of-elevational-migration.html#cb16-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
 <span id="cb16-2"><a href="extent-of-elevational-migration.html#cb16-2"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(dat<span class="fl">.1</span>)</span>
 <span id="cb16-3"><a href="extent-of-elevational-migration.html#cb16-3"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span>[,<span class="sc">-</span><span class="dv">27</span>]</span>
@@ -229,9 +238,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb16-9"><a href="extent-of-elevational-migration.html#cb16-9"></a>dat1W<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
 <span id="cb16-10"><a href="extent-of-elevational-migration.html#cb16-10"></a>dat1E<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span>
 <span id="cb16-11"><a href="extent-of-elevational-migration.html#cb16-11"></a><span class="fu">rm</span>(dat<span class="fl">.1</span>)</span></code></pre></div>
+</details>
 </div>
 <div id="eastern-himalayas" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Eastern Himalayas<a href="extent-of-elevational-migration.html#eastern-himalayas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb17"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb17-1"><a href="extent-of-elevational-migration.html#cb17-1"></a></span>
 <span id="cb17-2"><a href="extent-of-elevational-migration.html#cb17-2"></a><span class="do">#### Creating a list of unique species</span></span>
 <span id="cb17-3"><a href="extent-of-elevational-migration.html#cb17-3"></a></span>
@@ -307,9 +318,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb17-73"><a href="extent-of-elevational-migration.html#cb17-73"></a>    <span class="fu">write.csv</span>(ts, <span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;results/final_birdlist_east_&quot;</span>,ds,<span class="st">&quot;.sam&quot;</span>,minSample, <span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">row.names =</span> F)</span>
 <span id="cb17-74"><a href="extent-of-elevational-migration.html#cb17-74"></a>  }</span>
 <span id="cb17-75"><a href="extent-of-elevational-migration.html#cb17-75"></a>}</span></code></pre></div>
+</details>
 </div>
 <div id="western-himalayas" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Western Himalayas<a href="extent-of-elevational-migration.html#western-himalayas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
 <div class="sourceCode" id="cb18"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb18-1"><a href="extent-of-elevational-migration.html#cb18-1"></a>uniSpe_west <span class="ot">&lt;-</span> dat1W <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
 <span id="cb18-2"><a href="extent-of-elevational-migration.html#cb18-2"></a>uniSpe_west <span class="ot">&lt;-</span> <span class="fu">unique</span>(uniSpe_west[, <span class="st">&quot;COMMON.NAME&quot;</span>]) <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
 <span id="cb18-3"><a href="extent-of-elevational-migration.html#cb18-3"></a><span class="fu">colnames</span>(uniSpe_west) <span class="ot">&lt;-</span> <span class="st">&quot;Species&quot;</span></span>
@@ -380,6 +393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb18-68"><a href="extent-of-elevational-migration.html#cb18-68"></a>    <span class="fu">write.csv</span>(ts, <span class="at">file =</span> <span class="fu">paste</span>(<span class="st">&quot;results/final_birdlist_west&quot;</span>,ds,<span class="st">&quot;.sam&quot;</span>,minSample, <span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>), <span class="at">row.names =</span> F)</span>
 <span id="cb18-69"><a href="extent-of-elevational-migration.html#cb18-69"></a>  }</span>
 <span id="cb18-70"><a href="extent-of-elevational-migration.html#cb18-70"></a>}</span></code></pre></div>
+</details>
 
 </div>
 </div>
@@ -403,7 +417,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": false,
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
 "fontsettings": {
 "theme": "white",
 "family": "sans",
@@ -427,7 +451,7 @@ gitbook.start({
 "options": null
 },
 "toc": {
-"collapse": "section"
+"collapse": "none"
 }
 });
 });

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
+  <title>7.4 Phylogenetic paired t-test | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons</title>
   <meta name="description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="generator" content="bookdown 0.34 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta property="og:title" content="7.4 Phylogenetic paired t-test | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   <meta name="github-repo" content="vjjan91/elevMigration" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.2 Load previously generated .Rdata files for analyses | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
+  <meta name="twitter:title" content="7.4 Phylogenetic paired t-test | Source code for Himalayan birds shift elevations more to remain within narrow thermal regimes across seasons" />
   
   <meta name="twitter:description" content="This GitBook contains code and analyses that examine the extent of altitudinal migration among bird communities in the Himalayas" />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="load-necessary-libraries-3.html"/>
-<link rel="next" href="eastern-himalayas.html"/>
+<link rel="prev" href="pgls-models-for-the-western-himalayas.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -208,29 +208,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="load-previously-generated-.rdata-files-for-analyses" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Load previously generated .Rdata files for analyses<a href="load-previously-generated-.rdata-files-for-analyses.html#load-previously-generated-.rdata-files-for-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="phylogenetic-paired-t-test" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Phylogenetic paired t-test<a href="phylogenetic-paired-t-test.html#phylogenetic-paired-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb16"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb16-1"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-1"></a><span class="fu">load</span>(<span class="st">&quot;results/eBird_elev.RData&quot;</span>)</span>
-<span id="cb16-2"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-2"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span><span class="fu">as.data.frame</span>(dat<span class="fl">.1</span>)</span>
-<span id="cb16-3"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-3"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span>[,<span class="sc">-</span><span class="dv">27</span>]</span>
-<span id="cb16-4"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-4"></a></span>
-<span id="cb16-5"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-5"></a><span class="do">#### Keep only full species data</span></span>
-<span id="cb16-6"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-6"></a>dat<span class="fl">.1</span><span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span>(CATEGORY <span class="sc">==</span> <span class="st">&quot;species&quot;</span> <span class="sc">|</span> CATEGORY <span class="sc">==</span> <span class="st">&quot;issf&quot;</span>)</span>
-<span id="cb16-7"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-7"></a></span>
-<span id="cb16-8"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-8"></a><span class="do">##Separating eastern and western himalayas</span></span>
-<span id="cb16-9"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-9"></a>dat1W<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-10"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-10"></a>dat1E<span class="ot">&lt;-</span>dat<span class="fl">.1</span> <span class="sc">%&gt;%</span> <span class="fu">filter</span> (LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span>)</span>
-<span id="cb16-11"><a href="load-previously-generated-.rdata-files-for-analyses.html#cb16-11"></a><span class="fu">rm</span>(dat<span class="fl">.1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb22-1"><a href="phylogenetic-paired-t-test.html#cb22-1"></a>diff_ttest<span class="ot">&lt;-</span><span class="fu">setNames</span>(<span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">0</span>)), <span class="fu">c</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;df&quot;</span>, <span class="st">&quot;pvalue&quot;</span>))</span>
+<span id="cb22-2"><a href="phylogenetic-paired-t-test.html#cb22-2"></a>niche_ttest<span class="ot">&lt;-</span><span class="fu">setNames</span>(<span class="fu">data.frame</span>(<span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">0</span>)), <span class="fu">c</span>(<span class="st">&quot;t&quot;</span>, <span class="st">&quot;df&quot;</span>, <span class="st">&quot;pvalue&quot;</span>))</span>
+<span id="cb22-3"><a href="phylogenetic-paired-t-test.html#cb22-3"></a></span>
+<span id="cb22-4"><a href="phylogenetic-paired-t-test.html#cb22-4"></a><span class="cf">for</span> (ds <span class="cf">in</span> <span class="fu">c</span>(<span class="st">&quot;05.q1.sam30&quot;</span>, <span class="st">&quot;05.q1.sam60&quot;</span>, <span class="st">&quot;05.q2.sam30&quot;</span>,<span class="st">&quot;05.q2.sam60&quot;</span>, <span class="st">&quot;05.q3.sam30&quot;</span>,<span class="st">&quot;05.q3.sam60&quot;</span>, <span class="st">&quot;95.q1.sam30&quot;</span>,<span class="st">&quot;95.q1.sam60&quot;</span>, <span class="st">&quot;95.q2.sam30&quot;</span>,<span class="st">&quot;95.q2.sam60&quot;</span> ,<span class="st">&quot;95.q3.sam30&quot;</span>,<span class="st">&quot;95.q3.sam60&quot;</span> ,<span class="st">&quot;50.q1.sam30&quot;</span>,<span class="st">&quot;50.q1.sam60&quot;</span> ,<span class="st">&quot;50.q2.sam30&quot;</span>,<span class="st">&quot;50.q2.sam60&quot;</span> ,<span class="st">&quot;50.q3.sam30&quot;</span>, <span class="st">&quot;50.q3.sam60&quot;</span>)) {</span>
+<span id="cb22-5"><a href="phylogenetic-paired-t-test.html#cb22-5"></a>  west<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="fu">paste</span>(<span class="st">&quot;results/west_ordered&quot;</span>,ds,<span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb22-6"><a href="phylogenetic-paired-t-test.html#cb22-6"></a>  east<span class="ot">&lt;-</span><span class="fu">read.csv</span>(<span class="fu">paste</span>(<span class="st">&quot;results/east_ordered&quot;</span>,ds,<span class="st">&quot;.csv&quot;</span>, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>))</span>
+<span id="cb22-7"><a href="phylogenetic-paired-t-test.html#cb22-7"></a>  commonW<span class="ot">&lt;-</span>west[(west<span class="sc">$</span>Species <span class="sc">%in%</span> east<span class="sc">$</span>Species),]</span>
+<span id="cb22-8"><a href="phylogenetic-paired-t-test.html#cb22-8"></a>  commonE<span class="ot">&lt;-</span>east[(east<span class="sc">$</span>Species <span class="sc">%in%</span> west<span class="sc">$</span>Species),]</span>
+<span id="cb22-9"><a href="phylogenetic-paired-t-test.html#cb22-9"></a>  common<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">Median_diffW =</span> commonW<span class="sc">$</span>Median_diff,<span class="at">Median_diffE =</span> commonE<span class="sc">$</span>Median_diff, <span class="at">ThermalRegimeW =</span> commonW<span class="sc">$</span>ThermalRegime,<span class="at">ThermalRegimeE =</span> commonE<span class="sc">$</span>ThermalRegime ,<span class="at">Tree.name =</span> commonE<span class="sc">$</span>Tree.name)</span>
+<span id="cb22-10"><a href="phylogenetic-paired-t-test.html#cb22-10"></a>  pruned.tree<span class="ot">&lt;-</span><span class="fu">drop.tip</span>(tree1,tree1<span class="sc">$</span>tip.label[<span class="sc">-</span><span class="fu">match</span>(common<span class="sc">$</span>Tree.name, tree1<span class="sc">$</span>tip.label)])</span>
+<span id="cb22-11"><a href="phylogenetic-paired-t-test.html#cb22-11"></a>  comdata<span class="ot">&lt;-</span>common[<span class="fu">match</span>(pruned.tree<span class="sc">$</span>tip.label, common<span class="sc">$</span>Tree.name),]</span>
+<span id="cb22-12"><a href="phylogenetic-paired-t-test.html#cb22-12"></a>  <span class="fu">row.names</span>(comdata)<span class="ot">&lt;-</span>comdata<span class="sc">$</span>Tree.name</span>
+<span id="cb22-13"><a href="phylogenetic-paired-t-test.html#cb22-13"></a>  a<span class="ot">&lt;-</span><span class="fu">phyl.pairedttest</span>(pruned.tree,comdata[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)])</span>
+<span id="cb22-14"><a href="phylogenetic-paired-t-test.html#cb22-14"></a>  b<span class="ot">&lt;-</span><span class="fu">phyl.pairedttest</span>(pruned.tree,comdata[,<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>)])</span>
+<span id="cb22-15"><a href="phylogenetic-paired-t-test.html#cb22-15"></a>  a_diff_ttest<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">t =</span> a<span class="sc">$</span>t, <span class="at">pvalue =</span> a<span class="sc">$</span>P, <span class="at">df =</span> a<span class="sc">$</span>df, <span class="at">dataset =</span> ds)</span>
+<span id="cb22-16"><a href="phylogenetic-paired-t-test.html#cb22-16"></a>  b_niche_ttest<span class="ot">&lt;-</span><span class="fu">data.frame</span>(<span class="at">t =</span> b<span class="sc">$</span>t, <span class="at">pvalue =</span> b<span class="sc">$</span>P, <span class="at">df =</span> b<span class="sc">$</span>df, <span class="at">dataset =</span> ds)</span>
+<span id="cb22-17"><a href="phylogenetic-paired-t-test.html#cb22-17"></a>  diff_ttest<span class="ot">&lt;-</span><span class="fu">rbind</span>(diff_ttest,a_diff_ttest)</span>
+<span id="cb22-18"><a href="phylogenetic-paired-t-test.html#cb22-18"></a>  niche_ttest<span class="ot">&lt;-</span><span class="fu">rbind</span>(niche_ttest,b_niche_ttest)</span>
+<span id="cb22-19"><a href="phylogenetic-paired-t-test.html#cb22-19"></a>  </span>
+<span id="cb22-20"><a href="phylogenetic-paired-t-test.html#cb22-20"></a>  <span class="fu">write.csv</span>(diff_ttest, <span class="st">&quot;results/diff_ttest.csv&quot;</span>, <span class="at">row.names =</span> F)</span>
+<span id="cb22-21"><a href="phylogenetic-paired-t-test.html#cb22-21"></a>  <span class="fu">write.csv</span>(niche_ttest, <span class="st">&quot;results/niche_ttest.csv&quot;</span>, <span class="at">row.names =</span> F)</span>
+<span id="cb22-22"><a href="phylogenetic-paired-t-test.html#cb22-22"></a>}</span></code></pre></div>
 </details>
+
 </div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="load-necessary-libraries-3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="eastern-himalayas.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="pgls-models-for-the-western-himalayas.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -261,7 +274,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/vjjan91/elevMigration/edit/master/05_elevational-migration.Rmd",
+"link": "https://github.com/vjjan91/elevMigration/edit/master/06_PGLS-models.Rmd",
 "text": "Edit"
 },
 "history": {
