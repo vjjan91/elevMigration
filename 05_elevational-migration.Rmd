@@ -5,7 +5,7 @@ editor_options:
 
 # Extent of elevational migration
 
-In this script, we calculate the median migration extent, breeding and wintering elevation for all combinations of elevational limit and sampling effort separately for the eastern and western Himalayas
+In this script, we calculate the median migration extent, breeding and wintering elevation for all combinations of elevational limit and sampling effort separately for the eastern and western Himalayas, modified from Tsai et al 2020)
 
 ## Load necessary libraries
 ```{r}

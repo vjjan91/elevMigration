@@ -19,6 +19,7 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   x<-read.csv(paste("results/final_birdlist_east_", ds, ".csv", sep = ""))
   x<-x[!(x$Species %in% rem$Species),]
   write.csv(x,file = paste("results/birdlist_east",ds,".csv", sep = ""), row.names = F) 
+  # birdlist without non-himalayan species
 }
 
 # load necessary data for running statistical models 
@@ -28,34 +29,35 @@ east_100_W <- east_100 %>% select(-contains("June"))%>% rename(elev_roundW = ele
 jetzname <-read.csv("data/for_PGLS_list3.csv") #taxonomy used by birdtree.org
 sheard_trait <- read.csv("data/2020-sheard et al-species-trait-dat - speciesdata.csv") %>% #trait data set
   select(HWI,Diet,Tree.name)
-tree <-read.nexus("data/birdtree.nex")
+tree <-read.nexus("data/birdtree.nex") #nex file from birdtree.org (hackett all species)
 tree <- mcc(tree) ## maximum clade credibility tree
 
-
+# create a single dataframe of summaries of all model combinations
 compile_eastmodels<-setNames(data.frame(matrix(ncol = 6, nrow = 0)), c("Variable", "Value", "Std.Error", "t-value", "p-value", "ds"))
 
 for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.sam30","05.q3.sam60", "95.q1.sam30","95.q1.sam60", "95.q2.sam30","95.q2.sam60" ,"95.q3.sam30","95.q3.sam60" ,"50.q1.sam30","50.q1.sam60" ,"50.q2.sam30","50.q2.sam60" ,"50.q3.sam30", "50.q3.sam60")) {
   x<-read.csv(paste("results/birdlist_east", ds, ".csv", sep = ""))
   x$elev_roundS<-round(x$Median_S,-2)
   x$elev_roundW<-round(x$Median_W,-2)
-  x<-left_join(x,east_100_S, by = "elev_roundS")
+  x<-left_join(x,east_100_S, by = "elev_roundS") #aligning temperature data to elevational range data
   x<-left_join(x,east_100_W, by = "elev_roundW")
-  x$ThermalRegime<-x$maxTemp_June_mean-x$minTemp_Jan_mean
-  x<-left_join(x,jetzname, by = "Species")
-  x<-left_join(x, sheard_trait, by = "Tree.name")%>% mutate(Diet = fct_recode(Diet, "omnivore" = "nectar", "omnivore" = "scav", "seeds"="plants"))
-  pruned.tree<-drop.tip(tree1,tree1$tip.label[-match(x$Tree.name, tree1$tip.label)])
-  glsdata<-x[match(pruned.tree$tip.label, x$Tree.name),]
- pgls2<-gls(Median_diff~ThermalRegime+HWI+relevel(Diet, ref = "invertebrates"),correlation=corPagel(1,pruned.tree),data=glsdata)
+  x$ThermalRegime<-x$maxTemp_June_mean-x$minTemp_Jan_mean #calculating species thermal regimes
+  x<-left_join(x,jetzname, by = "Species") #adding jetz taxonomy
+  x<-left_join(x, sheard_trait, by = "Tree.name")%>% mutate(Diet = fct_recode(Diet, "omnivore" = "nectar", "omnivore" = "scav", "seeds"="plants")) #adding trait info
+  pruned.tree<-drop.tip(tree1,tree1$tip.label[-match(x$Tree.name, tree1$tip.label)]) #setting up the PGLS model
+  glsdata<-x[match(pruned.tree$tip.label, x$Tree.name),] #setting up the PGLS model
+ pgls2<-gls(Median_diff~ThermalRegime+HWI+relevel(Diet, ref = "invertebrates"),correlation=corPagel(1,pruned.tree),data=glsdata) #setting up the PGLS model
   k<-summary(pgls2)
   outputk<-as.data.frame(k$tTable)
   outputk$dataset<-ds
   outputk$Variable<-rownames(outputk)
   compile_eastmodels<-rbind(compile_eastmodels,outputk)
   
-  write.csv(glsdata, file = paste("results/east_ordered",ds,".csv", sep = ""), row.names = F)
+  write.csv(glsdata, file = paste("results/east_ordered",ds,".csv", sep = ""), row.names = F) # species ordered by taxonomy
   write.csv(compile_eastmodels, "results/compile_eastmodels.csv", row.names = F)
 }
 
+## calculating adjusted p values using the Benjamini Hochberg correction for false discovery rates
 east_p<-read.csv("results/compile_eastmodels.csv")
 east_p$adjP<-p.adjust(east_p$p.value, method = "fdr")
 
@@ -70,34 +72,36 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   write.csv(x,file = paste("results/birdlist_west",ds,".csv", sep = ""), row.names = F) ## final list after removing non himalayan species
 }
 
-west_100<-read.csv("results/westHim_100.csv")
-west_100_S<-west_100 %>% select(-contains("Jan")) %>% rename(elev_roundS = elev_round)
-west_100_W<-west_100 %>% select(-contains("June"))%>% rename(elev_roundW = elev_round)
+west_100<-read.csv("results/westHim_100.csv") #temperature data
+west_100_S<-west_100 %>% select(-contains("Jan")) %>% rename(elev_roundS = elev_round) #winter
+west_100_W<-west_100 %>% select(-contains("June"))%>% rename(elev_roundW = elev_round) #summer
 
+# create a single dataframe of summaries of all model combinations
 compile_westmodels<-setNames(data.frame(matrix(ncol = 5, nrow = 0)), c("Value", "Std.Error", "t-value", "p-value", "ds"))
 
 for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.sam30","05.q3.sam60", "95.q1.sam30","95.q1.sam60", "95.q2.sam30","95.q2.sam60" ,"95.q3.sam30","95.q3.sam60" ,"50.q1.sam30","50.q1.sam60" ,"50.q2.sam30","50.q2.sam60" ,"50.q3.sam30", "50.q3.sam60")) {
   x<-read.csv(paste("results/birdlist_west", ds, ".csv", sep = ""))
   x$elev_roundS<-round(x$Median_S,-2)
   x$elev_roundW<-round(x$Median_W,-2)
-  x<-left_join(x,west_100_S, by = "elev_roundS")
+  x<-left_join(x,west_100_S, by = "elev_roundS") #aligning temperature data to elevational range data
   x<-left_join(x,west_100_W, by = "elev_roundW")
-  x$ThermalRegime<-x$maxTemp_June_mean-x$minTemp_Jan_mean
-  x<-left_join(x,jetzname, by = "Species")
+  x$ThermalRegime<-x$maxTemp_June_mean-x$minTemp_Jan_mean #calculating species thermal regimes
+  x<-left_join(x,jetzname, by = "Species") #adding jetz taxonomy
   x<-left_join(x, sheard_trait, by = "Tree.name")%>% mutate(Diet = fct_recode(Diet, "omnivore" = "nectar", "omnivore" = "scav", "seeds"="plants"))
-  pruned.tree<-drop.tip(tree1,tree1$tip.label[-match(x$Tree.name, tree1$tip.label)])
-  glsdata<-x[match(pruned.tree$tip.label, x$Tree.name),]
-  pgls2<-gls(Median_diff~ThermalRegime+HWI+relevel(Diet, ref = "invertebrates"),correlation=corPagel(1,pruned.tree),data=glsdata)
+  pruned.tree<-drop.tip(tree1,tree1$tip.label[-match(x$Tree.name, tree1$tip.label)]) #setting up the PGLS model
+  glsdata<-x[match(pruned.tree$tip.label, x$Tree.name),] #setting up the PGLS model
+  pgls2<-gls(Median_diff~ThermalRegime+HWI+relevel(Diet, ref = "invertebrates"),correlation=corPagel(1,pruned.tree),data=glsdata) #setting up the PGLS model
   k<-summary(pgls2)
   outputk<-as.data.frame(k$tTable)
   outputk$dataset<-ds
   outputk$Variable<-rownames(outputk)
   compile_westmodels<-rbind(compile_westmodels,outputk)
   
-  write.csv(glsdata, file = paste("results/west_ordered",ds,".csv", sep = ""), row.names = F)
+  write.csv(glsdata, file = paste("results/west_ordered",ds,".csv", sep = ""), row.names = F) # species ordered by taxonomy
   write.csv(compile_westmodels, "results/compile_westmodels.csv", row.names = F)
 }
 
+## calculating adjusted p values using the Benjamini Hochberg correction for false discovery rates
 west_p<-read.csv("results/compile_westmodels.csv")
 west_p$adjP<-p.adjust(west_p$p.value, method = "fdr")
 
@@ -105,17 +109,19 @@ write.csv(east_p, "results/compile_westmodels_padj.csv")
 
 ```
 
-## Phylogenetic paired t-test
+## Phylogenetic paired t-test for species common to the east and west
 ```{r}
-diff_ttest<-setNames(data.frame(matrix(ncol = 3, nrow = 0)), c("t", "df", "pvalue"))
-niche_ttest<-setNames(data.frame(matrix(ncol = 3, nrow = 0)), c("t", "df", "pvalue"))
+diff_ttest<-setNames(data.frame(matrix(ncol = 3, nrow = 0)), c("t", "df", "pvalue")) # difference in extent of elevation shift
+niche_ttest<-setNames(data.frame(matrix(ncol = 3, nrow = 0)), c("t", "df", "pvalue")) #difference in thermal regimes
 
 for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.sam30","05.q3.sam60", "95.q1.sam30","95.q1.sam60", "95.q2.sam30","95.q2.sam60" ,"95.q3.sam30","95.q3.sam60" ,"50.q1.sam30","50.q1.sam60" ,"50.q2.sam30","50.q2.sam60" ,"50.q3.sam30", "50.q3.sam60")) {
   west<-read.csv(paste("results/west_ordered",ds,".csv", sep = ""))
   east<-read.csv(paste("results/east_ordered",ds,".csv", sep = ""))
-  commonW<-west[(west$Species %in% east$Species),]
-  commonE<-east[(east$Species %in% west$Species),]
-  common<-data.frame(Median_diffW = commonW$Median_diff,Median_diffE = commonE$Median_diff, ThermalRegimeW = commonW$ThermalRegime,ThermalRegimeE = commonE$ThermalRegime ,Tree.name = commonE$Tree.name)
+  commonW<-west[(west$Species %in% east$Species),] # subset of species in the west that are found in the east
+  commonE<-east[(east$Species %in% west$Species),] # subset of species in the east that are found in the west
+  common<-data.frame(Median_diffW = commonW$Median_diff,Median_diffE = commonE$Median_diff, ThermalRegimeW = commonW$ThermalRegime,ThermalRegimeE = commonE$ThermalRegime ,Tree.name = commonE$Tree.name) # combined dataframe of common species with their extent of shift and thermal regimes in both the eastern and western himalayas
+  
+  # setting up and running the phylogenetic t-tests and outputting results on csvs
   pruned.tree<-drop.tip(tree1,tree1$tip.label[-match(common$Tree.name, tree1$tip.label)])
   comdata<-common[match(pruned.tree$tip.label, common$Tree.name),]
   row.names(comdata)<-comdata$Tree.name
@@ -126,7 +132,7 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
   diff_ttest<-rbind(diff_ttest,a_diff_ttest)
   niche_ttest<-rbind(niche_ttest,b_niche_ttest)
   
-  write.csv(diff_ttest, "results/diff_ttest.csv", row.names = F)
-  write.csv(niche_ttest, "results/niche_ttest.csv", row.names = F)
+  write.csv(diff_ttest, "results/diff_ttest.csv", row.names = F) # difference in extent of elevation shift
+  write.csv(niche_ttest, "results/niche_ttest.csv", row.names = F) #difference in thermal regimes
 }
 ```
