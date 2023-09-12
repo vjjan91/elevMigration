@@ -88,7 +88,7 @@ readcleanrawdata = function(rawpath)
 ```{r}
 # please download the latest versions of eBird data from https://ebird.org/data/download and set the file path accordingly. Since these two datasets are extremely large, we have not uploaded the same to github.
 
-# In this study, the latest version of the data corresponds to July 31st 2021
+# In this study, the latest version of the data corresponds to August 31st 2021
 
 # extract data for the following list of countries
 
