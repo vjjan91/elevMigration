@@ -60,7 +60,6 @@ for (ds in c("05.q1.sam30", "05.q1.sam60", "05.q2.sam30","05.q2.sam60", "05.q3.s
 ## calculating adjusted p values using the Benjamini Hochberg correction for false discovery rates
 east_p<-read.csv("results/compile_eastmodels.csv")
 east_p$adjP<-p.adjust(east_p$p.value, method = "fdr")
-
 write.csv(east_p, "results/compile_eastmodels_padj.csv")
 ```
 
