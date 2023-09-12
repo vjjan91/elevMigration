@@ -29,4 +29,4 @@ phylogenetic-generalized-least-squares-regressions
 remove-non-himalayan-species
 pgls-models-for-the-eastern-himalayas
 pgls-models-for-the-western-himalayas
-phylogenetic-paired-t-test
+phylogenetic-paired-t-test-for-species-common-to-the-east-and-west
