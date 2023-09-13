@@ -214,220 +214,220 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-necessary-libraries-1" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Load necessary libraries<a href="temperature-elevation-associations.html#load-necessary-libraries-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb3-1"><a href="temperature-elevation-associations.html#cb3-1"></a><span class="fu">library</span>(raster)</span>
-<span id="cb3-2"><a href="temperature-elevation-associations.html#cb3-2"></a><span class="fu">library</span>(stringi)</span>
-<span id="cb3-3"><a href="temperature-elevation-associations.html#cb3-3"></a><span class="fu">library</span>(glue)</span>
-<span id="cb3-4"><a href="temperature-elevation-associations.html#cb3-4"></a><span class="fu">library</span>(gdalUtils)</span>
-<span id="cb3-5"><a href="temperature-elevation-associations.html#cb3-5"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb3-6"><a href="temperature-elevation-associations.html#cb3-6"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb3-7"><a href="temperature-elevation-associations.html#cb3-7"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb3-8"><a href="temperature-elevation-associations.html#cb3-8"></a><span class="fu">library</span>(scales)</span>
-<span id="cb3-9"><a href="temperature-elevation-associations.html#cb3-9"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-10"><a href="temperature-elevation-associations.html#cb3-10"></a><span class="fu">library</span>(ggthemes)</span>
-<span id="cb3-11"><a href="temperature-elevation-associations.html#cb3-11"></a><span class="fu">library</span>(sf)</span>
-<span id="cb3-12"><a href="temperature-elevation-associations.html#cb3-12"></a><span class="fu">library</span>(mapview)</span>
-<span id="cb3-13"><a href="temperature-elevation-associations.html#cb3-13"></a><span class="fu">library</span>(rgeos)</span>
-<span id="cb3-14"><a href="temperature-elevation-associations.html#cb3-14"></a></span>
-<span id="cb3-15"><a href="temperature-elevation-associations.html#cb3-15"></a><span class="co"># get ci func</span></span>
-<span id="cb3-16"><a href="temperature-elevation-associations.html#cb3-16"></a>ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span><span class="fu">sd</span>(x, <span class="at">na.rm =</span> T)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x))}</span>
-<span id="cb3-17"><a href="temperature-elevation-associations.html#cb3-17"></a></span>
-<span id="cb3-18"><a href="temperature-elevation-associations.html#cb3-18"></a><span class="co"># prep mode function to aggregate</span></span>
-<span id="cb3-19"><a href="temperature-elevation-associations.html#cb3-19"></a>funcMode <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> T) {</span>
-<span id="cb3-20"><a href="temperature-elevation-associations.html#cb3-20"></a>  ux <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
-<span id="cb3-21"><a href="temperature-elevation-associations.html#cb3-21"></a>  ux[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, ux)))]</span>
-<span id="cb3-22"><a href="temperature-elevation-associations.html#cb3-22"></a>}</span>
-<span id="cb3-23"><a href="temperature-elevation-associations.html#cb3-23"></a></span>
-<span id="cb3-24"><a href="temperature-elevation-associations.html#cb3-24"></a><span class="co"># a basic test</span></span>
-<span id="cb3-25"><a href="temperature-elevation-associations.html#cb3-25"></a>assertthat<span class="sc">::</span><span class="fu">assert_that</span>(<span class="fu">funcMode</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)) <span class="sc">==</span> <span class="fu">as.character</span>(<span class="dv">2</span>), </span>
-<span id="cb3-26"><a href="temperature-elevation-associations.html#cb3-26"></a>                        <span class="at">msg =</span> <span class="st">&quot;problem in the mode function&quot;</span>) <span class="co"># works</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="temperature-elevation-associations.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(raster)</span>
+<span id="cb3-2"><a href="temperature-elevation-associations.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(stringi)</span>
+<span id="cb3-3"><a href="temperature-elevation-associations.html#cb3-3" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
+<span id="cb3-4"><a href="temperature-elevation-associations.html#cb3-4" tabindex="-1"></a><span class="fu">library</span>(gdalUtils)</span>
+<span id="cb3-5"><a href="temperature-elevation-associations.html#cb3-5" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb3-6"><a href="temperature-elevation-associations.html#cb3-6" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-7"><a href="temperature-elevation-associations.html#cb3-7" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb3-8"><a href="temperature-elevation-associations.html#cb3-8" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb3-9"><a href="temperature-elevation-associations.html#cb3-9" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-10"><a href="temperature-elevation-associations.html#cb3-10" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
+<span id="cb3-11"><a href="temperature-elevation-associations.html#cb3-11" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb3-12"><a href="temperature-elevation-associations.html#cb3-12" tabindex="-1"></a><span class="fu">library</span>(mapview)</span>
+<span id="cb3-13"><a href="temperature-elevation-associations.html#cb3-13" tabindex="-1"></a><span class="fu">library</span>(rgeos)</span>
+<span id="cb3-14"><a href="temperature-elevation-associations.html#cb3-14" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="temperature-elevation-associations.html#cb3-15" tabindex="-1"></a><span class="co"># get ci func</span></span>
+<span id="cb3-16"><a href="temperature-elevation-associations.html#cb3-16" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x){<span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span><span class="fu">sd</span>(x, <span class="at">na.rm =</span> T)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x))}</span>
+<span id="cb3-17"><a href="temperature-elevation-associations.html#cb3-17" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="temperature-elevation-associations.html#cb3-18" tabindex="-1"></a><span class="co"># prep mode function to aggregate</span></span>
+<span id="cb3-19"><a href="temperature-elevation-associations.html#cb3-19" tabindex="-1"></a>funcMode <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> T) {</span>
+<span id="cb3-20"><a href="temperature-elevation-associations.html#cb3-20" tabindex="-1"></a>  ux <span class="ot">&lt;-</span> <span class="fu">unique</span>(x)</span>
+<span id="cb3-21"><a href="temperature-elevation-associations.html#cb3-21" tabindex="-1"></a>  ux[<span class="fu">which.max</span>(<span class="fu">tabulate</span>(<span class="fu">match</span>(x, ux)))]</span>
+<span id="cb3-22"><a href="temperature-elevation-associations.html#cb3-22" tabindex="-1"></a>}</span>
+<span id="cb3-23"><a href="temperature-elevation-associations.html#cb3-23" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="temperature-elevation-associations.html#cb3-24" tabindex="-1"></a><span class="co"># a basic test</span></span>
+<span id="cb3-25"><a href="temperature-elevation-associations.html#cb3-25" tabindex="-1"></a>assertthat<span class="sc">::</span><span class="fu">assert_that</span>(<span class="fu">funcMode</span>(<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">3</span>,<span class="dv">4</span>)) <span class="sc">==</span> <span class="fu">as.character</span>(<span class="dv">2</span>), </span>
+<span id="cb3-26"><a href="temperature-elevation-associations.html#cb3-26" tabindex="-1"></a>                        <span class="at">msg =</span> <span class="st">&quot;problem in the mode function&quot;</span>) <span class="co"># works</span></span></code></pre></div>
 </details>
 </div>
 <div id="load-shapefiles" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Load shapefiles<a href="temperature-elevation-associations.html#load-shapefiles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb4-1"><a href="temperature-elevation-associations.html#cb4-1"></a><span class="co"># Load shapefiles</span></span>
-<span id="cb4-2"><a href="temperature-elevation-associations.html#cb4-2"></a><span class="co"># Please note the below shapefile consists of multiple polygons that combines the east and west</span></span>
-<span id="cb4-3"><a href="temperature-elevation-associations.html#cb4-3"></a>himalayas <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/shapefile_himalaya.shp&quot;</span>)</span>
-<span id="cb4-4"><a href="temperature-elevation-associations.html#cb4-4"></a><span class="fu">mapview</span>(himalayas)</span>
-<span id="cb4-5"><a href="temperature-elevation-associations.html#cb4-5"></a></span>
-<span id="cb4-6"><a href="temperature-elevation-associations.html#cb4-6"></a><span class="co"># Need to merge a few polygons to essentially split himalayas into the west and the east</span></span>
-<span id="cb4-7"><a href="temperature-elevation-associations.html#cb4-7"></a><span class="co"># This will have to be done at 83E for Nepal</span></span>
-<span id="cb4-8"><a href="temperature-elevation-associations.html#cb4-8"></a></span>
-<span id="cb4-9"><a href="temperature-elevation-associations.html#cb4-9"></a><span class="co"># Merge polygons for western himalayas</span></span>
-<span id="cb4-10"><a href="temperature-elevation-associations.html#cb4-10"></a>west_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>),]</span>
-<span id="cb4-11"><a href="temperature-elevation-associations.html#cb4-11"></a>westHim <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(west_toMerge,<span class="at">xmin=</span><span class="fl">68.03321</span>,<span class="at">ymin=</span><span class="fl">23.69771</span>,<span class="at">xmax=</span><span class="dv">83</span>,<span class="at">ymax=</span><span class="fl">37.07761</span>)</span>
-<span id="cb4-12"><a href="temperature-elevation-associations.html#cb4-12"></a></span>
-<span id="cb4-13"><a href="temperature-elevation-associations.html#cb4-13"></a><span class="co"># Merge polygons for eastern himalayas</span></span>
-<span id="cb4-14"><a href="temperature-elevation-associations.html#cb4-14"></a>east_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">10</span>),]</span>
-<span id="cb4-15"><a href="temperature-elevation-associations.html#cb4-15"></a>east_toMerge <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(east_toMerge, <span class="at">dist=</span><span class="dv">0</span>)</span>
-<span id="cb4-16"><a href="temperature-elevation-associations.html#cb4-16"></a>eastHim <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(east_toMerge,<span class="at">xmin=</span><span class="dv">83</span>,<span class="at">ymin=</span><span class="fl">25.96462</span>,<span class="at">xmax=</span><span class="fl">97.4115</span>,<span class="at">ymax=</span><span class="fl">30.44728</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="temperature-elevation-associations.html#cb4-1" tabindex="-1"></a><span class="co"># Load shapefiles</span></span>
+<span id="cb4-2"><a href="temperature-elevation-associations.html#cb4-2" tabindex="-1"></a><span class="co"># Please note the below shapefile consists of multiple polygons that combines the east and west</span></span>
+<span id="cb4-3"><a href="temperature-elevation-associations.html#cb4-3" tabindex="-1"></a>himalayas <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">&quot;data/shapefiles/shapefile_himalaya.shp&quot;</span>)</span>
+<span id="cb4-4"><a href="temperature-elevation-associations.html#cb4-4" tabindex="-1"></a><span class="fu">mapview</span>(himalayas)</span>
+<span id="cb4-5"><a href="temperature-elevation-associations.html#cb4-5" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="temperature-elevation-associations.html#cb4-6" tabindex="-1"></a><span class="co"># Need to merge a few polygons to essentially split himalayas into the west and the east</span></span>
+<span id="cb4-7"><a href="temperature-elevation-associations.html#cb4-7" tabindex="-1"></a><span class="co"># This will have to be done at 83E for Nepal</span></span>
+<span id="cb4-8"><a href="temperature-elevation-associations.html#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="temperature-elevation-associations.html#cb4-9" tabindex="-1"></a><span class="co"># Merge polygons for western himalayas</span></span>
+<span id="cb4-10"><a href="temperature-elevation-associations.html#cb4-10" tabindex="-1"></a>west_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>,<span class="dv">10</span>),]</span>
+<span id="cb4-11"><a href="temperature-elevation-associations.html#cb4-11" tabindex="-1"></a>westHim <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(west_toMerge,<span class="at">xmin=</span><span class="fl">68.03321</span>,<span class="at">ymin=</span><span class="fl">23.69771</span>,<span class="at">xmax=</span><span class="dv">83</span>,<span class="at">ymax=</span><span class="fl">37.07761</span>)</span>
+<span id="cb4-12"><a href="temperature-elevation-associations.html#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="temperature-elevation-associations.html#cb4-13" tabindex="-1"></a><span class="co"># Merge polygons for eastern himalayas</span></span>
+<span id="cb4-14"><a href="temperature-elevation-associations.html#cb4-14" tabindex="-1"></a>east_toMerge <span class="ot">&lt;-</span> himalayas[<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">10</span>),]</span>
+<span id="cb4-15"><a href="temperature-elevation-associations.html#cb4-15" tabindex="-1"></a>east_toMerge <span class="ot">&lt;-</span> <span class="fu">st_buffer</span>(east_toMerge, <span class="at">dist=</span><span class="dv">0</span>)</span>
+<span id="cb4-16"><a href="temperature-elevation-associations.html#cb4-16" tabindex="-1"></a>eastHim <span class="ot">&lt;-</span> <span class="fu">st_crop</span>(east_toMerge,<span class="at">xmin=</span><span class="dv">83</span>,<span class="at">ymin=</span><span class="fl">25.96462</span>,<span class="at">xmax=</span><span class="fl">97.4115</span>,<span class="at">ymax=</span><span class="fl">30.44728</span>)</span></code></pre></div>
 </details>
 </div>
 <div id="prepare-elevation-rasters" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Prepare elevation rasters<a href="temperature-elevation-associations.html#prepare-elevation-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb5-1"><a href="temperature-elevation-associations.html#cb5-1"></a><span class="co"># load elevation and crop to hills size, then mask by hills</span></span>
-<span id="cb5-2"><a href="temperature-elevation-associations.html#cb5-2"></a><span class="co"># Please note that this file is large and is not uploaded to GitHub and can be downloaded from SRTM (Farr et al. 2007)</span></span>
-<span id="cb5-3"><a href="temperature-elevation-associations.html#cb5-3"></a>alt <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&quot;data/elevation/alt&quot;</span>)</span>
-<span id="cb5-4"><a href="temperature-elevation-associations.html#cb5-4"></a>alt.east <span class="ot">&lt;-</span> <span class="fu">crop</span>(alt, <span class="fu">as</span>(eastHim, <span class="st">&quot;Spatial&quot;</span>))</span>
-<span id="cb5-5"><a href="temperature-elevation-associations.html#cb5-5"></a>alt.west <span class="ot">&lt;-</span> <span class="fu">crop</span>(alt, <span class="fu">as</span>(westHim, <span class="st">&quot;Spatial&quot;</span>))</span>
-<span id="cb5-6"><a href="temperature-elevation-associations.html#cb5-6"></a><span class="fu">rm</span>(alt); <span class="fu">gc</span>()</span>
-<span id="cb5-7"><a href="temperature-elevation-associations.html#cb5-7"></a></span>
-<span id="cb5-8"><a href="temperature-elevation-associations.html#cb5-8"></a><span class="co"># get slope and aspect</span></span>
-<span id="cb5-9"><a href="temperature-elevation-associations.html#cb5-9"></a>slopeEast <span class="ot">&lt;-</span> <span class="fu">terrain</span>(<span class="at">x =</span> alt.east, <span class="at">opt =</span> <span class="fu">c</span>(<span class="st">&quot;slope&quot;</span>, <span class="st">&quot;aspect&quot;</span>))</span>
-<span id="cb5-10"><a href="temperature-elevation-associations.html#cb5-10"></a>slopeWest <span class="ot">&lt;-</span> <span class="fu">terrain</span>(<span class="at">x =</span> alt.west, <span class="at">opt =</span> <span class="fu">c</span>(<span class="st">&quot;slope&quot;</span>, <span class="st">&quot;aspect&quot;</span>))</span>
-<span id="cb5-11"><a href="temperature-elevation-associations.html#cb5-11"></a></span>
-<span id="cb5-12"><a href="temperature-elevation-associations.html#cb5-12"></a><span class="co"># stack rasters</span></span>
-<span id="cb5-13"><a href="temperature-elevation-associations.html#cb5-13"></a>elevEast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(alt.east, slopeEast)</span>
-<span id="cb5-14"><a href="temperature-elevation-associations.html#cb5-14"></a>elevWest <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(alt.west, slopeWest)</span>
-<span id="cb5-15"><a href="temperature-elevation-associations.html#cb5-15"></a><span class="fu">rm</span>(alt.east,alt.west); <span class="fu">gc</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="temperature-elevation-associations.html#cb5-1" tabindex="-1"></a><span class="co"># load elevation and crop to hills size, then mask by hills</span></span>
+<span id="cb5-2"><a href="temperature-elevation-associations.html#cb5-2" tabindex="-1"></a><span class="co"># Please note that this file is large and is not uploaded to GitHub and can be downloaded from SRTM (Farr et al. 2007)</span></span>
+<span id="cb5-3"><a href="temperature-elevation-associations.html#cb5-3" tabindex="-1"></a>alt <span class="ot">&lt;-</span> <span class="fu">raster</span>(<span class="st">&quot;data/elevation/alt&quot;</span>)</span>
+<span id="cb5-4"><a href="temperature-elevation-associations.html#cb5-4" tabindex="-1"></a>alt.east <span class="ot">&lt;-</span> <span class="fu">crop</span>(alt, <span class="fu">as</span>(eastHim, <span class="st">&quot;Spatial&quot;</span>))</span>
+<span id="cb5-5"><a href="temperature-elevation-associations.html#cb5-5" tabindex="-1"></a>alt.west <span class="ot">&lt;-</span> <span class="fu">crop</span>(alt, <span class="fu">as</span>(westHim, <span class="st">&quot;Spatial&quot;</span>))</span>
+<span id="cb5-6"><a href="temperature-elevation-associations.html#cb5-6" tabindex="-1"></a><span class="fu">rm</span>(alt); <span class="fu">gc</span>()</span>
+<span id="cb5-7"><a href="temperature-elevation-associations.html#cb5-7" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="temperature-elevation-associations.html#cb5-8" tabindex="-1"></a><span class="co"># get slope and aspect</span></span>
+<span id="cb5-9"><a href="temperature-elevation-associations.html#cb5-9" tabindex="-1"></a>slopeEast <span class="ot">&lt;-</span> <span class="fu">terrain</span>(<span class="at">x =</span> alt.east, <span class="at">opt =</span> <span class="fu">c</span>(<span class="st">&quot;slope&quot;</span>, <span class="st">&quot;aspect&quot;</span>))</span>
+<span id="cb5-10"><a href="temperature-elevation-associations.html#cb5-10" tabindex="-1"></a>slopeWest <span class="ot">&lt;-</span> <span class="fu">terrain</span>(<span class="at">x =</span> alt.west, <span class="at">opt =</span> <span class="fu">c</span>(<span class="st">&quot;slope&quot;</span>, <span class="st">&quot;aspect&quot;</span>))</span>
+<span id="cb5-11"><a href="temperature-elevation-associations.html#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="temperature-elevation-associations.html#cb5-12" tabindex="-1"></a><span class="co"># stack rasters</span></span>
+<span id="cb5-13"><a href="temperature-elevation-associations.html#cb5-13" tabindex="-1"></a>elevEast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(alt.east, slopeEast)</span>
+<span id="cb5-14"><a href="temperature-elevation-associations.html#cb5-14" tabindex="-1"></a>elevWest <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(alt.west, slopeWest)</span>
+<span id="cb5-15"><a href="temperature-elevation-associations.html#cb5-15" tabindex="-1"></a><span class="fu">rm</span>(alt.east,alt.west); <span class="fu">gc</span>()</span></code></pre></div>
 </details>
 </div>
 <div id="prepare-climate-rasters" class="section level2 hasAnchor" number="3.4">
 <h2><span class="header-section-number">3.4</span> Prepare climate rasters<a href="temperature-elevation-associations.html#prepare-climate-rasters" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb6-1"><a href="temperature-elevation-associations.html#cb6-1"></a><span class="co"># list chelsa files</span></span>
-<span id="cb6-2"><a href="temperature-elevation-associations.html#cb6-2"></a><span class="co"># CHELSA files are not uploaded to GitHub as they are extremely large and can be downloaded from https://chelsa-climate.org/</span></span>
-<span id="cb6-3"><a href="temperature-elevation-associations.html#cb6-3"></a><span class="co"># Please note that we downloaded four rasters corresponding to minimum and maximum temperatures for the months of January and June</span></span>
-<span id="cb6-4"><a href="temperature-elevation-associations.html#cb6-4"></a></span>
-<span id="cb6-5"><a href="temperature-elevation-associations.html#cb6-5"></a>chelsaFiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;data/chelsa/&quot;</span>, </span>
-<span id="cb6-6"><a href="temperature-elevation-associations.html#cb6-6"></a>                          <span class="at">full.names =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb6-7"><a href="temperature-elevation-associations.html#cb6-7"></a>                          <span class="at">pattern =</span> <span class="st">&quot;*.tif&quot;</span>)</span>
-<span id="cb6-8"><a href="temperature-elevation-associations.html#cb6-8"></a></span>
-<span id="cb6-9"><a href="temperature-elevation-associations.html#cb6-9"></a><span class="co"># gather chelsa data over the east</span></span>
-<span id="cb6-10"><a href="temperature-elevation-associations.html#cb6-10"></a>chelsaEast <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(chelsaFiles, <span class="cf">function</span>(chr){</span>
-<span id="cb6-11"><a href="temperature-elevation-associations.html#cb6-11"></a>  a <span class="ot">&lt;-</span> <span class="fu">raster</span>(chr)</span>
-<span id="cb6-12"><a href="temperature-elevation-associations.html#cb6-12"></a>  <span class="fu">crs</span>(a) <span class="ot">&lt;-</span> <span class="fu">crs</span>(elevEast)</span>
-<span id="cb6-13"><a href="temperature-elevation-associations.html#cb6-13"></a>  a <span class="ot">&lt;-</span> <span class="fu">crop</span>(a, <span class="fu">as</span>(eastHim, <span class="st">&quot;Spatial&quot;</span>))</span>
-<span id="cb6-14"><a href="temperature-elevation-associations.html#cb6-14"></a>  <span class="fu">return</span>(a)</span>
-<span id="cb6-15"><a href="temperature-elevation-associations.html#cb6-15"></a>})</span>
-<span id="cb6-16"><a href="temperature-elevation-associations.html#cb6-16"></a></span>
-<span id="cb6-17"><a href="temperature-elevation-associations.html#cb6-17"></a><span class="co"># gather chelsa data over the west</span></span>
-<span id="cb6-18"><a href="temperature-elevation-associations.html#cb6-18"></a>chelsaWest <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(chelsaFiles, <span class="cf">function</span>(chr){</span>
-<span id="cb6-19"><a href="temperature-elevation-associations.html#cb6-19"></a>  a <span class="ot">&lt;-</span> <span class="fu">raster</span>(chr)</span>
-<span id="cb6-20"><a href="temperature-elevation-associations.html#cb6-20"></a>  <span class="fu">crs</span>(a) <span class="ot">&lt;-</span> <span class="fu">crs</span>(elevWest)</span>
-<span id="cb6-21"><a href="temperature-elevation-associations.html#cb6-21"></a>  a <span class="ot">&lt;-</span> <span class="fu">crop</span>(a, <span class="fu">as</span>(westHim, <span class="st">&quot;Spatial&quot;</span>))</span>
-<span id="cb6-22"><a href="temperature-elevation-associations.html#cb6-22"></a>  <span class="fu">return</span>(a)</span>
-<span id="cb6-23"><a href="temperature-elevation-associations.html#cb6-23"></a>})</span>
-<span id="cb6-24"><a href="temperature-elevation-associations.html#cb6-24"></a></span>
-<span id="cb6-25"><a href="temperature-elevation-associations.html#cb6-25"></a></span>
-<span id="cb6-26"><a href="temperature-elevation-associations.html#cb6-26"></a><span class="co"># Divide temperature values by 10 for east</span></span>
-<span id="cb6-27"><a href="temperature-elevation-associations.html#cb6-27"></a>chelsaEast[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-28"><a href="temperature-elevation-associations.html#cb6-28"></a>chelsaEast[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-29"><a href="temperature-elevation-associations.html#cb6-29"></a>chelsaEast[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-30"><a href="temperature-elevation-associations.html#cb6-30"></a>chelsaEast[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-31"><a href="temperature-elevation-associations.html#cb6-31"></a></span>
-<span id="cb6-32"><a href="temperature-elevation-associations.html#cb6-32"></a><span class="co"># Divide temperature values by 10 for the west</span></span>
-<span id="cb6-33"><a href="temperature-elevation-associations.html#cb6-33"></a>chelsaWest[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-34"><a href="temperature-elevation-associations.html#cb6-34"></a>chelsaWest[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-35"><a href="temperature-elevation-associations.html#cb6-35"></a>chelsaWest[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-36"><a href="temperature-elevation-associations.html#cb6-36"></a>chelsaWest[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
-<span id="cb6-37"><a href="temperature-elevation-associations.html#cb6-37"></a></span>
-<span id="cb6-38"><a href="temperature-elevation-associations.html#cb6-38"></a><span class="co"># stack chelsa data for the east and west</span></span>
-<span id="cb6-39"><a href="temperature-elevation-associations.html#cb6-39"></a>chelsaEast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaEast)</span>
-<span id="cb6-40"><a href="temperature-elevation-associations.html#cb6-40"></a>chelsaWest <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaWest)</span>
-<span id="cb6-41"><a href="temperature-elevation-associations.html#cb6-41"></a></span>
-<span id="cb6-42"><a href="temperature-elevation-associations.html#cb6-42"></a><span class="do">### Stack prepared rasters</span></span>
-<span id="cb6-43"><a href="temperature-elevation-associations.html#cb6-43"></a><span class="co"># stack rasters for efficient reprojection later</span></span>
-<span id="cb6-44"><a href="temperature-elevation-associations.html#cb6-44"></a>env_east <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevEast, chelsaEast)</span>
-<span id="cb6-45"><a href="temperature-elevation-associations.html#cb6-45"></a>env_west <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevWest, chelsaWest)</span>
-<span id="cb6-46"><a href="temperature-elevation-associations.html#cb6-46"></a></span>
-<span id="cb6-47"><a href="temperature-elevation-associations.html#cb6-47"></a><span class="co"># get proper names</span></span>
-<span id="cb6-48"><a href="temperature-elevation-associations.html#cb6-48"></a>elev_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, <span class="st">&quot;slope&quot;</span>, <span class="st">&quot;aspect&quot;</span>)</span>
-<span id="cb6-49"><a href="temperature-elevation-associations.html#cb6-49"></a>chelsa_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;maxTemp_Jan&quot;</span>, <span class="st">&quot;maxTemp_June&quot;</span>,<span class="st">&quot;minTemp_Jan&quot;</span>,<span class="st">&quot;minTemp_June&quot;</span>)</span>
-<span id="cb6-50"><a href="temperature-elevation-associations.html#cb6-50"></a></span>
-<span id="cb6-51"><a href="temperature-elevation-associations.html#cb6-51"></a><span class="fu">names</span>(env_east) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span>
-<span id="cb6-52"><a href="temperature-elevation-associations.html#cb6-52"></a><span class="fu">names</span>(env_west) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="temperature-elevation-associations.html#cb6-1" tabindex="-1"></a><span class="co"># list chelsa files</span></span>
+<span id="cb6-2"><a href="temperature-elevation-associations.html#cb6-2" tabindex="-1"></a><span class="co"># CHELSA files are not uploaded to GitHub as they are extremely large and can be downloaded from https://chelsa-climate.org/</span></span>
+<span id="cb6-3"><a href="temperature-elevation-associations.html#cb6-3" tabindex="-1"></a><span class="co"># Please note that we downloaded four rasters corresponding to minimum and maximum temperatures for the months of January and June</span></span>
+<span id="cb6-4"><a href="temperature-elevation-associations.html#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="temperature-elevation-associations.html#cb6-5" tabindex="-1"></a>chelsaFiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;data/chelsa/&quot;</span>, </span>
+<span id="cb6-6"><a href="temperature-elevation-associations.html#cb6-6" tabindex="-1"></a>                          <span class="at">full.names =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb6-7"><a href="temperature-elevation-associations.html#cb6-7" tabindex="-1"></a>                          <span class="at">pattern =</span> <span class="st">&quot;*.tif&quot;</span>)</span>
+<span id="cb6-8"><a href="temperature-elevation-associations.html#cb6-8" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="temperature-elevation-associations.html#cb6-9" tabindex="-1"></a><span class="co"># gather chelsa data over the east</span></span>
+<span id="cb6-10"><a href="temperature-elevation-associations.html#cb6-10" tabindex="-1"></a>chelsaEast <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(chelsaFiles, <span class="cf">function</span>(chr){</span>
+<span id="cb6-11"><a href="temperature-elevation-associations.html#cb6-11" tabindex="-1"></a>  a <span class="ot">&lt;-</span> <span class="fu">raster</span>(chr)</span>
+<span id="cb6-12"><a href="temperature-elevation-associations.html#cb6-12" tabindex="-1"></a>  <span class="fu">crs</span>(a) <span class="ot">&lt;-</span> <span class="fu">crs</span>(elevEast)</span>
+<span id="cb6-13"><a href="temperature-elevation-associations.html#cb6-13" tabindex="-1"></a>  a <span class="ot">&lt;-</span> <span class="fu">crop</span>(a, <span class="fu">as</span>(eastHim, <span class="st">&quot;Spatial&quot;</span>))</span>
+<span id="cb6-14"><a href="temperature-elevation-associations.html#cb6-14" tabindex="-1"></a>  <span class="fu">return</span>(a)</span>
+<span id="cb6-15"><a href="temperature-elevation-associations.html#cb6-15" tabindex="-1"></a>})</span>
+<span id="cb6-16"><a href="temperature-elevation-associations.html#cb6-16" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="temperature-elevation-associations.html#cb6-17" tabindex="-1"></a><span class="co"># gather chelsa data over the west</span></span>
+<span id="cb6-18"><a href="temperature-elevation-associations.html#cb6-18" tabindex="-1"></a>chelsaWest <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(chelsaFiles, <span class="cf">function</span>(chr){</span>
+<span id="cb6-19"><a href="temperature-elevation-associations.html#cb6-19" tabindex="-1"></a>  a <span class="ot">&lt;-</span> <span class="fu">raster</span>(chr)</span>
+<span id="cb6-20"><a href="temperature-elevation-associations.html#cb6-20" tabindex="-1"></a>  <span class="fu">crs</span>(a) <span class="ot">&lt;-</span> <span class="fu">crs</span>(elevWest)</span>
+<span id="cb6-21"><a href="temperature-elevation-associations.html#cb6-21" tabindex="-1"></a>  a <span class="ot">&lt;-</span> <span class="fu">crop</span>(a, <span class="fu">as</span>(westHim, <span class="st">&quot;Spatial&quot;</span>))</span>
+<span id="cb6-22"><a href="temperature-elevation-associations.html#cb6-22" tabindex="-1"></a>  <span class="fu">return</span>(a)</span>
+<span id="cb6-23"><a href="temperature-elevation-associations.html#cb6-23" tabindex="-1"></a>})</span>
+<span id="cb6-24"><a href="temperature-elevation-associations.html#cb6-24" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="temperature-elevation-associations.html#cb6-25" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="temperature-elevation-associations.html#cb6-26" tabindex="-1"></a><span class="co"># Divide temperature values by 10 for east</span></span>
+<span id="cb6-27"><a href="temperature-elevation-associations.html#cb6-27" tabindex="-1"></a>chelsaEast[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-28"><a href="temperature-elevation-associations.html#cb6-28" tabindex="-1"></a>chelsaEast[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-29"><a href="temperature-elevation-associations.html#cb6-29" tabindex="-1"></a>chelsaEast[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-30"><a href="temperature-elevation-associations.html#cb6-30" tabindex="-1"></a>chelsaEast[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaEast[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-31"><a href="temperature-elevation-associations.html#cb6-31" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="temperature-elevation-associations.html#cb6-32" tabindex="-1"></a><span class="co"># Divide temperature values by 10 for the west</span></span>
+<span id="cb6-33"><a href="temperature-elevation-associations.html#cb6-33" tabindex="-1"></a>chelsaWest[[<span class="dv">1</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">1</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-34"><a href="temperature-elevation-associations.html#cb6-34" tabindex="-1"></a>chelsaWest[[<span class="dv">2</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">2</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-35"><a href="temperature-elevation-associations.html#cb6-35" tabindex="-1"></a>chelsaWest[[<span class="dv">3</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">3</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-36"><a href="temperature-elevation-associations.html#cb6-36" tabindex="-1"></a>chelsaWest[[<span class="dv">4</span>]] <span class="ot">&lt;-</span> chelsaWest[[<span class="dv">4</span>]]<span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb6-37"><a href="temperature-elevation-associations.html#cb6-37" tabindex="-1"></a></span>
+<span id="cb6-38"><a href="temperature-elevation-associations.html#cb6-38" tabindex="-1"></a><span class="co"># stack chelsa data for the east and west</span></span>
+<span id="cb6-39"><a href="temperature-elevation-associations.html#cb6-39" tabindex="-1"></a>chelsaEast <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaEast)</span>
+<span id="cb6-40"><a href="temperature-elevation-associations.html#cb6-40" tabindex="-1"></a>chelsaWest <span class="ot">&lt;-</span> raster<span class="sc">::</span><span class="fu">stack</span>(chelsaWest)</span>
+<span id="cb6-41"><a href="temperature-elevation-associations.html#cb6-41" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="temperature-elevation-associations.html#cb6-42" tabindex="-1"></a><span class="do">### Stack prepared rasters</span></span>
+<span id="cb6-43"><a href="temperature-elevation-associations.html#cb6-43" tabindex="-1"></a><span class="co"># stack rasters for efficient reprojection later</span></span>
+<span id="cb6-44"><a href="temperature-elevation-associations.html#cb6-44" tabindex="-1"></a>env_east <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevEast, chelsaEast)</span>
+<span id="cb6-45"><a href="temperature-elevation-associations.html#cb6-45" tabindex="-1"></a>env_west <span class="ot">&lt;-</span> <span class="fu">stack</span>(elevWest, chelsaWest)</span>
+<span id="cb6-46"><a href="temperature-elevation-associations.html#cb6-46" tabindex="-1"></a></span>
+<span id="cb6-47"><a href="temperature-elevation-associations.html#cb6-47" tabindex="-1"></a><span class="co"># get proper names</span></span>
+<span id="cb6-48"><a href="temperature-elevation-associations.html#cb6-48" tabindex="-1"></a>elev_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, <span class="st">&quot;slope&quot;</span>, <span class="st">&quot;aspect&quot;</span>)</span>
+<span id="cb6-49"><a href="temperature-elevation-associations.html#cb6-49" tabindex="-1"></a>chelsa_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;maxTemp_Jan&quot;</span>, <span class="st">&quot;maxTemp_June&quot;</span>,<span class="st">&quot;minTemp_Jan&quot;</span>,<span class="st">&quot;minTemp_June&quot;</span>)</span>
+<span id="cb6-50"><a href="temperature-elevation-associations.html#cb6-50" tabindex="-1"></a></span>
+<span id="cb6-51"><a href="temperature-elevation-associations.html#cb6-51" tabindex="-1"></a><span class="fu">names</span>(env_east) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span>
+<span id="cb6-52"><a href="temperature-elevation-associations.html#cb6-52" tabindex="-1"></a><span class="fu">names</span>(env_west) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(<span class="fu">glue</span>(<span class="st">&#39;{c(elev_names, chelsa_names)}&#39;</span>))</span></code></pre></div>
 </details>
 </div>
 <div id="extracting-data-across-elevational-bands" class="section level2 hasAnchor" number="3.5">
 <h2><span class="header-section-number">3.5</span> Extracting data across elevational bands<a href="temperature-elevation-associations.html#extracting-data-across-elevational-bands" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb7-1"><a href="temperature-elevation-associations.html#cb7-1"></a><span class="co"># make duplicate stack</span></span>
-<span id="cb7-2"><a href="temperature-elevation-associations.html#cb7-2"></a>envEast <span class="ot">&lt;-</span> env_east[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
-<span id="cb7-3"><a href="temperature-elevation-associations.html#cb7-3"></a>envWest <span class="ot">&lt;-</span> env_West[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
-<span id="cb7-4"><a href="temperature-elevation-associations.html#cb7-4"></a></span>
-<span id="cb7-5"><a href="temperature-elevation-associations.html#cb7-5"></a><span class="co"># convert to list</span></span>
-<span id="cb7-6"><a href="temperature-elevation-associations.html#cb7-6"></a>envEast <span class="ot">&lt;-</span> <span class="fu">as.list</span>(envEast)</span>
-<span id="cb7-7"><a href="temperature-elevation-associations.html#cb7-7"></a>envWest <span class="ot">&lt;-</span> <span class="fu">as.list</span>(envWest)</span>
-<span id="cb7-8"><a href="temperature-elevation-associations.html#cb7-8"></a></span>
-<span id="cb7-9"><a href="temperature-elevation-associations.html#cb7-9"></a><span class="co"># map get values over the stack</span></span>
-<span id="cb7-10"><a href="temperature-elevation-associations.html#cb7-10"></a>envEast <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(envEast, getValues)</span>
-<span id="cb7-11"><a href="temperature-elevation-associations.html#cb7-11"></a>envWest <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(envWest, getValues)</span>
-<span id="cb7-12"><a href="temperature-elevation-associations.html#cb7-12"></a><span class="fu">names</span>(envEast) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)</span>
-<span id="cb7-13"><a href="temperature-elevation-associations.html#cb7-13"></a><span class="fu">names</span>(envWest) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)</span>
-<span id="cb7-14"><a href="temperature-elevation-associations.html#cb7-14"></a></span>
-<span id="cb7-15"><a href="temperature-elevation-associations.html#cb7-15"></a><span class="co"># convert to dataframe and round to a particular elevational band you need</span></span>
-<span id="cb7-16"><a href="temperature-elevation-associations.html#cb7-16"></a>envEast <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(envEast)</span>
-<span id="cb7-17"><a href="temperature-elevation-associations.html#cb7-17"></a>envWest <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(envWest)</span>
-<span id="cb7-18"><a href="temperature-elevation-associations.html#cb7-18"></a></span>
-<span id="cb7-19"><a href="temperature-elevation-associations.html#cb7-19"></a>envEast <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(envEast) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-20"><a href="temperature-elevation-associations.html#cb7-20"></a>  <span class="fu">mutate</span>(<span class="at">elev_round  =</span> plyr<span class="sc">::</span><span class="fu">round_any</span>(elev, <span class="dv">100</span>)) <span class="sc">%&gt;%</span> <span class="co"># changed to 100 m intervals </span></span>
-<span id="cb7-21"><a href="temperature-elevation-associations.html#cb7-21"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>elev) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-22"><a href="temperature-elevation-associations.html#cb7-22"></a>  <span class="fu">group_by</span>(elev_round) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-23"><a href="temperature-elevation-associations.html#cb7-23"></a>  <span class="fu">summarise_all</span>(<span class="at">.funs =</span> <span class="fu">list</span>(<span class="sc">~</span><span class="fu">mean</span>(.), <span class="sc">~</span><span class="fu">ci</span>(.))) <span class="sc">%&gt;%</span></span>
-<span id="cb7-24"><a href="temperature-elevation-associations.html#cb7-24"></a>  <span class="fu">mutate</span>(<span class="at">tempRange_Jan =</span> (maxTemp_Jan_mean <span class="sc">-</span> minTemp_Jan_mean),</span>
-<span id="cb7-25"><a href="temperature-elevation-associations.html#cb7-25"></a>         <span class="at">tempRange_June =</span> (maxTemp_June_mean <span class="sc">-</span> minTemp_June_mean))</span>
-<span id="cb7-26"><a href="temperature-elevation-associations.html#cb7-26"></a></span>
-<span id="cb7-27"><a href="temperature-elevation-associations.html#cb7-27"></a>envWest <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(envWest) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-28"><a href="temperature-elevation-associations.html#cb7-28"></a>  <span class="fu">mutate</span>(<span class="at">elev_round  =</span> plyr<span class="sc">::</span><span class="fu">round_any</span>(elev, <span class="dv">100</span>)) <span class="sc">%&gt;%</span> <span class="co"># changed to 100 m intervals </span></span>
-<span id="cb7-29"><a href="temperature-elevation-associations.html#cb7-29"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>elev) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-30"><a href="temperature-elevation-associations.html#cb7-30"></a>  <span class="fu">group_by</span>(elev_round) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-31"><a href="temperature-elevation-associations.html#cb7-31"></a>  <span class="fu">summarise_all</span>(<span class="at">.funs =</span> <span class="fu">list</span>(<span class="sc">~</span><span class="fu">mean</span>(.), <span class="sc">~</span><span class="fu">ci</span>(.))) <span class="sc">%&gt;%</span></span>
-<span id="cb7-32"><a href="temperature-elevation-associations.html#cb7-32"></a>  <span class="fu">mutate</span>(<span class="at">tempRange_Jan =</span> (maxTemp_Jan_mean <span class="sc">-</span> minTemp_Jan_mean),</span>
-<span id="cb7-33"><a href="temperature-elevation-associations.html#cb7-33"></a>         <span class="at">tempRange_June =</span> (maxTemp_June_mean <span class="sc">-</span> minTemp_June_mean))</span>
-<span id="cb7-34"><a href="temperature-elevation-associations.html#cb7-34"></a></span>
-<span id="cb7-35"><a href="temperature-elevation-associations.html#cb7-35"></a><span class="co"># Write results to a .csv</span></span>
-<span id="cb7-36"><a href="temperature-elevation-associations.html#cb7-36"></a>west_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/westHim_100.csv&quot;</span>, <span class="at">row.names =</span> F) </span>
-<span id="cb7-37"><a href="temperature-elevation-associations.html#cb7-37"></a>east_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/eastHim_100.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="temperature-elevation-associations.html#cb7-1" tabindex="-1"></a><span class="co"># make duplicate stack</span></span>
+<span id="cb7-2"><a href="temperature-elevation-associations.html#cb7-2" tabindex="-1"></a>envEast <span class="ot">&lt;-</span> env_east[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
+<span id="cb7-3"><a href="temperature-elevation-associations.html#cb7-3" tabindex="-1"></a>envWest <span class="ot">&lt;-</span> env_West[[<span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)]]</span>
+<span id="cb7-4"><a href="temperature-elevation-associations.html#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="temperature-elevation-associations.html#cb7-5" tabindex="-1"></a><span class="co"># convert to list</span></span>
+<span id="cb7-6"><a href="temperature-elevation-associations.html#cb7-6" tabindex="-1"></a>envEast <span class="ot">&lt;-</span> <span class="fu">as.list</span>(envEast)</span>
+<span id="cb7-7"><a href="temperature-elevation-associations.html#cb7-7" tabindex="-1"></a>envWest <span class="ot">&lt;-</span> <span class="fu">as.list</span>(envWest)</span>
+<span id="cb7-8"><a href="temperature-elevation-associations.html#cb7-8" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="temperature-elevation-associations.html#cb7-9" tabindex="-1"></a><span class="co"># map get values over the stack</span></span>
+<span id="cb7-10"><a href="temperature-elevation-associations.html#cb7-10" tabindex="-1"></a>envEast <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(envEast, getValues)</span>
+<span id="cb7-11"><a href="temperature-elevation-associations.html#cb7-11" tabindex="-1"></a>envWest <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(envWest, getValues)</span>
+<span id="cb7-12"><a href="temperature-elevation-associations.html#cb7-12" tabindex="-1"></a><span class="fu">names</span>(envEast) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)</span>
+<span id="cb7-13"><a href="temperature-elevation-associations.html#cb7-13" tabindex="-1"></a><span class="fu">names</span>(envWest) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;elev&quot;</span>, chelsa_names)</span>
+<span id="cb7-14"><a href="temperature-elevation-associations.html#cb7-14" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="temperature-elevation-associations.html#cb7-15" tabindex="-1"></a><span class="co"># convert to dataframe and round to a particular elevational band you need</span></span>
+<span id="cb7-16"><a href="temperature-elevation-associations.html#cb7-16" tabindex="-1"></a>envEast <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(envEast)</span>
+<span id="cb7-17"><a href="temperature-elevation-associations.html#cb7-17" tabindex="-1"></a>envWest <span class="ot">&lt;-</span> <span class="fu">bind_cols</span>(envWest)</span>
+<span id="cb7-18"><a href="temperature-elevation-associations.html#cb7-18" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="temperature-elevation-associations.html#cb7-19" tabindex="-1"></a>envEast <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(envEast) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-20"><a href="temperature-elevation-associations.html#cb7-20" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">elev_round  =</span> plyr<span class="sc">::</span><span class="fu">round_any</span>(elev, <span class="dv">100</span>)) <span class="sc">%&gt;%</span> <span class="co"># changed to 100 m intervals </span></span>
+<span id="cb7-21"><a href="temperature-elevation-associations.html#cb7-21" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>elev) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-22"><a href="temperature-elevation-associations.html#cb7-22" tabindex="-1"></a>  <span class="fu">group_by</span>(elev_round) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-23"><a href="temperature-elevation-associations.html#cb7-23" tabindex="-1"></a>  <span class="fu">summarise_all</span>(<span class="at">.funs =</span> <span class="fu">list</span>(<span class="sc">~</span><span class="fu">mean</span>(.), <span class="sc">~</span><span class="fu">ci</span>(.))) <span class="sc">%&gt;%</span></span>
+<span id="cb7-24"><a href="temperature-elevation-associations.html#cb7-24" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tempRange_Jan =</span> (maxTemp_Jan_mean <span class="sc">-</span> minTemp_Jan_mean),</span>
+<span id="cb7-25"><a href="temperature-elevation-associations.html#cb7-25" tabindex="-1"></a>         <span class="at">tempRange_June =</span> (maxTemp_June_mean <span class="sc">-</span> minTemp_June_mean))</span>
+<span id="cb7-26"><a href="temperature-elevation-associations.html#cb7-26" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="temperature-elevation-associations.html#cb7-27" tabindex="-1"></a>envWest <span class="ot">&lt;-</span> <span class="fu">drop_na</span>(envWest) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-28"><a href="temperature-elevation-associations.html#cb7-28" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">elev_round  =</span> plyr<span class="sc">::</span><span class="fu">round_any</span>(elev, <span class="dv">100</span>)) <span class="sc">%&gt;%</span> <span class="co"># changed to 100 m intervals </span></span>
+<span id="cb7-29"><a href="temperature-elevation-associations.html#cb7-29" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>elev) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-30"><a href="temperature-elevation-associations.html#cb7-30" tabindex="-1"></a>  <span class="fu">group_by</span>(elev_round) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-31"><a href="temperature-elevation-associations.html#cb7-31" tabindex="-1"></a>  <span class="fu">summarise_all</span>(<span class="at">.funs =</span> <span class="fu">list</span>(<span class="sc">~</span><span class="fu">mean</span>(.), <span class="sc">~</span><span class="fu">ci</span>(.))) <span class="sc">%&gt;%</span></span>
+<span id="cb7-32"><a href="temperature-elevation-associations.html#cb7-32" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tempRange_Jan =</span> (maxTemp_Jan_mean <span class="sc">-</span> minTemp_Jan_mean),</span>
+<span id="cb7-33"><a href="temperature-elevation-associations.html#cb7-33" tabindex="-1"></a>         <span class="at">tempRange_June =</span> (maxTemp_June_mean <span class="sc">-</span> minTemp_June_mean))</span>
+<span id="cb7-34"><a href="temperature-elevation-associations.html#cb7-34" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="temperature-elevation-associations.html#cb7-35" tabindex="-1"></a><span class="co"># Write results to a .csv</span></span>
+<span id="cb7-36"><a href="temperature-elevation-associations.html#cb7-36" tabindex="-1"></a>west_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/westHim_100.csv&quot;</span>, <span class="at">row.names =</span> F) </span>
+<span id="cb7-37"><a href="temperature-elevation-associations.html#cb7-37" tabindex="-1"></a>east_data <span class="ot">&lt;-</span> <span class="fu">write.csv</span>(env,<span class="st">&quot;results/eastHim_100.csv&quot;</span>, <span class="at">row.names =</span> F)</span></code></pre></div>
 </details>
 </div>
 <div id="plot-temperature-as-a-function-of-elevation" class="section level2 hasAnchor" number="3.6">
 <h2><span class="header-section-number">3.6</span> Plot temperature as a function of elevation<a href="temperature-elevation-associations.html#plot-temperature-as-a-function-of-elevation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb8-1"><a href="temperature-elevation-associations.html#cb8-1"></a><span class="co"># eastern Himalayas</span></span>
-<span id="cb8-2"><a href="temperature-elevation-associations.html#cb8-2"></a>fig_climate_elevEast <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(envEast)<span class="sc">+</span></span>
-<span id="cb8-3"><a href="temperature-elevation-associations.html#cb8-3"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean),</span>
-<span id="cb8-4"><a href="temperature-elevation-associations.html#cb8-4"></a>            <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>)<span class="sc">+</span></span>
-<span id="cb8-5"><a href="temperature-elevation-associations.html#cb8-5"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean, <span class="at">ymin=</span>mean<span class="sc">-</span>ci, <span class="at">ymax=</span>mean<span class="sc">+</span>ci),</span>
-<span id="cb8-6"><a href="temperature-elevation-associations.html#cb8-6"></a>                  <span class="at">size =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
-<span id="cb8-7"><a href="temperature-elevation-associations.html#cb8-7"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
-<span id="cb8-8"><a href="temperature-elevation-associations.html#cb8-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
-<span id="cb8-9"><a href="temperature-elevation-associations.html#cb8-9"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>clim_var, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="sc">+</span></span>
-<span id="cb8-10"><a href="temperature-elevation-associations.html#cb8-10"></a>  <span class="fu">theme_few</span>()<span class="sc">+</span></span>
-<span id="cb8-11"><a href="temperature-elevation-associations.html#cb8-11"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;elevation (m) at 100m intervals&quot;</span>, <span class="at">y =</span> <span class="st">&quot;CHELSA variable value&quot;</span>)<span class="sc">+</span></span>
-<span id="cb8-12"><a href="temperature-elevation-associations.html#cb8-12"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>), </span>
-<span id="cb8-13"><a href="temperature-elevation-associations.html#cb8-13"></a>        <span class="at">axis.ticks.length.x =</span> <span class="fu">unit</span>(.<span class="dv">5</span>, <span class="st">&quot;cm&quot;</span>),</span>
-<span id="cb8-14"><a href="temperature-elevation-associations.html#cb8-14"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb8-15"><a href="temperature-elevation-associations.html#cb8-15"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb8-16"><a href="temperature-elevation-associations.html#cb8-16"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="dv">1</span>,<span class="st">&quot;cm&quot;</span>),</span>
-<span id="cb8-17"><a href="temperature-elevation-associations.html#cb8-17"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
-<span id="cb8-18"><a href="temperature-elevation-associations.html#cb8-18"></a></span>
-<span id="cb8-19"><a href="temperature-elevation-associations.html#cb8-19"></a><span class="co"># save ggplots accordingly</span></span>
-<span id="cb8-20"><a href="temperature-elevation-associations.html#cb8-20"></a><span class="fu">ggsave</span>(fig_climate_elevEast, <span class="at">filename =</span> <span class="st">&quot;figs/fig_eastHim_elev100.png&quot;</span>, </span>
-<span id="cb8-21"><a href="temperature-elevation-associations.html#cb8-21"></a>       <span class="at">height =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">device =</span> <span class="fu">png</span>(), <span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>); <span class="fu">dev.off</span>()</span>
-<span id="cb8-22"><a href="temperature-elevation-associations.html#cb8-22"></a></span>
-<span id="cb8-23"><a href="temperature-elevation-associations.html#cb8-23"></a><span class="co"># western Himalayas</span></span>
-<span id="cb8-24"><a href="temperature-elevation-associations.html#cb8-24"></a>fig_climate_elevWest <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(envWest)<span class="sc">+</span></span>
-<span id="cb8-25"><a href="temperature-elevation-associations.html#cb8-25"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean),</span>
-<span id="cb8-26"><a href="temperature-elevation-associations.html#cb8-26"></a>            <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>)<span class="sc">+</span></span>
-<span id="cb8-27"><a href="temperature-elevation-associations.html#cb8-27"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean, <span class="at">ymin=</span>mean<span class="sc">-</span>ci, <span class="at">ymax=</span>mean<span class="sc">+</span>ci),</span>
-<span id="cb8-28"><a href="temperature-elevation-associations.html#cb8-28"></a>                  <span class="at">size =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
-<span id="cb8-29"><a href="temperature-elevation-associations.html#cb8-29"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
-<span id="cb8-30"><a href="temperature-elevation-associations.html#cb8-30"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
-<span id="cb8-31"><a href="temperature-elevation-associations.html#cb8-31"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>clim_var, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="sc">+</span></span>
-<span id="cb8-32"><a href="temperature-elevation-associations.html#cb8-32"></a>  <span class="fu">theme_few</span>()<span class="sc">+</span></span>
-<span id="cb8-33"><a href="temperature-elevation-associations.html#cb8-33"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;elevation (m) at 100m intervals&quot;</span>, <span class="at">y =</span> <span class="st">&quot;CHELSA variable value&quot;</span>)<span class="sc">+</span></span>
-<span id="cb8-34"><a href="temperature-elevation-associations.html#cb8-34"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>), </span>
-<span id="cb8-35"><a href="temperature-elevation-associations.html#cb8-35"></a>        <span class="at">axis.ticks.length.x =</span> <span class="fu">unit</span>(.<span class="dv">5</span>, <span class="st">&quot;cm&quot;</span>),</span>
-<span id="cb8-36"><a href="temperature-elevation-associations.html#cb8-36"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
-<span id="cb8-37"><a href="temperature-elevation-associations.html#cb8-37"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb8-38"><a href="temperature-elevation-associations.html#cb8-38"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="dv">1</span>,<span class="st">&quot;cm&quot;</span>),</span>
-<span id="cb8-39"><a href="temperature-elevation-associations.html#cb8-39"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
-<span id="cb8-40"><a href="temperature-elevation-associations.html#cb8-40"></a></span>
-<span id="cb8-41"><a href="temperature-elevation-associations.html#cb8-41"></a><span class="co"># save ggplots accordingly</span></span>
-<span id="cb8-42"><a href="temperature-elevation-associations.html#cb8-42"></a><span class="fu">ggsave</span>(fig_climate_elevWest, <span class="at">filename =</span> <span class="st">&quot;figs/fig_westHim_elev100.png&quot;</span>, </span>
-<span id="cb8-43"><a href="temperature-elevation-associations.html#cb8-43"></a>       <span class="at">height =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">device =</span> <span class="fu">png</span>(), <span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>); <span class="fu">dev.off</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="temperature-elevation-associations.html#cb8-1" tabindex="-1"></a><span class="co"># eastern Himalayas</span></span>
+<span id="cb8-2"><a href="temperature-elevation-associations.html#cb8-2" tabindex="-1"></a>fig_climate_elevEast <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(envEast)<span class="sc">+</span></span>
+<span id="cb8-3"><a href="temperature-elevation-associations.html#cb8-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean),</span>
+<span id="cb8-4"><a href="temperature-elevation-associations.html#cb8-4" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-5"><a href="temperature-elevation-associations.html#cb8-5" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean, <span class="at">ymin=</span>mean<span class="sc">-</span>ci, <span class="at">ymax=</span>mean<span class="sc">+</span>ci),</span>
+<span id="cb8-6"><a href="temperature-elevation-associations.html#cb8-6" tabindex="-1"></a>                  <span class="at">size =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
+<span id="cb8-7"><a href="temperature-elevation-associations.html#cb8-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb8-8"><a href="temperature-elevation-associations.html#cb8-8" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb8-9"><a href="temperature-elevation-associations.html#cb8-9" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>clim_var, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-10"><a href="temperature-elevation-associations.html#cb8-10" tabindex="-1"></a>  <span class="fu">theme_few</span>()<span class="sc">+</span></span>
+<span id="cb8-11"><a href="temperature-elevation-associations.html#cb8-11" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;elevation (m) at 100m intervals&quot;</span>, <span class="at">y =</span> <span class="st">&quot;CHELSA variable value&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-12"><a href="temperature-elevation-associations.html#cb8-12" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>), </span>
+<span id="cb8-13"><a href="temperature-elevation-associations.html#cb8-13" tabindex="-1"></a>        <span class="at">axis.ticks.length.x =</span> <span class="fu">unit</span>(.<span class="dv">5</span>, <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb8-14"><a href="temperature-elevation-associations.html#cb8-14" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb8-15"><a href="temperature-elevation-associations.html#cb8-15" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-16"><a href="temperature-elevation-associations.html#cb8-16" tabindex="-1"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="dv">1</span>,<span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb8-17"><a href="temperature-elevation-associations.html#cb8-17" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
+<span id="cb8-18"><a href="temperature-elevation-associations.html#cb8-18" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="temperature-elevation-associations.html#cb8-19" tabindex="-1"></a><span class="co"># save ggplots accordingly</span></span>
+<span id="cb8-20"><a href="temperature-elevation-associations.html#cb8-20" tabindex="-1"></a><span class="fu">ggsave</span>(fig_climate_elevEast, <span class="at">filename =</span> <span class="st">&quot;figs/fig_eastHim_elev100.png&quot;</span>, </span>
+<span id="cb8-21"><a href="temperature-elevation-associations.html#cb8-21" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">device =</span> <span class="fu">png</span>(), <span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>); <span class="fu">dev.off</span>()</span>
+<span id="cb8-22"><a href="temperature-elevation-associations.html#cb8-22" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="temperature-elevation-associations.html#cb8-23" tabindex="-1"></a><span class="co"># western Himalayas</span></span>
+<span id="cb8-24"><a href="temperature-elevation-associations.html#cb8-24" tabindex="-1"></a>fig_climate_elevWest <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(envWest)<span class="sc">+</span></span>
+<span id="cb8-25"><a href="temperature-elevation-associations.html#cb8-25" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean),</span>
+<span id="cb8-26"><a href="temperature-elevation-associations.html#cb8-26" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">0.2</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-27"><a href="temperature-elevation-associations.html#cb8-27" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">x =</span> elev_round, <span class="at">y =</span> mean, <span class="at">ymin=</span>mean<span class="sc">-</span>ci, <span class="at">ymax=</span>mean<span class="sc">+</span>ci),</span>
+<span id="cb8-28"><a href="temperature-elevation-associations.html#cb8-28" tabindex="-1"></a>                  <span class="at">size =</span> <span class="fl">0.3</span>)<span class="sc">+</span></span>
+<span id="cb8-29"><a href="temperature-elevation-associations.html#cb8-29" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb8-30"><a href="temperature-elevation-associations.html#cb8-30" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma)<span class="sc">+</span></span>
+<span id="cb8-31"><a href="temperature-elevation-associations.html#cb8-31" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>clim_var, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-32"><a href="temperature-elevation-associations.html#cb8-32" tabindex="-1"></a>  <span class="fu">theme_few</span>()<span class="sc">+</span></span>
+<span id="cb8-33"><a href="temperature-elevation-associations.html#cb8-33" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;elevation (m) at 100m intervals&quot;</span>, <span class="at">y =</span> <span class="st">&quot;CHELSA variable value&quot;</span>)<span class="sc">+</span></span>
+<span id="cb8-34"><a href="temperature-elevation-associations.html#cb8-34" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">16</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>), </span>
+<span id="cb8-35"><a href="temperature-elevation-associations.html#cb8-35" tabindex="-1"></a>        <span class="at">axis.ticks.length.x =</span> <span class="fu">unit</span>(.<span class="dv">5</span>, <span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb8-36"><a href="temperature-elevation-associations.html#cb8-36" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb8-37"><a href="temperature-elevation-associations.html#cb8-37" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-38"><a href="temperature-elevation-associations.html#cb8-38" tabindex="-1"></a>        <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="dv">1</span>,<span class="st">&quot;cm&quot;</span>),</span>
+<span id="cb8-39"><a href="temperature-elevation-associations.html#cb8-39" tabindex="-1"></a>        <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>))</span>
+<span id="cb8-40"><a href="temperature-elevation-associations.html#cb8-40" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="temperature-elevation-associations.html#cb8-41" tabindex="-1"></a><span class="co"># save ggplots accordingly</span></span>
+<span id="cb8-42"><a href="temperature-elevation-associations.html#cb8-42" tabindex="-1"></a><span class="fu">ggsave</span>(fig_climate_elevWest, <span class="at">filename =</span> <span class="st">&quot;figs/fig_westHim_elev100.png&quot;</span>, </span>
+<span id="cb8-43"><a href="temperature-elevation-associations.html#cb8-43" tabindex="-1"></a>       <span class="at">height =</span> <span class="dv">10</span>, <span class="at">width =</span> <span class="dv">14</span>, <span class="at">device =</span> <span class="fu">png</span>(), <span class="at">dpi =</span> <span class="dv">300</span>, <span class="at">units=</span><span class="st">&quot;in&quot;</span>); <span class="fu">dev.off</span>()</span></code></pre></div>
 </details>
 
 </div>

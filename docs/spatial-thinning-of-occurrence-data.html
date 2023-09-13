@@ -214,42 +214,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-necessary-libraries" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Load necessary libraries<a href="spatial-thinning-of-occurrence-data.html#load-necessary-libraries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb1-1"><a href="spatial-thinning-of-occurrence-data.html#cb1-1"></a><span class="fu">library</span>(sf)</span>
-<span id="cb1-2"><a href="spatial-thinning-of-occurrence-data.html#cb1-2"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="spatial-thinning-of-occurrence-data.html#cb1-3"></a><span class="fu">library</span>(spThin)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="spatial-thinning-of-occurrence-data.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-2"><a href="spatial-thinning-of-occurrence-data.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="spatial-thinning-of-occurrence-data.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(spThin)</span></code></pre></div>
 </details>
 </div>
 <div id="load-data" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Load data<a href="spatial-thinning-of-occurrence-data.html#load-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <details class=chunk-details open><summary class=chunk-summary><span class=chunk-summary-text>Code</span></summary>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r numberLines"><code class="sourceCode r"><span id="cb2-1"><a href="spatial-thinning-of-occurrence-data.html#cb2-1"></a>loc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/localities-for-map.csv&quot;</span>)</span>
-<span id="cb2-2"><a href="spatial-thinning-of-occurrence-data.html#cb2-2"></a><span class="fu">head</span>(loc)</span>
-<span id="cb2-3"><a href="spatial-thinning-of-occurrence-data.html#cb2-3"></a></span>
-<span id="cb2-4"><a href="spatial-thinning-of-occurrence-data.html#cb2-4"></a>loc_unique <span class="ot">&lt;-</span> loc <span class="sc">%&gt;%</span> <span class="fu">distinct</span>()</span>
-<span id="cb2-5"><a href="spatial-thinning-of-occurrence-data.html#cb2-5"></a></span>
-<span id="cb2-6"><a href="spatial-thinning-of-occurrence-data.html#cb2-6"></a>loc_unique<span class="sc">$</span>species <span class="ot">&lt;-</span> <span class="st">&quot;species&quot;</span></span>
-<span id="cb2-7"><a href="spatial-thinning-of-occurrence-data.html#cb2-7"></a></span>
-<span id="cb2-8"><a href="spatial-thinning-of-occurrence-data.html#cb2-8"></a><span class="co"># carry out spatial thinning with a minimum distance of 15km between records</span></span>
-<span id="cb2-9"><a href="spatial-thinning-of-occurrence-data.html#cb2-9"></a>thinned <span class="ot">&lt;-</span> <span class="fu">thin</span>(loc_unique,<span class="at">lat.col=</span><span class="st">&quot;LATITUDE&quot;</span>,<span class="at">long.col =</span> <span class="st">&quot;LONGITUDE&quot;</span>,</span>
-<span id="cb2-10"><a href="spatial-thinning-of-occurrence-data.html#cb2-10"></a>                <span class="at">spec.col =</span> <span class="st">&quot;species&quot;</span>,<span class="at">thin.par =</span> <span class="dv">15</span>,<span class="at">reps=</span><span class="dv">1</span>,</span>
-<span id="cb2-11"><a href="spatial-thinning-of-occurrence-data.html#cb2-11"></a>                <span class="at">write.files=</span>T, </span>
-<span id="cb2-12"><a href="spatial-thinning-of-occurrence-data.html#cb2-12"></a>                <span class="at">out.dir=</span><span class="st">&quot;data/&quot;</span>,</span>
-<span id="cb2-13"><a href="spatial-thinning-of-occurrence-data.html#cb2-13"></a>                <span class="at">out.base=</span><span class="st">&quot;localities-thinned&quot;</span>)</span>
-<span id="cb2-14"><a href="spatial-thinning-of-occurrence-data.html#cb2-14"></a></span>
-<span id="cb2-15"><a href="spatial-thinning-of-occurrence-data.html#cb2-15"></a><span class="co"># reload spatially thinned file</span></span>
-<span id="cb2-16"><a href="spatial-thinning-of-occurrence-data.html#cb2-16"></a>thin_file <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;results/localities-for-map-thinned.csv&quot;</span>)</span>
-<span id="cb2-17"><a href="spatial-thinning-of-occurrence-data.html#cb2-17"></a></span>
-<span id="cb2-18"><a href="spatial-thinning-of-occurrence-data.html#cb2-18"></a>thin_file <span class="ot">&lt;-</span> thin_file <span class="sc">%&gt;%</span></span>
-<span id="cb2-19"><a href="spatial-thinning-of-occurrence-data.html#cb2-19"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">case_when</span>(LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span> <span class="sc">~</span> <span class="st">&quot;west&quot;</span>,</span>
-<span id="cb2-20"><a href="spatial-thinning-of-occurrence-data.html#cb2-20"></a>                            LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span> <span class="sc">~</span> <span class="st">&quot;east&quot;</span>))</span>
-<span id="cb2-21"><a href="spatial-thinning-of-occurrence-data.html#cb2-21"></a></span>
-<span id="cb2-22"><a href="spatial-thinning-of-occurrence-data.html#cb2-22"></a>shp <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(thin_file, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>,<span class="st">&quot;LATITUDE&quot;</span>), <span class="at">crs=</span><span class="dv">4326</span>)</span>
-<span id="cb2-23"><a href="spatial-thinning-of-occurrence-data.html#cb2-23"></a><span class="fu">str</span>(shp)</span>
-<span id="cb2-24"><a href="spatial-thinning-of-occurrence-data.html#cb2-24"></a></span>
-<span id="cb2-25"><a href="spatial-thinning-of-occurrence-data.html#cb2-25"></a><span class="fu">st_write</span>(shp[shp<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;east&quot;</span>,],<span class="st">&quot;data/shapefiles/localities-east.shp&quot;</span>,</span>
-<span id="cb2-26"><a href="spatial-thinning-of-occurrence-data.html#cb2-26"></a>         <span class="at">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)</span>
-<span id="cb2-27"><a href="spatial-thinning-of-occurrence-data.html#cb2-27"></a><span class="fu">st_write</span>(shp[shp<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;west&quot;</span>,],<span class="st">&quot;data/shapefiles/localities-west.shp&quot;</span>,</span>
-<span id="cb2-28"><a href="spatial-thinning-of-occurrence-data.html#cb2-28"></a>         <span class="at">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="spatial-thinning-of-occurrence-data.html#cb2-1" tabindex="-1"></a>loc <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/localities-for-map.csv&quot;</span>)</span>
+<span id="cb2-2"><a href="spatial-thinning-of-occurrence-data.html#cb2-2" tabindex="-1"></a><span class="fu">head</span>(loc)</span>
+<span id="cb2-3"><a href="spatial-thinning-of-occurrence-data.html#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="spatial-thinning-of-occurrence-data.html#cb2-4" tabindex="-1"></a>loc_unique <span class="ot">&lt;-</span> loc <span class="sc">%&gt;%</span> <span class="fu">distinct</span>()</span>
+<span id="cb2-5"><a href="spatial-thinning-of-occurrence-data.html#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="spatial-thinning-of-occurrence-data.html#cb2-6" tabindex="-1"></a>loc_unique<span class="sc">$</span>species <span class="ot">&lt;-</span> <span class="st">&quot;species&quot;</span></span>
+<span id="cb2-7"><a href="spatial-thinning-of-occurrence-data.html#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="spatial-thinning-of-occurrence-data.html#cb2-8" tabindex="-1"></a><span class="co"># carry out spatial thinning with a minimum distance of 15km between records</span></span>
+<span id="cb2-9"><a href="spatial-thinning-of-occurrence-data.html#cb2-9" tabindex="-1"></a>thinned <span class="ot">&lt;-</span> <span class="fu">thin</span>(loc_unique,<span class="at">lat.col=</span><span class="st">&quot;LATITUDE&quot;</span>,<span class="at">long.col =</span> <span class="st">&quot;LONGITUDE&quot;</span>,</span>
+<span id="cb2-10"><a href="spatial-thinning-of-occurrence-data.html#cb2-10" tabindex="-1"></a>                <span class="at">spec.col =</span> <span class="st">&quot;species&quot;</span>,<span class="at">thin.par =</span> <span class="dv">15</span>,<span class="at">reps=</span><span class="dv">1</span>,</span>
+<span id="cb2-11"><a href="spatial-thinning-of-occurrence-data.html#cb2-11" tabindex="-1"></a>                <span class="at">write.files=</span>T, </span>
+<span id="cb2-12"><a href="spatial-thinning-of-occurrence-data.html#cb2-12" tabindex="-1"></a>                <span class="at">out.dir=</span><span class="st">&quot;data/&quot;</span>,</span>
+<span id="cb2-13"><a href="spatial-thinning-of-occurrence-data.html#cb2-13" tabindex="-1"></a>                <span class="at">out.base=</span><span class="st">&quot;localities-thinned&quot;</span>)</span>
+<span id="cb2-14"><a href="spatial-thinning-of-occurrence-data.html#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="spatial-thinning-of-occurrence-data.html#cb2-15" tabindex="-1"></a><span class="co"># reload spatially thinned file</span></span>
+<span id="cb2-16"><a href="spatial-thinning-of-occurrence-data.html#cb2-16" tabindex="-1"></a>thin_file <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;results/localities-for-map-thinned.csv&quot;</span>)</span>
+<span id="cb2-17"><a href="spatial-thinning-of-occurrence-data.html#cb2-17" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="spatial-thinning-of-occurrence-data.html#cb2-18" tabindex="-1"></a>thin_file <span class="ot">&lt;-</span> thin_file <span class="sc">%&gt;%</span></span>
+<span id="cb2-19"><a href="spatial-thinning-of-occurrence-data.html#cb2-19" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">case_when</span>(LONGITUDE <span class="sc">&lt;</span> <span class="dv">83</span> <span class="sc">~</span> <span class="st">&quot;west&quot;</span>,</span>
+<span id="cb2-20"><a href="spatial-thinning-of-occurrence-data.html#cb2-20" tabindex="-1"></a>                            LONGITUDE <span class="sc">&gt;</span> <span class="dv">83</span> <span class="sc">~</span> <span class="st">&quot;east&quot;</span>))</span>
+<span id="cb2-21"><a href="spatial-thinning-of-occurrence-data.html#cb2-21" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="spatial-thinning-of-occurrence-data.html#cb2-22" tabindex="-1"></a>shp <span class="ot">&lt;-</span> <span class="fu">st_as_sf</span>(thin_file, <span class="at">coords =</span> <span class="fu">c</span>(<span class="st">&quot;LONGITUDE&quot;</span>,<span class="st">&quot;LATITUDE&quot;</span>), <span class="at">crs=</span><span class="dv">4326</span>)</span>
+<span id="cb2-23"><a href="spatial-thinning-of-occurrence-data.html#cb2-23" tabindex="-1"></a><span class="fu">str</span>(shp)</span>
+<span id="cb2-24"><a href="spatial-thinning-of-occurrence-data.html#cb2-24" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="spatial-thinning-of-occurrence-data.html#cb2-25" tabindex="-1"></a><span class="fu">st_write</span>(shp[shp<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;east&quot;</span>,],<span class="st">&quot;data/shapefiles/localities-east.shp&quot;</span>,</span>
+<span id="cb2-26"><a href="spatial-thinning-of-occurrence-data.html#cb2-26" tabindex="-1"></a>         <span class="at">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)</span>
+<span id="cb2-27"><a href="spatial-thinning-of-occurrence-data.html#cb2-27" tabindex="-1"></a><span class="fu">st_write</span>(shp[shp<span class="sc">$</span>region<span class="sc">==</span><span class="st">&quot;west&quot;</span>,],<span class="st">&quot;data/shapefiles/localities-west.shp&quot;</span>,</span>
+<span id="cb2-28"><a href="spatial-thinning-of-occurrence-data.html#cb2-28" tabindex="-1"></a>         <span class="at">driver=</span><span class="st">&quot;ESRI Shapefile&quot;</span>)</span></code></pre></div>
 </details>
 
 </div>
