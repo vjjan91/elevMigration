@@ -23,18 +23,10 @@ blockquote > p:first-child {
 }
 .header-section-number {
   padding-right: .2em;
-  font-weight: 500;
-}
-.level1 .header-section-number {
-  display: inline-block;
-  border-bottom: 3px solid;
-}
-.level1 h1 {
-  border-bottom: 1px solid;
+  font-weight: 400;
 }
 h2, h3, h4, h5, h6 {
   font-weight: 300;
-  font-size: 10pt;
 }
 h1.title {
   font-weight: 700;
