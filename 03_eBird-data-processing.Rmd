@@ -111,13 +111,13 @@ write.csv(datll, "results/unique_loc.csv", row.names = F)
 dat <- st_as_sf(dat, coords = c("LONGITUDE","LATITUDE"), crs=4326, remove = "F")
 
 # Loading the elevation data
-elev <- raster("data/elevation/alt")
+elev <- raster("data/elevation/alt") #srtm dem, will have to download yourself as file too big for github
 
 # extract elevation
-elevDat <- raster::extract(elev,dat)
+elevation <- raster::extract(elev,dat)
 
 # cbind elevation back to dataframe
-dat <- cbind(dat,elevDat)
+dat <- cbind(dat,elevation)
 
 # save Rdata file (uploaded to GitHub)
 save(dat, file = "results/eBird_elev.RData")
